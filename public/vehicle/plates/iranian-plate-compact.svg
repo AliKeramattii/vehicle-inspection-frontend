@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" role="img" aria-label="Iranian licence plate template">
+<g id="plate-background"><rect x="1" y="1" width="198" height="46" rx="8" fill="#fff" stroke="#111827" stroke-width="2"/></g>
+<g id="country-strip"><path d="M2 9a8 8 0 0 1 8-8h17v46H10a8 8 0 0 1-8-8V9Z" fill="#1646A7"/><text x="13.0" y="34" text-anchor="middle" font-family="Arial" font-size="9" fill="#fff">IR</text></g>
+<g id="main-number-left"><text x="57" y="31.68" text-anchor="middle" font-family="Vazirmatn,Arial" font-size="17" fill="#111827">۱۲</text></g>
+<g id="letter"><text x="102" y="31.68" text-anchor="middle" font-family="Vazirmatn,Arial" font-size="17" fill="#111827">ب</text></g>
+<g id="main-number-right"><text x="161" y="31.68" text-anchor="middle" font-family="Vazirmatn,Arial" font-size="17" fill="#111827">۱۲۳</text></g>
+<g id="region-number"><line x1="144" y1="2" x2="144" y2="46" stroke="#CBD5E1"/><text x="172" y="18" text-anchor="middle" font-family="Vazirmatn,Arial" font-size="10" fill="#111827">ایران</text><text x="172" y="38" text-anchor="middle" font-family="Vazirmatn,Arial" font-size="13" fill="#111827">۱۱</text></g>
+<g id="border" fill="none" stroke="#111827" stroke-width="1.5"><rect x="1" y="1" width="198" height="46" rx="8"/></g></svg>

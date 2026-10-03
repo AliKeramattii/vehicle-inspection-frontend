@@ -1,0 +1,2137 @@
+{
+  "home": {
+    "file": "/icons/navigation/home.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "arrow-right-rtl": {
+    "file": "/icons/navigation/arrow-right-rtl.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "arrow-left-rtl": {
+    "file": "/icons/navigation/arrow-left-rtl.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "chevron-down": {
+    "file": "/icons/navigation/chevron-down.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "chevron-up": {
+    "file": "/icons/navigation/chevron-up.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "close": {
+    "file": "/icons/navigation/close.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "menu": {
+    "file": "/icons/navigation/menu.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "more-horizontal": {
+    "file": "/icons/navigation/more-horizontal.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "more-vertical": {
+    "file": "/icons/navigation/more-vertical.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "search": {
+    "file": "/icons/navigation/search.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "filter": {
+    "file": "/icons/navigation/filter.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "settings": {
+    "file": "/icons/navigation/settings.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "help-circle": {
+    "file": "/icons/navigation/help-circle.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "info": {
+    "file": "/icons/navigation/info.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "external-link": {
+    "file": "/icons/navigation/external-link.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "copy": {
+    "file": "/icons/navigation/copy.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "edit": {
+    "file": "/icons/navigation/edit.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "delete": {
+    "file": "/icons/navigation/delete.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "download": {
+    "file": "/icons/navigation/download.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "refresh": {
+    "file": "/icons/navigation/refresh.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "logout": {
+    "file": "/icons/navigation/logout.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "user": {
+    "file": "/icons/navigation/user.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "users": {
+    "file": "/icons/navigation/users.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "calendar": {
+    "file": "/icons/navigation/calendar.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "clock": {
+    "file": "/icons/navigation/clock.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "history": {
+    "file": "/icons/navigation/history.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "notification": {
+    "file": "/icons/navigation/notification.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions"
+  },
+  "location-step": {
+    "file": "/icons/journey/location-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper"
+  },
+  "location-step-completed": {
+    "file": "/icons/journey/location-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state"
+  },
+  "vehicle-step": {
+    "file": "/icons/journey/vehicle-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper"
+  },
+  "vehicle-step-completed": {
+    "file": "/icons/journey/vehicle-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state"
+  },
+  "camera-step": {
+    "file": "/icons/journey/camera-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper"
+  },
+  "camera-step-completed": {
+    "file": "/icons/journey/camera-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state"
+  },
+  "submit-step": {
+    "file": "/icons/journey/submit-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper"
+  },
+  "submit-step-completed": {
+    "file": "/icons/journey/submit-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state"
+  },
+  "car": {
+    "file": "/icons/vehicle/car.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-front": {
+    "file": "/icons/vehicle/car-front.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-rear": {
+    "file": "/icons/vehicle/car-rear.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-side-left": {
+    "file": "/icons/vehicle/car-side-left.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-side-right": {
+    "file": "/icons/vehicle/car-side-right.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-top": {
+    "file": "/icons/vehicle/car-top.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-front-45-left": {
+    "file": "/icons/vehicle/car-front-45-left.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-front-45-right": {
+    "file": "/icons/vehicle/car-front-45-right.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-rear-45-left": {
+    "file": "/icons/vehicle/car-rear-45-left.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-rear-45-right": {
+    "file": "/icons/vehicle/car-rear-45-right.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "car-interior": {
+    "file": "/icons/vehicle/car-interior.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "dashboard": {
+    "file": "/icons/vehicle/dashboard.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "steering-wheel": {
+    "file": "/icons/vehicle/steering-wheel.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "odometer": {
+    "file": "/icons/vehicle/odometer.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "engine": {
+    "file": "/icons/vehicle/engine.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "hood-open": {
+    "file": "/icons/vehicle/hood-open.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "vin": {
+    "file": "/icons/vehicle/vin.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "license-plate": {
+    "file": "/icons/vehicle/license-plate.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "wheel": {
+    "file": "/icons/vehicle/wheel.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "mirror": {
+    "file": "/icons/vehicle/mirror.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "roof": {
+    "file": "/icons/vehicle/roof.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "door": {
+    "file": "/icons/vehicle/door.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "bumper": {
+    "file": "/icons/vehicle/bumper.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "headlight": {
+    "file": "/icons/vehicle/headlight.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "taillight": {
+    "file": "/icons/vehicle/taillight.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "windshield": {
+    "file": "/icons/vehicle/windshield.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls"
+  },
+  "camera": {
+    "file": "/icons/camera/camera.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "camera-outline": {
+    "file": "/icons/camera/camera-outline.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "shutter": {
+    "file": "/icons/camera/shutter.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "retake": {
+    "file": "/icons/camera/retake.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "gallery": {
+    "file": "/icons/camera/gallery.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "flash-on": {
+    "file": "/icons/camera/flash-on.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "flash-off": {
+    "file": "/icons/camera/flash-off.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "flash-auto": {
+    "file": "/icons/camera/flash-auto.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "switch-camera": {
+    "file": "/icons/camera/switch-camera.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "focus": {
+    "file": "/icons/camera/focus.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "target": {
+    "file": "/icons/camera/target.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "alignment": {
+    "file": "/icons/camera/alignment.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "level": {
+    "file": "/icons/camera/level.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "stability": {
+    "file": "/icons/camera/stability.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "brightness": {
+    "file": "/icons/camera/brightness.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "low-light": {
+    "file": "/icons/camera/low-light.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "zoom-in": {
+    "file": "/icons/camera/zoom-in.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "zoom-out": {
+    "file": "/icons/camera/zoom-out.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "fullscreen": {
+    "file": "/icons/camera/fullscreen.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "rotate": {
+    "file": "/icons/camera/rotate.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "camera-guide": {
+    "file": "/icons/camera/camera-guide.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "ghost-overlay": {
+    "file": "/icons/camera/ghost-overlay.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "hide-overlay": {
+    "file": "/icons/camera/hide-overlay.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "show-overlay": {
+    "file": "/icons/camera/show-overlay.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "video": {
+    "file": "/icons/camera/video.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "record": {
+    "file": "/icons/camera/record.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "stop-recording": {
+    "file": "/icons/camera/stop-recording.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "360-video": {
+    "file": "/icons/camera/360-video.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "image-quality": {
+    "file": "/icons/camera/image-quality.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "blur-warning": {
+    "file": "/icons/camera/blur-warning.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "glare-warning": {
+    "file": "/icons/camera/glare-warning.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "cropped-warning": {
+    "file": "/icons/camera/cropped-warning.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "vehicle-too-close": {
+    "file": "/icons/camera/vehicle-too-close.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "vehicle-too-far": {
+    "file": "/icons/camera/vehicle-too-far.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance"
+  },
+  "orbit": {
+    "file": "/icons/viewer-3d/orbit.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "rotate-3d": {
+    "file": "/icons/viewer-3d/rotate-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "pan": {
+    "file": "/icons/viewer-3d/pan.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "zoom-3d": {
+    "file": "/icons/viewer-3d/zoom-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "reset-camera": {
+    "file": "/icons/viewer-3d/reset-camera.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-front": {
+    "file": "/icons/viewer-3d/view-front.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-rear": {
+    "file": "/icons/viewer-3d/view-rear.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-left": {
+    "file": "/icons/viewer-3d/view-left.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-right": {
+    "file": "/icons/viewer-3d/view-right.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-top": {
+    "file": "/icons/viewer-3d/view-top.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-front-left": {
+    "file": "/icons/viewer-3d/view-front-left.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-front-right": {
+    "file": "/icons/viewer-3d/view-front-right.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-rear-left": {
+    "file": "/icons/viewer-3d/view-rear-left.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "view-rear-right": {
+    "file": "/icons/viewer-3d/view-rear-right.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "toggle-2d": {
+    "file": "/icons/viewer-3d/toggle-2d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "toggle-3d": {
+    "file": "/icons/viewer-3d/toggle-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "hotspot": {
+    "file": "/icons/viewer-3d/hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "selected-hotspot": {
+    "file": "/icons/viewer-3d/selected-hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "completed-hotspot": {
+    "file": "/icons/viewer-3d/completed-hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "retake-hotspot": {
+    "file": "/icons/viewer-3d/retake-hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "fullscreen-3d": {
+    "file": "/icons/viewer-3d/fullscreen-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states"
+  },
+  "map-pin": {
+    "file": "/icons/location/map-pin.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "map-pin-selected": {
+    "file": "/icons/location/map-pin-selected.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "gps": {
+    "file": "/icons/location/gps.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "gps-off": {
+    "file": "/icons/location/gps-off.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "crosshair": {
+    "file": "/icons/location/crosshair.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "current-location": {
+    "file": "/icons/location/current-location.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "map": {
+    "file": "/icons/location/map.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "address": {
+    "file": "/icons/location/address.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "building": {
+    "file": "/icons/location/building.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "parking": {
+    "file": "/icons/location/parking.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "location-accuracy": {
+    "file": "/icons/location/location-accuracy.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "verified-location": {
+    "file": "/icons/location/verified-location.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "location-warning": {
+    "file": "/icons/location/location-warning.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions"
+  },
+  "upload": {
+    "file": "/icons/upload/upload.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "upload-cloud": {
+    "file": "/icons/upload/upload-cloud.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "uploading": {
+    "file": "/icons/upload/uploading.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "queued": {
+    "file": "/icons/upload/queued.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "processing": {
+    "file": "/icons/upload/processing.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "synced": {
+    "file": "/icons/upload/synced.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "cloud-check": {
+    "file": "/icons/upload/cloud-check.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "cloud-off": {
+    "file": "/icons/upload/cloud-off.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "offline": {
+    "file": "/icons/upload/offline.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "online": {
+    "file": "/icons/upload/online.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "wifi": {
+    "file": "/icons/upload/wifi.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "wifi-off": {
+    "file": "/icons/upload/wifi-off.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "retry": {
+    "file": "/icons/upload/retry.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "failed-upload": {
+    "file": "/icons/upload/failed-upload.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "saved-locally": {
+    "file": "/icons/upload/saved-locally.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "encrypted": {
+    "file": "/icons/upload/encrypted.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state"
+  },
+  "success": {
+    "file": "/icons/status/success.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "check-circle": {
+    "file": "/icons/status/check-circle.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "warning": {
+    "file": "/icons/status/warning.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "error": {
+    "file": "/icons/status/error.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "pending": {
+    "file": "/icons/status/pending.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "processing-status": {
+    "file": "/icons/status/processing-status.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "approved": {
+    "file": "/icons/status/approved.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "rejected": {
+    "file": "/icons/status/rejected.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "retake-required": {
+    "file": "/icons/status/retake-required.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "manual-review": {
+    "file": "/icons/status/manual-review.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "locked": {
+    "file": "/icons/status/locked.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "unlocked": {
+    "file": "/icons/status/unlocked.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "verified": {
+    "file": "/icons/status/verified.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "unverified": {
+    "file": "/icons/status/unverified.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "completed": {
+    "file": "/icons/status/completed.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "incomplete": {
+    "file": "/icons/status/incomplete.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators"
+  },
+  "shield": {
+    "file": "/icons/security/shield.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "shield-check": {
+    "file": "/icons/security/shield-check.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "privacy": {
+    "file": "/icons/security/privacy.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "lock": {
+    "file": "/icons/security/lock.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "secure-upload": {
+    "file": "/icons/security/secure-upload.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "encrypted-data": {
+    "file": "/icons/security/encrypted-data.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "camera-permission": {
+    "file": "/icons/security/camera-permission.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "location-permission": {
+    "file": "/icons/security/location-permission.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "consent": {
+    "file": "/icons/security/consent.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "document-check": {
+    "file": "/icons/security/document-check.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security"
+  },
+  "clean-car": {
+    "file": "/icons/readiness/clean-car.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "lighting-good": {
+    "file": "/icons/readiness/lighting-good.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "two-meter-space": {
+    "file": "/icons/readiness/two-meter-space.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "engine-on": {
+    "file": "/icons/readiness/engine-on.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "battery": {
+    "file": "/icons/readiness/battery.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "battery-low": {
+    "file": "/icons/readiness/battery-low.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "storage": {
+    "file": "/icons/readiness/storage.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "camera-ready": {
+    "file": "/icons/readiness/camera-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "gps-ready": {
+    "file": "/icons/readiness/gps-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "webgl-ready": {
+    "file": "/icons/readiness/webgl-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "device-ready": {
+    "file": "/icons/readiness/device-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks"
+  },
+  "inspection-case": {
+    "file": "/icons/reviewer/inspection-case.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "review-queue": {
+    "file": "/icons/reviewer/review-queue.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "loupe": {
+    "file": "/icons/reviewer/loupe.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "compare": {
+    "file": "/icons/reviewer/compare.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "original-image": {
+    "file": "/icons/reviewer/original-image.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "watermarked-image": {
+    "file": "/icons/reviewer/watermarked-image.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "flag": {
+    "file": "/icons/reviewer/flag.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "quality-flag": {
+    "file": "/icons/reviewer/quality-flag.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "manual-plate": {
+    "file": "/icons/reviewer/manual-plate.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "low-gps-accuracy": {
+    "file": "/icons/reviewer/low-gps-accuracy.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "quality-override": {
+    "file": "/icons/review-flags/quality-override.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "request-evidence": {
+    "file": "/icons/reviewer/request-evidence.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "approve-evidence": {
+    "file": "/icons/reviewer/approve-evidence.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "reject-evidence": {
+    "file": "/icons/reviewer/reject-evidence.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "audit-log": {
+    "file": "/icons/reviewer/audit-log.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "comment": {
+    "file": "/icons/reviewer/comment.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "decision": {
+    "file": "/icons/reviewer/decision.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "claim": {
+    "file": "/icons/reviewer/claim.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "sla-clock": {
+    "file": "/icons/reviewer/sla-clock.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue"
+  },
+  "branding": {
+    "file": "/icons/admin/branding.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "inspection-template": {
+    "file": "/icons/admin/inspection-template.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "policies": {
+    "file": "/icons/admin/policies.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "webhook": {
+    "file": "/icons/admin/webhook.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "roles": {
+    "file": "/icons/admin/roles.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "permissions": {
+    "file": "/icons/admin/permissions.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "partner": {
+    "file": "/icons/admin/partner.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "integration": {
+    "file": "/icons/admin/integration.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "api": {
+    "file": "/icons/admin/api.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "version": {
+    "file": "/icons/admin/version.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "publish": {
+    "file": "/icons/admin/publish.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "draft": {
+    "file": "/icons/admin/draft.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "archive": {
+    "file": "/icons/admin/archive.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "analytics": {
+    "file": "/icons/admin/analytics.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "system-health": {
+    "file": "/icons/admin/system-health.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal"
+  },
+  "inspection-pin-pending": {
+    "file": "/icons/viewer-3d/inspection-pin-pending.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — pending state"
+  },
+  "inspection-pin-pending-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-pending-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — pending state"
+  },
+  "inspection-pin-selected": {
+    "file": "/icons/viewer-3d/inspection-pin-selected.svg",
+    "category": "viewer-3d",
+    "defaultSize": 36,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — selected state"
+  },
+  "inspection-pin-selected-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-selected-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 36,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — selected state"
+  },
+  "inspection-pin-completed": {
+    "file": "/icons/viewer-3d/inspection-pin-completed.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — completed state"
+  },
+  "inspection-pin-completed-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-completed-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — completed state"
+  },
+  "inspection-pin-retake": {
+    "file": "/icons/viewer-3d/inspection-pin-retake.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — retake state"
+  },
+  "inspection-pin-retake-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-retake-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — retake state"
+  },
+  "plate-highlight": {
+    "file": "/overlays/targets/plate-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay"
+  },
+  "vin-highlight": {
+    "file": "/overlays/targets/vin-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay"
+  },
+  "wheel-highlight": {
+    "file": "/overlays/targets/wheel-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay"
+  },
+  "dashboard-highlight": {
+    "file": "/overlays/targets/dashboard-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay"
+  },
+  "vehicle-body-highlight": {
+    "file": "/overlays/targets/vehicle-body-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay"
+  },
+  "target-corners": {
+    "file": "/overlays/targets/target-corners.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay"
+  },
+  "camera-target": {
+    "file": "/overlays/targets/camera-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay"
+  },
+  "plate-target": {
+    "file": "/overlays/targets/plate-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay"
+  },
+  "vin-target": {
+    "file": "/overlays/targets/vin-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay"
+  },
+  "odometer-target": {
+    "file": "/overlays/targets/odometer-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay"
+  },
+  "ghost-car-outline-front": {
+    "file": "/overlays/ghost/ghost-car-outline-front.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — front"
+  },
+  "ghost-car-outline-front-left": {
+    "file": "/overlays/ghost/ghost-car-outline-front-left.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — front-left"
+  },
+  "ghost-car-outline-front-right": {
+    "file": "/overlays/ghost/ghost-car-outline-front-right.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — front-right"
+  },
+  "ghost-car-outline-side-left": {
+    "file": "/overlays/ghost/ghost-car-outline-side-left.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — side-left"
+  },
+  "ghost-car-outline-side-right": {
+    "file": "/overlays/ghost/ghost-car-outline-side-right.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — side-right"
+  },
+  "ghost-car-outline-rear": {
+    "file": "/overlays/ghost/ghost-car-outline-rear.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — rear"
+  },
+  "ghost-car-outline-rear-left": {
+    "file": "/overlays/ghost/ghost-car-outline-rear-left.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — rear-left"
+  },
+  "ghost-car-outline-rear-right": {
+    "file": "/overlays/ghost/ghost-car-outline-rear-right.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — rear-right"
+  },
+  "ghost-car-outline-top": {
+    "file": "/overlays/ghost/ghost-car-outline-top.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — top"
+  },
+  "alignment-ground-line": {
+    "file": "/overlays/alignment/alignment-ground-line.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay"
+  },
+  "alignment-target-corners": {
+    "file": "/overlays/alignment/alignment-target-corners.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay"
+  },
+  "alignment-center-crosshair": {
+    "file": "/overlays/alignment/alignment-center-crosshair.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay"
+  },
+  "alignment-level-line": {
+    "file": "/overlays/alignment/alignment-level-line.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay"
+  },
+  "shutter-default": {
+    "file": "/overlays/camera/shutter-default.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control"
+  },
+  "shutter-pressed": {
+    "file": "/overlays/camera/shutter-pressed.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control"
+  },
+  "video-record-default": {
+    "file": "/overlays/camera/video-record-default.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control"
+  },
+  "video-record-active": {
+    "file": "/overlays/camera/video-record-active.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control"
+  },
+  "iranian-plate": {
+    "file": "/vehicle/plates/iranian-plate.svg",
+    "category": "plate",
+    "defaultSize": 280,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic Iranian licence plate component; replace text groups at runtime"
+  },
+  "iranian-plate-compact": {
+    "file": "/vehicle/plates/iranian-plate-compact.svg",
+    "category": "plate",
+    "defaultSize": 200,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic Iranian licence plate component; replace text groups at runtime"
+  },
+  "vehicle-orthographic-fallback": {
+    "file": "/vehicle/fallback/vehicle-orthographic-fallback.svg",
+    "category": "vehicle-fallback",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "WebGL fallback top + side orthographic technical vehicle reference with anchor points"
+  },
+  "inspection-progress-ring": {
+    "file": "/overlays/progress/inspection-progress-ring.svg",
+    "category": "progress",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic circular progress; control .progress strokeDashoffset from React/CSS"
+  },
+  "upload-progress-ring": {
+    "file": "/overlays/progress/upload-progress-ring.svg",
+    "category": "progress",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic circular progress; control .progress strokeDashoffset from React/CSS"
+  },
+  "video-360-progress-ring": {
+    "file": "/overlays/progress/video-360-progress-ring.svg",
+    "category": "progress",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic circular progress; control .progress strokeDashoffset from React/CSS"
+  },
+  "blurred": {
+    "file": "/icons/retake-reasons/blurred.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "too-dark": {
+    "file": "/icons/retake-reasons/too-dark.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "too-bright": {
+    "file": "/icons/retake-reasons/too-bright.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "glare": {
+    "file": "/icons/retake-reasons/glare.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "plate-unreadable": {
+    "file": "/icons/retake-reasons/plate-unreadable.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "vehicle-cropped": {
+    "file": "/icons/retake-reasons/vehicle-cropped.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "wrong-angle": {
+    "file": "/icons/retake-reasons/wrong-angle.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "too-close": {
+    "file": "/icons/retake-reasons/too-close.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "too-far": {
+    "file": "/icons/retake-reasons/too-far.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "obstruction": {
+    "file": "/icons/retake-reasons/obstruction.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "wrong-vehicle-part": {
+    "file": "/icons/retake-reasons/wrong-vehicle-part.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "vin-unreadable": {
+    "file": "/icons/retake-reasons/vin-unreadable.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "dashboard-unreadable": {
+    "file": "/icons/retake-reasons/dashboard-unreadable.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance"
+  },
+  "manual-plate-entry": {
+    "file": "/icons/review-flags/manual-plate-entry.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "gps-low-accuracy": {
+    "file": "/icons/review-flags/gps-low-accuracy.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "customer-modified-vehicle-data": {
+    "file": "/icons/review-flags/customer-modified-vehicle-data.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "duplicate-image": {
+    "file": "/icons/review-flags/duplicate-image.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "unexpected-metadata": {
+    "file": "/icons/review-flags/unexpected-metadata.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "retake-history": {
+    "file": "/icons/review-flags/retake-history.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "offline-capture": {
+    "file": "/icons/review-flags/offline-capture.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "late-upload": {
+    "file": "/icons/review-flags/late-upload.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag"
+  },
+  "no-inspections": {
+    "file": "/illustrations/empty-states/no-inspections.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no inspections state illustration"
+  },
+  "no-uploads": {
+    "file": "/illustrations/empty-states/no-uploads.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no uploads state illustration"
+  },
+  "offline-saved": {
+    "file": "/illustrations/empty-states/offline-saved.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "offline saved state illustration"
+  },
+  "inspection-complete": {
+    "file": "/illustrations/empty-states/inspection-complete.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "inspection complete state illustration"
+  },
+  "submission-success": {
+    "file": "/illustrations/empty-states/submission-success.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "submission success state illustration"
+  },
+  "waiting-review": {
+    "file": "/illustrations/empty-states/waiting-review.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "waiting review state illustration"
+  },
+  "additional-evidence": {
+    "file": "/illustrations/empty-states/additional-evidence.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "additional evidence state illustration"
+  },
+  "no-review-cases": {
+    "file": "/illustrations/empty-states/no-review-cases.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no review cases state illustration"
+  },
+  "no-search-results": {
+    "file": "/illustrations/empty-states/no-search-results.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no search results state illustration"
+  },
+  "location-error": {
+    "file": "/illustrations/empty-states/location-error.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "location error state illustration"
+  },
+  "camera-permission-required": {
+    "file": "/illustrations/empty-states/camera-permission-required.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "camera permission required state illustration"
+  },
+  "gps-permission-required": {
+    "file": "/illustrations/empty-states/gps-permission-required.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "gps permission required state illustration"
+  },
+  "webgl-unavailable": {
+    "file": "/illustrations/empty-states/webgl-unavailable.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "webgl unavailable state illustration"
+  },
+  "readiness-clean-vehicle": {
+    "file": "/illustrations/readiness/readiness-clean-vehicle.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness clean vehicle state illustration"
+  },
+  "readiness-open-space": {
+    "file": "/illustrations/readiness/readiness-open-space.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness open space state illustration"
+  },
+  "readiness-engine-on": {
+    "file": "/illustrations/readiness/readiness-engine-on.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness engine on state illustration"
+  },
+  "readiness-phone-ready": {
+    "file": "/illustrations/readiness/readiness-phone-ready.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness phone ready state illustration"
+  },
+  "privacy-consent": {
+    "file": "/illustrations/consent/privacy-consent.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "privacy consent state illustration"
+  },
+  "inspection-submitted": {
+    "file": "/illustrations/success/inspection-submitted.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "inspection submitted state illustration"
+  },
+  "retake-request": {
+    "file": "/illustrations/errors/retake-request.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "retake request state illustration"
+  },
+  "offline-storage": {
+    "file": "/illustrations/errors/offline-storage.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "offline storage state illustration"
+  },
+  "vehicle-loader": {
+    "file": "/illustrations/loader/vehicle-loader.svg",
+    "category": "loader",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "Animated model-loading outline; animate stroke-dashoffset"
+  },
+  "orbit-car": {
+    "file": "/overlays/orbit/orbit-car.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance"
+  },
+  "orbit-arrow": {
+    "file": "/overlays/orbit/orbit-arrow.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance"
+  },
+  "orbit-progress": {
+    "file": "/overlays/orbit/orbit-progress.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance"
+  },
+  "top-view-car": {
+    "file": "/overlays/orbit/top-view-car.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance"
+  },
+  "reviewer-quality-override": {
+    "file": "/icons/reviewer/quality-override.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer decision panel quality-override flag"
+  }
+}

@@ -1,0 +1,2442 @@
+{
+  "home": {
+    "file": "/icons/navigation/home.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m3.5 10 8.5-7 8.5 7v9a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1v-9Z\"/></svg>"
+  },
+  "arrow-right-rtl": {
+    "file": "/icons/navigation/arrow-right-rtl.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 12h14m-5-5 5 5-5 5\"/></svg>"
+  },
+  "arrow-left-rtl": {
+    "file": "/icons/navigation/arrow-left-rtl.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M19 12H5m5-5-5 5 5 5\"/></svg>"
+  },
+  "chevron-down": {
+    "file": "/icons/navigation/chevron-down.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m7 9 5 5 5-5\"/></svg>"
+  },
+  "chevron-up": {
+    "file": "/icons/navigation/chevron-up.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m7 15 5-5 5 5\"/></svg>"
+  },
+  "close": {
+    "file": "/icons/navigation/close.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M6 6l12 12M18 6 6 18\"/></svg>"
+  },
+  "menu": {
+    "file": "/icons/navigation/menu.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 7h16M4 12h16M4 17h16\"/></svg>"
+  },
+  "more-horizontal": {
+    "file": "/icons/navigation/more-horizontal.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"6\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"18\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+  },
+  "more-vertical": {
+    "file": "/icons/navigation/more-vertical.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"6\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"18\" r=\".8\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+  },
+  "search": {
+    "file": "/icons/navigation/search.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"11\" cy=\"11\" r=\"6\"/><path d=\"m16 16 4 4\"/></svg>"
+  },
+  "filter": {
+    "file": "/icons/navigation/filter.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 6h16M7 12h10M10 18h4\"/></svg>"
+  },
+  "settings": {
+    "file": "/icons/navigation/settings.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2.8v2M12 19.2v2M2.8 12h2M19.2 12h2m-15.7-6.5 1.4 1.4m10.2 10.2 1.4 1.4m0-13-1.4 1.4M6.9 17.1l-1.4 1.4\"/></svg>"
+  },
+  "help-circle": {
+    "file": "/icons/navigation/help-circle.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M9.8 9a2.4 2.4 0 1 1 3.5 2.1c-.9.5-1.3 1-1.3 2M12 17h.01\"/></svg>"
+  },
+  "info": {
+    "file": "/icons/navigation/info.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 10v6m0-9h.01\"/></svg>"
+  },
+  "external-link": {
+    "file": "/icons/navigation/external-link.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M14 5h5v5M19 5l-8 8\"/><path d=\"M17 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h5\"/></svg>"
+  },
+  "copy": {
+    "file": "/icons/navigation/copy.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"8\" y=\"8\" width=\"11\" height=\"11\" rx=\"2\"/><path d=\"M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2\"/></svg>"
+  },
+  "edit": {
+    "file": "/icons/navigation/edit.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m4 17-.5 3.5L7 20l10.8-10.8-3-3L4 17Z\"/><path d=\"m13.8 7.2 3 3\"/></svg>"
+  },
+  "delete": {
+    "file": "/icons/navigation/delete.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 7h14M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5\"/></svg>"
+  },
+  "download": {
+    "file": "/icons/navigation/download.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3v11m-4-4 4 4 4-4M5 19h14\"/></svg>"
+  },
+  "refresh": {
+    "file": "/icons/navigation/refresh.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M19 7V3l-2 2a8 8 0 1 0 2 9\"/></svg>"
+  },
+  "logout": {
+    "file": "/icons/navigation/logout.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M10 4H5v16h5M13 8l4 4-4 4m4-4H8\"/></svg>"
+  },
+  "user": {
+    "file": "/icons/navigation/user.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"8\" r=\"3\"/><path d=\"M5.5 20a6.5 6.5 0 0 1 13 0\"/></svg>"
+  },
+  "users": {
+    "file": "/icons/navigation/users.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"9\" cy=\"8\" r=\"3\"/><circle cx=\"17\" cy=\"9\" r=\"2.2\"/><path d=\"M3 20a6 6 0 0 1 12 0m1-6a4.5 4.5 0 0 1 5 4.5\"/></svg>"
+  },
+  "calendar": {
+    "file": "/icons/navigation/calendar.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"5\" width=\"16\" height=\"15\" rx=\"2\"/><path d=\"M8 3v4m8-4v4M4 9h16\"/></svg>"
+  },
+  "clock": {
+    "file": "/icons/navigation/clock.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3.5 2\"/></svg>"
+  },
+  "history": {
+    "file": "/icons/navigation/history.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 7V3m0 4h4\"/><path d=\"M5 6a8 8 0 1 1-1 8M12 8v5l3 2\"/></svg>"
+  },
+  "notification": {
+    "file": "/icons/navigation/notification.svg",
+    "category": "navigation",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Global navigation and utility actions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M6 16h12l-1.5-2.2V10a4.5 4.5 0 0 0-9 0v3.8L6 16Zm4 3h4\"/></svg>"
+  },
+  "location-step": {
+    "file": "/icons/journey/location-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/></svg>"
+  },
+  "location-step-completed": {
+    "file": "/icons/journey/location-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><circle cx=\"18\" cy=\"18\" r=\"4\" fill=\"#059669\" stroke=\"#059669\"/><path d=\"m16.4 18 1.1 1.1 2.2-2.2\" stroke=\"white\"/></svg>"
+  },
+  "vehicle-step": {
+    "file": "/icons/journey/vehicle-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/></svg>"
+  },
+  "vehicle-step-completed": {
+    "file": "/icons/journey/vehicle-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><circle cx=\"18\" cy=\"18\" r=\"4\" fill=\"#059669\" stroke=\"#059669\"/><path d=\"m16.4 18 1.1 1.1 2.2-2.2\" stroke=\"white\"/></svg>"
+  },
+  "camera-step": {
+    "file": "/icons/journey/camera-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/></svg>"
+  },
+  "camera-step-completed": {
+    "file": "/icons/journey/camera-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><circle cx=\"18\" cy=\"18\" r=\"4\" fill=\"#059669\" stroke=\"#059669\"/><path d=\"m16.4 18 1.1 1.1 2.2-2.2\" stroke=\"white\"/></svg>"
+  },
+  "submit-step": {
+    "file": "/icons/journey/submit-step.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 12h11m-3-4 4 4-4 4\"/><path d=\"M16 5h3a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3\"/></svg>"
+  },
+  "submit-step-completed": {
+    "file": "/icons/journey/submit-step-completed.svg",
+    "category": "journey",
+    "defaultSize": 24,
+    "currentColor": false,
+    "recommendedUsage": "Four-stage RTL inspection journey stepper, completed state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 12h11m-3-4 4 4-4 4\"/><path d=\"M16 5h3a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-3\"/><circle cx=\"18\" cy=\"18\" r=\"4\" fill=\"#059669\" stroke=\"#059669\"/><path d=\"m16.4 18 1.1 1.1 2.2-2.2\" stroke=\"white\"/></svg>"
+  },
+  "car": {
+    "file": "/icons/vehicle/car.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/></svg>"
+  },
+  "car-front": {
+    "file": "/icons/vehicle/car-front.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/></svg>"
+  },
+  "car-rear": {
+    "file": "/icons/vehicle/car-rear.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5.2 9.2 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1l1.8 2.4 1.2 1.5v5.5a1.3 1.3 0 0 1-1.3 1.3h-1v-1H6.3v1h-1A1.3 1.3 0 0 1 4 16.2v-5.5l1.2-1.5Z\"/><path d=\"M7 10.2h10M8 13h2m4 0h2M9 7.8h6\"/></svg>"
+  },
+  "car-side-left": {
+    "file": "/icons/vehicle/car-side-left.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/></svg>"
+  },
+  "car-side-right": {
+    "file": "/icons/vehicle/car-side-right.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/></svg>"
+  },
+  "car-top": {
+    "file": "/icons/vehicle/car-top.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M9 3.5h6l2.2 4.1v8.8L15 20.5H9l-2.2-4.1V7.6L9 3.5Z\"/><path d=\"M8.2 8h7.6M8.2 16h7.6M9.5 5.3h5M9.2 9.5h5.6v5H9.2z\"/></svg>"
+  },
+  "car-front-45-left": {
+    "file": "/icons/vehicle/car-front-45-left.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"M5 11.5 8 9\"/></svg>"
+  },
+  "car-front-45-right": {
+    "file": "/icons/vehicle/car-front-45-right.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"M5 11.5 8 9\"/></svg>"
+  },
+  "car-rear-45-left": {
+    "file": "/icons/vehicle/car-rear-45-left.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m19 11.5-3-2.5\"/></svg>"
+  },
+  "car-rear-45-right": {
+    "file": "/icons/vehicle/car-rear-45-right.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m19 11.5-3-2.5\"/></svg>"
+  },
+  "car-interior": {
+    "file": "/icons/vehicle/car-interior.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 18h16M6 18v-5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v5M8 10V7h3v3m2 0V7h3v3\"/></svg>"
+  },
+  "dashboard": {
+    "file": "/icons/vehicle/dashboard.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 16c2-4 5-6 9-6s7 2 9 6v3H3v-3Z\"/><path d=\"M7 15h3m4 0h3M12 12v4\"/></svg>"
+  },
+  "steering-wheel": {
+    "file": "/icons/vehicle/steering-wheel.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8\"/><circle cx=\"12\" cy=\"12\" r=\"2.2\"/><path d=\"M4.5 10h5l2.5 2m7.5-2h-5L12 12m0 2v6\"/></svg>"
+  },
+  "odometer": {
+    "file": "/icons/vehicle/odometer.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 17a8 8 0 0 1 16 0\"/><path d=\"m12 13 4-3M7 15h.01m10 0h.01M12 8h.01\"/><rect x=\"8\" y=\"17\" width=\"8\" height=\"3\" rx=\"1\"/></svg>"
+  },
+  "engine": {
+    "file": "/icons/vehicle/engine.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9h3l1-2h6l1 2h3v8h-3l-1 2H9l-1-2H5V9Zm-2 3h2m14 0h2M10 10v6m4-6v6\"/></svg>"
+  },
+  "hood-open": {
+    "file": "/icons/vehicle/hood-open.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M7 6 5 2h14l-2 4\"/></svg>"
+  },
+  "vin": {
+    "file": "/icons/vehicle/vin.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"3\" y=\"7\" width=\"18\" height=\"10\" rx=\"2\"/><path d=\"M6 10h1m2 0h1m2 0h1m2 0h1m2 0h1M6 14h7\"/></svg>"
+  },
+  "license-plate": {
+    "file": "/icons/vehicle/license-plate.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"1.5\"/><path d=\"M7 8v8m9-8v8M10 11h3\"/></svg>"
+  },
+  "wheel": {
+    "file": "/icons/vehicle/wheel.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 4v5m0 6v5M4 12h5m6 0h5m-2.3-5.7-3.5 3.5m-4.4 4.4-3.5 3.5\"/></svg>"
+  },
+  "mirror": {
+    "file": "/icons/vehicle/mirror.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 15c0-4 3-7 8-7h4c1.5 0 2.5 1.2 2 2.7l-1.2 3.6c-.3 1-1.3 1.7-2.4 1.7H5Z\"/><path d=\"M8 16v3\"/></svg>"
+  },
+  "roof": {
+    "file": "/icons/vehicle/roof.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 15h16M6 15l3-7h6l3 7M8 10h8\"/></svg>"
+  },
+  "door": {
+    "file": "/icons/vehicle/door.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"6\" y=\"4\" width=\"12\" height=\"16\" rx=\"2\"/><path d=\"M8 10h8m-2 3h1\"/></svg>"
+  },
+  "bumper": {
+    "file": "/icons/vehicle/bumper.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 10h16v5l-3 3H7l-3-3v-5Zm3 3h10\"/></svg>"
+  },
+  "headlight": {
+    "file": "/icons/vehicle/headlight.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 13c3-4 7-6 16-5-2 5-6 8-16 8v-3Z\"/><path d=\"M8 12h7\"/></svg>"
+  },
+  "taillight": {
+    "file": "/icons/vehicle/taillight.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 9c6-2 12-1 16 3-4 4-10 5-16 3V9Z\"/><path d=\"m8 11 3 3 4-3\"/></svg>"
+  },
+  "windshield": {
+    "file": "/icons/vehicle/windshield.svg",
+    "category": "vehicle",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Vehicle identity, angle and inspection-part controls",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7 4h10l2 16H5L7 4Z\"/><path d=\"M8.5 7h7\"/></svg>"
+  },
+  "camera": {
+    "file": "/icons/camera/camera.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/></svg>"
+  },
+  "camera-outline": {
+    "file": "/icons/camera/camera-outline.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/></svg>"
+  },
+  "shutter": {
+    "file": "/icons/camera/shutter.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/></svg>"
+  },
+  "retake": {
+    "file": "/icons/camera/retake.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"M6 5H3v3M3.5 7A7 7 0 0 1 9 3\"/></svg>"
+  },
+  "gallery": {
+    "file": "/icons/camera/gallery.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"2\"/><circle cx=\"9\" cy=\"10\" r=\"1.5\"/><path d=\"m6 17 4-4 3 3 2-2 3 3\"/></svg>"
+  },
+  "flash-on": {
+    "file": "/icons/camera/flash-on.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m13 2-7 11h5l-1 9 8-12h-5V2Z\"/></svg>"
+  },
+  "flash-off": {
+    "file": "/icons/camera/flash-off.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m13 2-7 11h5l-1 9 8-12h-5V2Z\"/><path d=\"M4 4l16 16\"/></svg>"
+  },
+  "flash-auto": {
+    "file": "/icons/camera/flash-auto.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m13 2-7 11h5l-1 9 8-12h-5V2Z\"/><path d=\"M4 5h3m10 0h3\"/></svg>"
+  },
+  "switch-camera": {
+    "file": "/icons/camera/switch-camera.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"M7 5 5 3 3 5m14 14 2 2 2-2\"/></svg>"
+  },
+  "focus": {
+    "file": "/icons/camera/focus.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>"
+  },
+  "target": {
+    "file": "/icons/camera/target.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>"
+  },
+  "alignment": {
+    "file": "/icons/camera/alignment.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>"
+  },
+  "level": {
+    "file": "/icons/camera/level.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 12h16M7 9v6m10-6v6\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/></svg>"
+  },
+  "stability": {
+    "file": "/icons/camera/stability.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M6 5v14m12-14v14M9 8h6v8H9z\"/><path d=\"M3 8 1 10l2 2m18-4 2 2-2 2\"/></svg>"
+  },
+  "brightness": {
+    "file": "/icons/camera/brightness.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2m0-14-2 2M7 17l-2 2\"/></svg>"
+  },
+  "low-light": {
+    "file": "/icons/camera/low-light.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2m0-14-2 2M7 17l-2 2\"/><path d=\"M5 4l14 16\"/></svg>"
+  },
+  "zoom-in": {
+    "file": "/icons/camera/zoom-in.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"10\" cy=\"10\" r=\"6\"/><path d=\"m15 15 5 5M7 10h6\"/><path d=\"M10 7v6\"/></svg>"
+  },
+  "zoom-out": {
+    "file": "/icons/camera/zoom-out.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"10\" cy=\"10\" r=\"6\"/><path d=\"m15 15 5 5M7 10h6\"/></svg>"
+  },
+  "fullscreen": {
+    "file": "/icons/camera/fullscreen.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4\"/></svg>"
+  },
+  "rotate": {
+    "file": "/icons/camera/rotate.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M18 7V3l-2 2a7 7 0 1 0 2 10\"/></svg>"
+  },
+  "camera-guide": {
+    "file": "/icons/camera/camera-guide.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"M7 3v3m10-3v3M7 21v-3m10 3v-3\"/></svg>"
+  },
+  "ghost-overlay": {
+    "file": "/icons/camera/ghost-overlay.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M4 4h16v16H4z\" stroke-dasharray=\"2 2\"/></svg>"
+  },
+  "hide-overlay": {
+    "file": "/icons/camera/hide-overlay.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M4 4l16 16\"/></svg>"
+  },
+  "show-overlay": {
+    "file": "/icons/camera/show-overlay.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M3 12s3-5 9-5 9 5 9 5-3 5-9 5-9-5-9-5Z\"/></svg>"
+  },
+  "video": {
+    "file": "/icons/camera/video.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"3\" y=\"6\" width=\"13\" height=\"12\" rx=\"2\"/><path d=\"m16 10 5-3v10l-5-3\"/></svg>"
+  },
+  "record": {
+    "file": "/icons/camera/record.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8\"/><circle cx=\"12\" cy=\"12\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+  },
+  "stop-recording": {
+    "file": "/icons/camera/stop-recording.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8\"/><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\" rx=\"1\" fill=\"currentColor\" stroke=\"none\"/></svg>"
+  },
+  "360-video": {
+    "file": "/icons/camera/360-video.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 12a8 5 0 1 0 16 0 8 5 0 1 0-16 0Z\"/><path d=\"m17 7 3 1-1 3\"/><path d=\"M9 3.5h6l2.2 4.1v8.8L15 20.5H9l-2.2-4.1V7.6L9 3.5Z\"/><path d=\"M8.2 8h7.6M8.2 16h7.6M9.5 5.3h5M9.2 9.5h5.6v5H9.2z\"/></svg>"
+  },
+  "image-quality": {
+    "file": "/icons/camera/image-quality.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"m16 5 1 2 2 .3-1.5 1.5.4 2.2-1.9-1-2 1 .4-2.2L13 7.3l2-.3 1-2Z\"/></svg>"
+  },
+  "blur-warning": {
+    "file": "/icons/camera/blur-warning.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h8M5 12h12M5 16h8\"/><path d=\"m17 7 4 5-4 5\"/></svg>"
+  },
+  "glare-warning": {
+    "file": "/icons/camera/glare-warning.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 3v3m0 12v3M3 12h3m12 0h3\"/></svg>"
+  },
+  "cropped-warning": {
+    "file": "/icons/camera/cropped-warning.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7 3v14a2 2 0 0 0 2 2h12M3 7h12a2 2 0 0 1 2 2v12\"/></svg>"
+  },
+  "vehicle-too-close": {
+    "file": "/icons/camera/vehicle-too-close.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M3 3v5m0-5h5m13 0v5m0-5h-5\"/></svg>"
+  },
+  "vehicle-too-far": {
+    "file": "/icons/camera/vehicle-too-far.svg",
+    "category": "camera",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Camera capture and quality guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4\"/></svg>"
+  },
+  "orbit": {
+    "file": "/icons/viewer-3d/orbit.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m5 7 7 4 7-4M12 11v10\"/><path d=\"M3 12c2-4 5-6 9-6s7 2 9 6M3 12c2 4 5 6 9 6s7-2 9-6\"/></svg>"
+  },
+  "rotate-3d": {
+    "file": "/icons/viewer-3d/rotate-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m5 7 7 4 7-4M12 11v10\"/><path d=\"M4 5v4h4m8 10v-4h4\"/></svg>"
+  },
+  "pan": {
+    "file": "/icons/viewer-3d/pan.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m5 7 7 4 7-4M12 11v10\"/><path d=\"M3 12h18m-3-3 3 3-3 3M6 9l-3 3 3 3\"/></svg>"
+  },
+  "zoom-3d": {
+    "file": "/icons/viewer-3d/zoom-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m5 7 7 4 7-4M12 11v10\"/><path d=\"M17 17l4 4M16 12h4m-2-2v4\"/></svg>"
+  },
+  "reset-camera": {
+    "file": "/icons/viewer-3d/reset-camera.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m5 7 7 4 7-4M12 11v10\"/><path d=\"M5 8V4h4m10 12v4h-4\"/></svg>"
+  },
+  "view-front": {
+    "file": "/icons/viewer-3d/view-front.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M12 2v3\"/></svg>"
+  },
+  "view-rear": {
+    "file": "/icons/viewer-3d/view-rear.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5.2 9.2 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1l1.8 2.4 1.2 1.5v5.5a1.3 1.3 0 0 1-1.3 1.3h-1v-1H6.3v1h-1A1.3 1.3 0 0 1 4 16.2v-5.5l1.2-1.5Z\"/><path d=\"M7 10.2h10M8 13h2m4 0h2M9 7.8h6\"/><path d=\"M12 19v3\"/></svg>"
+  },
+  "view-left": {
+    "file": "/icons/viewer-3d/view-left.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"M7 4 4 7l3 3\"/></svg>"
+  },
+  "view-right": {
+    "file": "/icons/viewer-3d/view-right.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m17 4 3 3-3 3\"/></svg>"
+  },
+  "view-top": {
+    "file": "/icons/viewer-3d/view-top.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M9 3.5h6l2.2 4.1v8.8L15 20.5H9l-2.2-4.1V7.6L9 3.5Z\"/><path d=\"M8.2 8h7.6M8.2 16h7.6M9.5 5.3h5M9.2 9.5h5.6v5H9.2z\"/><path d=\"M12 2v3m-2-1 2-2 2 2\"/></svg>"
+  },
+  "view-front-left": {
+    "file": "/icons/viewer-3d/view-front-left.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m4 8 4-4\"/></svg>"
+  },
+  "view-front-right": {
+    "file": "/icons/viewer-3d/view-front-right.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m20 8-4-4\"/></svg>"
+  },
+  "view-rear-left": {
+    "file": "/icons/viewer-3d/view-rear-left.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m4 16 4 4\"/></svg>"
+  },
+  "view-rear-right": {
+    "file": "/icons/viewer-3d/view-rear-right.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m20 16-4 4\"/></svg>"
+  },
+  "toggle-2d": {
+    "file": "/icons/viewer-3d/toggle-2d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"2\"/><path d=\"M7 16 17 8\"/></svg>"
+  },
+  "toggle-3d": {
+    "file": "/icons/viewer-3d/toggle-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m5 7 7 4 7-4M12 11v10\"/></svg>"
+  },
+  "hotspot": {
+    "file": "/icons/viewer-3d/hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/></svg>"
+  },
+  "selected-hotspot": {
+    "file": "/icons/viewer-3d/selected-hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><circle cx=\"12\" cy=\"12\" r=\"8\" stroke-dasharray=\"2 2\"/></svg>"
+  },
+  "completed-hotspot": {
+    "file": "/icons/viewer-3d/completed-hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><path d=\"m9.5 12 1.5 1.5 3.5-3.5\"/></svg>"
+  },
+  "retake-hotspot": {
+    "file": "/icons/viewer-3d/retake-hotspot.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/><path d=\"M16 8v4h-4\"/></svg>"
+  },
+  "fullscreen-3d": {
+    "file": "/icons/viewer-3d/fullscreen-3d.svg",
+    "category": "viewer-3d",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "3D vehicle viewer controls and hotspot states",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m5 7 7 4 7-4M12 11v10\"/><path d=\"M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4\"/></svg>"
+  },
+  "map-pin": {
+    "file": "/icons/location/map-pin.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/></svg>"
+  },
+  "map-pin-selected": {
+    "file": "/icons/location/map-pin-selected.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><circle cx=\"12\" cy=\"11\" r=\"3.2\"/></svg>"
+  },
+  "gps": {
+    "file": "/icons/location/gps.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3\"/></svg>"
+  },
+  "gps-off": {
+    "file": "/icons/location/gps-off.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"6\"/><path d=\"M2 2l20 20M12 2v3M2 12h3m14 0h3\"/></svg>"
+  },
+  "crosshair": {
+    "file": "/icons/location/crosshair.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3\"/></svg>"
+  },
+  "current-location": {
+    "file": "/icons/location/current-location.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3\"/></svg>"
+  },
+  "map": {
+    "file": "/icons/location/map.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z\"/><path d=\"M9 3v15m6-12v15\"/></svg>"
+  },
+  "address": {
+    "file": "/icons/location/address.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 5h16v14H4zM7 9h10m-10 4h6\"/><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/></svg>"
+  },
+  "building": {
+    "file": "/icons/location/building.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 21V4h10v17M9 8h2m-2 4h2m-2 4h2M15 10h4v11\"/></svg>"
+  },
+  "parking": {
+    "file": "/icons/location/parking.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M10 17V7h3a3 3 0 0 1 0 6h-3\"/></svg>"
+  },
+  "location-accuracy": {
+    "file": "/icons/location/location-accuracy.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3\"/><circle cx=\"12\" cy=\"12\" r=\"9\" stroke-dasharray=\"2 2\"/></svg>"
+  },
+  "verified-location": {
+    "file": "/icons/location/verified-location.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><path d=\"m9.5 11 1.5 1.5 3.5-3.5\"/></svg>"
+  },
+  "location-warning": {
+    "file": "/icons/location/location-warning.svg",
+    "category": "location",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Map, GPS and address interactions",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><path d=\"M12 8v4m0 2h.01\"/></svg>"
+  },
+  "upload": {
+    "file": "/icons/upload/upload.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 18V8m-4 4 4-4 4 4\"/></svg>"
+  },
+  "upload-cloud": {
+    "file": "/icons/upload/upload-cloud.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7.5 18H6a4 4 0 0 1-.6-7.9A6 6 0 0 1 17 8.4a4.2 4.2 0 0 1 .7 8.3H16\"/><path d=\"M12 18V8m-4 4 4-4 4 4\"/></svg>"
+  },
+  "uploading": {
+    "file": "/icons/upload/uploading.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7.5 18H6a4 4 0 0 1-.6-7.9A6 6 0 0 1 17 8.4a4.2 4.2 0 0 1 .7 8.3H16\"/><path d=\"M12 18V8m-4 4 4-4 4 4\"/></svg>"
+  },
+  "queued": {
+    "file": "/icons/upload/queued.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M12 7v5l3 2\"/></svg>"
+  },
+  "processing": {
+    "file": "/icons/upload/processing.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M18 7V3l-2 2a7 7 0 1 0 2 10\"/></svg>"
+  },
+  "synced": {
+    "file": "/icons/upload/synced.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7.5 18H6a4 4 0 0 1-.6-7.9A6 6 0 0 1 17 8.4a4.2 4.2 0 0 1 .7 8.3H16\"/><path d=\"m9 14 2 2 4-4\"/></svg>"
+  },
+  "cloud-check": {
+    "file": "/icons/upload/cloud-check.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7.5 18H6a4 4 0 0 1-.6-7.9A6 6 0 0 1 17 8.4a4.2 4.2 0 0 1 .7 8.3H16\"/><path d=\"m9 14 2 2 4-4\"/></svg>"
+  },
+  "cloud-off": {
+    "file": "/icons/upload/cloud-off.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7.5 18H6a4 4 0 0 1-.6-7.9A6 6 0 0 1 17 8.4a4.2 4.2 0 0 1 .7 8.3H16\"/><path d=\"M3 3l18 18\"/></svg>"
+  },
+  "offline": {
+    "file": "/icons/upload/offline.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7.5 18H6a4 4 0 0 1-.6-7.9A6 6 0 0 1 17 8.4a4.2 4.2 0 0 1 .7 8.3H16\"/><path d=\"M3 3l18 18\"/></svg>"
+  },
+  "online": {
+    "file": "/icons/upload/online.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 12a10 10 0 0 1 14 0M8 15a6 6 0 0 1 8 0m-5 3h2\"/></svg>"
+  },
+  "wifi": {
+    "file": "/icons/upload/wifi.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 9a13 13 0 0 1 18 0M6 13a9 9 0 0 1 12 0m-8 4a3 3 0 0 1 4 0\"/></svg>"
+  },
+  "wifi-off": {
+    "file": "/icons/upload/wifi-off.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 9a13 13 0 0 1 18 0M6 13a9 9 0 0 1 12 0m-8 4a3 3 0 0 1 4 0\"/><path d=\"M3 3l18 18\"/></svg>"
+  },
+  "retry": {
+    "file": "/icons/upload/retry.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M19 7V3l-2 2a8 8 0 1 0 2 9\"/></svg>"
+  },
+  "failed-upload": {
+    "file": "/icons/upload/failed-upload.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7.5 18H6a4 4 0 0 1-.6-7.9A6 6 0 0 1 17 8.4a4.2 4.2 0 0 1 .7 8.3H16\"/><path d=\"M9 12l6 6m0-6-6 6\"/></svg>"
+  },
+  "saved-locally": {
+    "file": "/icons/upload/saved-locally.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"5\" y=\"3\" width=\"14\" height=\"18\" rx=\"2\"/><path d=\"M9 17h6m-5-9h4\"/><path d=\"m9 13 2 2 4-4\"/></svg>"
+  },
+  "encrypted": {
+    "file": "/icons/upload/encrypted.svg",
+    "category": "upload",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Upload, local persistence and network state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"5\" y=\"10\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/></svg>"
+  },
+  "success": {
+    "file": "/icons/status/success.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/></svg>"
+  },
+  "check-circle": {
+    "file": "/icons/status/check-circle.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/></svg>"
+  },
+  "warning": {
+    "file": "/icons/status/warning.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 8v5m0 3h.01\"/></svg>"
+  },
+  "error": {
+    "file": "/icons/status/error.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m9 9 6 6m0-6-6 6\"/></svg>"
+  },
+  "pending": {
+    "file": "/icons/status/pending.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7v5l3 2\"/></svg>"
+  },
+  "processing-status": {
+    "file": "/icons/status/processing-status.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7v5l3 2\"/></svg>"
+  },
+  "approved": {
+    "file": "/icons/status/approved.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/></svg>"
+  },
+  "rejected": {
+    "file": "/icons/status/rejected.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m9 9 6 6m0-6-6 6\"/></svg>"
+  },
+  "retake-required": {
+    "file": "/icons/status/retake-required.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 7v5l3 2\"/></svg>"
+  },
+  "manual-review": {
+    "file": "/icons/status/manual-review.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 8v5m0 3h.01\"/></svg>"
+  },
+  "locked": {
+    "file": "/icons/status/locked.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/></svg>"
+  },
+  "unlocked": {
+    "file": "/icons/status/unlocked.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/></svg>"
+  },
+  "verified": {
+    "file": "/icons/status/verified.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/></svg>"
+  },
+  "unverified": {
+    "file": "/icons/status/unverified.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 8v5m0 3h.01\"/></svg>"
+  },
+  "completed": {
+    "file": "/icons/status/completed.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/></svg>"
+  },
+  "incomplete": {
+    "file": "/icons/status/incomplete.svg",
+    "category": "status",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Semantic status indicators",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"M12 8v5m0 3h.01\"/></svg>"
+  },
+  "shield": {
+    "file": "/icons/security/shield.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3 19 6v5c0 4.6-2.8 7.9-7 10-4.2-2.1-7-5.4-7-10V6l7-3Z\"/></svg>"
+  },
+  "shield-check": {
+    "file": "/icons/security/shield-check.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3 19 6v5c0 4.6-2.8 7.9-7 10-4.2-2.1-7-5.4-7-10V6l7-3Z\"/><path d=\"m9 12 2 2 4-4\"/></svg>"
+  },
+  "privacy": {
+    "file": "/icons/security/privacy.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3 19 6v5c0 4.6-2.8 7.9-7 10-4.2-2.1-7-5.4-7-10V6l7-3Z\"/><path d=\"M9 11h6v5H9zM10 11V9a2 2 0 0 1 4 0v2\"/></svg>"
+  },
+  "lock": {
+    "file": "/icons/security/lock.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"5\" y=\"10\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/></svg>"
+  },
+  "secure-upload": {
+    "file": "/icons/security/secure-upload.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3 19 6v5c0 4.6-2.8 7.9-7 10-4.2-2.1-7-5.4-7-10V6l7-3Z\"/><path d=\"M12 8v8m-3-3 3 3 3-3\"/></svg>"
+  },
+  "encrypted-data": {
+    "file": "/icons/security/encrypted-data.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3 19 6v5c0 4.6-2.8 7.9-7 10-4.2-2.1-7-5.4-7-10V6l7-3Z\"/><path d=\"M9 11h6v5H9zM10 11V9a2 2 0 0 1 4 0v2\"/></svg>"
+  },
+  "camera-permission": {
+    "file": "/icons/security/camera-permission.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"m16 5 1 2 2 .3\"/></svg>"
+  },
+  "location-permission": {
+    "file": "/icons/security/location-permission.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><path d=\"m16 5 1 2 2 .3\"/></svg>"
+  },
+  "consent": {
+    "file": "/icons/security/consent.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3 19 6v5c0 4.6-2.8 7.9-7 10-4.2-2.1-7-5.4-7-10V6l7-3Z\"/><path d=\"m9 12 2 2 4-4\"/></svg>"
+  },
+  "document-check": {
+    "file": "/icons/security/document-check.svg",
+    "category": "security",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Consent, permissions, privacy and security",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 3 19 6v5c0 4.6-2.8 7.9-7 10-4.2-2.1-7-5.4-7-10V6l7-3Z\"/><path d=\"m9 12 2 2 4-4\"/></svg>"
+  },
+  "clean-car": {
+    "file": "/icons/readiness/clean-car.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"m18 4 1 2 2 .5-1.5 1.5.5 2-2-1-2 1 .5-2L15 6.5l2-.5 1-2Z\"/></svg>"
+  },
+  "lighting-good": {
+    "file": "/icons/readiness/lighting-good.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2m0-14-2 2M7 17l-2 2\"/></svg>"
+  },
+  "two-meter-space": {
+    "file": "/icons/readiness/two-meter-space.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M9 3.5h6l2.2 4.1v8.8L15 20.5H9l-2.2-4.1V7.6L9 3.5Z\"/><path d=\"M8.2 8h7.6M8.2 16h7.6M9.5 5.3h5M9.2 9.5h5.6v5H9.2z\"/><path d=\"M3 5h4M3 5l2-2M3 5l2 2m16 12h-4m4 0-2-2m2 2-2 2\"/></svg>"
+  },
+  "engine-on": {
+    "file": "/icons/readiness/engine-on.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9h3l1-2h6l1 2h3v8h-3l-1 2H9l-1-2H5V9Zm-2 3h2m14 0h2M10 10v6m4-6v6\"/><path d=\"M3 5h2m14 0h2\"/></svg>"
+  },
+  "battery": {
+    "file": "/icons/readiness/battery.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"7\" width=\"15\" height=\"10\" rx=\"2\"/><path d=\"M19 10h2v4h-2\"/><path d=\"M7 10h8v4H7z\"/></svg>"
+  },
+  "battery-low": {
+    "file": "/icons/readiness/battery-low.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"7\" width=\"15\" height=\"10\" rx=\"2\"/><path d=\"M19 10h2v4h-2\"/><path d=\"M7 10h8v4H7z\"/><path d=\"M4 4l16 16\"/></svg>"
+  },
+  "storage": {
+    "file": "/icons/readiness/storage.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><ellipse cx=\"12\" cy=\"6\" rx=\"7\" ry=\"3\"/><path d=\"M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6m-14 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6\"/></svg>"
+  },
+  "camera-ready": {
+    "file": "/icons/readiness/camera-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"m15.5 5.5 1.5 1.5 3-3\"/></svg>"
+  },
+  "gps-ready": {
+    "file": "/icons/readiness/gps-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><path d=\"m9.5 11 1.5 1.5 3.5-3.5\"/></svg>"
+  },
+  "webgl-ready": {
+    "file": "/icons/readiness/webgl-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 7 4v10l-7 4-7-4V7l7-4Z\"/><path d=\"m8 13 2 2 5-5\"/></svg>"
+  },
+  "device-ready": {
+    "file": "/icons/readiness/device-ready.svg",
+    "category": "readiness",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Pre-inspection readiness checks",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"7\" y=\"2.5\" width=\"10\" height=\"19\" rx=\"2\"/><path d=\"M10 18h4m-3-8 1.5 1.5L16 8\"/></svg>"
+  },
+  "inspection-case": {
+    "file": "/icons/reviewer/inspection-case.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"5\" y=\"3\" width=\"14\" height=\"18\" rx=\"2\"/><path d=\"M9 3v3h6V3m-6 8h6m-6 4h4\"/></svg>"
+  },
+  "review-queue": {
+    "file": "/icons/reviewer/review-queue.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 6h14v12H5zM8 10h8m-8 4h5\"/><path d=\"M3 9h2m14 0h2\"/></svg>"
+  },
+  "loupe": {
+    "file": "/icons/reviewer/loupe.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"10\" cy=\"10\" r=\"5\"/><path d=\"m14 14 6 6M8 8h4m-4 3h3\"/></svg>"
+  },
+  "compare": {
+    "file": "/icons/reviewer/compare.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 6h7v12H4zM13 6h7v12h-7zM9 12h6\"/></svg>"
+  },
+  "original-image": {
+    "file": "/icons/reviewer/original-image.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"2\"/><path d=\"m6 16 4-4 3 3 2-2 3 3\"/></svg>"
+  },
+  "watermarked-image": {
+    "file": "/icons/reviewer/watermarked-image.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"5\" width=\"16\" height=\"14\" rx=\"2\"/><path d=\"m6 16 4-4 3 3 2-2 3 3M7 8h10\"/></svg>"
+  },
+  "flag": {
+    "file": "/icons/reviewer/flag.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 21V4m0 1h10l-2 3 2 3H5\"/></svg>"
+  },
+  "quality-flag": {
+    "file": "/icons/reviewer/quality-flag.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 21V4m0 1h10l-2 3 2 3H5\"/><path d=\"M17 14l1 2 2 .3-1.5 1.5.5 2.2-2-1-2 1 .5-2.2-1.5-1.5 2-.3 1-2Z\"/></svg>"
+  },
+  "manual-plate": {
+    "file": "/icons/reviewer/manual-plate.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"1.5\"/><path d=\"m16 6 3-3 2 2-3 3-2 .5.5-2.5Z\"/></svg>"
+  },
+  "low-gps-accuracy": {
+    "file": "/icons/reviewer/low-gps-accuracy.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><circle cx=\"12\" cy=\"11\" r=\"5\" stroke-dasharray=\"2 2\"/></svg>"
+  },
+  "quality-override": {
+    "file": "/icons/review-flags/quality-override.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 12h6l2-5 3 10 2-5h3\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg>"
+  },
+  "request-evidence": {
+    "file": "/icons/reviewer/request-evidence.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"M18 4v4m-2-2h4\"/></svg>"
+  },
+  "approve-evidence": {
+    "file": "/icons/reviewer/approve-evidence.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"m16 6 1.5 1.5L20 5\"/></svg>"
+  },
+  "reject-evidence": {
+    "file": "/icons/reviewer/reject-evidence.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"m16 5 4 4m0-4-4 4\"/></svg>"
+  },
+  "audit-log": {
+    "file": "/icons/reviewer/audit-log.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M6 4h12v16H6zM9 8h6m-6 4h6m-6 4h4\"/><path d=\"M4 6v12\"/></svg>"
+  },
+  "comment": {
+    "file": "/icons/reviewer/comment.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 5h16v11H9l-5 4V5Z\"/></svg>"
+  },
+  "decision": {
+    "file": "/icons/reviewer/decision.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8.5\"/><path d=\"m8.5 12 2.3 2.3 4.8-5\"/><path d=\"M3 3h4m10 0h4\"/></svg>"
+  },
+  "claim": {
+    "file": "/icons/reviewer/claim.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 6h16v13H4zM7 10h10m-10 4h6\"/></svg>"
+  },
+  "sla-clock": {
+    "file": "/icons/reviewer/sla-clock.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Desktop reviewer workstation and queue",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M12 7v5l3 2M5 4 3 2\"/></svg>"
+  },
+  "branding": {
+    "file": "/icons/admin/branding.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 12 12 4l8 8-8 8-8-8Z\"/><path d=\"M8 12h8\"/></svg>"
+  },
+  "inspection-template": {
+    "file": "/icons/admin/inspection-template.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 3h14v18H5zM8 7h8M8 11h8M8 15h5\"/></svg>"
+  },
+  "policies": {
+    "file": "/icons/admin/policies.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M6 3h12v18H6zM9 7h6m-6 4h6m-6 4h4\"/></svg>"
+  },
+  "webhook": {
+    "file": "/icons/admin/webhook.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"7\" cy=\"12\" r=\"3\"/><circle cx=\"17\" cy=\"7\" r=\"3\"/><circle cx=\"17\" cy=\"17\" r=\"3\"/><path d=\"M10 11 14 8m-4 5 4 3\"/></svg>"
+  },
+  "roles": {
+    "file": "/icons/admin/roles.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"9\" cy=\"8\" r=\"3\"/><path d=\"M4 20a5 5 0 0 1 10 0\"/><path d=\"m16 12 2 2 3-3\"/></svg>"
+  },
+  "permissions": {
+    "file": "/icons/admin/permissions.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"6\" y=\"10\" width=\"12\" height=\"10\" rx=\"2\"/><path d=\"M9 10V7a3 3 0 0 1 6 0v3\"/><path d=\"m10 15 1.5 1.5L14 14\"/></svg>"
+  },
+  "partner": {
+    "file": "/icons/admin/partner.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 7h6v10H4zM14 7h6v10h-6zM10 12h4\"/></svg>"
+  },
+  "integration": {
+    "file": "/icons/admin/integration.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M8 3v5H3m13-5v5h5M8 21v-5H3m13 5v-5h5M8 8h8v8H8z\"/></svg>"
+  },
+  "api": {
+    "file": "/icons/admin/api.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M7 5 3 12l4 7m10-14 4 7-4 7M10 17l4-10\"/></svg>"
+  },
+  "version": {
+    "file": "/icons/admin/version.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 6h16v12H4zM8 10h8m-8 4h5\"/><circle cx=\"18\" cy=\"6\" r=\"2\"/></svg>"
+  },
+  "publish": {
+    "file": "/icons/admin/publish.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21V8m-4 4 4-4 4 4M5 4h14\"/></svg>"
+  },
+  "draft": {
+    "file": "/icons/admin/draft.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 4h10l4 4v12H5V4Z\"/><path d=\"M14 4v5h5M8 14h8\"/></svg>"
+  },
+  "archive": {
+    "file": "/icons/admin/archive.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"4\" y=\"7\" width=\"16\" height=\"13\" rx=\"1\"/><path d=\"M3 4h18v3H3zM9 11h6\"/></svg>"
+  },
+  "analytics": {
+    "file": "/icons/admin/analytics.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 19V11m5 8V5m5 14v-7m4 7V8\"/></svg>"
+  },
+  "system-health": {
+    "file": "/icons/admin/system-health.svg",
+    "category": "admin",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Multi-tenant administration portal",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 12h4l2-5 4 10 2-5h6\"/></svg>"
+  },
+  "inspection-pin-pending": {
+    "file": "/icons/viewer-3d/inspection-pin-pending.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — pending state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#64748B\" stroke=\"white\" stroke-width=\"2\"/><text x=\"24\" y=\"29\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"15\" font-weight=\"700\" fill=\"white\">1</text></svg>"
+  },
+  "inspection-pin-pending-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-pending-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — pending state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#64748B\" stroke=\"white\" stroke-width=\"2\"/><circle cx=\"24\" cy=\"24\" r=\"4\" fill=\"white\"/></svg>"
+  },
+  "inspection-pin-selected": {
+    "file": "/icons/viewer-3d/inspection-pin-selected.svg",
+    "category": "viewer-3d",
+    "defaultSize": 36,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — selected state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"21\" fill=\"none\" stroke=\"#2563EB\" stroke-opacity=\".22\" stroke-width=\"2\" stroke-dasharray=\"3 3\"/><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#2563EB\" stroke=\"white\" stroke-width=\"2\"/><text x=\"24\" y=\"29\" text-anchor=\"middle\" font-family=\"Arial,sans-serif\" font-size=\"15\" font-weight=\"700\" fill=\"white\">1</text></svg>"
+  },
+  "inspection-pin-selected-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-selected-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 36,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — selected state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"21\" fill=\"none\" stroke=\"#2563EB\" stroke-opacity=\".22\" stroke-width=\"2\" stroke-dasharray=\"3 3\"/><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#2563EB\" stroke=\"white\" stroke-width=\"2\"/><circle cx=\"24\" cy=\"24\" r=\"4\" fill=\"white\"/></svg>"
+  },
+  "inspection-pin-completed": {
+    "file": "/icons/viewer-3d/inspection-pin-completed.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — completed state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#059669\" stroke=\"white\" stroke-width=\"2\"/><path d=\"m17 24 5 5 10-11\" fill=\"none\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "inspection-pin-completed-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-completed-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — completed state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#059669\" stroke=\"white\" stroke-width=\"2\"/><path d=\"m17 24 5 5 10-11\" fill=\"none\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "inspection-pin-retake": {
+    "file": "/icons/viewer-3d/inspection-pin-retake.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — retake state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#D97706\" stroke=\"white\" stroke-width=\"2\"/><path d=\"M30 18v7h-7M29 25a7 7 0 1 1-2-7\" fill=\"none\" stroke=\"white\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "inspection-pin-retake-blank": {
+    "file": "/icons/viewer-3d/inspection-pin-retake-blank.svg",
+    "category": "viewer-3d",
+    "defaultSize": 32,
+    "currentColor": false,
+    "recommendedUsage": "3D inspection hotspot — retake state",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"#D97706\" stroke=\"white\" stroke-width=\"2\"/><path d=\"M30 18v7h-7M29 25a7 7 0 1 1-2-7\" fill=\"none\" stroke=\"white\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "plate-highlight": {
+    "file": "/overlays/targets/plate-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><rect x=\"7\" y=\"14\" width=\"34\" height=\"20\" rx=\"4\" fill=\"rgba(37,99,235,.12)\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "vin-highlight": {
+    "file": "/overlays/targets/vin-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><rect x=\"7\" y=\"14\" width=\"34\" height=\"20\" rx=\"4\" fill=\"rgba(37,99,235,.12)\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "wheel-highlight": {
+    "file": "/overlays/targets/wheel-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><circle cx=\"24\" cy=\"24\" r=\"16\" fill=\"rgba(37,99,235,.12)\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "dashboard-highlight": {
+    "file": "/overlays/targets/dashboard-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><rect x=\"7\" y=\"14\" width=\"34\" height=\"20\" rx=\"4\" fill=\"rgba(37,99,235,.12)\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "vehicle-body-highlight": {
+    "file": "/overlays/targets/vehicle-body-highlight.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M5 31v-6c0-4 3-7 7-8l6-2 7-7h14l7 8 7 2c4 1 6 4 6 8v5H5Z\" fill=\"rgba(37,99,235,.12)\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "target-corners": {
+    "file": "/overlays/targets/target-corners.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": false,
+    "recommendedUsage": "Projected inspection target/highlight overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M4 12V4h8M36 4h8v8M4 36v8h8M44 36v8h-8\"/></svg>"
+  },
+  "camera-target": {
+    "file": "/overlays/targets/camera-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M4 14V4h10M34 4h10v10M4 34v10h10M44 34v10H34\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "plate-target": {
+    "file": "/overlays/targets/plate-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M4 14V4h10M34 4h10v10M4 34v10h10M44 34v10H34\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "vin-target": {
+    "file": "/overlays/targets/vin-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M4 14V4h10M34 4h10v10M4 34v10h10M44 34v10H34\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+  },
+  "odometer-target": {
+    "file": "/overlays/targets/odometer-target.svg",
+    "category": "overlay-target",
+    "defaultSize": 48,
+    "currentColor": true,
+    "recommendedUsage": "Camera or review target corner overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path d=\"M4 14V4h10M34 4h10v10M4 34v10h10M44 34v10H34\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M15 28a9 9 0 0 1 18 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/></svg>"
+  },
+  "ghost-car-outline-front": {
+    "file": "/overlays/ghost/ghost-car-outline-front.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — front",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M92 62 125 23h150l33 39 28 35v88c0 10-8 18-18 18h-20v-14H102v14H82c-10 0-18-8-18-18V97l28-35Z\"/><path d=\"M114 70h172M95 113h210M117 149h166M136 30h128\"/><path d=\"M112 113c0-20 17-36 38-36h100c21 0 38 16 38 36\"/><path d=\"M103 189v-45m194 45v-45\"/></g></svg>"
+  },
+  "ghost-car-outline-front-left": {
+    "file": "/overlays/ghost/ghost-car-outline-front-left.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — front-left",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M92 62 125 23h150l33 39 28 35v88c0 10-8 18-18 18h-20v-14H102v14H82c-10 0-18-8-18-18V97l28-35Z\"/><path d=\"M114 70h172M95 113h210M117 149h166M136 30h128\"/><path d=\"M112 113c0-20 17-36 38-36h100c21 0 38 16 38 36\"/><path d=\"M103 189v-45m194 45v-45\"/><path d=\"M75 90 125 65\"/></g></svg>"
+  },
+  "ghost-car-outline-front-right": {
+    "file": "/overlays/ghost/ghost-car-outline-front-right.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — front-right",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M92 62 125 23h150l33 39 28 35v88c0 10-8 18-18 18h-20v-14H102v14H82c-10 0-18-8-18-18V97l28-35Z\"/><path d=\"M114 70h172M95 113h210M117 149h166M136 30h128\"/><path d=\"M112 113c0-20 17-36 38-36h100c21 0 38 16 38 36\"/><path d=\"M103 189v-45m194 45v-45\"/><path d=\"m325 90-50-25\"/></g></svg>"
+  },
+  "ghost-car-outline-side-left": {
+    "file": "/overlays/ghost/ghost-car-outline-side-left.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — side-left",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M35 145v-28c0-12 9-23 22-27l42-13 42-47h102l42 47 56 15c15 4 24 16 24 31v22H35Z\"/><path d=\"M107 77h169M78 145a38 38 0 1 0 76 0m134 0a38 38 0 1 0 76 0\"/><path d=\"M150 31v114m78-114v114M98 77l25-42m162 42-32-46\"/></g></svg>"
+  },
+  "ghost-car-outline-side-right": {
+    "file": "/overlays/ghost/ghost-car-outline-side-right.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — side-right",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M35 145v-28c0-12 9-23 22-27l42-13 42-47h102l42 47 56 15c15 4 24 16 24 31v22H35Z\"/><path d=\"M107 77h169M78 145a38 38 0 1 0 76 0m134 0a38 38 0 1 0 76 0\"/><path d=\"M150 31v114m78-114v114M98 77l25-42m162 42-32-46\"/></g></svg>"
+  },
+  "ghost-car-outline-rear": {
+    "file": "/overlays/ghost/ghost-car-outline-rear.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — rear",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M92 62 125 23h150l33 39 28 35v88c0 10-8 18-18 18h-20v-14H102v14H82c-10 0-18-8-18-18V97l28-35Z\"/><path d=\"M114 70h172M95 113h210M117 149h166M136 30h128\"/><path d=\"M112 113c0-20 17-36 38-36h100c21 0 38 16 38 36\"/><path d=\"M103 189v-45m194 45v-45\"/></g></svg>"
+  },
+  "ghost-car-outline-rear-left": {
+    "file": "/overlays/ghost/ghost-car-outline-rear-left.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — rear-left",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M92 62 125 23h150l33 39 28 35v88c0 10-8 18-18 18h-20v-14H102v14H82c-10 0-18-8-18-18V97l28-35Z\"/><path d=\"M114 70h172M95 113h210M117 149h166M136 30h128\"/><path d=\"M112 113c0-20 17-36 38-36h100c21 0 38 16 38 36\"/><path d=\"M103 189v-45m194 45v-45\"/><path d=\"M75 90 125 65\"/></g></svg>"
+  },
+  "ghost-car-outline-rear-right": {
+    "file": "/overlays/ghost/ghost-car-outline-rear-right.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — rear-right",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M92 62 125 23h150l33 39 28 35v88c0 10-8 18-18 18h-20v-14H102v14H82c-10 0-18-8-18-18V97l28-35Z\"/><path d=\"M114 70h172M95 113h210M117 149h166M136 30h128\"/><path d=\"M112 113c0-20 17-36 38-36h100c21 0 38 16 38 36\"/><path d=\"M103 189v-45m194 45v-45\"/><path d=\"m325 90-50-25\"/></g></svg>"
+  },
+  "ghost-car-outline-top": {
+    "file": "/overlays/ghost/ghost-car-outline-top.svg",
+    "category": "ghost-overlay",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Live camera vehicle alignment guide — top",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"rgba(255,255,255,.07)\" stroke=\"white\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M0 0h400v220H0z\" fill=\"none\"/><g style=\"filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))\"><path d=\"M145 18h110l42 38v108l-42 38H145l-42-38V56l42-38Z\"/><path d=\"M132 62h136M132 158h136M160 40h80M155 76h90v68h-90z\"/></g></svg>"
+  },
+  "alignment-ground-line": {
+    "file": "/overlays/alignment/alignment-ground-line.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"none\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 24h384\" stroke-dasharray=\"12 10\"/></svg>"
+  },
+  "alignment-target-corners": {
+    "file": "/overlays/alignment/alignment-target-corners.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"none\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M40 110V60h50M310 60h50v50M40 160v-50m0 50h50m220 0h50v-50\"/></svg>"
+  },
+  "alignment-center-crosshair": {
+    "file": "/overlays/alignment/alignment-center-crosshair.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"none\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M200 70v100M150 120h100\"/><circle cx=\"200\" cy=\"120\" r=\"14\"/></svg>"
+  },
+  "alignment-level-line": {
+    "file": "/overlays/alignment/alignment-level-line.svg",
+    "category": "alignment",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "Composable live camera alignment overlay",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 220\" fill=\"none\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M50 120h300\"/><circle cx=\"200\" cy=\"120\" r=\"5\" fill=\"white\"/></svg>"
+  },
+  "shutter-default": {
+    "file": "/overlays/camera/shutter-default.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 76 76\"><circle cx=\"38\" cy=\"38\" r=\"35\" fill=\"rgba(255,255,255,.14)\" stroke=\"white\" stroke-opacity=\".7\" stroke-width=\"2\"/><circle cx=\"38\" cy=\"38\" r=\"28\" fill=\"white\"/></svg>"
+  },
+  "shutter-pressed": {
+    "file": "/overlays/camera/shutter-pressed.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 76 76\"><circle cx=\"38\" cy=\"38\" r=\"35\" fill=\"rgba(255,255,255,.18)\" stroke=\"white\" stroke-width=\"2\"/><circle cx=\"38\" cy=\"38\" r=\"24\" fill=\"white\"/></svg>"
+  },
+  "video-record-default": {
+    "file": "/overlays/camera/video-record-default.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 76 76\"><circle cx=\"38\" cy=\"38\" r=\"35\" fill=\"none\" stroke=\"white\" stroke-width=\"3\"/><circle cx=\"38\" cy=\"38\" r=\"24\" fill=\"#DC2626\"/></svg>"
+  },
+  "video-record-active": {
+    "file": "/overlays/camera/video-record-active.svg",
+    "category": "camera-control",
+    "defaultSize": 76,
+    "currentColor": false,
+    "recommendedUsage": "Camera capture control",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 76 76\"><circle cx=\"38\" cy=\"38\" r=\"35\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"4\"/><rect x=\"27\" y=\"27\" width=\"22\" height=\"22\" rx=\"4\" fill=\"#DC2626\"/></svg>"
+  },
+  "iranian-plate": {
+    "file": "/vehicle/plates/iranian-plate.svg",
+    "category": "plate",
+    "defaultSize": 280,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic Iranian licence plate component; replace text groups at runtime",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 280 64\" role=\"img\" aria-label=\"Iranian licence plate template\">\n<g id=\"plate-background\"><rect x=\"1\" y=\"1\" width=\"278\" height=\"62\" rx=\"8\" fill=\"#fff\" stroke=\"#111827\" stroke-width=\"2\"/></g>\n<g id=\"country-strip\"><path d=\"M2 9a8 8 0 0 1 8-8h25v62H10a8 8 0 0 1-8-8V9Z\" fill=\"#1646A7\"/><text x=\"17.0\" y=\"50\" text-anchor=\"middle\" font-family=\"Arial\" font-size=\"9\" fill=\"#fff\">IR</text></g>\n<g id=\"main-number-left\"><text x=\"65\" y=\"42.24\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"24\" fill=\"#111827\">۱۲</text></g>\n<g id=\"letter\"><text x=\"110\" y=\"42.24\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"24\" fill=\"#111827\">ب</text></g>\n<g id=\"main-number-right\"><text x=\"169\" y=\"42.24\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"24\" fill=\"#111827\">۱۲۳</text></g>\n<g id=\"region-number\"><line x1=\"224\" y1=\"2\" x2=\"224\" y2=\"62\" stroke=\"#CBD5E1\"/><text x=\"252\" y=\"18\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"10\" fill=\"#111827\">ایران</text><text x=\"252\" y=\"54\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"20\" fill=\"#111827\">۱۱</text></g>\n<g id=\"border\" fill=\"none\" stroke=\"#111827\" stroke-width=\"1.5\"><rect x=\"1\" y=\"1\" width=\"278\" height=\"62\" rx=\"8\"/></g></svg>"
+  },
+  "iranian-plate-compact": {
+    "file": "/vehicle/plates/iranian-plate-compact.svg",
+    "category": "plate",
+    "defaultSize": 200,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic Iranian licence plate component; replace text groups at runtime",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 48\" role=\"img\" aria-label=\"Iranian licence plate template\">\n<g id=\"plate-background\"><rect x=\"1\" y=\"1\" width=\"198\" height=\"46\" rx=\"8\" fill=\"#fff\" stroke=\"#111827\" stroke-width=\"2\"/></g>\n<g id=\"country-strip\"><path d=\"M2 9a8 8 0 0 1 8-8h17v46H10a8 8 0 0 1-8-8V9Z\" fill=\"#1646A7\"/><text x=\"13.0\" y=\"34\" text-anchor=\"middle\" font-family=\"Arial\" font-size=\"9\" fill=\"#fff\">IR</text></g>\n<g id=\"main-number-left\"><text x=\"57\" y=\"31.68\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"17\" fill=\"#111827\">۱۲</text></g>\n<g id=\"letter\"><text x=\"102\" y=\"31.68\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"17\" fill=\"#111827\">ب</text></g>\n<g id=\"main-number-right\"><text x=\"161\" y=\"31.68\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"17\" fill=\"#111827\">۱۲۳</text></g>\n<g id=\"region-number\"><line x1=\"144\" y1=\"2\" x2=\"144\" y2=\"46\" stroke=\"#CBD5E1\"/><text x=\"172\" y=\"18\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"10\" fill=\"#111827\">ایران</text><text x=\"172\" y=\"38\" text-anchor=\"middle\" font-family=\"Vazirmatn,Arial\" font-size=\"13\" fill=\"#111827\">۱۱</text></g>\n<g id=\"border\" fill=\"none\" stroke=\"#111827\" stroke-width=\"1.5\"><rect x=\"1\" y=\"1\" width=\"198\" height=\"46\" rx=\"8\"/></g></svg>"
+  },
+  "vehicle-orthographic-fallback": {
+    "file": "/vehicle/fallback/vehicle-orthographic-fallback.svg",
+    "category": "vehicle-fallback",
+    "defaultSize": 400,
+    "currentColor": false,
+    "recommendedUsage": "WebGL fallback top + side orthographic technical vehicle reference with anchor points",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 420\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(0 0)\"><path d=\"M153 14h94l41 36v120l-41 36h-94l-41-36V50l41-36Z\"/><path d=\"M136 66h128m-128 88h128M160 40h80M154 80h92v60h-92z\"/><path d=\"M112 78H90m198 0h22M112 142H90m198 0h22\"/></g><g transform=\"translate(0 215)\"><path d=\"M35 144v-27c0-12 9-22 22-26l42-13 43-48h103l42 48 55 14c15 4 24 16 24 31v21H35Z\"/><path d=\"M108 78h170M78 144a38 38 0 1 0 76 0m134 0a38 38 0 1 0 76 0\"/><path d=\"M149 31v113m79-113v113M100 78l24-42m160 42-31-47\"/></g><g id=\"anchors\"><circle cx=\"120\" cy=\"50\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a1\"/><circle cx=\"200\" cy=\"35\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a2\"/><circle cx=\"280\" cy=\"55\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a3\"/><circle cx=\"92\" cy=\"100\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a4\"/><circle cx=\"305\" cy=\"102\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a5\"/><circle cx=\"120\" cy=\"150\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a6\"/><circle cx=\"200\" cy=\"180\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a7\"/><circle cx=\"280\" cy=\"150\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a8\"/><circle cx=\"95\" cy=\"260\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a9\"/><circle cx=\"160\" cy=\"245\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a10\"/><circle cx=\"230\" cy=\"245\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a11\"/><circle cx=\"302\" cy=\"260\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a12\"/><circle cx=\"100\" cy=\"350\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a13\"/><circle cx=\"300\" cy=\"350\" r=\"5\" fill=\"transparent\" stroke=\"#94A3B8\" stroke-width=\"1.5\" data-anchor=\"a14\"/></g></svg>"
+  },
+  "inspection-progress-ring": {
+    "file": "/overlays/progress/inspection-progress-ring.svg",
+    "category": "progress",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic circular progress; control .progress strokeDashoffset from React/CSS",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"42\" fill=\"none\" stroke=\"#E2E8F0\" stroke-width=\"8\"/><circle class=\"progress\" cx=\"50\" cy=\"50\" r=\"42\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-dasharray=\"263.89\" stroke-dashoffset=\"92.36\" transform=\"rotate(-90 50 50)\"/></svg>"
+  },
+  "upload-progress-ring": {
+    "file": "/overlays/progress/upload-progress-ring.svg",
+    "category": "progress",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic circular progress; control .progress strokeDashoffset from React/CSS",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"42\" fill=\"none\" stroke=\"#E2E8F0\" stroke-width=\"8\"/><circle class=\"progress\" cx=\"50\" cy=\"50\" r=\"42\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-dasharray=\"263.89\" stroke-dashoffset=\"92.36\" transform=\"rotate(-90 50 50)\"/></svg>"
+  },
+  "video-360-progress-ring": {
+    "file": "/overlays/progress/video-360-progress-ring.svg",
+    "category": "progress",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "Dynamic circular progress; control .progress strokeDashoffset from React/CSS",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"42\" fill=\"none\" stroke=\"#E2E8F0\" stroke-width=\"8\"/><circle class=\"progress\" cx=\"50\" cy=\"50\" r=\"42\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-dasharray=\"263.89\" stroke-dashoffset=\"92.36\" transform=\"rotate(-90 50 50)\"/></svg>"
+  },
+  "blurred": {
+    "file": "/icons/retake-reasons/blurred.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h9M5 12h13M5 16h9\"/><path d=\"m16 7 4 5-4 5\"/></svg>"
+  },
+  "too-dark": {
+    "file": "/icons/retake-reasons/too-dark.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"7\"/><path d=\"M12 5a7 7 0 0 0 0 14Z\"/></svg>"
+  },
+  "too-bright": {
+    "file": "/icons/retake-reasons/too-bright.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3m0 14v3M2 12h3m14 0h3\"/></svg>"
+  },
+  "glare": {
+    "file": "/icons/retake-reasons/glare.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"m12 3 1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5L12 3Z\"/></svg>"
+  },
+  "plate-unreadable": {
+    "file": "/icons/retake-reasons/plate-unreadable.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"1.5\"/><path d=\"M7 8v8m9-8v8M10 11h3\"/><path d=\"M4 4l16 16\"/></svg>"
+  },
+  "vehicle-cropped": {
+    "file": "/icons/retake-reasons/vehicle-cropped.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M8 3H3v5m13-5h5v5\"/></svg>"
+  },
+  "wrong-angle": {
+    "file": "/icons/retake-reasons/wrong-angle.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"M4 5 8 3m12 2-4-2\"/></svg>"
+  },
+  "too-close": {
+    "file": "/icons/retake-reasons/too-close.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M3 3v5m0-5h5m13 0v5m0-5h-5\"/></svg>"
+  },
+  "too-far": {
+    "file": "/icons/retake-reasons/too-far.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M8 4H4v4m12-4h4v4M8 20H4v-4m12 4h4v-4\"/></svg>"
+  },
+  "obstruction": {
+    "file": "/icons/retake-reasons/obstruction.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 9.5 7 6.8c.5-.7 1.3-1.1 2.2-1.1h5.6c.9 0 1.7.4 2.2 1.1L19 9.5l1 1.3v5.7a1 1 0 0 1-1 1h-1.2a1 1 0 0 1-1-1V16H7.2v.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.7l1-1.3Z\"/><path d=\"M7 10h10M7.4 13h.1M16.5 13h.1M8.2 7.8h7.6\"/><path d=\"M4 4l16 16\"/></svg>"
+  },
+  "wrong-vehicle-part": {
+    "file": "/icons/retake-reasons/wrong-vehicle-part.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><circle cx=\"18\" cy=\"8\" r=\"3\"/><path d=\"m17 7 2 2m0-2-2 2\"/></svg>"
+  },
+  "vin-unreadable": {
+    "file": "/icons/retake-reasons/vin-unreadable.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"3\" y=\"7\" width=\"18\" height=\"10\" rx=\"2\"/><path d=\"M6 10h1m2 0h1m2 0h1m2 0h1m2 0h1M6 14h7\"/><path d=\"M4 4l16 16\"/></svg>"
+  },
+  "dashboard-unreadable": {
+    "file": "/icons/retake-reasons/dashboard-unreadable.svg",
+    "category": "retake-reason",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer retake reason / customer guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 16c2-4 5-6 9-6s7 2 9 6v3H3v-3Z\"/><path d=\"M7 15h3m4 0h3M12 12v4\"/><path d=\"M4 4l16 16\"/></svg>"
+  },
+  "manual-plate-entry": {
+    "file": "/icons/review-flags/manual-plate-entry.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"1.5\"/><path d=\"m16 6 3-3 2 2-3 3-2 .5.5-2.5Z\"/></svg>"
+  },
+  "gps-low-accuracy": {
+    "file": "/icons/review-flags/gps-low-accuracy.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M12 21s5-4.9 5-10a5 5 0 1 0-10 0c0 5.1 5 10 5 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"1.7\"/><circle cx=\"12\" cy=\"11\" r=\"5\" stroke-dasharray=\"2 2\"/></svg>"
+  },
+  "customer-modified-vehicle-data": {
+    "file": "/icons/review-flags/customer-modified-vehicle-data.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M3 14.5v-2.2c0-.8.5-1.5 1.3-1.8l2-.7 2-3h6.6l2.2 3.2 2.6.8c.8.2 1.3 1 1.3 1.8v1.9H3Z\"/><path d=\"M8 9.8h8.7M7.2 14.5a2 2 0 1 0 4 0m5.6 0a2 2 0 1 0 4 0\"/><path d=\"m16 5 3-3 2 2-3 3\"/></svg>"
+  },
+  "duplicate-image": {
+    "file": "/icons/review-flags/duplicate-image.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><rect x=\"7\" y=\"7\" width=\"12\" height=\"12\" rx=\"2\"/><rect x=\"4\" y=\"4\" width=\"12\" height=\"12\" rx=\"2\"/></svg>"
+  },
+  "unexpected-metadata": {
+    "file": "/icons/review-flags/unexpected-metadata.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M6 4h12v16H6zM9 8h6m-6 4h6\"/><path d=\"M12 15v2m0-5h.01\"/></svg>"
+  },
+  "retake-history": {
+    "file": "/icons/review-flags/retake-history.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 7V3m0 4h4\"/><path d=\"M5 6a8 8 0 1 1-1 8M12 8v5l3 2\"/><path d=\"M17 7v4h-4\"/></svg>"
+  },
+  "offline-capture": {
+    "file": "/icons/review-flags/offline-capture.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M5 8h3l1.2-2h5.6L16 8h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z\"/><circle cx=\"12\" cy=\"13.5\" r=\"3.2\"/><path d=\"M3 3l18 18\"/></svg>"
+  },
+  "late-upload": {
+    "file": "/icons/review-flags/late-upload.svg",
+    "category": "review-flag",
+    "defaultSize": 20,
+    "currentColor": true,
+    "recommendedUsage": "Compact reviewer queue flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3.5 2\"/><path d=\"M18 18l2 2\"/></svg>"
+  },
+  "no-inspections": {
+    "file": "/illustrations/empty-states/no-inspections.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no inspections state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(32 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M25 145h190\" stroke=\"#E2E8F0\" stroke-width=\"3\"/><circle cx=\"185\" cy=\"46\" r=\"20\" fill=\"#EFF6FF\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "no-uploads": {
+    "file": "/illustrations/empty-states/no-uploads.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no uploads state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(32 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M25 145h190\" stroke=\"#E2E8F0\" stroke-width=\"3\"/><circle cx=\"185\" cy=\"46\" r=\"20\" fill=\"#EFF6FF\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "offline-saved": {
+    "file": "/illustrations/empty-states/offline-saved.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "offline saved state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(32 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M25 145h190\" stroke=\"#E2E8F0\" stroke-width=\"3\"/><circle cx=\"185\" cy=\"46\" r=\"20\" fill=\"#EFF6FF\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "inspection-complete": {
+    "file": "/illustrations/empty-states/inspection-complete.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "inspection complete state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(30 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><circle cx=\"176\" cy=\"54\" r=\"27\" fill=\"#ECFDF5\" stroke=\"#059669\" stroke-width=\"2\"/><path d=\"m163 54 9 9 18-20\" stroke=\"#059669\" stroke-width=\"4\"/></svg>"
+  },
+  "submission-success": {
+    "file": "/illustrations/empty-states/submission-success.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "submission success state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(30 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><circle cx=\"176\" cy=\"54\" r=\"27\" fill=\"#ECFDF5\" stroke=\"#059669\" stroke-width=\"2\"/><path d=\"m163 54 9 9 18-20\" stroke=\"#059669\" stroke-width=\"4\"/></svg>"
+  },
+  "waiting-review": {
+    "file": "/illustrations/empty-states/waiting-review.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "waiting review state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(32 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M25 145h190\" stroke=\"#E2E8F0\" stroke-width=\"3\"/><circle cx=\"185\" cy=\"46\" r=\"20\" fill=\"#EFF6FF\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "additional-evidence": {
+    "file": "/illustrations/empty-states/additional-evidence.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "additional evidence state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(25 76) scale(0.85)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><rect x=\"138\" y=\"32\" width=\"60\" height=\"46\" rx=\"8\" fill=\"#FFF7ED\" stroke=\"#D97706\" stroke-width=\"2\"/><path d=\"M184 43v12h-12M182 55a15 15 0 1 1-5-12\" stroke=\"#D97706\" stroke-width=\"3\"/></svg>"
+  },
+  "no-review-cases": {
+    "file": "/illustrations/empty-states/no-review-cases.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no review cases state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(32 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M25 145h190\" stroke=\"#E2E8F0\" stroke-width=\"3\"/><circle cx=\"185\" cy=\"46\" r=\"20\" fill=\"#EFF6FF\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "no-search-results": {
+    "file": "/illustrations/empty-states/no-search-results.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "no search results state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(32 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M25 145h190\" stroke=\"#E2E8F0\" stroke-width=\"3\"/><circle cx=\"185\" cy=\"46\" r=\"20\" fill=\"#EFF6FF\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "location-error": {
+    "file": "/illustrations/empty-states/location-error.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "location error state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(22 90) scale(0.75)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M156 28c17 0 29 13 29 29 0 24-29 47-29 47s-29-23-29-47c0-16 12-29 29-29Z\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><circle cx=\"156\" cy=\"57\" r=\"7\" fill=\"#2563EB\"/></svg>"
+  },
+  "camera-permission-required": {
+    "file": "/illustrations/empty-states/camera-permission-required.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "camera permission required state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"88\" y=\"20\" width=\"64\" height=\"130\" rx=\"12\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><path d=\"M105 34h30\" stroke=\"#64748B\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"132\" r=\"5\" fill=\"#2563EB\"/><path d=\"M101 62h38v42h-38z\" fill=\"#fff\" stroke=\"#64748B\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"83\" r=\"10\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "gps-permission-required": {
+    "file": "/illustrations/empty-states/gps-permission-required.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "gps permission required state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"88\" y=\"20\" width=\"64\" height=\"130\" rx=\"12\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><path d=\"M105 34h30\" stroke=\"#64748B\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"132\" r=\"5\" fill=\"#2563EB\"/><path d=\"M120 65c12 0 20 9 20 20 0 16-20 31-20 31s-20-15-20-31c0-11 8-20 20-20Z\" fill=\"#fff\" stroke=\"#2563EB\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"84\" r=\"5\" fill=\"#2563EB\"/></svg>"
+  },
+  "webgl-unavailable": {
+    "file": "/illustrations/empty-states/webgl-unavailable.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "webgl unavailable state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m120 25 52 30v60l-52 30-52-30V55l52-30Z\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><path d=\"M68 55l52 30 52-30M120 85v60M55 35l130 110\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "readiness-clean-vehicle": {
+    "file": "/illustrations/readiness/readiness-clean-vehicle.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness clean vehicle state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(30 72) scale(0.95)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"m187 35 5 9 10 2-7 7 2 10-10-5-9 5 2-10-7-7 10-2 4-9Z\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "readiness-open-space": {
+    "file": "/illustrations/readiness/readiness-open-space.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness open space state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(35 72) scale(0.8)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M24 55h38m-38 0 8-6m-8 6 8 6m184-6h-38m38 0-8-6m8 6-8 6\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "readiness-engine-on": {
+    "file": "/illustrations/readiness/readiness-engine-on.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness engine on state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M35 35h170v105H35z\" rx=\"12\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><circle cx=\"82\" cy=\"91\" r=\"28\" stroke=\"#64748B\" stroke-width=\"2\"/><circle cx=\"158\" cy=\"91\" r=\"28\" stroke=\"#64748B\" stroke-width=\"2\"/><path d=\"M120 74h25v16h-25z\" fill=\"#fff\" stroke=\"#2563EB\" stroke-width=\"2\"/><path d=\"m179 36 8 8 14-16\" stroke=\"#059669\" stroke-width=\"4\"/></svg>"
+  },
+  "readiness-phone-ready": {
+    "file": "/illustrations/readiness/readiness-phone-ready.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "readiness phone ready state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"88\" y=\"20\" width=\"64\" height=\"130\" rx=\"12\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><path d=\"M105 34h30\" stroke=\"#64748B\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"132\" r=\"5\" fill=\"#2563EB\"/><path d=\"M101 62h38v42h-38z\" fill=\"#fff\" stroke=\"#64748B\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"83\" r=\"10\" stroke=\"#2563EB\" stroke-width=\"2\"/></svg>"
+  },
+  "privacy-consent": {
+    "file": "/illustrations/consent/privacy-consent.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "privacy consent state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(30 78) scale(0.9)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><path d=\"M120 18 150 30v22c0 28-15 46-30 55-15-9-30-27-30-55V30l30-12Z\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><path d=\"m108 53 9 9 18-20\" stroke=\"#059669\" stroke-width=\"4\"/><path d=\"M44 43h20m112 12h18m-18 30h18\" stroke=\"#64748B\" stroke-width=\"2\"/></svg>"
+  },
+  "inspection-submitted": {
+    "file": "/illustrations/success/inspection-submitted.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "inspection submitted state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(30 72) scale(0.92)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><circle cx=\"176\" cy=\"54\" r=\"27\" fill=\"#ECFDF5\" stroke=\"#059669\" stroke-width=\"2\"/><path d=\"m163 54 9 9 18-20\" stroke=\"#059669\" stroke-width=\"4\"/></svg>"
+  },
+  "retake-request": {
+    "file": "/illustrations/errors/retake-request.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "retake request state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(25 76) scale(0.85)\" stroke=\"#2563EB\" stroke-width=\"2\"><path d=\"M8 55v-12c0-8 6-15 14-17l25-7L64 4h54l18 15 29 8c9 2 15 10 15 19v9H8Z\" fill=\"#EFF6FF\"/><path d=\"M47 19h90\"/><circle cx=\"45\" cy=\"55\" r=\"15\" fill=\"#fff\"/><circle cx=\"145\" cy=\"55\" r=\"15\" fill=\"#fff\"/></g><rect x=\"138\" y=\"32\" width=\"60\" height=\"46\" rx=\"8\" fill=\"#FFF7ED\" stroke=\"#D97706\" stroke-width=\"2\"/><path d=\"M184 43v12h-12M182 55a15 15 0 1 1-5-12\" stroke=\"#D97706\" stroke-width=\"3\"/></svg>"
+  },
+  "offline-storage": {
+    "file": "/illustrations/errors/offline-storage.svg",
+    "category": "illustration",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "offline storage state illustration",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 180\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"88\" y=\"20\" width=\"64\" height=\"130\" rx=\"12\" fill=\"#EFF6FF\" stroke=\"#2563EB\" stroke-width=\"2\"/><path d=\"M105 34h30\" stroke=\"#64748B\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"132\" r=\"5\" fill=\"#2563EB\"/><path d=\"M55 80h50\" stroke=\"#64748B\" stroke-width=\"2\" stroke-dasharray=\"5 4\"/><path d=\"M45 55l110 90\" stroke=\"#D97706\" stroke-width=\"3\"/></svg>"
+  },
+  "vehicle-loader": {
+    "file": "/illustrations/loader/vehicle-loader.svg",
+    "category": "loader",
+    "defaultSize": 240,
+    "currentColor": false,
+    "recommendedUsage": "Animated model-loading outline; animate stroke-dashoffset",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 120\" fill=\"none\" stroke=\"#2563EB\" stroke-width=\"2\" stroke-linecap=\"round\"><path pathLength=\"100\" stroke-dasharray=\"100\" stroke-dashoffset=\"22\" d=\"M22 82v-14c0-10 7-18 17-21l28-8 25-24h61l24 24 30 9c10 3 17 12 17 22v12H22Z\"/><circle cx=\"72\" cy=\"82\" r=\"20\"/><circle cx=\"174\" cy=\"82\" r=\"20\"/></svg>"
+  },
+  "orbit-car": {
+    "file": "/overlays/orbit/orbit-car.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M42 12h16l8 12v52L58 88H42l-8-12V24l8-12Z\"/><path d=\"M38 30h24M38 70h24\"/></svg>"
+  },
+  "orbit-arrow": {
+    "file": "/overlays/orbit/orbit-arrow.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 50a35 35 0 0 1 65-18\"/><path d=\"m74 21 8 10-13 2\"/></svg>"
+  },
+  "orbit-progress": {
+    "file": "/overlays/orbit/orbit-progress.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"50\" cy=\"50\" r=\"38\"/><path d=\"M50 12a38 38 0 0 1 31 60\" stroke=\"#2563EB\" stroke-width=\"6\"/></svg>"
+  },
+  "top-view-car": {
+    "file": "/overlays/orbit/top-view-car.svg",
+    "category": "360-guide",
+    "defaultSize": 100,
+    "currentColor": false,
+    "recommendedUsage": "360-degree vehicle video orbit guidance",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M42 12h16l8 12v52L58 88H42l-8-12V24l8-12Z\"/><path d=\"M38 30h24M38 70h24M42 36h16v28H42z\"/></svg>"
+  },
+  "reviewer-quality-override": {
+    "file": "/icons/reviewer/quality-override.svg",
+    "category": "reviewer",
+    "defaultSize": 24,
+    "currentColor": true,
+    "recommendedUsage": "Reviewer decision panel quality-override flag",
+    "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" ><path d=\"M4 12h6l2-5 3 10 2-5h3\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg>"
+  }
+}

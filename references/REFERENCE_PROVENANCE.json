@@ -1,0 +1,98 @@
+{
+  "source": "Refrence.zip supplied by user",
+  "count": 23,
+  "files": [
+    {
+      "source": "Refrence/1.png",
+      "canonical": "01-landing-referral.png"
+    },
+    {
+      "source": "Refrence/2.png",
+      "canonical": "02-otp-verification.png"
+    },
+    {
+      "source": "Refrence/3.png",
+      "canonical": "03-readiness.png"
+    },
+    {
+      "source": "Refrence/4.png",
+      "canonical": "04-consent-privacy.png"
+    },
+    {
+      "source": "Refrence/5.png",
+      "canonical": "05-location.png"
+    },
+    {
+      "source": "Refrence/6.png",
+      "canonical": "06-vehicle-identity.png"
+    },
+    {
+      "source": "Refrence/7.png",
+      "canonical": "07-inspection-3d-home.png"
+    },
+    {
+      "source": "Refrence/8.png",
+      "canonical": "08-photo-guide-bottom-sheet.png"
+    },
+    {
+      "source": "Refrence/9.png",
+      "canonical": "09-live-camera-ghost-alignment.png"
+    },
+    {
+      "source": "Refrence/10.png",
+      "canonical": "10-photo-review.png"
+    },
+    {
+      "source": "Refrence/11.png",
+      "canonical": "11-odometer-review.png"
+    },
+    {
+      "source": "Refrence/12.png",
+      "canonical": "12-video-360-capture.png"
+    },
+    {
+      "source": "Refrence/13.png",
+      "canonical": "13-upload-centre.png"
+    },
+    {
+      "source": "Refrence/14.png",
+      "canonical": "14-final-inspection-summary.png"
+    },
+    {
+      "source": "Refrence/15.png",
+      "canonical": "15-submission-receipt.png"
+    },
+    {
+      "source": "Refrence/for the website asks for retake some of the photos.png",
+      "canonical": "16-additional-evidence-retake.png"
+    },
+    {
+      "source": "Refrence/Persian Vehicle Inspection App UI.png",
+      "canonical": "17-inspection-photo-guide-reference.png"
+    },
+    {
+      "source": "Refrence/Persian Vehicle Inspection Review Dashboard.png",
+      "canonical": "18-reviewer-queue.png"
+    },
+    {
+      "source": "Refrence/Persian Vehicle Inspection Review Dashboard (1).png",
+      "canonical": "19-reviewer-workstation.png"
+    },
+    {
+      "source": "Refrence/Persian Vehicle Inspection Template Editor.png",
+      "canonical": "20-admin-template-editor.png"
+    },
+    {
+      "source": "Refrence/SUV Inspection Blueprint with Markers.png",
+      "canonical": "21-vehicle-2d-fallback.png"
+    },
+    {
+      "source": "Refrence/Unbranded SUV WebGL Asset Showcase.png",
+      "canonical": "22-vehicle-webgl-reference.png"
+    },
+    {
+      "source": "Refrence/Wireframe SUV with Blue Scan Markers.png",
+      "canonical": "23-ghost-alignment-asset.png"
+    }
+  ]
+}
