@@ -9,6 +9,11 @@ const icons = {
   warning: "/icons/status/warning.svg", error: "/icons/status/error.svg",
   clock: "/icons/navigation/clock.svg", shield: "/icons/security/shield-check.svg",
   close: "/icons/navigation/close.svg",
+  lock: "/icons/security/lock.svg", cloud: "/icons/upload/upload-cloud.svg",
+  noVisit: "/icons/location/gps-off.svg", edit: "/icons/navigation/edit.svg",
+  referral: "/icons/auth/referral-ticket.svg", carFront: "/icons/vehicle/car-front.svg",
+  platformCar: "/icons/auth/platform-car.svg", support: "/icons/auth/support-headset.svg",
+  chevronBack: "/icons/auth/chevron-back.svg", chevronForward: "/icons/auth/chevron-forward.svg",
 } as const;
 export type IconName = keyof typeof icons;
 

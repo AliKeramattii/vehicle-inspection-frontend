@@ -4,6 +4,6 @@ import { createMockInspectionRepository } from "@/mocks/inspection-repository";
 
 export interface Repositories { auth: AuthRepository; inspection: InspectionRepository }
 // Explicit mock composition point. Future HTTP repositories implement these same interfaces.
-export function createRepositories(): Repositories {
-  return { auth: createMockAuthRepository(), inspection: createMockInspectionRepository() };
+export function createRepositories(options: { mockAuthResendAfterSeconds?: number } = {}): Repositories {
+  return { auth: createMockAuthRepository(Date.now, options.mockAuthResendAfterSeconds), inspection: createMockInspectionRepository() };
 }

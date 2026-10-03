@@ -13,7 +13,62 @@ The backend team may refine URLs and DTOs, but behavior and required data must r
 - OpenAPI/Swagger published by the ASP.NET service.
 - Frontend TypeScript API types should ultimately be generated from OpenAPI.
 
+## Bootstrap repository boundary
+
+`src/lib/api/repositories.ts` defines `AuthRepository` and `InspectionRepository` in domain terms.
+`src/lib/api/client.ts` explicitly composes isolated mock implementations; no HTTP calls are made.
+When the ASP.NET service is available, implement HTTP repositories behind these interfaces, place
+OpenAPI-generated transport types in `src/lib/api/generated/`, validate transport responses, and
+adapt them before returning domain models to components. Existing paths used by these interfaces
+are centralized in `src/lib/api/endpoints.ts`; add further paths when their phases are implemented.
+
+The inspection DTO in `src/lib/api/adapters/inspection.ts` is provisional: `inspectionId`,
+`vehicleDetails`, `locationDetails`, and `evidenceItems` map to domain `id`, `vehicle`, `location`,
+and `evidence`. This shape is a frontend fixture, not a finalized backend response specification.
+
+Mock development values:
+- Referral: `A4K9P2` (trimmed and normalized to uppercase).
+- Mobile: an ASCII Iranian mobile number matching `09` plus nine digits.
+- OTP: `12345`; call `requestOtp` on the same repository instance first.
+- Inspection: `insp_demo`; a draft with sample vehicle, no location, and no evidence.
+- Capture plan: two sample slots with arbitrary codes; not the later 14-shot template.
+
+Mock OTP challenges expire after two minutes, allow three incorrect attempts, and are consumed
+on successful verification. The factory defaults to a 60-second resend window; phase 01's customer
+provider configures 120 seconds to match the reference countdown. The mock enforces this window.
+SMS delivery, durable sessions, and production authentication remain backend responsibilities.
+Mocks hold challenges only inside each repository instance and never issue tokens.
+Repository errors expose stable codes; Zod rejects malformed input or fixture data.
+
 ## Entry/auth
+
+### Phase 01 mock workflow
+
+- `/` validates `A4K9P2`, then requests an OTP for the mock invitation mobile `09120004567`.
+  This demo context is defined in `features/auth/config.ts`; it is not inferred from a backend
+  referral response. Production invitation/phone acquisition still needs an agreed contract.
+- `/verify` accepts five digits (`12345` succeeds), auto-verifies exactly once per completed
+  entry, and presents Persian numerals while sending ASCII values to the repository.
+- Resend and number editing call the same repository's `requestOtp`; cooldowns and failed-attempt
+  metadata come from that repository. Verification succeeds on the current screen; phase 02 is
+  deliberately not routed or implemented.
+- No tokens, HTTP requests, persistent sessions, or browser SMS interception are implemented.
+  Native `autocomplete="one-time-code"` supports autofill-capable browsers; actual SMS delivery
+  and platform autofill depend on future backend integration and device behavior.
+
+Frontend-required challenge metadata (a requested future API shape, not a finalized response):
+
+```json
+{ "expiresAt": "2026-10-04T00:02:00Z", "retryAfterSeconds": 120, "remainingAttempts": 3 }
+```
+
+Failed verification must expose `remainingAttempts`; early resend must expose `retryAfterSeconds`.
+Mock `RepositoryError.details` carries these fields alongside `OTP_INVALID`, `OTP_LOCKED`, or
+`OTP_RESEND_TOO_SOON`. Transport adapters should map authoritative API error metadata to this
+domain shape once OpenAPI is available. The UI does not locally guess the number of attempts.
+
+Partner/support branding is reference copy. The support disclosure directs customers to their
+issuing insurance representative; no phone number or external contact URL has been invented.
 
 ### POST `/api/referrals/validate`
 Request:

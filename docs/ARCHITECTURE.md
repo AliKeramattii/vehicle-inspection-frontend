@@ -10,6 +10,26 @@ One Next.js repository with three route groups:
 
 They share tokens/icons/primitives but not their large-scale page layouts.
 
+Bootstrap establishes `(customer)`, `(reviewer)/reviewer`, and `(admin)/admin` layouts.
+Reviewer/admin groups reserve their URL namespaces; their product pages are intentionally absent
+until the corresponding phases. `/` and `/verify` now implement phase 01 with mock auth only.
+The unchanged foundation preview moved to `/foundation/preview`; `/foundation` remains the
+non-indexed component gallery with its original baselines.
+
+The root layout is a Server Component. `QueryProvider` is the narrow client boundary for server
+state; its per-mount QueryClient avoids sharing caches between server requests. Interactive form
+examples and mock Query preview are client islands inside the server-rendered gallery.
+No backend entities are duplicated into Zustand; workflow stores and IndexedDB implementation
+will be added with their respective phases.
+
+Phase 01's customer layout mounts a per-instance `AuthWorkflowProvider` around server-rendered
+children. It owns the mock repository and a transient Zustand store with a discriminated
+`idle | challenge | verified` workflow. Query mutations perform referral validation and OTP
+request/verification. The store holds mobile/code context, deadlines, and remaining attempts for
+the active workflow; fetched user, partner, inspection, and session entities are not duplicated.
+The repository and workflow survive customer client navigation, but not a full reload.
+OTP direct navigation/reload renders an explicit recoverable missing-challenge state.
+
 ## Suggested source structure
 
 ```text

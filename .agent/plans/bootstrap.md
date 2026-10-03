@@ -34,15 +34,31 @@ No endpoints are called or changed. Add repository contracts for existing auth a
 - Visually inspect gallery baselines; these are bootstrap component baselines, not acceptance claims for later reference screens.
 
 ## Acceptance criteria
-- [ ] Required foundation components, domain contracts, mocks, layouts, and tooling exist.
-- [ ] Local Persian font, tokens, RTL, LTR codes, focus states, and mobile CTA work.
-- [ ] Mock data is validated and presentation components do not depend on DTOs.
-- [ ] All automated checks pass and screenshots are inspected.
-- [ ] Later product phases remain unimplemented and all references are preserved.
+- [x] Required foundation components, domain contracts, mocks, layouts, and tooling exist.
+- [x] Local Persian font, tokens, RTL, LTR codes, focus states, and mobile CTA work.
+- [x] Mock data is validated and presentation components do not depend on DTOs.
+- [x] All automated checks pass and screenshots are inspected.
+- [x] Later product phases remain unimplemented and all references are preserved.
 
 ## Progress
 - [x] Read AGENTS, reference index, all requested docs, and bootstrap prompt; inspect all 23 PNGs and supplied asset inventory/docs.
 - [x] Record scope and implementation plan before editing application code.
-- [ ] Implement foundation and typed mock boundary.
-- [ ] Add tests and visual baselines.
-- [ ] Validate, inspect screenshots, and document results/unresolved items.
+- [x] Implement foundation and typed mock boundary.
+- [x] Add tests and visual baselines.
+- [x] Validate, inspect screenshots, and document results/unresolved items.
+
+## Decisions and results
+- Local Vazirmatn v33.003 and its OFL are bundled; no runtime/build font CDN is needed.
+- Only development dependencies were added for Vitest, DOM testing, and Playwright. Node types
+  were aligned to the installed Node 24 runtime to satisfy Vitest's peer requirement.
+- Vitest uses two thread workers after fork workers failed to start in this Windows terminal.
+- Playwright uses production rendering to avoid hot-reload navigation/screenshot interference.
+  Its process PATH includes System32 on Windows; without it, Playwright could not find taskkill
+  and hung after otherwise passing tests. Final regression tests finish and shut down cleanly.
+- Next.js automatically appended its version-specific agent documentation block to AGENTS.md
+  during `next dev`; relevant bundled layout, font, routing, and viewport guides were reviewed.
+- Validation: lint/typecheck, 16 unit tests, six E2E tests, four reviewed screenshots, and
+  successful production builds. These screenshots cover bootstrap components only.
+- Unresolved: seven high-severity audit findings in preexisting Next ESLint/Serwist dependency
+  chains. npm proposes incompatible downgrades; those are outside this foundation change.
+- Deferred by scope: product phases, backend integration, GLB/camera/offline workflows, and Storybook.

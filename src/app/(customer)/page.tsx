@@ -1,2 +1,2 @@
-import { FoundationHome } from "@/features/foundation/foundation-home";
-export default function HomePage() { return <FoundationHome />; }
+import { LandingScreen } from "@/features/auth/landing-screen";
+export default function HomePage() { return <LandingScreen />; }

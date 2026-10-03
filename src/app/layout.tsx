@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { QueryProvider } from "@/components/providers/query-provider";
 import "./globals.css";
@@ -15,6 +15,10 @@ const vazirmatn = localFont({
 export const metadata: Metadata = {
   title: { default: "بازدید خودرو", template: "%s | بازدید خودرو" },
   description: "بازدید آنلاین و امن خودرو",
+};
+
+export const viewport: Viewport = {
+  width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#F8FAFC",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

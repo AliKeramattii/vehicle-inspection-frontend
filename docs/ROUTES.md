@@ -1,5 +1,8 @@
 # Route Map
 
+Implemented through phase 01: `/` and `/verify` only. The other product routes below remain
+planned scaffolding. Internal bootstrap routes: `/foundation` and `/foundation/preview`.
+
 ## Customer
 
 - `/` — partner/referral landing
