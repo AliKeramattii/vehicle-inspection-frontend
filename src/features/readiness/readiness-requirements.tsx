@@ -11,7 +11,7 @@ export function ReadinessRequirements() {
   return <ol className="readiness-requirements" aria-label="شرایط آمادگی بازدید">
     {readinessRequirements.map((item, index) => <li key={item.asset}>
       <span className="requirement-number" aria-hidden="true">{toPersianDigits(index + 1)}</span>
-      <Image src={`/illustrations/readiness/${item.asset}.svg`} alt="" width={240} height={180} loading="eager" className="requirement-art" />
+      <Image src={`/illustrations/readiness/${item.asset}.webp`} alt="" width={65} height={52} sizes="(max-width: 359px) 47px, 65px" loading="eager" className="requirement-art" />
       <div><h2>{item.title}</h2><p>{item.description}</p></div>
     </li>)}
   </ol>;

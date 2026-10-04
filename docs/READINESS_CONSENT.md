@@ -16,12 +16,15 @@ References `03-readiness.png` and `04-consent-privacy.png` define the compositio
 one 176px readiness hero, four compact numbered requirements, two-column restrained diagnostics,
 and a 48px sticky action; consent uses a 196px privacy visual above one quiet white summary
 surface with three collection rows, a short purpose statement, collapsed terms and one checkbox.
-SVGs come from the supplied readiness/permissions/security asset system. Both screens reuse
-the approved standalone Phase-01 SUV photo (`public/images/auth/landing-suv.png`, provenance
-in that directory); no new bitmap is required. Privacy combines it with an SVG shield derived
-from the supplied privacy illustration and four decorative DOM markers. Overlay positioning
-is limited to these genuine vehicle/illustration layers; normal page regions use flow/flex/grid.
-Physical vehicle orientation is never mirrored. Text and controls remain semantic DOM.
+The supplied `vehicle-inspection.webp` fills the readiness hero as a cover background; a light
+gradient keeps its existing semantic RTL copy readable. Next.js `getImageProps` provides
+optimized density variants through CSS `image-set`, without an inner vehicle image or duplicate
+check mark. Four WebP illustrations under `public/illustrations/readiness/` replace the clean
+vehicle, open space, engine and phone SVGs. Diagnostic icons remain unchanged. Consent uses
+the single optimized `consent-hero.webp` banner, replacing the shield/car/marker DOM composition.
+Both banners live under `public/images/preparation/`. Overlay positioning is limited to the
+readiness copy and readability gradient; normal page regions use flow/flex/grid. Physical
+vehicle orientation is never mirrored. Existing copy, controls and screen geometry are preserved.
 
 ## Capability architecture
 
@@ -63,12 +66,10 @@ mock validation/idempotency. Browser coverage exercises the complete Phase-01→
 two 390×844 baselines, checkbox/terms states, no permission/API calls/console errors, touch targets
 and overflow at 320/390/480px. Existing Phase-01/foundation baselines are not regenerated.
 
-The reused photo and supplied technical SVGs differ in car angle (privacy remains front-left),
-pavilion/greenery, lighting and icon details from the raster references. Vazirmatn glyph shapes
-also differ. Two built-in image generation requests did not return during the implementation;
-they were stopped and the approved local assets were reused instead. The composition is
-reference-led; screenshot baselines protect the rendered implementation, not pixel identity
-with the reference. Final legal terms, retention and customer rights need service-owner approval
+The approved replacement banners and requirement illustrations supersede the original SVG/photo
+artwork. Vazirmatn glyph shapes and fine artwork details still differ from the original raster
+references. The composition is reference-led; screenshot baselines protect the rendered
+implementation, not pixel identity with the reference. Final legal terms, retention and customer rights need service-owner approval
 before production. No live device checks, durable consent/auth or Phase-03 functionality exist.
 
 ## Final validation
@@ -80,3 +81,11 @@ baselines are under `tests/e2e/screenshots/preparation.spec.ts/`; every existing
 foundation baseline remains unchanged and passes. Browser scenarios found no app console errors,
 failed resources, permission prompts or real API requests. Playwright still emits the existing
 NO_COLOR/FORCE_COLOR environment warning. Fine artwork differences above remain explicit.
+
+For the approved WebP asset update, lint, typecheck, all 39 unit tests, the full Playwright suite
+(26 passed, two intentional skips) and production build passed again. Only the two preparation
+baselines were regenerated after reviewing both 390×844 screens. The readiness snapshot wait
+now decodes the optimized CSS background instead of expecting an inner image. Browser validation
+used the committed diagnostic GPS icon; an unrelated local edit to that icon was restored
+byte-for-byte afterward and is excluded from this change. The existing Phase-01 baselines,
+capability/consent behavior, API contract, routes and development configuration are unchanged.
