@@ -51,6 +51,21 @@ visual shells remain Server Components. Muted text uses the existing contrast-fr
 
 ## Visual baselines and remaining differences
 
+The final landing regression review accounted for all 615 changed pixels: the
+shortened referral heading (330), perforated ticket replacement (97), crossed
+location pin (115), and support-headset replacement (73). No differences were
+found in hero proportions, typography, spacing, CTA dimensions, benefit rows,
+or privacy/footer layout outside those four regions.
+
+The canonical PNG supports the full `کد معرفی / کد ارجاع` heading, a ticket with
+horizontal strokes, and the compact boom-microphone headset. Those presentation
+regressions were restored without changing form behavior. The crossed location
+pin is closer to the canonical PNG than the old crosshair symbol, so it is retained.
+After visually reviewing the corrected render and confirming that only 115 pixels
+at that icon differed, the landing baseline was regenerated. The OTP and foundation
+baselines, screenshot thresholds, workflows, routes, and development origin fix
+remain unchanged.
+
 `tests/e2e/screenshots/auth.spec.ts/landing-referral-customer.png` and
 `otp-verification-customer.png` are exact 390×844 screenshots of the working routes. The landing
 baseline contains the valid sample code. The OTP baseline freezes time at 1:42 remaining and
