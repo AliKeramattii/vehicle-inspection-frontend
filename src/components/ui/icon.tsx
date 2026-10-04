@@ -14,6 +14,12 @@ const icons = {
   referral: "/icons/auth/referral-ticket.svg", carFront: "/icons/vehicle/car-front.svg",
   platformCar: "/icons/auth/platform-car.svg", support: "/icons/auth/support-headset.svg",
   chevronBack: "/icons/auth/chevron-back.svg", chevronForward: "/icons/auth/chevron-forward.svg",
+  cameraReady: "/icons/readiness/camera-ready.svg", gpsReady: "/icons/readiness/gps-ready.svg",
+  webglReady: "/icons/readiness/webgl-ready.svg", storageReady: "/icons/readiness/storage.svg",
+  deviceReady: "/icons/readiness/device-ready.svg", camera: "/icons/camera/camera.svg",
+  readinessTick: "/icons/readiness/tick.svg",
+  location: "/icons/location/map-pin.svg", document: "/icons/admin/policies.svg",
+  terms: "/icons/admin/policies.svg", down: "/icons/navigation/chevron-down.svg",
 } as const;
 export type IconName = keyof typeof icons;
 

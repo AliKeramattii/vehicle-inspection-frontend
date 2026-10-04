@@ -50,8 +50,8 @@ Repository errors expose stable codes; Zod rejects malformed input or fixture da
 - `/verify` accepts five digits (`12345` succeeds), auto-verifies exactly once per completed
   entry, and presents Persian numerals while sending ASCII values to the repository.
 - Resend and number editing call the same repository's `requestOtp`; cooldowns and failed-attempt
-  metadata come from that repository. Verification succeeds on the current screen; phase 02 is
-  deliberately not routed or implemented.
+  metadata come from that repository. Phase 02 now routes successful verification to `/readiness`,
+  then `/consent`, retaining only the verified inspection ID in transient workflow memory.
 - No tokens, HTTP requests, persistent sessions, or browser SMS interception are implemented.
   Native `autocomplete="one-time-code"` supports autofill-capable browsers; actual SMS delivery
   and platform autofill depend on future backend integration and device behavior.
@@ -124,12 +124,43 @@ Returns the current inspection/review status.
 ## Consent
 
 ### POST `/api/inspections/{inspectionId}/consent`
+Planned ASP.NET endpoint; Phase 02 calls `InspectionRepository.recordConsent` with an
+isolated in-memory mock instead of HTTP. No browser permission grant is represented by consent.
+
+Request (explicit acceptance required):
 ```json
 {
   "accepted": true,
   "termsVersion": "2026-10"
 }
 ```
+
+Requested response, not yet confirmed by the backend:
+```json
+{
+  "inspectionId": "insp_123",
+  "accepted": true,
+  "termsVersion": "2026-10",
+  "acceptedAt": "2026-10-04T00:00:00Z"
+}
+```
+
+The server must authenticate the customer and authorize access to this inspection; credentials
+and session strategy remain unconfirmed. Acceptance time is server-controlled. Repeating the
+same accepted terms version should be idempotent. Reject missing/false acceptance or unsupported
+terms versions with structured validation errors (400/422); distinguish 401, 403, 404, stale-version
+409, 429, and server/network/timeout failures. The future adapter must preserve safe useful errors
+for the form's retry state. No additional consent endpoints are assumed.
+
+The mock validates `accepted: true` and version `2026-10`, records a cloned receipt per repository
+instance, and returns it idempotently. Refresh resets it, just like mock auth. This is development
+workflow evidence, not durable production consent. Final terms, retention policy and customer
+rights require service-owner/legal approval before production use.
+
+Readiness capability checks are local diagnostics through `CapabilityService`, currently
+deterministic mock results. They do not invoke camera/GPS permissions, create WebGL contexts,
+reserve storage, or submit device facts to the backend. These require future browser adapters
+and explicit permission requests in the relevant feature, not a new API endpoint.
 
 ## Location
 

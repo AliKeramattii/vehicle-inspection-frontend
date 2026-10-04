@@ -54,7 +54,7 @@ test("referral entry preserves LTR order and rejects incomplete/invalid codes", 
   await expect(page.locator(".code-cell")).toHaveText(["A", "4", "K", "9", "P", "2"]);
 });
 
-test("five-digit OTP autofill auto-verifies and stays in phase 01", async ({ page }) => {
+test("five-digit OTP autofill auto-verifies and enters readiness", async ({ page }) => {
   await enterOtp(page);
   const input = page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" });
   await expect(input).toHaveAttribute("autocomplete", "one-time-code");
@@ -62,10 +62,10 @@ test("five-digit OTP autofill auto-verifies and stays in phase 01", async ({ pag
   await expect(input).toHaveAttribute("dir", "ltr");
   await input.fill("۱۲۳۴");
   await expect(input).toHaveValue("1234");
-  await expect(page.getByRole("heading", { name: "شماره موبایل تأیید شد." })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "قبل از شروع، آماده‌اید؟" })).toHaveCount(0);
   await input.fill("۱۲۳۴۵");
-  await expect(page.getByRole("heading", { name: "شماره موبایل تأیید شد." })).toBeVisible();
-  await expect(page).toHaveURL(/\/verify$/);
+  await expect(page.getByRole("heading", { name: "قبل از شروع، آماده‌اید؟" })).toBeVisible();
+  await expect(page).toHaveURL(/\/readiness$/);
 });
 
 test("OTP rejects wrong digits, counts attempts, then resends when the countdown ends", async ({ page }) => {

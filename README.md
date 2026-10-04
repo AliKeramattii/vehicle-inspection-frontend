@@ -1,7 +1,7 @@
 # Vehicle Inspection Frontend
 
 Persian RTL Next.js App Router frontend for customer self-inspection, reviewer operations,
-and administration. Currently implemented: `00-bootstrap` and `01-landing-otp` only.
+and administration. Implemented: `00-bootstrap`, `01-landing-otp`, and `02-readiness-consent`.
 
 ```sh
 npm ci
@@ -19,8 +19,10 @@ Install the test browser first with `npx playwright install chromium`.
 
 See [bootstrap usage and boundaries](docs/BOOTSTRAP.md), [architecture](docs/ARCHITECTURE.md),
 [API contracts and mock values](docs/API_CONTRACT.md), and [canonical references](references/INDEX.md).
-The active execution plan is [.agent/plans/landing-otp.md](.agent/plans/landing-otp.md).
+See [readiness and consent](docs/READINESS_CONSENT.md) and its
+[execution plan](.agent/plans/readiness-consent.md). Consent ends with a confirmation;
+Phase 03 and later product functionality remain unimplemented.
 
 Development listens on `0.0.0.0`, so localhost and this machine's LAN address serve
-the same Phase-01 app. See [origin parity and development reset instructions](docs/DEVELOPMENT_ORIGINS.md).
+the same app. See [origin parity and development reset instructions](docs/DEVELOPMENT_ORIGINS.md).
 Run `npm run test:e2e:dev` to check both development origins and hot reload.

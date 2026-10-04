@@ -58,7 +58,8 @@ test("development origins have identical landing, working HMR/assets, and fresh 
       await expect(page.locator(".otp-art img")).toBeVisible();
       await expect.poll(() => page.locator(".otp-art img").evaluate((image) => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0)).toBe(true);
       await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
-      await expect(page.getByRole("heading", { name: "شماره موبایل تأیید شد." })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "قبل از شروع، آماده‌اید؟" })).toBeVisible();
+      await expect(page).toHaveURL(`${origin}/readiness`);
       await page.reload();
       await expect(page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" })).toHaveCount(0);
       await page.goto(origin);

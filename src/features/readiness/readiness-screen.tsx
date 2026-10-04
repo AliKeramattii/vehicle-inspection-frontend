@@ -1,0 +1,23 @@
+import Image from "next/image";
+import { Icon } from "@/components/ui/icon";
+import { PreparationBack } from "@/features/preparation/preparation-header";
+import { ReadinessRequirements } from "./readiness-requirements";
+import { DeviceReadiness } from "./device-readiness";
+import "@/features/preparation/preparation.css";
+
+export function ReadinessScreen() {
+  return <main id="main-content" tabIndex={-1} className="preparation-screen readiness-screen">
+    <PreparationBack href="/" />
+    <div className="readiness-intro"><h1>قبل از شروع، آماده‌اید؟</h1>
+      <p>با انجام چند بررسی ساده، فرآیند بازدید به‌خوبی<br />و با موفقیت انجام خواهد شد.</p>
+      <div className="readiness-estimate"><Icon name="clock" size={20} /><span>زمان تقریبی: ۱۲ دقیقه</span></div>
+    </div>
+    <section className="readiness-hero" aria-label="آماده‌سازی خودرو">
+      <Image src="/images/auth/landing-suv.png" alt="خودروی سفید در استودیوی روشن" width={1536} height={1024} sizes="(max-width: 480px) 62vw, 300px" preload />
+      <div className="readiness-hero-copy"><h2>خودروی شما <span>آماده<br />بازدید است</span>؟</h2><p>با رعایت موارد زیر، می‌توانید بازدید را سریع‌تر و بدون مشکل انجام دهید.</p></div>
+      <span className="readiness-hero-check" aria-hidden="true"><Icon name="readinessTick" size={31} /></span>
+    </section>
+    <ReadinessRequirements />
+    <DeviceReadiness />
+  </main>;
+}

@@ -1,5 +1,6 @@
 import type { AuthSession, OtpChallenge, OtpRequest, OtpVerification, ReferralValidation } from "@/types/auth";
 import type { CapturePlan, Inspection } from "@/types/domain";
+import type { ConsentInput, ConsentReceipt } from "@/features/consent/consent-model";
 
 export interface AuthRepository {
   validateReferral(code: string): Promise<ReferralValidation>;
@@ -9,6 +10,7 @@ export interface AuthRepository {
 export interface InspectionRepository {
   getInspection(id: string): Promise<Inspection>;
   getCapturePlan(inspectionId: string): Promise<CapturePlan>;
+  recordConsent(inspectionId: string, input: ConsentInput): Promise<ConsentReceipt>;
 }
 export type RepositoryErrorCode = "NOT_FOUND" | "INVALID_REFERRAL" | "OTP_NOT_REQUESTED" | "OTP_EXPIRED" | "OTP_INVALID" | "OTP_LOCKED" | "OTP_RESEND_TOO_SOON";
 export type RepositoryErrorDetails = { remainingAttempts?: number; retryAfterSeconds?: number };

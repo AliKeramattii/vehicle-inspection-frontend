@@ -7,5 +7,6 @@ export const endpoints = {
     detail: (id: string) => `/api/inspections/${segment(id)}`,
     status: (id: string) => `/api/inspections/${segment(id)}/status`,
     capturePlan: (id: string) => `/api/inspections/${segment(id)}/capture-plan`,
+    consent: (id: string) => `/api/inspections/${segment(id)}/consent`,
   },
 } as const;

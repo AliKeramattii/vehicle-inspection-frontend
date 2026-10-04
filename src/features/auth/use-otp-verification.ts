@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { RepositoryError } from "@/lib/api/repositories";
 import { useAuthContext, useAuthWorkflow } from "./auth-workflow-provider";
 
 export function useOtpVerification() {
+  const router = useRouter();
   const { repository, store } = useAuthContext();
   const workflow = useAuthWorkflow();
   const [code, setCode] = useState("");
@@ -18,9 +20,12 @@ export function useOtpVerification() {
       if (current.stage !== "challenge") throw new RepositoryError("OTP_NOT_REQUESTED", "ابتدا کد تأیید را درخواست کنید.");
       return repository.verifyOtp({ mobile: current.mobile, code: value });
     },
-    onSuccess: () => {
+    onSuccess: (session) => {
       const current = store.getState().workflow;
-      if (current.stage === "challenge") store.getState().setWorkflow({ stage: "verified", mobile: current.mobile });
+      if (current.stage === "challenge") {
+        store.getState().setWorkflow({ stage: "verified", mobile: current.mobile, inspectionId: session.inspectionId });
+        router.replace("/readiness");
+      }
     },
     onError: (error) => {
       const current = store.getState().workflow;

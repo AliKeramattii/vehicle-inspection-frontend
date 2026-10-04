@@ -21,7 +21,8 @@ the supplied library lacked. The insurance mark is a small semantic SVG, not a r
 ## Mock behavior
 
 - Enter referral `A4K9P2` to request the OTP for demo invitation number `09120004567`.
-- Enter OTP `12345` to verify. Successful verification remains on `/verify` with confirmation.
+- Enter OTP `12345` to verify. Phase 02 now routes successful verification to `/readiness`.
+  See `READINESS_CONSENT.md`; the Phase-01 visual screens and baselines are unchanged.
 - The mock expires codes and permits resend after 120 seconds. Three incorrect completed
   entries exhaust the challenge; resend resets the attempt count after the countdown.
 - Number editing opens a native dialog, validates an Iranian mobile, requests a new challenge,
