@@ -20,3 +20,7 @@ Install the test browser first with `npx playwright install chromium`.
 See [bootstrap usage and boundaries](docs/BOOTSTRAP.md), [architecture](docs/ARCHITECTURE.md),
 [API contracts and mock values](docs/API_CONTRACT.md), and [canonical references](references/INDEX.md).
 The active execution plan is [.agent/plans/landing-otp.md](.agent/plans/landing-otp.md).
+
+Development listens on `0.0.0.0`, so localhost and this machine's LAN address serve
+the same Phase-01 app. See [origin parity and development reset instructions](docs/DEVELOPMENT_ORIGINS.md).
+Run `npm run test:e2e:dev` to check both development origins and hot reload.
