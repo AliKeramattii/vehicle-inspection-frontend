@@ -54,9 +54,9 @@ test("Phase 01 flows through readiness and consent, without permissions or backe
   await expect(button).toBeEnabled();
   await noOverflow(page);
   await button.click();
-  await expect(page.getByRole("status")).toContainText("رضایت شما ثبت شد.");
-  await expect(page).toHaveURL(/\/consent$/);
-  await expect(page.locator("a[href*='/location']")).toHaveCount(0);
+  await expect(page).toHaveURL(/\/inspection\/insp_demo\/location$/);
+  await expect(page.getByRole("heading", { name: "آدرس شناسایی‌شده" })).toBeVisible();
+  await expect(page.locator("a[href*='/capture']")).toHaveCount(0);
   expect(await page.evaluate(() => (window as Window & { permissionCalls?: string[] }).permissionCalls)).toEqual([]);
   expect(errors).toEqual([]);
   expect(backend).toEqual([]);
@@ -102,7 +102,7 @@ test("preparation remains usable at 320, 390 and 480px without horizontal overfl
     await noOverflow(page);
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "تأیید و ادامه" }).click();
-    await expect(page.getByRole("status")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "آدرس شناسایی‌شده" })).toBeVisible();
     await page.goto("/readiness");
     await noOverflow(page);
     await expect(page.getByRole("button", { name: "همه چیز آماده است" })).toBeEnabled();

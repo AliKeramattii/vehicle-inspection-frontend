@@ -1,9 +1,13 @@
 # Phase 02: readiness and consent
 
-Only `/readiness` and `/consent` are added. Successful existing mock OTP verification enters
+Phase 02 added only `/readiness` and `/consent`. Successful existing mock OTP verification enters
 readiness; its CTA opens consent. Consent records acceptance and shows confirmation on the
 same route. No Phase-03 location route existed, so none is invented. Referral `A4K9P2`, OTP
 `12345`, Phase-01 controls/screens/baselines and localhost/LAN configuration are preserved.
+
+Phase 03 now supplies a completion callback from ConsentWorkflow to enter the location route.
+The standalone ConsentForm completion state and all initial Phase-02 visuals/baselines remain
+unchanged. See `LOCATION_VEHICLE.md` for the new bounded workflow.
 
 ## Components and visual decisions
 

@@ -165,6 +165,14 @@ and explicit permission requests in the relevant feature, not a new API endpoint
 ## Location
 
 ### PUT `/api/inspections/{inspectionId}/location`
+Planned contract, not a confirmed ASP.NET implementation. Phase 03 calls the typed in-memory
+`InspectionRepository.saveLocation`. Its frontend model is flat; a future transport adapter maps
+`formattedAddress`, building, unit/floor and parking into the nested `address` payload below.
+Coordinates/accuracy are numbers; unit/floor and parking may be empty or omitted. Building numbers
+are strings (the form normalizes Persian/Arabic numeric glyphs to ASCII). The server should return
+the authoritative saved coordinates, accuracy and address in the same shape, adapted back to
+`InspectionLocation`. It must authorize the inspection owner and require accepted consent.
+
 ```json
 {
   "latitude": 35.721,
@@ -179,12 +187,45 @@ and explicit permission requests in the relevant feature, not a new API endpoint
 }
 ```
 
+The development map/GPS adapter returns one deterministic suggested location with 8m accuracy.
+Dragging or keyboard panning changes coordinates; the pin remains anchored and the GPS marker
+moves with the map. There is no production tile/geocoding provider, browser GPS prompt, external
+map URL or API key. A real provider must implement the stable map/location boundary and perform
+permission requests only after explicit locate interaction. This does not require a new endpoint.
+Distinguish 400/422 field validation, 401/403, 404, 409 missing consent/stale inspection, 429 and
+server/network/timeout errors. The mock enforces consent and validates coordinate bounds.
+
 ## Vehicle
 
 ### GET `/api/inspections/{inspectionId}/vehicle`
+Planned response supplies `make`, `model`, numeric `year`, `colorName`, optional `colorHex`,
+masked-only `vinMasked`, semantic `plate` (below), and optional numeric `odometerKm`.
+The frontend never requests or reconstructs the full VIN. `getVehicle` currently returns a cloned
+frontend model or null through the mock repository; transport DTOs must be adapted in a real client.
 
 ### PUT `/api/inspections/{inspectionId}/vehicle`
-Use for customer-confirmed/corrected vehicle values.
+Planned confirmation request (not integrated):
+```json
+{
+  "confirmed": true,
+  "plate": { "firstTwoDigits": "45", "letter": "ب", "threeDigits": "723", "regionDigits": "11" },
+  "discrepancy": { "field": "color", "description": "رنگ بدنه سفید است" }
+}
+```
+`discrepancy` is optional; supported field IDs are `model`, `year`, `color`, `vin` and description
+is short customer-entered text (3–500 characters). It records a review concern rather than silently
+overwriting official vehicle details. The requested operation atomically confirms/saves the plate
+and optional discrepancy and returns `{ inspectionId, plate, discrepancy?, confirmedAt }`, with
+server-controlled ISO time. Equivalent repeated confirmations should be idempotent. A future
+adapter adds the transport-only `confirmed: true`; the domain action is `confirmVehicle`.
+Backend agreement on this atomic request remains pending; no extra endpoint is assumed.
+
+The mock requires previously saved location, validates semantic plate values, returns cloned
+receipts and keeps per-instance confirmation/plate state. Query owns reads and save results;
+local forms own only editing drafts. Refresh resets auth/consent/location/confirmation. Authentication,
+owner authorization and durable records remain production backend responsibilities. Distinguish
+400/422 plate/discrepancy errors, 401/403, 404 missing vehicle, 409 missing location/stale data,
+429, server/network/timeout failures. No real ASP.NET requests are enabled.
 
 ### PUT `/api/inspections/{inspectionId}/vehicle/plate`
 Plate structure should be semantic:
@@ -196,6 +237,12 @@ Plate structure should be semantic:
   "regionDigits": "11"
 }
 ```
+This existing planned endpoint can support independent plate correction. Phase 03 submits plate
+and final confirmation through the single mock domain operation above; it does not independently
+send or invent a plate HTTP request. Numeric segments remain ASCII strings with lengths 2/3/2;
+presentation uses Persian glyphs. The letter selector supports the conventional letters listed in
+`iranianPlateLetters`; alternate formats currently show contact guidance and block confirmation
+while the disclosure is open. Alternate-format domain/API support remains unimplemented.
 
 ## Capture plan
 

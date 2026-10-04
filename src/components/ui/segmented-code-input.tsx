@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState, type Ref } from "react";
+import { useId, useRef, useState, type Ref, type ClipboardEventHandler, type KeyboardEventHandler } from "react";
 import { cn } from "@/lib/utils/cn";
 import { normalizeCode, toPersianDigits } from "@/lib/utils/persian";
 
@@ -8,11 +8,13 @@ export type SegmentedCodeInputProps = {
   value: string; onChange: (value: string) => void; onBlur?: () => void;
   label: string; error?: string; describedBy?: string; disabled?: boolean;
   autoFocus?: boolean; name?: string; ref?: Ref<HTMLInputElement>;
+  autoComplete?: string; invalid?: boolean;
+  onPaste?: ClipboardEventHandler<HTMLInputElement>; onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 };
 type Props = SegmentedCodeInputProps & { length: number; numeric?: boolean; persianDigits?: boolean };
 
 export function SegmentedCodeInput({ value, onChange, onBlur, label, error, describedBy,
-  disabled, autoFocus, name, ref, length, numeric = false, persianDigits = false }: Props) {
+  disabled, autoFocus, name, ref, length, numeric = false, persianDigits = false, autoComplete, invalid, onPaste, onKeyDown }: Props) {
   const id = useId();
   const input = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -23,7 +25,7 @@ export function SegmentedCodeInput({ value, onChange, onBlur, label, error, desc
     <div className={cn("code-control", numeric && "code-control-otp")} dir="ltr">
       <div className="code-cells" aria-hidden="true">
         {Array.from({ length }, (_, index) => <span key={index} data-active={focused && index === active ? "true" : undefined}
-          className={cn("code-cell", error && "code-cell-error", disabled && "opacity-60")}>
+          className={cn("code-cell", (error || invalid) && "code-cell-error", disabled && "opacity-60")}>
           {persianDigits ? toPersianDigits(value[index] ?? "") : value[index]}
         </span>)}
       </div>
@@ -31,17 +33,20 @@ export function SegmentedCodeInput({ value, onChange, onBlur, label, error, desc
         input.current = node;
         if (typeof ref === "function") ref(node); else if (ref) ref.current = node;
       }} name={name} type="text" dir="ltr" inputMode={numeric ? "numeric" : "text"}
-        autoComplete={numeric ? "one-time-code" : "off"} autoCapitalize={numeric ? "off" : "characters"}
+        autoComplete={autoComplete ?? (numeric ? "one-time-code" : "off")} autoCapitalize={numeric ? "off" : "characters"}
         spellCheck={false} maxLength={length} value={value} disabled={disabled} autoFocus={autoFocus}
-        aria-invalid={error ? true : undefined}
+        aria-invalid={error || invalid ? true : undefined}
         aria-describedby={[describedBy, error ? `${id}-error` : undefined].filter(Boolean).join(" ") || undefined}
         className="code-native-input"
+        onKeyDown={onKeyDown}
         onChange={(event) => {
           const normalized = normalizeCode(event.target.value, length, numeric);
           setSelection(Math.min(event.target.selectionStart ?? normalized.length, length - 1));
           onChange(normalized);
         }}
         onPaste={(event) => {
+          onPaste?.(event);
+          if (event.defaultPrevented) return;
           event.preventDefault();
           const code = normalizeCode(event.clipboardData.getData("text"), length, numeric);
           event.currentTarget.value = code;

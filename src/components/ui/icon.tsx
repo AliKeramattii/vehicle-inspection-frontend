@@ -20,6 +20,11 @@ const icons = {
   readinessTick: "/icons/readiness/tick.svg",
   location: "/icons/location/map-pin.svg", document: "/icons/admin/policies.svg",
   terms: "/icons/admin/policies.svg", down: "/icons/navigation/chevron-down.svg",
+  locate: "/icons/location/current-location.svg", accuracy: "/icons/location/location-accuracy.svg",
+  mapPin: "/icons/location/map-pin-selected.svg", building: "/icons/location/building.svg",
+  parking: "/icons/location/parking.svg", plate: "/icons/vehicle/license-plate.svg",
+  keyboard: "/icons/reviewer/manual-plate.svg", copy: "/icons/navigation/copy.svg",
+  discrepancy: "/icons/status/warning.svg",
 } as const;
 export type IconName = keyof typeof icons;
 

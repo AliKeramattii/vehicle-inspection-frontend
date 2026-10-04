@@ -3,9 +3,12 @@ import { z } from "zod";
 export const inspectionStatusSchema = z.enum(["draft", "capturing", "uploading", "readyToSubmit", "queuedForReview", "underReview", "additionalEvidenceRequired", "approved", "rejected"]);
 export const evidenceStateSchema = z.enum(["local", "queued", "uploading", "processing", "uploaded", "verified", "failed", "retakeRequired"]);
 export const captureCategorySchema = z.enum(["body", "cabin", "engineChassis"]);
+export const iranianPlateLetters = ["الف", "ب", "ج", "د", "س", "ص", "ط", "ع", "ق", "ل", "م", "ن", "و", "ه", "ی"] as const;
 export const iranianPlateSchema = z.object({
-  firstTwoDigits: z.string().regex(/^\d{2}$/), letter: z.string().min(1),
-  threeDigits: z.string().regex(/^\d{3}$/), regionDigits: z.string().regex(/^\d{2}$/),
+  firstTwoDigits: z.string().regex(/^\d{2}$/, "دو رقم اول پلاک را وارد کنید."),
+  letter: z.enum(iranianPlateLetters, { error: "حرف پلاک را انتخاب کنید." }),
+  threeDigits: z.string().regex(/^\d{3}$/, "سه رقم اصلی پلاک را وارد کنید."),
+  regionDigits: z.string().regex(/^\d{2}$/, "دو رقم کد ایران را وارد کنید."),
 });
 export const vehicleSchema = z.object({
   make: z.string().min(1), model: z.string().min(1), year: z.number().int().positive(),

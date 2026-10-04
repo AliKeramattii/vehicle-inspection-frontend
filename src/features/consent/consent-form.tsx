@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BottomStickyCTA } from "@/components/ui/bottom-sticky-cta";
 import { PrimaryButton } from "@/components/ui/button";
@@ -11,15 +12,16 @@ import { InlineAlert } from "@/components/ui/status";
 import type { InspectionRepository } from "@/lib/api/repositories";
 import { useAuthContext, useAuthWorkflow } from "@/features/auth/auth-workflow-provider";
 import { consentTermsVersion, type ConsentState } from "./consent-model";
+import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 
-export function ConsentForm({ repository, inspectionId }: { repository: InspectionRepository; inspectionId: string | null }) {
+export function ConsentForm({ repository, inspectionId, onComplete }: { repository: InspectionRepository; inspectionId: string | null; onComplete?: () => void }) {
   const [accepted, setAccepted] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const termsId = useId();
   const submission = useMutation({ mutationFn: () => {
     if (!accepted || !inspectionId) throw new Error("برای ادامه، کد معرفی و شماره موبایل خود را تأیید کنید.");
     return repository.recordConsent(inspectionId, { accepted: true, termsVersion: consentTermsVersion });
-  } });
+  }, onSuccess: onComplete });
   const state: ConsentState = submission.isSuccess ? { status: "complete", receipt: submission.data } : submission.isPending ? { status: "saving" } : submission.isError ? { status: "failed", accepted, message: submission.error.message } : { status: "editing", accepted };
   if (state.status === "complete") return <section className="consent-complete" role="status"><Icon name="shield" size={43} /><h2>رضایت شما ثبت شد.</h2><p>آمادگی و رضایت بازدید تکمیل شد.</p><Link href="/readiness">بازگشت به آمادگی</Link></section>;
   return <form className="consent-form" onSubmit={(event) => { event.preventDefault(); if (accepted && !submission.isPending) submission.mutate(); }}>
@@ -36,7 +38,9 @@ export function ConsentForm({ repository, inspectionId }: { repository: Inspecti
   </form>;
 }
 export function ConsentWorkflow() {
+  const router = useRouter();
   const { inspection } = useAuthContext();
   const workflow = useAuthWorkflow();
-  return <ConsentForm repository={inspection} inspectionId={workflow.stage === "verified" ? workflow.inspectionId : null} />;
+  const inspectionId = workflow.stage === "verified" ? workflow.inspectionId : null;
+  return <ConsentForm repository={inspection} inspectionId={inspectionId} onComplete={() => { if (inspectionId) router.push(inspectionRoutes.location(inspectionId)); }} />;
 }

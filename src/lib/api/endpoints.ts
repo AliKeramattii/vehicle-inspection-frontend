@@ -8,5 +8,8 @@ export const endpoints = {
     status: (id: string) => `/api/inspections/${segment(id)}/status`,
     capturePlan: (id: string) => `/api/inspections/${segment(id)}/capture-plan`,
     consent: (id: string) => `/api/inspections/${segment(id)}/consent`,
+    location: (id: string) => `/api/inspections/${segment(id)}/location`,
+    vehicle: (id: string) => `/api/inspections/${segment(id)}/vehicle`,
+    plate: (id: string) => `/api/inspections/${segment(id)}/vehicle/plate`,
   },
 } as const;

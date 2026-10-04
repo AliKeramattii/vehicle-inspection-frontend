@@ -13,7 +13,8 @@ They share tokens/icons/primitives but not their large-scale page layouts.
 Bootstrap establishes `(customer)`, `(reviewer)/reviewer`, and `(admin)/admin` layouts.
 Reviewer/admin groups reserve their URL namespaces; their product pages are intentionally absent
 until the corresponding phases. `/` and `/verify` implement phase 01 with mock auth only;
-`/readiness` and `/consent` implement phase 02. No inspection location route is implemented.
+`/readiness` and `/consent` implement phase 02. Phase 03 adds the inspection location/vehicle routes;
+see `LOCATION_VEHICLE.md` for the map, form and confirmation boundaries. No capture route exists.
 The unchanged foundation preview moved to `/foundation/preview`; `/foundation` remains the
 non-indexed component gallery with its original baselines.
 
@@ -28,7 +29,8 @@ children. It owns the mock repository and a transient Zustand store with a discr
 `idle | challenge | verified` workflow. Query mutations perform referral validation and OTP
 request/verification. The store holds mobile/code context, deadlines, and remaining attempts for
 the active workflow; fetched user, partner, inspection, and session entities are not duplicated.
-The provider also owns the same per-instance inspection repository used to record consent.
+The provider also owns the same per-instance inspection repository used to record consent,
+save location and confirm the vehicle/plate.
 The verified workflow retains only an inspection ID for that operation. Capability diagnostics
 use an interchangeable local service and an abortable hook; consent checkbox/terms use local
 state and Query mutations own submission status. See `READINESS_CONSENT.md` for this boundary.
