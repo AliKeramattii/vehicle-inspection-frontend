@@ -14,7 +14,10 @@ Bootstrap establishes `(customer)`, `(reviewer)/reviewer`, and `(admin)/admin` l
 Reviewer/admin groups reserve their URL namespaces; their product pages are intentionally absent
 until the corresponding phases. `/` and `/verify` implement phase 01 with mock auth only;
 `/readiness` and `/consent` implement phase 02. Phase 03 adds the inspection location/vehicle routes;
-see `LOCATION_VEHICLE.md` for the map, form and confirmation boundaries. No capture route exists.
+see `LOCATION_VEHICLE.md` for the map, form and confirmation boundaries. Phase 04 adds the canonical
+capture route with a production image-guided 2D workflow; see `PHOTOGRAPHY.md`. Vehicle confirmation
+enters it. Dedicated section/guide/camera/review routes share one template and durable local photos.
+Experimental 3D remains isolated and is never imported by customer photography.
 The unchanged foundation preview moved to `/foundation/preview`; `/foundation` remains the
 non-indexed component gallery with its original baselines.
 

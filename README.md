@@ -1,7 +1,7 @@
 # Vehicle Inspection Frontend
 
 Persian RTL Next.js App Router frontend for customer self-inspection, reviewer operations,
-and administration. Implemented: `00-bootstrap`, `01-landing-otp`, and `02-readiness-consent`.
+and administration. Implemented: `00-bootstrap`, `01-landing-otp`, `02-readiness-consent`, `03-location-vehicle`, and revised Phase 04 image-guided photography.
 
 ```sh
 npm ci
@@ -20,8 +20,8 @@ Install the test browser first with `npx playwright install chromium`.
 See [bootstrap usage and boundaries](docs/BOOTSTRAP.md), [architecture](docs/ARCHITECTURE.md),
 [API contracts and mock values](docs/API_CONTRACT.md), and [canonical references](references/INDEX.md).
 See [readiness and consent](docs/READINESS_CONSENT.md) and its
-[execution plan](.agent/plans/readiness-consent.md). Consent ends with a confirmation;
-Phase 03 and later product functionality remain unimplemented.
+[execution plan](.agent/plans/readiness-consent.md). Consent continues through location/vehicle to photography. See [photography architecture](docs/PHOTOGRAPHY.md).
+Remote upload/submission, reviewer/admin and optional 3D remain future work.
 
 Development listens on `0.0.0.0`, so localhost and this machine's LAN address serve
 the same app. See [origin parity and development reset instructions](docs/DEVELOPMENT_ORIGINS.md).

@@ -58,7 +58,7 @@ Do not add a second UI framework such as Material UI, Ant Design, Bootstrap, Cha
 - Use Server Components by default. Add `"use client"` only where interaction/browser APIs require it.
 - Do not expose secrets to the browser.
 - Never call private token-generation endpoints from client code.
-- Do not hardcode CAP-01 through CAP-14 logic throughout the UI; consume a capture-plan model.
+- Do not hardcode photo IDs or counts throughout the UI; consume the configured sections/requirements.
 - No unsafe raw HTML injection.
 - Do not introduce dependencies without a clear reason.
 
@@ -158,9 +158,26 @@ and error/retry paths.
 
 Never rely only on service-worker background sync.
 
-## 3D
+## Current customer photography — Phase 04
 
-The 3D viewer must be a real interactive component, not a prerendered image.
+Production Phase 04 is premium **2D image-guided inspection**: overview → InspectionSection →
+PhotoRequirement → canonical sample/guidance → camera → comparison → confirmation. Current
+template: seven sections/twelve required photos; derive progress/totals from configuration.
+This supersedes historical customer 3D/14-photo requirements and reference screenshot counts.
+
+Definition of Done prioritizes section navigation, meaningful reference photography, camera,
+durable local captures, comparison, replacement, automatic continuation, retakes and mobile quality.
+No customer GLB/WebGL/mesh selection/3D viewer is required. Never mount/download the experimental
+Three/R3F subsystem in the default photography route. Use exact photo-guide assets in INDEX.
+
+Preserve reusable 3D infrastructure isolated for future use, without refining its model in this
+phase. Future hotspot → InspectionSection → same PhotoRequirement shares all downstream logic;
+today 2D section navigation uses that boundary. Do not duplicate camera/review/storage logic.
+
+## Future optional 3D
+
+When a future task explicitly enables 3D, its viewer must be genuinely interactive, not a
+prerendered image. This requirement does not apply to production customer Phase 04 photography.
 
 Expected semantic model node names include:
 `Body_Main`, `Hood`, `Door_FL`, `Door_FR`, `Door_RL`, `Door_RR`,

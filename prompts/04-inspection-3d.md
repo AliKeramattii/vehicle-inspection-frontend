@@ -1,37 +1,27 @@
-# Codex task — Interactive inspection home
+# Phase 04 — production image-guided 2D photography
 
-## Canonical visual references
+Filename retained for existing links. Previous mandatory 3D/14-shot instructions are superseded.
+Read AGENTS, INDEX, DESIGN_SYSTEM, API_CONTRACT and image-guided-photography ExecPlan.
 
-- `references/screens/07-inspection-3d-home.png`
-- `references/screens/17-inspection-photo-guide-reference.png`
-- `references/screens/21-vehicle-2d-fallback.png`
-- `references/screens/22-vehicle-webgl-reference.png`
+Implement the canonical capture route with seven sections: right, left, front, rear, cabin,
+engine-details, roof. Current template: twelve required photos, exact canonical WebPs from INDEX.
+Derive every total and next action from configuration; the platform is not limited to twelve forever.
 
-Inspect **all** references above before implementation. The first screen-specific image is the primary composition reference; the others are supporting references for shared visual language, media, 3D, or overlay details.
+Flow: overview → dedicated section → requirement → large sample/guidance → explicit camera opening
+→ sample/user comparison → quality confirmations → durable local save → next incomplete photo.
+Allow reopen/view/replacement without first deleting the accepted original. Retakes target stable
+requirement IDs and show reviewer reasons. Full completion enables local final review; remote
+uploads/submission remain planned separate boundaries. No fabricated upload or quality success.
 
+Native Persian RTL, LTR IDs, shared header/stepper/controls. Inspect canonical photos and PNGs 08–11.
+Review visuals at 390x844 and responsiveness at 360/430. Cover overview/all sections/guide/camera/
+review/partial/completed/retake/full states. Preserve full sample framing and physical directions.
 
-Create and follow an ExecPlan.
+Camera/browser storage behind narrow service boundaries. No permission on overview/guide. Save
+blobs in IndexedDB before confirmation, stop streams on exit/hidden page and revoke object URLs.
+Offer loading/denied/unavailable/retry states and native photo selection when live capture fails.
 
-Implement the customer 3D inspection home at the capture route.
-
-Requirements:
-- Journey stepper: location and vehicle complete, capture current
-- 7/14 progress treatment
-- segmented capture progress
-- upload status `۷ همگام‌شده • ۲ در صف`
-- main 3D scene dominates the viewport
-- React Three Fiber shell
-- model adapter that can work now with a placeholder/fallback and later with the production GLB
-- inspection pin component states:
-  pending / selected / completed / retake
-- selected pin pulse, respecting reduced motion
-- region-highlight API by semantic node names
-- standing-position marker
-- viewer controls for front/right/rear/left/top/reset/2D
-- shot groups and horizontal shot carousel
-- sticky CTA for next shot
-
-Do not fake the whole viewer with a static reference screenshot.
-If the final GLB is absent, implement a clean adapter/fallback and document exactly where it should be added.
-
-Keep WebGL code isolated from ordinary page UI.
+No R3F/Three/GLB download in default flow. Preserve reusable isolated experimental viewer for a
+future hotspot → section → same requirement mapping; no model improvements. Update conflicting
+instructions/tests, preserve earlier baselines/unrelated edits, run lint/typecheck/all units/full
+Playwright/build. Review before new baselines; scoped commit/push and accurate completion report.

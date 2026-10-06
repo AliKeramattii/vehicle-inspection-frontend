@@ -1,0 +1,31 @@
+import type { LocalPhoto } from "@/lib/media/photo-store";
+import type { InspectionSection, PhotographyTemplate, PhotoRequirement, PhotoRequirementStatus } from "@/schemas/photography";
+
+export const photoStatusLabels: Record<PhotoRequirementStatus, string> = {
+  pending: "ثبت نشده", captured: "ثبت شد", uploading: "در حال ارسال", uploaded: "ارسال شد", verified: "تأیید شد", "retake-requested": "نیاز به عکاسی مجدد",
+};
+export function requirementStatus(photo: PhotoRequirement, records: readonly LocalPhoto[]): PhotoRequirementStatus {
+  return records.find((record) => record.requirementId === photo.id)?.status ?? photo.status;
+}
+export const photoSatisfied = (status: PhotoRequirementStatus) => ["captured", "uploading", "uploaded", "verified"].includes(status);
+export function sectionProgress(section: InspectionSection, records: readonly LocalPhoto[]) {
+  const required = section.photoRequirements.filter((photo) => photo.required);
+  const completed = required.filter((photo) => photoSatisfied(requirementStatus(photo, records))).length;
+  const retake = section.photoRequirements.some((photo) => requirementStatus(photo, records) === "retake-requested");
+  return { completed, total: required.length, remaining: required.length - completed, retake };
+}
+export function photographyProgress(template: PhotographyTemplate, records: readonly LocalPhoto[]) {
+  const progress = template.sections.map((section) => sectionProgress(section, records));
+  const completed = progress.reduce((total, section) => total + section.completed, 0);
+  const total = progress.reduce((total, section) => total + section.total, 0);
+  return { completed, total, remaining: total - completed, percentage: total ? completed / total * 100 : 0, complete: total > 0 && completed === total };
+}
+export function findRequirement(template: PhotographyTemplate, id: string) {
+  for (const section of template.sections) { const photo = section.photoRequirements.find((requirement) => requirement.id === id); if (photo) return { section, photo, index: section.photoRequirements.indexOf(photo) }; }
+}
+export function nextRequirement(section: InspectionSection, records: readonly LocalPhoto[], confirmedId?: string) {
+  return section.photoRequirements.find((photo) => photo.id !== confirmedId && photo.required && !photoSatisfied(requirementStatus(photo, records)));
+}
+export function nextSection(template: PhotographyTemplate, records: readonly LocalPhoto[]) {
+  return [...template.sections].sort((a, b) => a.order - b.order).find((section) => sectionProgress(section, records).remaining > 0);
+}

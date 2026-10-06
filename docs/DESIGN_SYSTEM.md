@@ -63,7 +63,7 @@ Primary acceptance viewport: 390×844.
 
 Principles:
 - one primary action per screen
-- large visual/3D content before paragraphs
+- large meaningful photography before paragraphs; current customer Phase 04 is image-guided 2D
 - sticky primary CTA near the bottom
 - generous whitespace
 - safe-area-aware bottom spacing
@@ -91,7 +91,16 @@ Use:
 - restrained green/amber quality indicators
 - professional camera ergonomics
 
-## 3D
+## Phase 04 photography
+
+Seven explicit reopenable sections and twelve requirements in the current configurable template.
+Large canonical sample photos with full framing (`object-fit: contain`), concise guidance and
+sample/user-photo comparison. Compact derived progress. Pending/current/completed/retake states
+use text/icons as well as neutral/blue/green/amber. No orbit controls, hotspots, standing meshes
+or 3D toggle. Camera is dark; section/review screens are light. Quality checks are customer
+confirmations, not invented automatic analysis.
+
+## Future optional 3D (isolated from customer Phase 04)
 
 Studio:
 - white/cool-grey cyclorama

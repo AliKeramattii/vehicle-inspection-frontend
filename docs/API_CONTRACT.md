@@ -31,7 +31,7 @@ Mock development values:
 - Mobile: an ASCII Iranian mobile number matching `09` plus nine digits.
 - OTP: `12345`; call `requestOtp` on the same repository instance first.
 - Inspection: `insp_demo`; a draft with sample vehicle, no location, and no evidence.
-- Capture plan: two sample slots with arbitrary codes; not the later 14-shot template.
+- Capture plan: production mock uses the configurable seven-section/twelve-photo template. The exported two-slot bootstrap fixture remains only for foundation tests.
 
 Mock OTP challenges expire after two minutes, allow three incorrect attempts, and are consumed
 on successful verification. The factory defaults to a 60-second resend window; phase 01's customer
@@ -248,34 +248,38 @@ while the disclosure is open. Alternate-format domain/API support remains unimpl
 
 ### GET `/api/inspections/{inspectionId}/capture-plan`
 
-The frontend must not permanently hardcode the 14-shot workflow.
+Planned ASP.NET contract, not confirmed or integrated. The current customer template contains seven
+sections and twelve required photos; totals are configurable, never a platform-wide fixed count.
+The mock derives legacy flat shots and totalRequired from one authoritative sections configuration.
 
-Example:
+Requested domain response: templateId, templateVersion, sections[] with id/title/order and
+photoRequirements[] containing id/title/description/sampleImage/instructions[], optional
+distance/height/orientation, required, status and reviewerReason. Stable requirement IDs also
+identify evidence and retake requests. Quality confirmation labels/policy belong to each requirement.
+Status: pending, captured (local only), uploading, uploaded, verified, retake-requested. A retake
+supersedes completion until replacement is confirmed. Local capture is not proof of remote storage.
+Future optional semanticNodes/viewpoint may map to these same requirements; neither is mandatory.
+
+Example (abbreviated, remaining sections configured similarly):
 ```json
 {
-  "templateId": "body-standard",
-  "templateVersion": 3,
-  "totalRequired": 14,
-  "shots": [
-    {
-      "code": "CAP-05",
-      "title": "نمای مستقیم جلو با پلاک",
-      "category": "body",
-      "required": true,
-      "guideAvailable": true,
-      "distanceMeters": 3,
-      "phoneHeight": "waist",
-      "cameraOrientation": "portrait",
-      "viewpoint": "front",
-      "highlightNodes": ["Plate_Front", "Bumper_Front"],
-      "qualityPolicy": {
-        "plateReadable": true,
-        "minimumGpsAccuracyMeters": 25
-      }
-    }
-  ]
+  "templateId": "body-image-guided", "templateVersion": 1, "totalRequired": 12,
+  "sections": [{ "id": "right", "title": "نمای راست", "order": 1,
+    "photoRequirements": [{ "id": "front-45-right", "title": "جلو ۴۵° راست",
+      "description": "جلوی خودرو و سمت راست به صورت کامل دیده شود.",
+      "sampleImage": "/assets/inspection/photo-guides/front-45-right.webp",
+      "instructions": ["خودرو را کامل داخل کادر قرار دهید."],
+      "checks": ["واضح", "نور مناسب", "خودرو کامل در کادر"],
+      "required": true, "status": "pending" }] }]
 }
 ```
+
+The frontend keeps draft and accepted blobs in IndexedDB, namespaced by inspection/template version/
+requirement. Confirmed local evidence is read through Query, not duplicated in Zustand or the mock
+inspection repository. Draft replacement retains the accepted original until atomic confirmation.
+No evidence HTTP calls, upload acknowledgement, background queue or submission is implemented here.
+Future GET evidence and additional-evidence adapters must map shotCode/requirementId and reviewerReason
+to the current template. Unrelated historical CAP codes in API examples are illustrative, not rules.
 
 ## Evidence/upload
 

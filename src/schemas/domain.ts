@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { inspectionSectionSchema } from "./photography";
 
 export const inspectionStatusSchema = z.enum(["draft", "capturing", "uploading", "readyToSubmit", "queuedForReview", "underReview", "additionalEvidenceRequired", "approved", "rejected"]);
 export const evidenceStateSchema = z.enum(["local", "queued", "uploading", "processing", "uploaded", "verified", "failed", "retakeRequired"]);
@@ -21,10 +22,12 @@ export const captureSlotSchema = z.object({
   phoneHeight: z.enum(["waist", "headlight", "chest", "custom"]).optional(),
   cameraOrientation: z.enum(["portrait", "landscape"]).optional(), viewpoint: z.string().optional(),
   highlightNodes: z.array(z.string()),
+  status: z.enum(["pending", "completed", "retake"]).optional(),
 });
 export const capturePlanSchema = z.object({
   templateId: z.string().min(1), templateVersion: z.number().int().positive(),
   totalRequired: z.number().int().nonnegative(), shots: z.array(captureSlotSchema),
+  sections: z.array(inspectionSectionSchema).optional(),
 }).superRefine((plan, context) => {
   if (plan.totalRequired !== plan.shots.filter((shot) => shot.required).length) {
     context.addIssue({ code: "custom", path: ["totalRequired"], message: "Required count must match the plan." });

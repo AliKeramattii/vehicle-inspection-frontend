@@ -72,9 +72,9 @@ test("consent → location → vehicle uses mocks, fixed pin and no browser perm
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await page.getByRole("button", { name: "درست است", exact: true }).click();
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
-  await expect(page.getByRole("status")).toContainText("مشخصات خودرو تأیید شد.");
-  await expect(page).toHaveURL(/\/vehicle$/);
-  await expect(page.locator('a[href*="/capture"]')).toHaveCount(0);
+  await expect(page).toHaveURL(/\/capture$/);
+  await expect(page.getByRole("progressbar", { name: "۰ از ۱۲ تصویر تکمیل شده" })).toBeVisible();
+  await expect(page.locator('[aria-current="step"]')).toContainText("عکاسی");
   expect(errors).toEqual([]); expect(backend).toEqual([]);
   expect(await page.evaluate(() => (window as Window & { phaseThreePermissionCalls?: string[] }).phaseThreePermissionCalls)).toEqual([]);
 });
@@ -110,7 +110,8 @@ test("manual plate entry normalizes/pastes digits, validates, selects letters an
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "توضیح مغایرت ثبت شد؛ ویرایش" })).toBeFocused();
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
-  await expect(page.getByRole("status")).toContainText("مشخصات خودرو تأیید شد.");
+  await expect(page).toHaveURL(/\/capture$/);
+  await expect(page.getByRole("progressbar", { name: "۰ از ۱۲ تصویر تکمیل شده" })).toBeVisible();
   await expect(page.getByRole("img", { name: /پلاک خودرو/ })).toHaveCount(0);
 });
 

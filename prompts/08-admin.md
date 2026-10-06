@@ -17,7 +17,7 @@ Current template:
 `بازدید استاندارد بیمه بدنه — نسخه ۳`
 status: `منتشرشده`
 
-Create editable CAP-01..CAP-14 table/list with:
+Create an editable template-driven table (current customer template: seven sections, twelve photos) with:
 - code
 - Persian title
 - category
@@ -25,15 +25,15 @@ Create editable CAP-01..CAP-14 table/list with:
 - guide availability
 - quality policy
 
-Selecting CAP-05 opens the editor:
+Selecting a requirement opens the editor:
 - title
 - instructions
 - required
 - distance
 - phone height
 - camera orientation
-- linked 3D viewpoint
-- highlighted 3D nodes
+- section and canonical sample image
+- optional future 3D viewpoint/node mapping, never required by the customer flow
 - small visual vehicle pose preview
 
 Actions:
@@ -41,4 +41,4 @@ Actions:
 - `انتشار نسخه جدید`
 
 Keep template data fully typed and compatible with the capture-plan API contract.
-Do not hardcode screen behavior around CAP-05; selection should be generic.
+Do not hardcode screen behavior around any requirement ID; selection should be data-driven.

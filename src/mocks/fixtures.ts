@@ -9,7 +9,7 @@ export const inspectionFixture: InspectionDto = {
   vehicleDetails: { make: "کیا", model: "اسپورتیج", year: 2023, colorName: "نقره‌ای متالیک", colorHex: "#b5bac1",
     vinMasked: "NAAP******3F56", plate: { firstTwoDigits: "45", letter: "ب", threeDigits: "723", regionDigits: "11" } },
 };
-// A deliberately small bootstrap fixture, never a complete/fixed 14-shot workflow.
+// A deliberately small bootstrap fixture, not the current customer photography template.
 export const capturePlanFixture: CapturePlan = {
   templateId: "bootstrap-sample", templateVersion: 1, totalRequired: 2,
   shots: [

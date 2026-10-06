@@ -1,5 +1,9 @@
 # Codex task — Guide sheet + Camera + Photo review + Odometer
 
+**Scope update:** basic guidance, camera, durable local capture and sample comparison now belong
+to revised Phase 04 (`04-inspection-3d.md`). This is a future enhancement brief. Preserve that shared
+workflow; do not restore mandatory 3D or duplicate camera logic. Quality policies/IDs are configured.
+
 ## Canonical visual references
 
 - `references/screens/08-photo-guide-bottom-sheet.png`
@@ -36,11 +40,11 @@ Photo review:
 - image dominant
 - pinch/zoom-capable viewer or future-ready abstraction
 - quality checklist
-- required readable-plate checkbox for CAP-05
+- readable-plate confirmation where the configured quality policy requests it
 - confirm/save vs retake
 
 Odometer:
-- CAP-10
+- configured odometer requirement (currently `odometer-on`)
 - integer domain value
 - Persian formatted display/input presentation
 - never store/send `۴۸٬۳۲۰` as the API numeric value; domain value is `48320`

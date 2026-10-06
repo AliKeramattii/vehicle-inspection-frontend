@@ -1,9 +1,9 @@
 # Route Map
 
-Implemented through phase 03: `/`, `/verify`, `/readiness`, `/consent`, and the location/vehicle
+Implemented through phase 04: `/`, `/verify`, `/readiness`, `/consent`, and the location/vehicle/capture
 inspection routes below. Other product routes remain planned. Internal bootstrap routes:
 `/foundation` and `/foundation/preview`. Successful consent enters location; saved location enters
-vehicle. Vehicle confirmation ends on the vehicle route; no capture scaffold is created. Direct
+vehicle. Vehicle confirmation enters image-guided photography. Direct
 viewing is supported, but submissions require the verified mock workflow and repository prerequisites.
 
 ## Customer
@@ -14,8 +14,13 @@ viewing is supported, but submissions require the verified mock workflow and rep
 - `/consent`
 - `/inspection/[inspectionId]/location` — implemented with a deterministic map/location adapter
 - `/inspection/[inspectionId]/vehicle` — implemented with semantic plate confirmation/editing
-- `/inspection/[inspectionId]/capture`
-- `/inspection/[inspectionId]/upload`
+- `/inspection/[inspectionId]/capture` — implemented image-guided overview
+- `/inspection/[inspectionId]/capture/section/[sectionId]` — large photo requirements
+- `/inspection/[inspectionId]/capture/photo/[requirementId]/guide` — sample and guidance
+- `/inspection/[inspectionId]/capture/photo/[requirementId]/camera` — explicit live/native capture
+- `/inspection/[inspectionId]/capture/photo/[requirementId]/review` — comparison and confirmation
+- `/inspection/[inspectionId]/capture/review` — local completion review, no remote submission
+- `/inspection/[inspectionId]/upload` — planned
 - `/inspection/[inspectionId]/review`
 - `/inspection/[inspectionId]/submitted`
 - `/inspection/[inspectionId]/additional-evidence`

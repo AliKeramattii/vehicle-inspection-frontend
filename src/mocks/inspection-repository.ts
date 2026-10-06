@@ -1,7 +1,8 @@
 import { adaptInspection } from "@/lib/api/adapters/inspection";
 import { RepositoryError, type InspectionRepository } from "@/lib/api/repositories";
 import { capturePlanSchema, inspectionLocationSchema } from "@/schemas/domain";
-import { capturePlanFixture, inspectionFixture, mockInspectionId } from "./fixtures";
+import { inspectionFixture, mockInspectionId } from "./fixtures";
+import { templateCapturePlan } from "@/features/photography/inspection-template";
 import { consentInputSchema, type ConsentReceipt } from "@/features/consent/consent-model";
 import { vehicleConfirmationSchema, type VehicleConfirmationReceipt } from "@/features/vehicle/vehicle-model";
 
@@ -14,7 +15,7 @@ export function createMockInspectionRepository(): InspectionRepository {
   }
   return {
     async getInspection(id) { requireInspection(id); return structuredClone(inspection); },
-    async getCapturePlan(id) { requireInspection(id); return capturePlanSchema.parse(structuredClone(capturePlanFixture)); },
+    async getCapturePlan(id) { requireInspection(id); return capturePlanSchema.parse(structuredClone(templateCapturePlan())); },
     async recordConsent(id, input) {
       requireInspection(id);
       const accepted = consentInputSchema.parse(input);

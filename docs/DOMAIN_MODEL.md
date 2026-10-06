@@ -1,5 +1,12 @@
 # Initial Frontend Domain Model
 
+Phase 04 customer photography uses `PhotographyTemplate` / `InspectionSection` / `PhotoRequirement`
+from `schemas/photography.ts`: seven sections and twelve required photos in the current configurable
+template, stable sample/requirement IDs, status, instructions and quality labels. Legacy flat
+CapturePlan slots are derived from the same configuration. Local draft/accepted blobs belong to
+PhotoStore rather than the server inspection entity or Zustand. Future optional 3D nodes map to
+these same requirements; production customer photography has no mesh/GLB dependency.
+
 Use these as domain concepts, not necessarily exact API DTOs.
 
 ```ts
