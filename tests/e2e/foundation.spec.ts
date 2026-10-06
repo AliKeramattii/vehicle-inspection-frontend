@@ -52,6 +52,10 @@ test("RTL shell, local font, safe-area action, and screenshots", async ({
   await expect(
     page.getByRole("textbox", { name: "شناسه نمونه" }),
   ).toHaveAttribute("dir", "ltr");
+  await page.getByText("کیا اسپورتیج", { exact: true }).scrollIntoViewIfNeeded();
+  await expect(page.getByText("کیا اسپورتیج", { exact: true })).toBeInViewport();
+  expect(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight)).toBe(true);
+  await page.locator(".app-scroll").evaluate((element) => { element.scrollTop = 0; });
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,

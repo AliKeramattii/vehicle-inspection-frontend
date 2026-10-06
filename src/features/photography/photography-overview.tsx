@@ -1,24 +1,50 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { BottomStickyCTA } from "@/components/ui/bottom-sticky-cta";
 import { Icon } from "@/components/ui/icon";
+import { toPersianDigits as fa } from "@/lib/utils/persian";
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
-import type { PhotographyTemplate } from "@/schemas/photography";
+import type { PhotographyTemplate, InspectionSectionId } from "@/schemas/photography";
 import type { LocalPhoto } from "@/lib/media/photo-store";
-import { nextSection, photographyProgress } from "./photography-model";
-import { PhotoImage } from "./photo-image";
+import { findRequirement, nextIncompleteRequirement, nextRequirement, photographyProgress, photoSatisfied, requirementStatus } from "./photography-model";
 import { PhotographyProgress } from "./photography-progress";
-import { SectionRow } from "./section-row";
+import { categoryRequirements, photographyCategories, sectionCategory, type PhotographyCategory } from "./vehicle-photo-config";
+import { VehiclePhotoNavigator } from "./vehicle-photo-navigator";
+import { PhotographyShotCarousel } from "./photography-shot-carousel";
 
 export function PhotographyOverview({ template, records, inspectionId }: { template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string }) {
-  const next = nextSection(template, records), progress = photographyProgress(template, records);
-  const vehiclePhoto = template.sections.find((section) => section.id === "right")?.photoRequirements[0] ?? template.sections[0]?.photoRequirements[0];
-  return <div className="photo-route photography-overview"><PhotographyProgress template={template} records={records} />
-    <section className="photography-vehicle" aria-label="انتخاب بخش خودرو"><PhotoImage src={vehiclePhoto?.sampleImage} alt="نمای سه‌ربع خودرو برای انتخاب بخش عکاسی" eager />
-      <nav aria-label="نماهای خودرو">{template.sections.filter((section) => ["right", "left", "front", "rear", "roof"].includes(section.id)).map((section) => <Link key={section.id} href={inspectionRoutes.section(inspectionId, section.id)}>{section.title}</Link>)}</nav>
+  const next = nextIncompleteRequirement(template, records), progress = photographyProgress(template, records);
+  const [selectedId, select] = useState(next?.photo.id ?? template.sections[0].photoRequirements[0].id);
+  const selected = findRequirement(template, selectedId) ?? next ?? { section: template.sections[0], photo: template.sections[0].photoRequirements[0] };
+  const { photo, section } = selected, category = sectionCategory(section.id);
+  const record = records.find((record) => record.requirementId === photo.id), complete = photoSatisfied(requirementStatus(photo, records));
+  const chooseSection = (id: InspectionSectionId) => {
+    const target = template.sections.find((section) => section.id === id);
+    if (target) select((nextRequirement(target, records) ?? target.photoRequirements[0]).id);
+  };
+  const chooseCategory = (category: PhotographyCategory) => {
+    const photos = categoryRequirements(template, category);
+    const target = photos.find((photo) => !photoSatisfied(requirementStatus(photo, records))) ?? photos[0];
+    if (target) select(target.id);
+  };
+  const review = Boolean(record?.draft) || complete;
+  const href = progress.complete ? inspectionRoutes.photographyReview(inspectionId) : inspectionRoutes.photo(inspectionId, photo.id, review ? "review" : "guide");
+  const label = progress.complete ? "بررسی و ارسال" : record?.draft ? `ادامه بررسی: ${photo.title}` : complete ? `مشاهده عکس: ${photo.title}` : `عکاسی نمای بعدی: ${photo.title}`;
+  return <div className="photo-route photography-overview">
+    <div className="photography-studio"><PhotographyProgress template={template} records={records} />
+      <VehiclePhotoNavigator template={template} photo={photo} sectionId={section.id} records={records} onSelect={select} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
+    </div>
+    <section className="photography-shot-panel" aria-label="بخش‌ها و عکس‌های بازدید">
+      <nav className="photography-categories" aria-label="دسته‌های عکاسی">{photographyCategories.map((item) => {
+        const photos = categoryRequirements(template, item.id).filter((photo) => photo.required);
+        const completed = photos.filter((photo) => photoSatisfied(requirementStatus(photo, records))).length;
+        return <button key={item.id} type="button" aria-pressed={category === item.id} onClick={() => chooseCategory(item.id)}><Icon name={item.icon} size={23} /><span><strong>{item.title}</strong><small>{fa(completed)} از {fa(photos.length)} تصویر</small></span></button>;
+      })}</nav>
+      <div className="photography-selected-heading"><h2>{section.title}</h2><Link href={inspectionRoutes.section(inspectionId, section.id)}>مشاهده بخش<Icon name="chevronBack" size={15} /></Link></div>
+      <PhotographyShotCarousel photos={categoryRequirements(template, category)} records={records} selectedId={photo.id} onSelect={select} />
     </section>
-    <section className="photography-sections"><div className="photography-heading"><h2>بخش‌های عکاسی</h2><span>نمونه هر عکس را ببینید</span></div>
-      {template.sections.map((section) => <SectionRow key={section.id} section={section} records={records} inspectionId={inspectionId} current={section.id === next?.id} />)}
-    </section>
-    <BottomStickyCTA className="photography-actions">{progress.complete ? <Link className="photography-primary" href={inspectionRoutes.photographyReview(inspectionId)}><Icon name="check" size={22} />بررسی و ارسال</Link> : next && <Link className="photography-primary" href={inspectionRoutes.section(inspectionId, next.id)}><Icon name="camera" size={22} />{progress.completed ? "ادامه عکاسی" : "شروع عکاسی"}: {next.title}</Link>}</BottomStickyCTA>
+    <BottomStickyCTA className="photography-actions"><Link className="photography-primary" href={href}><Icon name={progress.complete ? "check" : review ? "viewFront" : "camera"} size={23} />{label}</Link></BottomStickyCTA>
   </div>;
 }

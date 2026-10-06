@@ -29,6 +29,10 @@ const icons = {
   viewFront: "/icons/viewer-3d/view-front.svg", viewRight: "/icons/viewer-3d/view-right.svg",
   viewRear: "/icons/viewer-3d/view-rear.svg", viewLeft: "/icons/viewer-3d/view-left.svg", viewTop: "/icons/viewer-3d/view-top.svg",
   resetCamera: "/icons/viewer-3d/reset-camera.svg", toggle2d: "/icons/viewer-3d/toggle-2d.svg", toggle3d: "/icons/viewer-3d/toggle-3d.svg",
+  photoFrame: "/icons/camera/alignment.svg", photoFocus: "/icons/camera/focus.svg",
+  photoGlare: "/icons/camera/glare-warning.svg", photoAngle: "/icons/retake-reasons/wrong-angle.svg",
+  ignition: "/icons/readiness/engine-on.svg", hood: "/icons/vehicle/hood-open.svg", vin: "/icons/vehicle/vin.svg",
+  distance: "/icons/photography/distance.svg", stability: "/icons/camera/stability.svg",
 } as const;
 export type IconName = keyof typeof icons;
 

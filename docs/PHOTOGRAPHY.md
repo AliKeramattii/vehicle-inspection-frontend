@@ -1,116 +1,123 @@
-# Phase 04 — production image-guided photography
+# Phase 04 — reference-led 2D photography
 
-The previous uncommitted customer 3D/14-shot direction is superseded. Production uses a 2D image
-overview → section → requirement → sample/guidance → camera → comparison → confirmation.
-The current template has seven sections and twelve required photos; the architecture is configurable.
+Reference `07-inspection-3d-home.png` defines the composition: compact branding/journey, circular
+and segmented progress, dominant studio vehicle, image markers, restrained view controls,
+categories, two rows of image cards and bottom action. Production uses canonical static 2D
+photography, seven sections and twelve requirements. Experimental Three/R3F remains isolated.
 
-## Configuration and ownership
+## Configuration and state ownership
 
-`features/photography/inspection-template.ts` is the sole metadata configuration. Sections contain
-typed/Zod-validated requirements, exact sample paths, descriptions/instructions, framing metadata,
-quality confirmation labels and stable IDs. `templateCapturePlan` derives flat slots for existing
-foundation/future viewer consumers. The mock repository returns clones through its existing
-`getCapturePlan` boundary. No API DTO or ASP.NET request is used in presentation.
+`inspection-template.ts` is the sole typed/Zod-validated business configuration. Requirements
+contain stable IDs, exact sample paths, titles, instructions, guidance topics, distance/height,
+required/status and optional reviewer reason. The existing mock repository returns cloned templates.
+`templateCapturePlan` derives its compatibility slots/count; no transport DTO or real API enters UI.
 
-Query owns template/inspection and local accepted/draft evidence reads. Domain helpers derive
-total/completed/remaining, section status and next incomplete requirement. Local React state owns
-camera lifecycle and unchecked review confirmations only. No new Zustand state or framework exists.
-Fresh templates start at 0/12; captured/uploading/uploaded/verified satisfy a requirement, pending
-and retake-requested do not. Local capture is not a remote upload acknowledgement.
+Query owns template/inspection and IndexedDB evidence reads. Pure helpers derive progress,
+satisfaction, visual state and next incomplete requirement/section. One local selected requirement
+ID in `PhotographyOverview` derives the displayed image, active view/category, marker/card state
+and CTA. No separate selected angle/category, duplicate backend state or new Zustand state exists.
+
+`vehicle-photo-config.ts` owns category/view mapping and per-artwork percentage anchors. Different
+physical source angles have their own coordinates; they are never mirrored. Markers share the
+artwork's cover dimensions, so responsive cropping cannot detach them from the image. Side controls
+select real configured front/right/rear/left/roof samples; reset selects the next incomplete photo.
+Cabin/engine categories expose the remaining sections. All seven sections remain reopenable.
 
 ## Components and routes
 
-Thin server capture layout/pages retain the shared journey header, current photography step and
-LTR demo inspection reference `BDI-8F31K2`. The mock reference is presentation context; production
-reference acquisition remains part of the agreed inspection response contract.
+Thin server pages and the existing capture route structure remain unchanged.
 
-- `/capture`: `PhotographyOverview`, compact `PhotographyProgress`, clean vehicle photography,
-  simple view links and explicit `SectionRow` navigation. Completed sections remain clickable.
-- `/capture/section/[sectionId]`: `SectionDetail`, large reusable `PhotoRequirementCard` samples,
-  captured image, view/replacement and reviewer reason actions.
-- `/capture/photo/[requirementId]/guide`: `PhotoGuidance`, full sample, three instructions and metadata.
-- `/capture/photo/[requirementId]/camera`: `PhotoCamera`/`useCamera` and isolated browser camera service.
-- `/capture/photo/[requirementId]/review`: `PhotoReview`, side-by-side sample/user images, fullscreen
-  enlargement in the existing focus-managed dialog, customer quality checks and shared sticky actions.
-- `/capture/review`: `PhotographyCompletion`, derived full/partial progress and reopenable sections.
-  This is local review, not remote submission. No upload/submission routes existed before this task.
+- Overview: `PhotographyOverview`, `PhotographyProgress`, `VehiclePhotoNavigator`,
+  `PhotographyShotCarousel` and `PhotographyShotCard`.
+- Section: `SectionDetail`, full-frame samples/accepted evidence in `PhotoRequirementCard`, view,
+  replacement and reviewer-reason actions. Its deliberate vertical region scrolls; CTA stays visible.
+- Guide: `PhotoGuidance`, a large full sample, requirement-specific instructions/icons and metadata.
+- Camera: existing `PhotoCamera`/`useCamera`, isolated camera service and native photo selection.
+- Review: `PhotoReview`, dominant actual captured Blob, compact expandable sample, retake and
+  `تأیید و ادامه`. No user quality checkbox, self-certification or fabricated quality success.
+- Final local review: `PhotographyCompletion`, derived progress and reopenable sections. This does
+  not submit remotely; upload/submission are still planned.
 
-`PhotographyWorkflow` reads mocks, verifies earlier workflow prerequisites, validates the template
-and delegates to small screens. Route focus resets scroll and announces the new section/photo heading.
-Loading, empty/missing-template/requirement, unauthorized and retry states are explicit.
+`PhotographyWorkflow` verifies prerequisites, reads/validates mocks and delegates to small screens.
+Route focus resets only the internal content region and focuses the new heading without document
+scroll. Loading/missing/unauthorized/storage failure/retry states remain explicit.
 
-## Assets and visual decisions
+## Artwork, status and reference decisions
 
-Canonical source: `references/assets/vehicle-inspection-ui-assets/photo-guides/`. One byte-identical
-runtime copy under `public/assets/inspection/photo-guides/` preserves all twelve filenames:
+The twelve canonical WebPs remain byte-identical under `public/assets/inspection/photo-guides/`,
+with the original filenames documented in INDEX. Next Image optimizes static guidance/artwork;
+local Blob URLs bypass HTTP optimization and are revoked on change/unmount.
 
-`front-45-right.webp`, `back-45-right.webp`, `front-45-left.webp`, `back-45-left.webp`,
-`front-plate.webp`, `rear-plate.webp`, `odometer-on.webp`, `driver-interior.webp`, `engine-bay.webp`,
-`spec-plate.webp`, `chassis-number.webp`, `car-roof.webp`.
+The main vehicle artwork fills the scene using cover sizing rather than a tiny contained vehicle
+or letterboxed hero. This creates some edge cropping at taller viewports and under the control rail;
+full samples/evidence stay uncropped in guide/review and can be enlarged. Image controls/pins use
+44px targets. Short scenes move the control rail into a horizontal row so every control remains visible.
+The native RTL two-row carousel scrolls/snaps horizontally and keeps the selected card visible.
 
-URLs are `/assets/inspection/photo-guides/<filename>`. Next Image optimizes static samples; local
-blob URLs bypass HTTP optimization and are revoked on change/unmount. Sample cards use 4:3 contain
-frames so full photography stays visible. The overview uses the configured first right-side photo.
-No sample/physical direction is mirrored. Native RTL, Vazirmatn, quiet borders and current design
-tokens are preserved. Canonical 08–11 support camera/review ergonomics; historical 07/21/22 are
-proportion/studio inspiration, not mandatory 3D/count instructions. Comparison differs intentionally
-from the old single-image review PNG. It offers enlargement to inspect small lettering.
+Presentation palette:
+- Gray: no photo, numbered marker / `ثبت نشده`.
+- Blue #2563EB: complete, checkmark / `ثبت شد`.
+- Orange #D97706: draft/retake or partially completed section, retake symbol / explicit attention text.
+- Selected: extra blue outline independent of completion state.
 
-## Camera and durability
+A replacement draft adds attention while preserving the accepted original and its progress credit.
+A reviewer retake removes progress credit until replacement. Completed journey steps also use blue
+on capture surfaces. The circular count and segments derive from real local evidence (fresh 0/12);
+`تصویر ذخیره‌شده روی دستگاه` is truthful local status, not fake uploaded/synchronized progress.
+No manual standing-position certification, arbitrary 2D toggle or remote upload implementation.
 
-Camera opens only on the dedicated screen after explicit guidance navigation, requests video only,
-prefers the environment camera and displays a real muted playsInline video. Capture draws the full
-video frame to canvas and produces a JPEG Blob. Streams stop on unmount, hidden document, failure
-and late permission resolution after exit. Native capture/file selection handles unavailable/denied
-camera. File type/size/decode are checked; no source image is silently used as a runtime capture.
-There is no AR, CV, 3D matching, fabricated light/level measurement or automatic quality judgement.
-Quality success means the customer checked all configured review requirements.
+Reference differences are intentional: current template/counts, canonical photographed vehicle,
+blue completion palette, no fake sync copy and compact sample beside a dominant actual review image.
+No reference PNG is rendered as UI. Vazirmatn, RTL, safe areas and technical LTR identifiers remain.
 
-`lib/media/photo-store.ts` stores draft and accepted blobs in `inspection-photos` IndexedDB v1,
-`photos` store. Keys namespace inspection ID, template ID/version and requirement ID. Draft capture
-finishes a transaction before review navigation. Atomic confirmation swaps the accepted blob and
-clears the draft/reviewer reason. Failed or discarded replacement retains the original accepted
-photo. Cancelled drafts remain recoverable until replaced/discarded. No remote upload starts.
-Local accepted photos survive reload; mock authentication still resets, so resuming requires the
-existing referral/OTP/location/vehicle workflow. Origin storage is separate as expected; landing
-and mock auth initial state remain consistent. Clear this IndexedDB database in browser site data
-to reset photography; do not confuse it with persisted mock login.
+## Guidance and continuation
 
-Live browser camera requires a secure context (HTTPS or localhost). LAN HTTP uses native photo
-selection when unavailable; origin/dev binding configuration is unchanged. See the
-[browser camera security requirements](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia).
-Storage can fail or be cleared/evicted; failures block confirmation and offer retry. Durable uploads,
-server authorization/evidence IDs and final submission remain the existing planned API boundary.
+Guidance topics map to existing custom icons (frame, distance, angle, ignition, glare, interior,
+hood, text, roof, stability). Exterior framing uses actual physical angle; odometer requires ignition
+and readable display, engine requires safely opened hood/full bay, spec/VIN requires close readable
+text (30cm), roof requires safe elevated framing. Legacy checks[] only supplies a camera framing tip.
 
-## Retakes and continuation
+Atomic confirmation accepts a draft, then opens the next incomplete required photo in that section.
+After the final photo, the completed section has a prominent CTA to the next incomplete section's
+first requirement. The overview stays manually accessible. Twelve satisfied requirements expose
+existing local final review. No 360 route exists yet, so no video flow is fabricated.
 
-Retakes identify requirement IDs and show reviewerReason in cards/guidance. In current deterministic
-tests, local fixture records simulate reviewer responses; runtime performs no reviewer API call.
-A confirmed replacement restores captured status. Future evidence adapters must resolve server
-retake versions/timestamps against local replacements rather than treating local capture as server
-verification. After confirmation, continue to another incomplete required photo in the same section;
-after the last one, show completed section context. All required satisfied enables final local review.
+## Camera, durability and mock boundary
 
-## Future optional 3D and performance
+Camera opens only after explicit guide navigation, requests video only and prefers environment.
+The real muted playsInline video is captured whole through canvas -> JPEG Blob. Tracks stop on exit,
+hidden document, failure and late permission resolution. Native photo selection handles unsupported/
+denied camera. File type/size/decode are checked; sample assets never become runtime evidence.
 
-Reusable experimental code remains in `components/vehicle/three` and `lib/vehicle`, without any
-production photography import. Neither WebGL probing nor Three/R3F/GLB/HDR is needed/downloaded.
-Future hotspot → section → requirement uses these same downstream screens/storage. The procedural
-model/approximate anchors are not improved or claimed final; optional GLB paths remain documented
-in `INSPECTION_3D.md`. Existing dependencies stay installed for that isolated future capability.
+`photo-store.ts` keeps draft and accepted Blobs in `inspection-photos` IndexedDB v1 / photos store,
+namespaced by inspection/template version/requirement ID. Draft transaction completes before review.
+Atomic confirmation swaps the original/clears the draft. Failed/discarded replacement retains original
+and supports retry. Durable evidence survives reload; mock login still resets, so resume uses the
+unchanged referral A4K9P2 / OTP12345 and location/vehicle workflow. Origins have separate storage.
+Reset development photography by clearing this IndexedDB database in the browser's site data.
+
+Camera security requirements remain HTTPS/localhost; LAN HTTP falls back to native photo selection.
+No origin/dev binding/PWA behavior changed. No CV, AR, quality scoring or backend request added.
+Future manual odometer entry, required 360 video, durable upload queue, final summary and reviewer
+retakes remain documented product requirements; none is implemented by this revision.
+
+## Viewport and performance
+
+See `VIEWPORT.md` for the shared 100dvh shell, keyboard bridge, internal scroll/focus and safe areas.
+Only interaction/browser boundaries are clients; routes/shells stay server components. No dependency
+added and no Three/R3F/GLB/HDR downloads in default photography. Only the current useful main/guide
+asset is eager; thumbnails are lazy. No heavy carousel library, GPU effects or extra viewer state.
 
 ## Verification
 
-Unit tests validate source/runtime byte equality, template counts/IDs, configurable totals, clone
-isolation, derived statuses/progress/continuation, navigation/actions, quality gates and camera cleanup.
-Browser scenarios exercise draft-before-confirm, atomic replacement/discard, permissions/native files,
-durability, retakes/full review, no production 3D/API requests and 360/390/430 overflow. Visual fixtures
-use canonical imagery as explicitly test-only evidence and a deterministic canvas camera stream.
-Production never makes that substitution. Baselines cover overview, all sections, guidance, camera,
-comparison/accepted checks, partial/completed/retake/full and final local review at 390x844.
+Unit tests cover exact assets, template/domain/progress, state semantics, marker/card/category/view
+selection, custom guidance, no quality checklist, simple confirmation, next section, camera cleanup
+and keyboard/zoom viewport behavior. Browser tests cover complete mock entry, no 3D/API/console
+errors, selection/colors, atomic replacement/discard/quota retry, native camera fallback, recovery,
+next photo/section and all customer viewport bounds. Visual states cover overview/partial/attention/
+complete, seven sections, completed section, exterior/odometer/VIN guidance, camera, draft/accepted
+review, retake and local final review at 390×844, plus responsive behavior at 360×800 and 430×932.
 
-Final validation: lint/typecheck/build pass, 70 unit tests pass, and the localhost/LAN development
-test passes. Full Playwright against HEAD plus intended task changes passes 51 tests (5 intentional
-desktop visual skips). The user working tree has a separate readiness baseline mismatch from its
-existing CSS/GPS-icon edits: 50 pass, 5 skip, 1 fails. Neither those edits nor earlier baselines were
-changed for this task. All 17 new photography baselines pass; 360/390/430 checks show no overflow.
+Final validation results are recorded in the revision ExecPlan after execution. Existing unrelated
+readiness CSS/GPS-icon edits are preserved and excluded from the task commit; their prior baseline
+mismatch must be reported separately, not silently approved by baseline regeneration.

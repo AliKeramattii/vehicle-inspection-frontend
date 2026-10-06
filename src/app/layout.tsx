@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { ViewportResize } from "@/components/layout/viewport-resize";
 import "./globals.css";
+import "@/components/layout/viewport.css";
 
 const vazirmatn = localFont({
   src: "./fonts/Vazirmatn-Variable.woff2",
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#F8FAFC",
+  width: "device-width", initialScale: 1, viewportFit: "cover", interactiveWidget: "resizes-content", themeColor: "#F8FAFC",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -29,6 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       className={`${vazirmatn.variable} min-h-full antialiased`}
     >
       <body>
+        <ViewportResize />
         <a href="#main-content" className="skip-link">رفتن به محتوای اصلی</a>
         <QueryProvider>{children}</QueryProvider>
       </body>

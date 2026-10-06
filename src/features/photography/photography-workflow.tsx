@@ -41,7 +41,7 @@ function PhotographySession({ inspectionId, template, view }: { inspectionId: st
   if (view.kind === "completion") return focus(<PhotographyCompletion {...shared} template={template} />);
   if (view.kind === "section") {
     const section = template.sections.find((section) => section.id === view.sectionId);
-    return focus(section ? <SectionDetail {...shared} section={section} /> : <MissingPhoto inspectionId={inspectionId} />);
+    return focus(section ? <SectionDetail {...shared} section={section} template={template} /> : <MissingPhoto inspectionId={inspectionId} />);
   }
   const found = findRequirement(template, view.requirementId);
   if (!found) return <MissingPhoto inspectionId={inspectionId} />;

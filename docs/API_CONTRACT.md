@@ -255,7 +255,10 @@ The mock derives legacy flat shots and totalRequired from one authoritative sect
 Requested domain response: templateId, templateVersion, sections[] with id/title/order and
 photoRequirements[] containing id/title/description/sampleImage/instructions[], optional
 distance/height/orientation, required, status and reviewerReason. Stable requirement IDs also
-identify evidence and retake requests. Quality confirmation labels/policy belong to each requirement.
+identify evidence and retake requests. Optional guidanceTopics[] select instruction icons
+(frame, distance, angle, ignition, glare, interior, hood, text, roof, steady). Legacy checks[]
+are framing metadata used by camera tips, not customer certification or automated analysis.
+Confirmation only accepts a locally captured draft; it does not certify quality or remote upload.
 Status: pending, captured (local only), uploading, uploaded, verified, retake-requested. A retake
 supersedes completion until replacement is confirmed. Local capture is not proof of remote storage.
 Future optional semanticNodes/viewpoint may map to these same requirements; neither is mandatory.

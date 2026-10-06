@@ -68,6 +68,8 @@ Principles:
 - generous whitespace
 - safe-area-aware bottom spacing
 - native RTL alignment
+- bounded `100dvh` document, stable header/actions and one deliberate internal content scroll region
+- keyboard visual-viewport resizing without restricting browser zoom; see `docs/VIEWPORT.md`
 
 ## Desktop operations layout
 
@@ -93,12 +95,16 @@ Use:
 
 ## Phase 04 photography
 
-Seven explicit reopenable sections and twelve requirements in the current configurable template.
-Large canonical sample photos with full framing (`object-fit: contain`), concise guidance and
-sample/user-photo comparison. Compact derived progress. Pending/current/completed/retake states
-use text/icons as well as neutral/blue/green/amber. No orbit controls, hotspots, standing meshes
-or 3D toggle. Camera is dark; section/review screens are light. Quality checks are customer
-confirmations, not invented automatic analysis.
+Seven reopenable sections and twelve requirements in the current configurable template. Reference
+07 remains the composition source: compact circular/segmented progress, dominant studio vehicle,
+image markers, physical-direction controls, compact categories, two-row shot cards and bottom CTA.
+The vehicle uses canonical 2D photography with cover cropping and matching percentage marker
+coordinates. Guidance/review retain full-frame contain images for evidence inspection.
+Gray = uncaptured, blue = complete, orange = attention/retake. Selection adds a blue outline;
+text and check/retake symbols accompany color. No production WebGL, 3D toggle or mesh selection.
+Camera is dark; section/review screens are light. Review shows the captured photo prominently and
+a small expandable sample, retake and simple confirmation. No customer quality checkbox or
+fabricated automatic quality success. Guidance copy/icons/distance are specific to each requirement.
 
 ## Future optional 3D (isolated from customer Phase 04)
 

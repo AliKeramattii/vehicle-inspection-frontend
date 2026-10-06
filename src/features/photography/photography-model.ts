@@ -8,6 +8,18 @@ export function requirementStatus(photo: PhotoRequirement, records: readonly Loc
   return records.find((record) => record.requirementId === photo.id)?.status ?? photo.status;
 }
 export const photoSatisfied = (status: PhotoRequirementStatus) => ["captured", "uploading", "uploaded", "verified"].includes(status);
+export type PhotographyVisualState = "pending" | "complete" | "attention";
+export function photographyVisualState(photo: PhotoRequirement, records: readonly LocalPhoto[]): PhotographyVisualState {
+  const record = records.find((item) => item.requirementId === photo.id);
+  const status = requirementStatus(photo, records);
+  return status === "retake-requested" || record?.draft ? "attention" : photoSatisfied(status) ? "complete" : "pending";
+}
+export const photographyStateLabels: Record<PhotographyVisualState, string> = { pending: "ثبت نشده", complete: "ثبت شد", attention: "نیاز به بررسی / عکاسی مجدد" };
+export function nextIncompleteRequirement(template: PhotographyTemplate, records: readonly LocalPhoto[]) {
+  const section = nextSection(template, records);
+  const photo = section && nextRequirement(section, records);
+  return section && photo ? { section, photo } : undefined;
+}
 export function sectionProgress(section: InspectionSection, records: readonly LocalPhoto[]) {
   const required = section.photoRequirements.filter((photo) => photo.required);
   const completed = required.filter((photo) => photoSatisfied(requirementStatus(photo, records))).length;

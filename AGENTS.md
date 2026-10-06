@@ -174,6 +174,22 @@ Preserve reusable 3D infrastructure isolated for future use, without refining it
 phase. Future hotspot → InspectionSection → same PhotoRequirement shares all downstream logic;
 today 2D section navigation uses that boundary. Do not duplicate camera/review/storage logic.
 
+## Phase-04 design and viewport revision
+
+Reference 07 remains the primary composition: compact journey/progress, dominant studio vehicle,
+markers directly on the image, physical-direction controls, categories and image shot cards.
+Use canonical 2D photography and the current seven-section/twelve-photo template, never customer
+WebGL/3D. Marker coordinates share the image crop; card/marker/view/CTA derive from one selection.
+Gray = no photo, blue = completed, orange = incomplete/retake; accompany color with text/icons.
+Review prioritizes actual captured evidence and a compact sample, retake and simple confirmation.
+Do not reintroduce interactive customer quality checkboxes or fabricated quality success.
+Guidance is requirement-specific; derive the next incomplete photo/section from configuration.
+
+All application documents use a bounded 100dvh shell. Keep header/actions stable and designate
+internal scrolling for long content. Safe areas, focus, keyboard resizing and browser zoom must
+remain usable. See docs/VIEWPORT.md and docs/PHOTOGRAPHY.md. Preserve planned odometer/360-video/
+upload/final-summary/retake requirements without implementing future phases automatically.
+
 ## Future optional 3D
 
 When a future task explicitly enables 3D, its viewer must be genuinely interactive, not a

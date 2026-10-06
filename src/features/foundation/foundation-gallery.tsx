@@ -1,4 +1,5 @@
 import { AppHeader } from "@/components/layout/app-header";
+import { AppViewport } from "@/components/layout/app-viewport";
 import { PageHeader } from "@/components/layout/page-header";
 import { JourneyStepper, type JourneyStage } from "@/components/inspection/journey-stepper";
 import { InlineAlert, StatusBadge } from "@/components/ui/status";
@@ -12,9 +13,9 @@ const stages: readonly JourneyStage[] = [
   { id: "submit", label: "ارسال", state: "upcoming" },
 ];
 export function FoundationGallery() {
-  return <div className="mx-auto flex min-h-dvh max-w-[1120px] flex-col bg-surface">
+  return <AppViewport className="mx-auto max-w-[1120px] bg-surface">
     <AppHeader partnerName="بیمه نمونه" />
-    <main id="main-content" tabIndex={-1} className="space-y-6 p-4 sm:p-8">
+    <main id="main-content" tabIndex={-1} className="app-scroll space-y-6 p-4 sm:p-8">
       <PageHeader title="اجزای رابط کاربری" description="نمونه اجزای مشترک؛ پیش‌نمایش مرحله پایه" backHref="/foundation/preview" />
       <InlineAlert>این صفحه برای بررسی ظاهر و رفتار اجزای مشترک است.</InlineAlert>
       <div className="grid items-start gap-6 md:grid-cols-2">
@@ -41,5 +42,5 @@ export function FoundationGallery() {
         </div>
       </div>
     </main>
-  </div>;
+  </AppViewport>;
 }

@@ -13,7 +13,7 @@ function useBlobUrl(blob: Blob | undefined) {
   }, [blob]);
   return value?.blob === blob ? value?.url : undefined;
 }
-export function PhotoImage({ src, blob, alt, className = "", eager = false }: { src?: string; blob?: Blob; alt: string; className?: string; eager?: boolean }) {
+export function PhotoImage({ src, blob, alt, className = "", eager = false, sizes = "(max-width: 480px) 100vw, 480px" }: { src?: string; blob?: Blob; alt: string; className?: string; eager?: boolean; sizes?: string }) {
   const url = useBlobUrl(blob), image = blob ? url : src;
-  return <div className={`photography-image ${className}`}>{image ? <Image src={image} alt={alt} fill sizes="(max-width: 480px) 100vw, 480px" loading={eager ? "eager" : "lazy"} unoptimized={Boolean(blob)} /> : <div className="photo-image-loading" role="status">در حال آماده‌سازی تصویر…</div>}</div>;
+  return <div className={`photography-image ${className}`}>{image ? <Image src={image} alt={alt} fill sizes={sizes} loading={eager ? "eager" : "lazy"} unoptimized={Boolean(blob)} /> : <div className="photo-image-loading" role="status">در حال آماده‌سازی تصویر…</div>}</div>;
 }
