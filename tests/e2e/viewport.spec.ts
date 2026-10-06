@@ -26,9 +26,20 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 390, height: 844 }
     await page.getByRole("button", { name: "پلاک من فرمت متفاوتی دارد" }).click(); await vehicle.click();
     await expect(page.getByRole("progressbar")).toBeVisible(); await bounded(page); await reachable(page.locator(".photography-actions a"), page);
     const scene = (await page.locator(".vehicle-photo-scene").boundingBox())!;
-    for (const button of await page.locator(".vehicle-photo-controls button").all()) {
-      await reachable(button, page); const box = (await button.boundingBox())!;
-      expect(box.y).toBeGreaterThanOrEqual(scene.y); expect(box.y + box.height).toBeLessThanOrEqual(scene.y + scene.height);
+    const controls = page.locator(".vehicle-photo-controls");
+    const image = (await page.locator('.vehicle-photo-scene .photography-image').boundingBox())!;
+    const controlsBox = (await controls.boundingBox())!;
+    expect(controlsBox.y).toBeGreaterThanOrEqual(scene.y + scene.height + 7);
+    expect(controlsBox.y).toBeGreaterThanOrEqual(image.y + image.height);
+    expect(await controls.evaluate((element) => element.closest('.vehicle-photo-scene'))).toBeNull();
+    await controls.scrollIntoViewIfNeeded();
+    for (const button of await page
+      .locator(".vehicle-photo-controls button")
+      .all()) {
+      await reachable(button, page);
+      const box = (await button.boundingBox())!;
+      expect(box.width).toBeGreaterThanOrEqual(44);
+      expect(box.y).toBeGreaterThanOrEqual((await page.locator('.vehicle-photo-scene .photography-image').boundingBox())!.y + image.height);
     }
     for (const name of ["راست", "چپ", "عقب", "جلو", "بالا"]) {
       await page.getByRole("button", { name: `نمای خودرو: ${name}` }).click();

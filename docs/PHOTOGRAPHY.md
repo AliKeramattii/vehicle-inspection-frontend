@@ -48,11 +48,16 @@ The twelve canonical WebPs remain byte-identical under `public/assets/inspection
 with the original filenames documented in INDEX. Next Image optimizes static guidance/artwork;
 local Blob URLs bypass HTTP optimization and are revoked on change/unmount.
 
-The main vehicle artwork fills the scene using cover sizing rather than a tiny contained vehicle
-or letterboxed hero. This creates some edge cropping at taller viewports and under the control rail;
-full samples/evidence stay uncropped in guide/review and can be enlarged. Image controls/pins use
-44px targets. Short scenes move the control rail into a horizontal row so every control remains visible.
-The native RTL two-row carousel scrolls/snaps horizontally and keeps the selected card visible.
+The main vehicle artwork fits a 300–360px studio region without clipping the useful silhouette.
+The source-ratio artwork layer contains both image and percentage markers, so crop coordinates
+remain stable. Small markers alone overlay the image. The 58px direction-control row always
+follows the scene with an 8px gap; no breakpoint restores an overlay. Controls are at least 44px
+wide and 52px tall with 20–22px icons and 11px labels. Local horizontal scrolling is available.
+The native RTL two-row carousel uses 108×110px cards, 52px contained thumbnails, 12px titles
+and 11px status. Selection scrolls only this rail, never the vertical content region. Primary
+selection is markers/cards, progression is the sticky CTA; directions/categories are secondary
+and section detail is contextual. At short heights the existing single internal content region
+scrolls to the second card row while the header/actions stay visible.
 
 Presentation palette:
 - Gray: no photo, numbered marker / `ثبت نشده`.
@@ -61,6 +66,10 @@ Presentation palette:
 - Selected: extra blue outline independent of completion state.
 
 A replacement draft adds attention while preserving the accepted original and its progress credit.
+`requirementProgress` derives section/category totals and attention from the same records;
+`photographyProgress` aggregates it. No duplicate section state is persisted. Completed sections
+with replacement drafts keep their count and expose attention, rather than a misleading blue-only
+state. Progress segments also show attention independently from the circular accepted count.
 A reviewer retake removes progress credit until replacement. Completed journey steps also use blue
 on capture surfaces. The circular count and segments derive from real local evidence (fresh 0/12);
 `تصویر ذخیره‌شده روی دستگاه` is truthful local status, not fake uploaded/synchronized progress.
@@ -76,6 +85,18 @@ Guidance topics map to existing custom icons (frame, distance, angle, ignition, 
 hood, text, roof, stability). Exterior framing uses actual physical angle; odometer requires ignition
 and readable display, engine requires safely opened hood/full bay, spec/VIN requires close readable
 text (30cm), roof requires safe elevated framing. Legacy checks[] only supplies a camera framing tip.
+VIN guidance differentiates readable text, focus and glare; roof differentiates roof, framing and
+stability. Copy remains requirement-owned. Reset uses the existing retry/direction symbol rather
+than a cube; evidence status uses a custom SVG check/retake symbol; enlargement uses zoom-in.
+
+`PhotoImage` declares frame intent for overview, exterior/interior guidance, technical closeups,
+captured evidence and comparison. Full evidence frames adopt decoded intrinsic aspect ratio and
+contain the whole image; portrait evidence has a viewport height bound. Landscape review no longer
+stretches a short image into a tall empty frame. A compact 86×64 sample remains expandable.
+Failed images reserve geometry and offer retry outside nested selection/enlargement buttons.
+`PhotographyLoading` reserves progress/image/control/card geometry without animated decoration.
+Invalid templates offer retry plus the existing vehicle return. Camera/review/save failures reuse
+InlineAlert with the correct dark/light context. No interactive quality checklist is introduced.
 
 Atomic confirmation accepts a draft, then opens the next incomplete required photo in that section.
 After the final photo, the completed section has a prominent CTA to the next incomplete section's
@@ -121,3 +142,18 @@ review, retake and local final review at 390×844, plus responsive behavior at 3
 Final validation results are recorded in the revision ExecPlan after execution. Existing unrelated
 readiness CSS/GPS-icon edits are preserved and excluded from the task commit; their prior baseline
 mismatch must be reported separately, not silently approved by baseline regeneration.
+
+## Automotive continuity inventory (replacement requires separate approval)
+
+No canonical automotive asset was replaced by this modernisation. Suggested priorities:
+
+1. Prominent landing `public/images/auth/landing-suv.png`, `public/images/vehicle/identity-suv.png`
+   and `public/images/preparation/consent-hero.webp`:
+   these show the earlier rounded Sportage family, while readiness/overview front-45 guidance
+   shows the newer angular family. Choose one approved body generation before replacing any.
+2. Canonical front/rear guide pairs (`front-45-*`, `back-45-*`, `front-plate`, `rear-plate`):
+   rear styling, wheels, paint temperature and studio background need one family across views.
+   Preserve exact canonical filenames and requirement ownership when replacements are approved.
+3. Interior/engine/odometer/spec/VIN/roof: check cabin generation and technical realism after
+   exterior continuity. Readable characters and complete evidence framing take priority over
+   matching decorative studio temperature. No image generation or replacement occurred here.

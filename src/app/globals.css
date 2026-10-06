@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../components/ui/customer-roles.css";
 
 @theme inline {
   --font-sans: var(--font-vazirmatn), Tahoma, Arial, sans-serif;

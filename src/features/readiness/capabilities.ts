@@ -16,6 +16,7 @@ export const capabilityDefinitions = [
   { id: "webgl", label: "نمایش سه‌بعدی", icon: "webglReady" },
   { id: "storage", label: "فضای ذخیره‌سازی", icon: "storageReady" },
 ] as const;
+export const customerCapabilityDefinitions = capabilityDefinitions.filter(({ id }) => id !== "webgl");
 export function initialCapabilities(): CapabilityResult[] {
   return capabilityIds.map((id) => ({ id, status: "checking" }));
 }
@@ -24,8 +25,8 @@ export function normalizeCapabilities(results: readonly CapabilityResult[]): Cap
 }
 export function canContinueReadiness(results: readonly CapabilityResult[]): boolean {
   const normalized = normalizeCapabilities(results);
-  return normalized.every(({ id, status }) => status !== "checking" &&
-    (id === "webgl" || (status !== "unavailable" && status !== "unsupported")));
+  return normalized.filter(({ id }) => id !== "webgl").every(({ status }) => status !== "checking" &&
+    status !== "unavailable" && status !== "unsupported");
 }
 // Diagnostic only: these fixtures do not grant camera/GPS permission, reserve
 // storage, or create a WebGL context. A browser adapter can implement this interface.

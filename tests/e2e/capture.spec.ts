@@ -48,7 +48,7 @@ test("capture persists a draft, review needs no certification, confirmation adva
   await expect(page).toHaveURL(/back-45-right\/review$/); await expect(page.getByRole("checkbox")).toHaveCount(0);
 
   await page.getByRole("button", { name: "تأیید و ادامه" }).click();
-  await expect(page).toHaveURL(/section\/right$/); await expect(page.getByText("✓ نمای راست تکمیل شد")).toBeVisible();
+  await expect(page).toHaveURL(/section\/right$/); await expect(page.getByText("نمای راست تکمیل شد", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "ادامه به نمای چپ" })).toHaveAttribute("href", /front-45-left\/guide$/);
   await page.getByRole("link", { name: "ادامه به نمای چپ" }).click(); await expect(page).toHaveURL(/front-45-left\/guide$/);
   await page.getByRole("link", { name: "بازگشت به نمای چپ" }).click(); await page.getByRole("link", { name: "بازگشت به نمای کلی" }).click();

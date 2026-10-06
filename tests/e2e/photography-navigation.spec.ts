@@ -7,7 +7,7 @@ test("image markers, shot cards, side controls and statuses share one selection"
   const marker = page.locator('.vehicle-photo-marker[data-requirement="front-45-right"]');
   const card = page.locator('.photography-shot-card[data-requirement="front-45-right"]');
   await expect(marker).toHaveAttribute("data-state", "complete");
-  expect(await marker.locator("span").evaluate((node) => getComputedStyle(node).backgroundColor)).toBe("rgb(37, 99, 235)");
+  expect(await marker.locator(":scope > span").evaluate((node) => getComputedStyle(node).backgroundColor)).toBe("rgb(37, 99, 235)");
   await marker.click(); await expect(card).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByRole("link", { name: /مشاهده عکس: جلو/ })).toHaveAttribute("href", /front-45-right\/review$/);
   await page.locator('.photography-shot-card[data-requirement="front-plate"]').click();
@@ -23,6 +23,6 @@ test("image markers, shot cards, side controls and statuses share one selection"
   await photography(page, 12, "front-plate");
   const attention = page.locator('.vehicle-photo-marker[data-requirement="front-plate"]');
   await expect(attention).toHaveAttribute("data-state", "attention");
-  expect(await attention.locator("span").evaluate((node) => getComputedStyle(node).backgroundColor)).toBe("rgb(217, 119, 6)");
+  expect(await attention.locator(":scope > span").evaluate((node) => getComputedStyle(node).backgroundColor)).toBe("rgb(217, 119, 6)");
   await expect(attention).toHaveAccessibleName(/نیاز به بررسی/);
 });

@@ -120,11 +120,11 @@ test("location and vehicle canonical 390×844 screenshots", async ({ page }, tes
   await location(page);
   await readyImages(page);
   expect(page.viewportSize()).toEqual({ width: 390, height: 844 });
-  await expect(page).toHaveScreenshot("inspection-location.png");
+  await expect.soft(page).toHaveScreenshot("inspection-location.png");
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await expect(page.getByRole("img", { name: /پلاک خودرو/ })).toBeVisible();
   await readyImages(page);
-  await expect(page).toHaveScreenshot("vehicle-identity.png");
+  await expect.soft(page).toHaveScreenshot("vehicle-identity.png");
 });
 
 test("location/vehicle controls remain usable at 320, 390 and 480 without overflow", async ({ page }) => {

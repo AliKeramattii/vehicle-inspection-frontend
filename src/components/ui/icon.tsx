@@ -14,7 +14,7 @@ const icons = {
   referral: "/icons/auth/referral-ticket.svg", carFront: "/icons/vehicle/car-front.svg",
   platformCar: "/icons/auth/platform-car.svg", support: "/icons/auth/support-headset.svg",
   chevronBack: "/icons/auth/chevron-back.svg", chevronForward: "/icons/auth/chevron-forward.svg",
-  cameraReady: "/icons/readiness/camera-ready.svg", gpsReady: "/icons/readiness/gps-ready.svg",
+  cameraReady: "/icons/readiness/camera-ready.svg", gpsReady: "/icons/location/gps.svg",
   webglReady: "/icons/readiness/webgl-ready.svg", storageReady: "/icons/readiness/storage.svg",
   deviceReady: "/icons/readiness/device-ready.svg", camera: "/icons/camera/camera.svg",
   readinessTick: "/icons/readiness/tick.svg",
@@ -33,6 +33,8 @@ const icons = {
   photoGlare: "/icons/camera/glare-warning.svg", photoAngle: "/icons/retake-reasons/wrong-angle.svg",
   ignition: "/icons/readiness/engine-on.svg", hood: "/icons/vehicle/hood-open.svg", vin: "/icons/vehicle/vin.svg",
   distance: "/icons/photography/distance.svg", stability: "/icons/camera/stability.svg",
+  resetView: "/icons/upload/retry.svg", retake: "/icons/camera/retake.svg",
+  enlarge: "/icons/camera/zoom-in.svg", evidenceCheck: "/icons/photography/evidence-check.svg",
 } as const;
 export type IconName = keyof typeof icons;
 

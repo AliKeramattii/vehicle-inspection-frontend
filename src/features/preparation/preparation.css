@@ -92,3 +92,8 @@
   .consent-branding > div { font-size: 12px; gap: 4px; }
   .consent-intro p { font-size: 12px; }
 }
+
+/* Approved action role; preserve the existing preparation artwork and typography. */
+.preparation-screen .preparation-actions > button { font: var(--customer-button-primary); }
+.preparation-screen .preparation-actions { padding-bottom: max(16px, env(safe-area-inset-bottom, 0px)); }
+.readiness-screen .device-diagnostics li:last-child { grid-column: 1 / -1; }

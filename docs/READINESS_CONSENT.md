@@ -39,13 +39,19 @@ continuation policy. `CapabilityService.check(AbortSignal)` is the replacement b
 It does not access raw browser APIs or grant permissions. `useCapabilities` owns results locally,
 aborts on unmount, ignores stale results and exposes retry. Initial rows reserve the same space.
 
-Checking blocks continuation. Missing/unavailable/unsupported core camera/location/storage
+Checking core capabilities blocks continuation. Missing/unavailable/unsupported core camera/location/storage
 blocks it and shows explanatory text plus retry. Permission-required allows proceeding to
-consent; permission requests belong in future capture/location features. Unsupported WebGL is
-non-blocking because the architecture provides for a later 2D fallback; no viewer is implemented.
+consent; permission requests belong in capture/location features. Production photography is 2D:
+only camera, location and storage appear in customer diagnostics. WebGL remains an isolated
+internal optional capability for future experiments; checking/unsupported/missing WebGL never
+blocks the customer journey. No customer-visible three-dimensional readiness wording remains.
 States have icons and accessible words, not color alone. A future browser adapter can perform
 availability/Permissions API/WebGL/storage checks without rewriting the UI and must not request
 camera or location access on initial load. Actual hardware readiness is not verified in this phase.
+The GPS diagnostic uses the existing location icon family. This does not overwrite the unrelated
+locally edited readiness GPS asset. Approved CTA role/safe-area normalisation does not change
+consent terms, field names, mock behavior or route flow. Unrelated readiness hero styling remains
+outside the modernisation commit and must not be absorbed into an approved snapshot.
 
 ## Consent state and repository boundary
 

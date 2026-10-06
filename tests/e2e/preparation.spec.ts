@@ -33,7 +33,7 @@ test("Phase 01 flows through readiness and consent, without permissions or backe
   await verifyReferral(page);
   await expect(page.getByRole("heading", { name: "قبل از شروع، آماده‌اید؟" })).toBeVisible();
   await expect(page.locator(".readiness-requirements li")).toHaveCount(4);
-  await expect(page.locator('.device-diagnostics li[data-status="ready"]')).toHaveCount(4);
+  await expect(page.locator('.device-diagnostics li[data-status="ready"]')).toHaveCount(3);
   await noOverflow(page);
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await expect(page).toHaveURL(/\/consent$/);
@@ -79,13 +79,13 @@ test("reference-led readiness and collapsed consent screenshots", async ({ page 
     }));
   });
   await page.evaluate(() => Promise.all([...document.images].map((image) => image.decode())));
-  await expect(page).toHaveScreenshot("readiness.png");
+  await expect.soft(page).toHaveScreenshot("readiness.png");
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await expect(page.getByRole("checkbox")).not.toBeChecked();
   await expect(page.getByRole("button", { name: "تأیید و ادامه" })).toBeDisabled();
   await expect.poll(() => page.locator(".consent-hero img").evaluate((image) => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0)).toBe(true);
   await page.evaluate(() => Promise.all([...document.images].map((image) => image.decode())));
-  await expect(page).toHaveScreenshot("consent-privacy.png");
+  await expect.soft(page).toHaveScreenshot("consent-privacy.png");
 });
 
 test("preparation remains usable at 320, 390 and 480px without horizontal overflow", async ({ page }) => {

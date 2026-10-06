@@ -8,7 +8,7 @@ export const photoRequirementSchema = z.object({
   distance: z.string().optional(), height: z.string().optional(), orientation: z.enum(["portrait", "landscape"]).optional(),
   required: z.boolean(), status: photoStatusSchema, reviewerReason: z.string().optional(),
   checks: z.array(z.string().min(1)).min(1), semanticNodes: z.array(z.string()).optional(),
-  guidanceTopics: z.array(z.enum(["frame", "distance", "angle", "ignition", "glare", "interior", "hood", "text", "roof", "steady"])).optional(),
+  guidanceTopics: z.array(z.enum(["frame", "distance", "angle", "ignition", "glare", "interior", "hood", "text", "focus", "roof", "steady"])).optional(),
 });
 export const inspectionSectionSchema = z.object({
   id: sectionIdSchema, title: z.string().min(1), order: z.number().int().positive(),

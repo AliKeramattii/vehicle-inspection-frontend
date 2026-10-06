@@ -15,6 +15,9 @@ const eslintConfig = defineConfig([
     "playwright-report/**",
     "test-results/**",
     ".agent/reference-review/**",
+    // Locally installed tooling is not application source.
+    ".agents/**",
+    "~/**",
   ]),
 ]);
 

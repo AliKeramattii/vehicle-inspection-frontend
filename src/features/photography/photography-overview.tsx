@@ -8,7 +8,7 @@ import { toPersianDigits as fa } from "@/lib/utils/persian";
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import type { PhotographyTemplate, InspectionSectionId } from "@/schemas/photography";
 import type { LocalPhoto } from "@/lib/media/photo-store";
-import { findRequirement, nextIncompleteRequirement, nextRequirement, photographyProgress, photoSatisfied, requirementStatus } from "./photography-model";
+import { findRequirement, nextIncompleteRequirement, nextRequirement, photographyProgress, photoSatisfied, requirementStatus, requirementProgress } from "./photography-model";
 import { PhotographyProgress } from "./photography-progress";
 import { categoryRequirements, photographyCategories, sectionCategory, type PhotographyCategory } from "./vehicle-photo-config";
 import { VehiclePhotoNavigator } from "./vehicle-photo-navigator";
@@ -33,18 +33,20 @@ export function PhotographyOverview({ template, records, inspectionId }: { templ
   const href = progress.complete ? inspectionRoutes.photographyReview(inspectionId) : inspectionRoutes.photo(inspectionId, photo.id, review ? "review" : "guide");
   const label = progress.complete ? "بررسی و ارسال" : record?.draft ? `ادامه بررسی: ${photo.title}` : complete ? `مشاهده عکس: ${photo.title}` : `عکاسی نمای بعدی: ${photo.title}`;
   return <div className="photo-route photography-overview">
+    <div className="photo-scroll photography-overview-content">
     <div className="photography-studio"><PhotographyProgress template={template} records={records} />
       <VehiclePhotoNavigator template={template} photo={photo} sectionId={section.id} records={records} onSelect={select} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
     </div>
     <section className="photography-shot-panel" aria-label="بخش‌ها و عکس‌های بازدید">
       <nav className="photography-categories" aria-label="دسته‌های عکاسی">{photographyCategories.map((item) => {
         const photos = categoryRequirements(template, item.id).filter((photo) => photo.required);
-        const completed = photos.filter((photo) => photoSatisfied(requirementStatus(photo, records))).length;
-        return <button key={item.id} type="button" aria-pressed={category === item.id} onClick={() => chooseCategory(item.id)}><Icon name={item.icon} size={23} /><span><strong>{item.title}</strong><small>{fa(completed)} از {fa(photos.length)} تصویر</small></span></button>;
+        const { completed, state, attention } = requirementProgress(photos, records);
+        return <button key={item.id} type="button" data-state={state} aria-pressed={category === item.id} onClick={() => chooseCategory(item.id)}><Icon name={item.icon} size={23} /><span><strong>{item.title}</strong><small>{fa(completed)} از {fa(photos.length)} تصویر{attention && <span className="category-attention"><Icon name="retake" size={12} /><span className="sr-only">نیاز به بررسی / عکاسی مجدد</span></span>}</small></span></button>;
       })}</nav>
       <div className="photography-selected-heading"><h2>{section.title}</h2><Link href={inspectionRoutes.section(inspectionId, section.id)}>مشاهده بخش<Icon name="chevronBack" size={15} /></Link></div>
       <PhotographyShotCarousel photos={categoryRequirements(template, category)} records={records} selectedId={photo.id} onSelect={select} />
     </section>
+    </div>
     <BottomStickyCTA className="photography-actions"><Link className="photography-primary" href={href}><Icon name={progress.complete ? "check" : review ? "viewFront" : "camera"} size={23} />{label}</Link></BottomStickyCTA>
   </div>;
 }

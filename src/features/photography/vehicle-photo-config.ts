@@ -18,7 +18,7 @@ export type VehiclePhotoMarker = { requirementId: string; x: number; y: number }
 export type VehiclePhotoArtwork = { aspectRatio: number; markers: readonly VehiclePhotoMarker[] };
 const marker = (requirementId: string, x: number, y: number): VehiclePhotoMarker => ({ requirementId, x, y });
 // Percentages belong to the original artwork, not the viewport. The image and markers share
-// the same cover-sized layer. Never mirror an image or swap physical vehicle left/right.
+// the same contained artwork layer. Never mirror an image or swap physical vehicle left/right.
 const vehiclePhotoArtwork: Record<string, VehiclePhotoArtwork> = {
   "front-45-right": { aspectRatio: 3 / 2, markers: [marker("front-45-right", 58, 57), marker("back-45-right", 75, 58), marker("front-plate", 23, 65), marker("car-roof", 62, 22)] },
   "back-45-right": { aspectRatio: 4 / 3, markers: [marker("back-45-right", 43, 57), marker("front-45-right", 74, 56), marker("rear-plate", 21, 62), marker("car-roof", 54, 20)] },

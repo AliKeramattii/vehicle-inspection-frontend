@@ -39,11 +39,11 @@ describe("capability boundary", () => {
     const button = screen.getByRole("button", { name: "همه چیز آماده است" });
     expect(button).toBeDisabled();
     expect(screen.getByRole("list")).toHaveAttribute("aria-busy", "true");
-    expect(container.querySelectorAll('.device-diagnostics li[data-status="checking"]')).toHaveLength(4);
+    expect(container.querySelectorAll('.device-diagnostics li[data-status="checking"]')).toHaveLength(3);
     await act(async () => resolve(capabilityIds.map((id) => ({ id, status: "ready" }))));
     await waitFor(() => expect(button).toBeEnabled());
     expect(screen.getByRole("list")).toHaveAttribute("aria-busy", "false");
-    expect(container.querySelectorAll('.device-diagnostics li[data-status="ready"]')).toHaveLength(4);
+    expect(container.querySelectorAll('.device-diagnostics li[data-status="ready"]')).toHaveLength(3);
     await userEvent.click(button);
     expect(push).toHaveBeenCalledWith("/consent");
   });
@@ -52,7 +52,7 @@ describe("capability boundary", () => {
     render(<DeviceReadiness service={service} />);
     expect(await screen.findByText("در دسترس نیست")).toBeVisible();
     expect(screen.getByText("نیاز به اجازه")).toBeVisible();
-    expect(screen.getByText("پشتیبانی نمی‌شود")).toBeVisible();
+    expect(screen.queryByText("نمایش سه‌بعدی")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "همه چیز آماده است" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "بررسی دوباره" })).toBeEnabled();
   });
@@ -62,5 +62,11 @@ describe("capability boundary", () => {
     await userEvent.click(await screen.findByRole("button", { name: "بررسی دوباره" }));
     await waitFor(() => expect(screen.getByRole("button", { name: "همه چیز آماده است" })).toBeEnabled());
     expect(check).toHaveBeenCalledTimes(2);
+  });
+  it("does not expose or wait for optional WebGL in the production 2D journey", async () => {
+    render(<DeviceReadiness service={createMockCapabilityService({ webgl: "checking" })} />);
+    await waitFor(() => expect(screen.getByRole("button", { name: "همه چیز آماده است" })).toBeEnabled());
+    expect(screen.queryByText("نمایش سه‌بعدی")).not.toBeInTheDocument();
+    expect(screen.getByRole("list")).toHaveAttribute("aria-busy", "false");
   });
 });

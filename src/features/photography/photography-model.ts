@@ -20,17 +20,24 @@ export function nextIncompleteRequirement(template: PhotographyTemplate, records
   const photo = section && nextRequirement(section, records);
   return section && photo ? { section, photo } : undefined;
 }
-export function sectionProgress(section: InspectionSection, records: readonly LocalPhoto[]) {
-  const required = section.photoRequirements.filter((photo) => photo.required);
+export function requirementProgress(requirements: readonly PhotoRequirement[], records: readonly LocalPhoto[]) {
+  const required = requirements.filter((photo) => photo.required);
   const completed = required.filter((photo) => photoSatisfied(requirementStatus(photo, records))).length;
-  const retake = section.photoRequirements.some((photo) => requirementStatus(photo, records) === "retake-requested");
-  return { completed, total: required.length, remaining: required.length - completed, retake };
+  const retake = requirements.some((photo) => requirementStatus(photo, records) === "retake-requested");
+  // Attention never removes accepted completion credit. Replacement remains atomic.
+  const attention = requirements.some((photo) => photographyVisualState(photo, records) === "attention");
+  const state: PhotographyVisualState = attention ? "attention" : completed === required.length ? "complete" : completed ? "attention" : "pending";
+  return { completed, total: required.length, remaining: required.length - completed, retake, attention, state };
+}
+export function sectionProgress(section: InspectionSection, records: readonly LocalPhoto[]) {
+  return requirementProgress(section.photoRequirements, records);
 }
 export function photographyProgress(template: PhotographyTemplate, records: readonly LocalPhoto[]) {
   const progress = template.sections.map((section) => sectionProgress(section, records));
   const completed = progress.reduce((total, section) => total + section.completed, 0);
   const total = progress.reduce((total, section) => total + section.total, 0);
-  return { completed, total, remaining: total - completed, percentage: total ? completed / total * 100 : 0, complete: total > 0 && completed === total };
+  const attention = progress.some((section) => section.attention);
+  return { completed, total, remaining: total - completed, percentage: total ? completed / total * 100 : 0, complete: total > 0 && completed === total, attention };
 }
 export function findRequirement(template: PhotographyTemplate, id: string) {
   for (const section of template.sections) { const photo = section.photoRequirements.find((requirement) => requirement.id === id); if (photo) return { section, photo, index: section.photoRequirements.indexOf(photo) }; }
