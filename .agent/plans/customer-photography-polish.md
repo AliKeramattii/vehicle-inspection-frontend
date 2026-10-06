@@ -48,7 +48,7 @@ Unit: completion/attention combinations, selected status, derived totals, image 
 - [x] Implement approved layout/state/frame/icon/recovery/readiness/brand changes.
 - [x] Add tests and iterate actual visual states.
 - [x] Complete documentation, technical validation and written audits.
-- [ ] Review intended diff, commit, push and verify.
+- [x] Review intended diff, commit, push and verify.
 
 ## Discoveries / validation
 Runner hang reproduced after seven passing capture assertions at Playwright web-server teardown.
@@ -81,3 +81,7 @@ All camera/persistence/atomic replacement/continuous navigation regressions pass
 candidate screenshot raced route navigation; added heading/action wait and inspected correct
 review before accepting its baseline. Speculative Next RSC cancellations are excluded from resource
 errors while actual failures remain checked. No canonical assets/dependencies/routes/APIs changed.
+
+Implementation commit `3b152fe` (`feat: polish customer photography experience`) was pushed to
+`origin/main`; `git ls-remote` confirmed the full commit hash on GitHub. The reviewed index matched
+the passing intended-change export, and unrelated user modifications/deletions remained intact.
