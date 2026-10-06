@@ -60,7 +60,7 @@ all important visual states, mobile overflow, no Three.js/GLB requests or real A
 - [x] Update direction documentation, implement domain/storage and customer screens.
 - [x] Test and visually iterate every major state.
 - [x] Final validation and scoped diff/security review.
-- [ ] Commit/push and verify Git outcome.
+- [x] Commit/push and verify Git outcome.
 
 ## Discoveries and resolutions
 - No existing camera, photo persistence or downstream upload/submission implementation existed.
@@ -97,3 +97,9 @@ all important visual states, mobile overflow, no Three.js/GLB requests or real A
 Live camera on LAN HTTP requires HTTPS; native camera/file selection remains available. Local
 storage may be cleared/evicted. Quality checks are customer confirmations, not computer vision.
 No upload/submission/reviewer/admin feature or 3D refinement was started.
+
+## Outcome and Git
+Implementation completed in `a957adf` (`feat: rebuild photography flow around 2d reference images`),
+pushed to `origin/main`, and the GitHub branch hash verified against local HEAD. All intended code,
+assets, documentation and new baselines are included; unrelated local edits remain unstaged.
+This final plan status is recorded in a separate documentation commit after verification.
