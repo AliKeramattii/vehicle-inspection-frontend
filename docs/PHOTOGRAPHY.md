@@ -23,6 +23,16 @@ artwork's cover dimensions, so responsive cropping cannot detach them from the i
 select real configured front/right/rear/left/roof samples; reset selects the next incomplete photo.
 Cabin/engine categories expose the remaining sections. All seven sections remain reopenable.
 
+Every image marker is an enabled 44px button around its unchanged 28px status symbol. Its
+requirement ID resolves through the same template as cards, guidance and evidence. Activation
+updates the single overview selection and opens the existing requirement route: guidance for
+uncaptured/retake photos (including reviewer reasons), review for accepted photos or drafts.
+`photoRequirementEntry` derives this destination and action label from existing records; no
+marker-specific evidence state or route map exists. Review keeps replacement optional and accepted
+evidence untouched. Enter/Space use native button behavior; focus and selection rings remain
+independent of gray/blue/orange status. Direction controls remain below the scene at every width.
+Retake drafts reopen review with the same reviewer reason as guidance; the original remains stored.
+
 ## Components and routes
 
 Thin server pages and the existing capture route structure remain unchanged.

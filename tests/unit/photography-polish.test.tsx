@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { inspectionPhotographyTemplate as template } from "@/features/photography/inspection-template";
 import { photographyProgress, photographyVisualState, sectionProgress } from "@/features/photography/photography-model";
@@ -9,6 +9,7 @@ import { PhotographyLoading } from "@/features/photography/photography-loading";
 import type { LocalPhoto } from "@/lib/media/photo-store";
 
 const section = template.sections[0], photo = section.photoRequirements[0];
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 const blob = new Blob(["evidence"], { type: "image/jpeg" });
 const accepted: LocalPhoto = { key: photo.id, namespace: "test", requirementId: photo.id, status: "captured", blob, capturedAt: "now" };
 const draft = { blob, capturedAt: "replacement" };

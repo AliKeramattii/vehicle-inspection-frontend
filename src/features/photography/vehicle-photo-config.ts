@@ -1,5 +1,5 @@
 import type { IconName } from "@/components/ui/icon";
-import type { InspectionSectionId, PhotographyTemplate } from "@/schemas/photography";
+import type { InspectionSectionId, PhotographyTemplate, PhotoRequirement } from "@/schemas/photography";
 
 export type PhotographyCategory = "body" | "cabin" | "details";
 export const photographyCategories: { id: PhotographyCategory; title: string; icon: IconName }[] = [
@@ -14,7 +14,7 @@ export const vehiclePhotoControls: { sectionId: InspectionSectionId; title: stri
   { sectionId: "right", title: "راست", icon: "viewRight" }, { sectionId: "front", title: "جلو", icon: "viewFront" },
   { sectionId: "left", title: "چپ", icon: "viewLeft" },
 ];
-export type VehiclePhotoMarker = { requirementId: string; x: number; y: number };
+export type VehiclePhotoMarker = { requirementId: PhotoRequirement["id"]; x: number; y: number };
 export type VehiclePhotoArtwork = { aspectRatio: number; markers: readonly VehiclePhotoMarker[] };
 const marker = (requirementId: string, x: number, y: number): VehiclePhotoMarker => ({ requirementId, x, y });
 // Percentages belong to the original artwork, not the viewport. The image and markers share

@@ -15,6 +15,20 @@ export function photographyVisualState(photo: PhotoRequirement, records: readonl
   return status === "retake-requested" || record?.draft ? "attention" : photoSatisfied(status) ? "complete" : "pending";
 }
 export const photographyStateLabels: Record<PhotographyVisualState, string> = { pending: "ثبت نشده", complete: "ثبت شد", attention: "نیاز به بررسی / عکاسی مجدد" };
+// Entry navigation is derived from the same evidence used by cards/progress. Opening a
+// requirement never writes or discards evidence, including accepted replacement originals.
+export function photoRequirementEntry(photo: PhotoRequirement, records: readonly LocalPhoto[]): { view: "guide" | "review"; action: string } {
+  const record = records.find((item) => item.requirementId === photo.id);
+  const status = requirementStatus(photo, records), complete = photoSatisfied(status);
+  return {
+    view: record?.draft || complete ? "review" : "guide",
+    action: record?.draft ? "ادامه بررسی عکس" : complete ? "مشاهده عکس" : status === "retake-requested" ? "عکاسی مجدد" : "عکاسی",
+  };
+}
+export function requirementRetakeReason(photo: PhotoRequirement, records: readonly LocalPhoto[]): string | undefined {
+  const record = records.find((item) => item.requirementId === photo.id);
+  return record?.status === "retake-requested" ? record.reviewerReason : photo.status === "retake-requested" ? photo.reviewerReason : undefined;
+}
 export function nextIncompleteRequirement(template: PhotographyTemplate, records: readonly LocalPhoto[]) {
   const section = nextSection(template, records);
   const photo = section && nextRequirement(section, records);

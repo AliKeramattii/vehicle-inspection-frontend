@@ -12,6 +12,7 @@ import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import type { PhotoRequirement, InspectionSection } from "@/schemas/photography";
 import type { LocalPhoto } from "@/lib/media/photo-store";
 import { PhotoImage } from "./photo-image";
+import { requirementRetakeReason } from "./photography-model";
 
 export function PhotoReview({ photo, section, record, inspectionId, onConfirm, onRetake, pending, error }: {
   photo: PhotoRequirement; section: InspectionSection; record?: LocalPhoto; inspectionId: string;
@@ -20,9 +21,11 @@ export function PhotoReview({ photo, section, record, inspectionId, onConfirm, o
   const [expanded, setExpanded] = useState<"sample" | "user">();
   const trigger = useRef<HTMLButtonElement | null>(null);
   const blob = record?.draft?.blob ?? record?.blob, draft = Boolean(record?.draft);
+  const reason = requirementRetakeReason(photo, record ? [record] : []);
   const dismiss = () => { setExpanded(undefined); requestAnimationFrame(() => trigger.current?.focus()); };
   return <div className="photo-route photo-review"><div className="photo-scroll photography-content photo-review-content"><Link className="photo-back" href={inspectionRoutes.section(inspectionId, section.id)}>بازگشت به {section.title}</Link>
     <div className="photography-title"><h2>بررسی عکس</h2><span>{photo.title}</span></div>
+    {reason && <p className="photo-retake-reason" role="status">نیاز به عکاسی مجدد: {reason}</p>}
     {!blob ? <div className="photo-empty" role="status"><p>هنوز عکسی برای این نما ثبت نشده است.</p><Link className="photography-primary" href={inspectionRoutes.photo(inspectionId, photo.id, "guide")}>شروع عکاسی</Link></div> : <>
       <figure className="photo-review-capture"><figcaption>عکس شما <span>برای بزرگ‌نمایی، روی تصویر بزنید</span></figcaption>
         <button aria-label="بزرگ‌نمایی عکس شما" onClick={(event) => { trigger.current = event.currentTarget; setExpanded("user"); }}><PhotoImage blob={blob} alt={`عکس شما: ${photo.title}`} eager frame="captured-evidence" retry={false} /></button>

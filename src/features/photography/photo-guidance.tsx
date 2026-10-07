@@ -6,6 +6,7 @@ import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import type { InspectionSection, PhotoRequirement } from "@/schemas/photography";
 import type { LocalPhoto } from "@/lib/media/photo-store";
 import { PhotoImage, type PhotoFrame } from "./photo-image";
+import { requirementRetakeReason } from "./photography-model";
 
 const guidanceIcons: Record<NonNullable<PhotoRequirement["guidanceTopics"]>[number], IconName> = {
   frame: "photoFrame", distance: "distance", angle: "photoAngle", ignition: "ignition", glare: "photoGlare",
@@ -17,8 +18,7 @@ export function guidanceFrame(photo: PhotoRequirement): PhotoFrame {
 }
 
 export function PhotoGuidance({ photo, section, records, inspectionId }: { photo: PhotoRequirement; section: InspectionSection; records: readonly LocalPhoto[]; inspectionId: string }) {
-  const record = records.find((item) => item.requirementId === photo.id);
-  const reason = record?.status === "retake-requested" ? record.reviewerReason : photo.status === "retake-requested" ? photo.reviewerReason : undefined;
+  const reason = requirementRetakeReason(photo, records);
   return <div className="photo-route photography-guide"><div className="photo-scroll photography-content photo-guide-content"><Link className="photo-back" href={inspectionRoutes.section(inspectionId, section.id)}>بازگشت به {section.title}</Link>
     <div className="photography-title"><h2>{photo.title}</h2><span>{fa(section.photoRequirements.indexOf(photo) + 1)} از {fa(section.photoRequirements.length)}</span></div>
     {reason && <p className="photo-retake-reason" role="status">نیاز به عکاسی مجدد: {reason}</p>}

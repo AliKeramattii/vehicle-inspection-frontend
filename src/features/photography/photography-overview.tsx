@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BottomStickyCTA } from "@/components/ui/bottom-sticky-cta";
 import { Icon } from "@/components/ui/icon";
@@ -8,13 +9,14 @@ import { toPersianDigits as fa } from "@/lib/utils/persian";
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import type { PhotographyTemplate, InspectionSectionId } from "@/schemas/photography";
 import type { LocalPhoto } from "@/lib/media/photo-store";
-import { findRequirement, nextIncompleteRequirement, nextRequirement, photographyProgress, photoSatisfied, requirementStatus, requirementProgress } from "./photography-model";
+import { findRequirement, nextIncompleteRequirement, nextRequirement, photoRequirementEntry, photographyProgress, photoSatisfied, requirementStatus, requirementProgress } from "./photography-model";
 import { PhotographyProgress } from "./photography-progress";
 import { categoryRequirements, photographyCategories, sectionCategory, type PhotographyCategory } from "./vehicle-photo-config";
 import { VehiclePhotoNavigator } from "./vehicle-photo-navigator";
 import { PhotographyShotCarousel } from "./photography-shot-carousel";
 
 export function PhotographyOverview({ template, records, inspectionId }: { template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string }) {
+  const router = useRouter();
   const next = nextIncompleteRequirement(template, records), progress = photographyProgress(template, records);
   const [selectedId, select] = useState(next?.photo.id ?? template.sections[0].photoRequirements[0].id);
   const selected = findRequirement(template, selectedId) ?? next ?? { section: template.sections[0], photo: template.sections[0].photoRequirements[0] };
@@ -29,13 +31,19 @@ export function PhotographyOverview({ template, records, inspectionId }: { templ
     const target = photos.find((photo) => !photoSatisfied(requirementStatus(photo, records))) ?? photos[0];
     if (target) select(target.id);
   };
-  const review = Boolean(record?.draft) || complete;
-  const href = progress.complete ? inspectionRoutes.photographyReview(inspectionId) : inspectionRoutes.photo(inspectionId, photo.id, review ? "review" : "guide");
+  const activateMarker = (id: string) => {
+    const target = findRequirement(template, id)?.photo;
+    if (!target) return;
+    select(target.id);
+    router.push(inspectionRoutes.photo(inspectionId, target.id, photoRequirementEntry(target, records).view), { scroll: false });
+  };
+  const entry = photoRequirementEntry(photo, records), review = entry.view === "review";
+  const href = progress.complete ? inspectionRoutes.photographyReview(inspectionId) : inspectionRoutes.photo(inspectionId, photo.id, entry.view);
   const label = progress.complete ? "بررسی و ارسال" : record?.draft ? `ادامه بررسی: ${photo.title}` : complete ? `مشاهده عکس: ${photo.title}` : `عکاسی نمای بعدی: ${photo.title}`;
   return <div className="photo-route photography-overview">
     <div className="photo-scroll photography-overview-content">
     <div className="photography-studio"><PhotographyProgress template={template} records={records} />
-      <VehiclePhotoNavigator template={template} photo={photo} sectionId={section.id} records={records} onSelect={select} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
+      <VehiclePhotoNavigator template={template} photo={photo} sectionId={section.id} records={records} onActivate={activateMarker} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
     </div>
     <section className="photography-shot-panel" aria-label="بخش‌ها و عکس‌های بازدید">
       <nav className="photography-categories" aria-label="دسته‌های عکاسی">{photographyCategories.map((item) => {

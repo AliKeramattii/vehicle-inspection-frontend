@@ -4,13 +4,13 @@ import { toPersianDigits as fa } from "@/lib/utils/persian";
 import type { LocalPhoto } from "@/lib/media/photo-store";
 import type { PhotographyTemplate, PhotoRequirement, InspectionSectionId } from "@/schemas/photography";
 import { PhotoImage } from "./photo-image";
-import { findRequirement, photographyStateLabels, photographyVisualState } from "./photography-model";
+import { findRequirement, photoRequirementEntry, photographyStateLabels, photographyVisualState } from "./photography-model";
 import { artworkForRequirement, vehiclePhotoControls } from "./vehicle-photo-config";
 import { EvidenceSymbol } from "./evidence-symbol";
 
-export function VehiclePhotoNavigator({ template, photo, sectionId, records, onSelect, onSection, onReset }: {
+export function VehiclePhotoNavigator({ template, photo, sectionId, records, onActivate, onSection, onReset }: {
   template: PhotographyTemplate; photo: PhotoRequirement; sectionId: InspectionSectionId; records: readonly LocalPhoto[];
-  onSelect: (id: string) => void; onSection: (id: InspectionSectionId) => void; onReset: () => void;
+  onActivate: (id: PhotoRequirement["id"]) => void; onSection: (id: InspectionSectionId) => void; onReset: () => void;
 }) {
   const artwork = artworkForRequirement(photo.id), requirements = template.sections.flatMap((section) => section.photoRequirements);
   return <section className="vehicle-photo-navigator" aria-label="انتخاب نما روی تصویر خودرو">
@@ -21,8 +21,9 @@ export function VehiclePhotoNavigator({ template, photo, sectionId, records, onS
         const target = findRequirement(template, marker.requirementId)?.photo;
         if (!target) return null;
         const state = photographyVisualState(target, records), selected = target.id === photo.id;
+        const { action } = photoRequirementEntry(target, records);
         return <button key={target.id} type="button" className="vehicle-photo-marker" data-requirement={target.id} data-state={state} aria-pressed={selected}
-          aria-label={`${target.title}، ${photographyStateLabels[state]}`} onClick={() => onSelect(target.id)} style={{ left: `${marker.x}%`, top: `${marker.y}%` }}>
+          aria-label={`${action} ${target.title}، ${photographyStateLabels[state]}`} onClick={() => onActivate(target.id)} style={{ left: `${marker.x}%`, top: `${marker.y}%` }}>
           <span aria-hidden="true"><EvidenceSymbol state={state} number={fa(requirements.indexOf(target) + 1)} size={18} /></span>
         </button>;
       })}</div>

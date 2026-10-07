@@ -17,6 +17,7 @@ import { createMockInspectionRepository } from "@/mocks/inspection-repository";
 import { capturePlanFixture } from "@/mocks/fixtures";
 
 const all = template.sections.flatMap((section) => section.photoRequirements);
+vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 Element.prototype.scrollIntoView = vi.fn();
 const blob = new Blob(["photo"], { type: "image/jpeg" });
 const record = (id: string): LocalPhoto => ({ key: id, namespace: "test", requirementId: id, status: "captured", blob, capturedAt: "2026-10-06T00:00:00Z" });
@@ -128,7 +129,7 @@ describe("vehicle image navigation and continuation", () => {
   it("keeps marker, image, card, section and CTA selection in sync", async () => {
     const user = userEvent.setup();
     render(<PhotographyOverview template={template} records={[]} inspectionId="insp_demo" />);
-    await user.click(screen.getAllByRole("button", { name: "نمای مستقیم جلو با پلاک، ثبت نشده" })[0]);
+    await user.click(screen.getByRole("button", { name: "عکاسی نمای مستقیم جلو با پلاک، ثبت نشده" }));
     expect(screen.getByRole("img", { name: /نمای راهنمای خودرو/ })).toHaveAttribute("src", expect.stringContaining("front-plate.webp"));
     expect(document.querySelector('.photography-shot-card[data-requirement="front-plate"]')).toHaveAttribute("aria-pressed", "true");
     expect(document.querySelector('.vehicle-photo-marker[data-requirement="front-plate"]')).toHaveAttribute("aria-pressed", "true");
