@@ -40,7 +40,7 @@ Unit tests cover entry derivation, semantic/action labels, selection/card/CTA sy
 - [x] Implement focused marker navigation and labels.
 - [x] Add tests and review screenshots/responsive interactions.
 - [x] Complete actual validation and document existing failures.
-- [ ] Review intended diff, commit and verify push.
+- [x] Review intended diff, commit and verify push.
 
 ## Validation notes
 Initial focused unit run: 37 passed; initial full unit run: 95 passed in 11 files, both exit 0.
@@ -71,3 +71,6 @@ startup timeout. No timeout/configuration change was made and the precise transi
 established. Nonblocking color-environment warnings and nested-export lockfile warnings remain.
 Staged source/test hashes match the passing export. Initial unrelated user edits/deletions are
 byte-preserved, and the navigation test index contains only the intended activation expectation.
+
+Implementation commit `f375761` (`feat: make vehicle photo markers interactive`) was pushed
+normally to `origin/main`. `git ls-remote` confirmed the full implementation hash on GitHub.
