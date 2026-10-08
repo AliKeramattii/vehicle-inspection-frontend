@@ -40,7 +40,8 @@ const sections: InspectionSection[] = [
   { id: "roof", title: "سقف", order: 7, photoRequirements: [photo("car-roof", "نمای سقف", "تمام سطح سقف خودرو را در تصویر نشان دهید.",
     ["از موقعیتی ایمن، گوشی را بالاتر بگیرید.", "بیشترین سطح سقف و گوشه‌های اصلی در کادر باشند.", "برای عکاسی روی خودرو نایستید."], { distance: "۱ متر", height: "بالاتر از سقف", guidanceTopics: ["roof", "frame", "steady"], checks: ["واضح", "نور مناسب", "سقف کامل در کادر"] })] },
 ];
-export const inspectionPhotographyTemplate = photographyTemplateSchema.parse({ templateId: "body-image-guided", templateVersion: 1, sections });
+export const inspectionPhotographyTemplate = photographyTemplateSchema.parse({ templateId: "body-image-guided", templateVersion: 1, sections,
+  captureRequirements: { odometerRequirementId: "odometer-on", video360Required: true } });
 
 // Compatibility adapter for existing foundation/future viewer consumers; no duplicate metadata.
 export function templateCapturePlan(): CapturePlan {

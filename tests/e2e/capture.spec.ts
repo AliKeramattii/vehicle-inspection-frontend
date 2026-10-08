@@ -81,7 +81,12 @@ test("retake reason maps to a requirement and full completion enables local fina
   await expect(page.getByText("پلاک خوانا نیست.")).toBeVisible(); await page.getByRole("link", { name: "عکاسی مجدد", exact: true }).click();
   await expect(page).toHaveURL(/front-plate\/guide$/); await expect(page.getByText("نیاز به عکاسی مجدد: پلاک خوانا نیست.")).toBeVisible();
   await photography(page, 12); await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "12");
-  await page.getByRole("link", { name: "بررسی و ارسال" }).click();
+  await page.getByRole("link", { name: "ثبت کیلومتر فعلی" }).click();
+  await expect(page.getByLabel("کیلومتر فعلی")).toBeVisible();
+  await page.getByLabel("کیلومتر فعلی").fill("۴۸٬۳۲۰");
+  await page.getByRole("button", { name: "تأیید و ادامه" }).click();
+  await expect(page).toHaveURL(/video\/record$/);
+  await page.getByRole("link", { name: "بازگشت به بررسی بازدید" }).click();
   await expect(page.getByRole("heading", { name: "عکاسی خودرو تکمیل شد" })).toBeVisible();
   await expect(page.getByText(/پس از اتصال سرویس ارسال/)).toBeVisible();
 });

@@ -7,7 +7,7 @@ import { InlineAlert } from "@/components/ui/status";
 
 export type PhotoFrame = "automotive-hero" | "vehicle-overview" | "exterior-guide" | "interior-guide" | "technical-closeup" | "captured-evidence" | "comparison";
 
-function useBlobUrl(blob: Blob | undefined) {
+export function useBlobUrl(blob: Blob | undefined) {
   const [value, setValue] = useState<{ blob: Blob; url: string }>();
   useEffect(() => {
     if (!blob) return;

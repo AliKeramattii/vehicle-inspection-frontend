@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { InspectionJourneyHeader } from "@/components/inspection/inspection-journey-header";
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import "@/features/photography/photography.css";
+import "@/features/capture-package/capture-package.css";
 
 export default async function PhotographyLayout({ children, params }: { children: ReactNode; params: Promise<{ inspectionId: string }> }) {
   const { inspectionId } = await params;

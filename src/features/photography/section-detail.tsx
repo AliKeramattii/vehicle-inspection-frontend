@@ -9,12 +9,14 @@ import { BottomStickyCTA } from "@/components/ui/bottom-sticky-cta";
 import { nextIncompleteRequirement, nextRequirement } from "./photography-model";
 import { Icon } from "@/components/ui/icon";
 import type { PhotographyTemplate } from "@/schemas/photography";
+import { nextCaptureTask, type CapturePackageData } from "@/features/capture-package/capture-package-model";
 
-export function SectionDetail({ section, template, records, inspectionId }: { section: InspectionSection; template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string }) {
+export function SectionDetail({ section, template, records, inspectionId, data }: { section: InspectionSection; template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string; data?: CapturePackageData }) {
   const { completed, total, remaining, attention } = sectionProgress(section, records);
   const nextPhoto = nextRequirement(section, records), next = nextIncompleteRequirement(template, records);
-  const href = nextPhoto ? inspectionRoutes.photo(inspectionId, nextPhoto.id, "guide") : next ? inspectionRoutes.photo(inspectionId, next.photo.id, "guide") : inspectionRoutes.photographyReview(inspectionId);
-  const label = nextPhoto ? `عکاسی نمای بعدی: ${nextPhoto.title}` : next ? `ادامه به ${next.section.title}` : "بررسی و ارسال";
+  const task = nextCaptureTask(inspectionId, template, records, data);
+  const href = nextPhoto ? inspectionRoutes.photo(inspectionId, nextPhoto.id, "guide") : next ? inspectionRoutes.photo(inspectionId, next.photo.id, "guide") : task.href;
+  const label = nextPhoto ? `عکاسی نمای بعدی: ${nextPhoto.title}` : next ? `ادامه به ${next.section.title}` : task.label;
   return <div className="photo-route photography-section"><div className="photography-content photo-section-header"><Link className="photo-back" href={inspectionRoutes.capture(inspectionId)}>بازگشت به نمای کلی</Link>
     <div className="photography-title"><h2>{section.title}</h2><span>{fa(completed)} از {fa(total)} تصویر</span></div>
     {!remaining && <div className="section-complete" role="status"><Icon name="evidenceCheck" size={20} />{section.title} تکمیل شد{attention && <span className="section-attention"><Icon name="retake" size={18} />در انتظار تأیید</span>}</div>}

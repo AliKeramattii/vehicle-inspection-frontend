@@ -57,7 +57,11 @@ test("derived blue completion, orange retake, next section and twelve-photo comp
   await expect(page.getByText("پلاک خوانا نیست.")).toBeVisible();
   await snapshotReady(page); await expect.soft(page).toHaveScreenshot("photo-retake.png");
   await photography(page, 12); await snapshotReady(page); await expect.soft(page).toHaveScreenshot("photography-complete.png");
-  await page.getByRole("link", { name: "بررسی و ارسال" }).click();
+  await page.getByRole("link", { name: "ثبت کیلومتر فعلی" }).click();
+  await page.getByLabel("کیلومتر فعلی").fill("۴۸٬۳۲۰");
+  await page.getByRole("button", { name: "تأیید و ادامه" }).click();
+  await expect(page).toHaveURL(/video\/record$/);
+  await page.getByRole("link", { name: "بازگشت به بررسی بازدید" }).click();
   await expect(page.getByRole("heading", { name: "عکاسی خودرو تکمیل شد" })).toBeVisible();
   await snapshotReady(page); await expect.soft(page).toHaveScreenshot("photography-final-review.png");
 });

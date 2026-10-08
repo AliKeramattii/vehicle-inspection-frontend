@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { inspectionSectionSchema } from "./photography";
+import { inspectionSectionSchema, supplementalCaptureSchema } from "./photography";
 
 export const inspectionStatusSchema = z.enum(["draft", "capturing", "uploading", "readyToSubmit", "queuedForReview", "underReview", "additionalEvidenceRequired", "approved", "rejected"]);
 export const evidenceStateSchema = z.enum(["local", "queued", "uploading", "processing", "uploaded", "verified", "failed", "retakeRequired"]);
@@ -28,6 +28,7 @@ export const capturePlanSchema = z.object({
   templateId: z.string().min(1), templateVersion: z.number().int().positive(),
   totalRequired: z.number().int().nonnegative(), shots: z.array(captureSlotSchema),
   sections: z.array(inspectionSectionSchema).optional(),
+  captureRequirements: supplementalCaptureSchema.optional(),
 }).superRefine((plan, context) => {
   if (plan.totalRequired !== plan.shots.filter((shot) => shot.required).length) {
     context.addIssue({ code: "custom", path: ["totalRequired"], message: "Required count must match the plan." });
@@ -36,11 +37,18 @@ export const capturePlanSchema = z.object({
     context.addIssue({ code: "custom", path: ["shots"], message: "Capture codes must be unique." });
   }
 });
-export const evidenceSchema = z.object({
-  id: z.string().min(1), shotCode: z.string().min(1), mediaType: z.enum(["image", "video360"]),
+export const evidenceKindSchema = z.enum(["photo", "video-360"]);
+const evidenceBaseSchema = z.object({
+  id: z.string().min(1),
   state: evidenceStateSchema, thumbnailUrl: z.url().optional(), remoteUrl: z.url().optional(),
-  capturedAt: z.iso.datetime().optional(),
+  capturedAt: z.iso.datetime().optional(), reviewerReason: z.string().optional(),
+  mimeType: z.string().min(1).optional(), sizeBytes: z.number().int().positive().optional(),
+  localBlobKey: z.string().min(1).optional(),
 });
+export const evidenceSchema = z.discriminatedUnion("mediaType", [
+  evidenceBaseSchema.extend({ mediaType: z.literal("image"), kind: z.literal("photo").default("photo"), shotCode: z.string().min(1), requirementId: z.string().min(1).optional() }),
+  evidenceBaseSchema.extend({ mediaType: z.literal("video360"), kind: z.literal("video-360").default("video-360"), durationSeconds: z.number().positive().optional() }),
+]);
 export const inspectionLocationSchema = z.object({
   latitude: z.number().min(-90).max(90), longitude: z.number().min(-180).max(180),
   accuracyMeters: z.number().nonnegative(), formattedAddress: z.string().min(1),

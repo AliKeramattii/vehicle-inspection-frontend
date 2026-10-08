@@ -35,9 +35,11 @@ describe("authoritative photography configuration", () => {
     }
   });
   it("validates unique section/requirement IDs without imposing a fixed twelve-photo platform limit", () => {
-    expect(photographyTemplateSchema.safeParse({ ...template, sections: [template.sections[0]] }).success).toBe(true);
-    expect(photographyTemplateSchema.safeParse({ ...template, sections: [template.sections[0], template.sections[0]] }).success).toBe(false);
-    expect(photographyTemplateSchema.safeParse({ ...template, sections: [{ ...template.sections[0], photoRequirements: [all[0], all[0]] }] }).success).toBe(false);
+    // This smaller template has no odometer photo or supplemental requirements.
+    const custom = { ...template, captureRequirements: undefined };
+    expect(photographyTemplateSchema.safeParse({ ...custom, sections: [template.sections[0]] }).success).toBe(true);
+    expect(photographyTemplateSchema.safeParse({ ...custom, sections: [template.sections[0], template.sections[0]] }).success).toBe(false);
+    expect(photographyTemplateSchema.safeParse({ ...custom, sections: [{ ...template.sections[0], photoRequirements: [all[0], all[0]] }] }).success).toBe(false);
   });
   it("adapts one template to the repository without shared mutable state or changing bootstrap samples", async () => {
     const repository = createMockInspectionRepository(), plan = await repository.getCapturePlan("insp_demo");
@@ -79,10 +81,10 @@ describe("image-guided presentation", () => {
     expect(screen.getByRole("link", { name: /عکاسی نمای بعدی: نمای مستقیم جلو/ })).toBeVisible();
     expect(screen.queryByRole("button", { name: /سه‌بعدی|چرخش/ })).not.toBeInTheDocument();
   });
-  it("exposes the final review only when all configured required photos are satisfied", () => {
+  it("continues to the missing odometer data when all configured photos are satisfied", () => {
     render(<PhotographyOverview template={template} records={all.map((photo) => record(photo.id))} inspectionId="insp_demo" />);
     expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "12");
-    expect(screen.getByRole("link", { name: "بررسی و ارسال" })).toHaveAttribute("href", "/inspection/insp_demo/capture/review");
+    expect(screen.getByRole("link", { name: "ثبت کیلومتر فعلی" })).toHaveAttribute("href", "/inspection/insp_demo/capture/photo/odometer-on/review");
   });
   it("shows large exact samples, captured-card view/replacement and reviewer reasons", () => {
     const retake = { ...record(all[0].id), status: "retake-requested" as const, reviewerReason: "پلاک خوانا نیست." };

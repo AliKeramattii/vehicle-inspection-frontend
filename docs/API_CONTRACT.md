@@ -267,6 +267,7 @@ Example (abbreviated, remaining sections configured similarly):
 ```json
 {
   "templateId": "body-image-guided", "templateVersion": 1, "totalRequired": 12,
+  "captureRequirements": { "odometerRequirementId": "odometer-on", "video360Required": true },
   "sections": [{ "id": "right", "title": "نمای راست", "order": 1,
     "photoRequirements": [{ "id": "front-45-right", "title": "جلو ۴۵° راست",
       "description": "جلوی خودرو و سمت راست به صورت کامل دیده شود.",
@@ -299,6 +300,9 @@ Recommended flow:
 {
   "shotCode": "CAP-05",
   "mediaType": "image",
+  "kind": "photo",
+  "mimeType": "image/jpeg",
+  "sizeBytes": 182340,
   "capturedAt": "2026-10-03T14:32:10Z",
   "location": {
     "latitude": 35.721,
@@ -336,14 +340,43 @@ Evidence state should support:
 ### PUT `/api/inspections/{inspectionId}/odometer`
 ```json
 {
-  "value": 48320,
-  "evidenceId": "ev_CAP10"
+  "kilometers": 48320,
+  "evidenceId": "ev_odometer"
 }
 ```
 
 ## 360 video
 
-Use the same evidence mechanism with `mediaType: "video360"` and appropriate upload metadata.
+These are planned authenticated ASP.NET operations, not runtime HTTP calls. `kilometers` is a
+nonnegative safe integer (zero is valid), never a formatted string. `evidenceId` is optional and
+links the accepted odometer photograph; the current local link is a namespaced photo key, not a
+remote evidence ID. A future adapter resolves it after evidence registration. Return the saved
+reading with updatedAt; structured 400/422 kilometers errors, 401/403, 404, 409 and network/save
+failures must retain the prior value/evidence. The current local repository persists reading/editing
+in IndexedDB and does not infer it from vehicle.odometerKm or an image.
+
+### Generic evidence registration, kind `video-360`
+
+Use the existing POST `/api/inspections/{inspectionId}/evidence`, with `mediaType: "video360"`,
+`kind: "video-360"`, browser-selected mimeType, sizeBytes, durationSeconds and capturedAt. A
+walk-around video is a continuous normal camera recording, not spherical media or reconstruction.
+Photo kind uses requirementId/shotCode; video has no PhotoRequirement and must not increment
+totalRequired. The same authenticated registration/upload/complete/error pipeline will serve both.
+No extra video endpoint or real upload is implemented.
+
+Local media metadata includes kind, MIME, bytes, capturedAt and unique localBlobKey; photo linkage
+uses its existing namespaced key. The blob key is local queue bookkeeping, never a server URL or
+Blob payload in JSON. Accepted video and replacement draft remain separate in IndexedDB until
+atomic confirmation. State reuses local/queued/uploading/processing/uploaded/verified/failed/
+retakeRequired, with optional reviewerReason. Recording/ready are transient UI states, not backend
+evidence states. A replacement draft retains accepted completion credit; retakeRequired blocks
+package readiness but never deletes the previous recording. Future evidence-request adapters may
+target kind video-360 with a reason without inventing a photo ID.
+
+Local capture readiness derives from required photographs, required odometer data and locally
+accepted video. It is not remote upload, quality verification or submission success. Current template:
+twelve photographs + one manual reading + one video. Supplemental requirements are configurable
+captureRequirements, separate from sections/photoRequirements.
 
 ## Final summary/submission
 

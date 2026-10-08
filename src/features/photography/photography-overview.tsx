@@ -14,8 +14,9 @@ import { PhotographyProgress } from "./photography-progress";
 import { categoryRequirements, photographyCategories, sectionCategory, type PhotographyCategory } from "./vehicle-photo-config";
 import { VehiclePhotoNavigator } from "./vehicle-photo-navigator";
 import { PhotographyShotCarousel } from "./photography-shot-carousel";
+import { nextCaptureTask, type CapturePackageData } from "@/features/capture-package/capture-package-model";
 
-export function PhotographyOverview({ template, records, inspectionId }: { template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string }) {
+export function PhotographyOverview({ template, records, inspectionId, data }: { template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string; data?: CapturePackageData }) {
   const router = useRouter();
   const next = nextIncompleteRequirement(template, records), progress = photographyProgress(template, records);
   const [selectedId, select] = useState(next?.photo.id ?? template.sections[0].photoRequirements[0].id);
@@ -38,8 +39,9 @@ export function PhotographyOverview({ template, records, inspectionId }: { templ
     router.push(inspectionRoutes.photo(inspectionId, target.id, photoRequirementEntry(target, records).view), { scroll: false });
   };
   const entry = photoRequirementEntry(photo, records), review = entry.view === "review";
-  const href = progress.complete ? inspectionRoutes.photographyReview(inspectionId) : inspectionRoutes.photo(inspectionId, photo.id, entry.view);
-  const label = progress.complete ? "بررسی و ارسال" : record?.draft ? `ادامه بررسی: ${photo.title}` : complete ? `مشاهده عکس: ${photo.title}` : `عکاسی نمای بعدی: ${photo.title}`;
+  const task = nextCaptureTask(inspectionId, template, records, data);
+  const href = progress.complete ? task.href : inspectionRoutes.photo(inspectionId, photo.id, entry.view);
+  const label = progress.complete ? task.label : record?.draft ? `ادامه بررسی: ${photo.title}` : complete ? `مشاهده عکس: ${photo.title}` : `عکاسی نمای بعدی: ${photo.title}`;
   return <div className="photo-route photography-overview">
     <div className="photo-scroll photography-overview-content">
     <div className="photography-studio"><PhotographyProgress template={template} records={records} />
@@ -53,6 +55,7 @@ export function PhotographyOverview({ template, records, inspectionId }: { templ
       })}</nav>
       <div className="photography-selected-heading"><h2>{section.title}</h2><Link href={inspectionRoutes.section(inspectionId, section.id)}>مشاهده بخش<Icon name="chevronBack" size={15} /></Link></div>
       <PhotographyShotCarousel photos={categoryRequirements(template, category)} records={records} selectedId={photo.id} onSelect={select} />
+      <Link className="capture-requirements-link" href={inspectionRoutes.photographyReview(inspectionId)}>بررسی نیازمندی‌های بازدید</Link>
     </section>
     </div>
     <BottomStickyCTA className="photography-actions"><Link className="photography-primary" href={href}><Icon name={progress.complete ? "check" : review ? "viewFront" : "camera"} size={23} />{label}</Link></BottomStickyCTA>

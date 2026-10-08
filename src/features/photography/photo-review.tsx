@@ -13,10 +13,13 @@ import type { PhotoRequirement, InspectionSection } from "@/schemas/photography"
 import type { LocalPhoto } from "@/lib/media/photo-store";
 import { PhotoImage } from "./photo-image";
 import { requirementRetakeReason } from "./photography-model";
+import { OdometerField } from "@/features/capture-package/odometer-field";
+import type { OdometerReading } from "@/features/capture-package/capture-package-model";
 
-export function PhotoReview({ photo, section, record, inspectionId, onConfirm, onRetake, pending, error }: {
+export function PhotoReview({ photo, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer }: {
   photo: PhotoRequirement; section: InspectionSection; record?: LocalPhoto; inspectionId: string;
   onConfirm: () => void; onRetake: () => void; pending?: boolean; error?: string;
+  odometer?: { reading?: OdometerReading; onSave: (kilometers: number) => void };
 }) {
   const [expanded, setExpanded] = useState<"sample" | "user">();
   const trigger = useRef<HTMLButtonElement | null>(null);
@@ -31,10 +34,11 @@ export function PhotoReview({ photo, section, record, inspectionId, onConfirm, o
         <button aria-label="بزرگ‌نمایی عکس شما" onClick={(event) => { trigger.current = event.currentTarget; setExpanded("user"); }}><PhotoImage blob={blob} alt={`عکس شما: ${photo.title}`} eager frame="captured-evidence" retry={false} /></button>
       </figure>
       <button className="photo-review-reference" aria-label="بزرگ‌نمایی نمونه" onClick={(event) => { trigger.current = event.currentTarget; setExpanded("sample"); }}><PhotoImage src={photo.sampleImage} alt={`نمونه صحیح: ${photo.title}`} eager frame="comparison" retry={false} /><span><strong>نمونه</strong><small>قاب‌بندی عکس را با نمونه مقایسه کنید.</small></span><Icon name="enlarge" size={20} /></button>
+      {odometer && <OdometerField value={odometer.reading} onSave={odometer.onSave} pending={pending} />}
       <p className="photo-review-note">{draft ? "برای نگه‌داشتن این عکس، تأیید و ادامه را بزنید." : "عکس ثبت‌شده روی این دستگاه ذخیره شده است."}</p>
       {error && <InlineAlert tone="destructive" className="photo-error">{error}</InlineAlert>}
     </>}
-  </div>{blob && <BottomStickyCTA className="photography-actions photo-review-actions">{draft ? <PrimaryButton onClick={onConfirm} loading={pending}>{!pending && <Icon name="check" size={21} />}تأیید و ادامه</PrimaryButton> : <Link className="photography-primary" href={inspectionRoutes.section(inspectionId, section.id)}>بازگشت به بخش</Link>}<SecondaryButton onClick={onRetake} disabled={pending}>عکاسی مجدد</SecondaryButton></BottomStickyCTA>}
+  </div>{blob && <BottomStickyCTA className="photography-actions photo-review-actions">{odometer ? <PrimaryButton type="submit" form="odometer-form" loading={pending}>تأیید و ادامه</PrimaryButton> : draft ? <PrimaryButton onClick={onConfirm} loading={pending}>{!pending && <Icon name="check" size={21} />}تأیید و ادامه</PrimaryButton> : <Link className="photography-primary" href={inspectionRoutes.section(inspectionId, section.id)}>بازگشت به بخش</Link>}<SecondaryButton onClick={onRetake} disabled={pending}>عکاسی مجدد</SecondaryButton></BottomStickyCTA>}
     {expanded && blob && createPortal(<NativeDialog title={expanded === "sample" ? "نمونه عکاسی" : "عکس شما"} onDismiss={dismiss}><PhotoImage src={photo.sampleImage} blob={expanded === "user" ? blob : undefined} alt={photo.title} eager className="photo-expanded-image" frame="captured-evidence" /><SecondaryButton onClick={dismiss}>بستن تصویر</SecondaryButton></NativeDialog>, document.body)}
   </div>;
 }

@@ -111,7 +111,9 @@ InlineAlert with the correct dark/light context. No interactive quality checklis
 Atomic confirmation accepts a draft, then opens the next incomplete required photo in that section.
 After the final photo, the completed section has a prominent CTA to the next incomplete section's
 first requirement. The overview stays manually accessible. Twelve satisfied requirements expose
-existing local final review. No 360 route exists yet, so no video flow is fabricated.
+the next required local task: missing odometer data, then walk-around video, then local review.
+The photo count remains twelve. A quiet review link below the cards keeps partial packages manually
+accessible without changing the image/control composition.
 
 ## Camera, durability and mock boundary
 
@@ -129,8 +131,9 @@ Reset development photography by clearing this IndexedDB database in the browser
 
 Camera security requirements remain HTTPS/localhost; LAN HTTP falls back to native photo selection.
 No origin/dev binding/PWA behavior changed. No CV, AR, quality scoring or backend request added.
-Future manual odometer entry, required 360 video, durable upload queue, final summary and reviewer
-retakes remain documented product requirements; none is implemented by this revision.
+Manual odometer entry and required walk-around video are implemented in Phase 05; see
+`ODOMETER_VIDEO.md`. Durable remote upload queue, final server summary and reviewer integration
+remain future work. No upload/submission success is fabricated.
 
 ## Viewport and performance
 

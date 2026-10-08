@@ -64,7 +64,7 @@ describe("requirement-based vehicle marker entry", () => {
     expect(marker).toBeEnabled();
     await user.click(marker);
     expect(push).toHaveBeenCalledExactlyOnceWith("/inspection/insp_demo/capture/photo/front-45-right/review", { scroll: false });
-    expect(screen.getByRole("link", { name: "بررسی و ارسال" })).toHaveAttribute("href", "/inspection/insp_demo/capture/review");
+    expect(screen.getByRole("link", { name: "ثبت کیلومتر فعلی" })).toHaveAttribute("href", "/inspection/insp_demo/capture/photo/odometer-on/review");
   });
 
   it("keeps the reviewer reason visible when a retake draft reopens review", () => {

@@ -14,10 +14,14 @@ export const inspectionSectionSchema = z.object({
   id: sectionIdSchema, title: z.string().min(1), order: z.number().int().positive(),
   photoRequirements: z.array(photoRequirementSchema).min(1),
 });
+export const supplementalCaptureSchema = z.object({ odometerRequirementId: z.string().min(1).optional(), video360Required: z.boolean() });
 export const photographyTemplateSchema = z.object({
   templateId: z.string().min(1), templateVersion: z.number().int().positive(), sections: z.array(inspectionSectionSchema).min(1),
+  captureRequirements: supplementalCaptureSchema.optional(),
 }).superRefine((template, ctx) => {
   const ids = template.sections.flatMap((section) => section.photoRequirements.map((photo) => photo.id));
+  const odometerId = template.captureRequirements?.odometerRequirementId;
+  if (odometerId && !ids.includes(odometerId)) ctx.addIssue({ code: "custom", path: ["captureRequirements", "odometerRequirementId"], message: "Odometer evidence must reference a configured photograph." });
   if (new Set(ids).size !== ids.length) ctx.addIssue({ code: "custom", path: ["sections"], message: "Requirement IDs must be unique." });
   if (new Set(template.sections.map((section) => section.id)).size !== template.sections.length) ctx.addIssue({ code: "custom", path: ["sections"], message: "Section IDs must be unique." });
 });
