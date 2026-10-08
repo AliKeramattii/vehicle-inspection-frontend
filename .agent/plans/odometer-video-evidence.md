@@ -34,7 +34,7 @@ Digits/separators/zero/invalid/overflow, persisted editing, separate completenes
 - [x] Package completeness and missing-task action have one derived source.
 - [x] Three mobile viewports fit AppViewport; approved Phase04 layout/markers remain intact.
 - [x] Tests, reviewed baselines and planned API documentation reflect the implementation.
-- [ ] Intended changes validated, committed and pushed; unrelated user work unchanged.
+- [x] Intended changes validated, committed and pushed; unrelated user work unchanged.
 
 ## Progress
 - [x] Repository state, boundaries and canonical references inspected; user files snapshotted.
@@ -42,7 +42,7 @@ Digits/separators/zero/invalid/overflow, persisted editing, separate completenes
 - [x] Odometer/video UI integrated.
 - [x] Unit/browser/visual validation completed.
 - [x] Documentation and preservation review.
-- [ ] Focused commit/push and remote verification.
+- [x] Focused commit/push and remote verification.
 
 ## Discoveries and verification
 - Local persistence uses a separate IndexedDB database, avoiding changes to accepted photo records or existing database fixtures.
@@ -59,3 +59,4 @@ Digits/separators/zero/invalid/overflow, persisted editing, separate completenes
 - Generic Evidence now discriminates photo/video media, sharing states and metadata without forcing video to use a PhotoRequirement/shot code. No upload queue, real API or customer 3D is introduced.
 - Unrelated files/deletions match their initial hashes. The previously dirty visual test is staged as only five new continuation lines in place of one old action; user formatting stays in the working tree. No public asset, dependency, origin configuration, legal text or existing route is staged.
 - Nonblocking color-environment warnings appear in Playwright. The isolated staged export also warns about nested lockfiles; root build is clean. No timeout increase or configuration change was used. Both full browser processes finish normally.
+- Implementation commit `1431b0e` (`feat: add odometer and 360 capture evidence`) was pushed normally to origin/main. `git ls-remote` verified full hash `1431b0e617d6c9a95a7ac7e041bd771c7ba41a40` on GitHub. A documentation-only completion commit records this evidence, following the repository's prior phase workflow.
