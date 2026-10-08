@@ -32,14 +32,14 @@ Injected transport/store/clock for deterministic coordinator tests; real Indexed
 - [x] Capture state independent from upload and verification.
 - [x] Upload Center usable/accessible, odometer excluded from derived denominator.
 - [x] Existing phase behavior and unrelated user work preserved.
-- [ ] Reviewed new visuals, validation exit results documented, intended changes committed/pushed.
+- [x] Reviewed new visuals, validation exit results documented, intended changes committed/pushed.
 
 ## Progress
 - [x] Inspect state, source/reference/design guidance and snapshot unrelated edits.
 - [x] Implement queue and coordinator.
 - [x] Implement Upload Center and capture navigation.
 - [x] Tests and visual review: 26 new unit cases (159 total), 16 new browser scenarios, six inspected upload baselines; all three viewports, video preview and offline odometer/video replacement.
-- [ ] Documentation, validation, Git review/commit/push.
+- [x] Documentation, validation, Git review/commit/push: implementation 08b486a pushed; remote HEAD verified. Root full suite 100 pass / 45 skip / known readiness failure, exit 1. Intended staged source full suite 101 pass / 45 skip, exit 0; lint/typecheck/159 unit tests/build all exit 0. See docs/UPLOAD_VALIDATION.md.
 
 ## Discoveries
 - Local Query operations needed `networkMode: always`; otherwise offline IndexedDB reads/saves paused. Browser regressions now cover offline entry and media/data saves.
