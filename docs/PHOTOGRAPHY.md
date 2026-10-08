@@ -132,8 +132,8 @@ Reset development photography by clearing this IndexedDB database in the browser
 Camera security requirements remain HTTPS/localhost; LAN HTTP falls back to native photo selection.
 No origin/dev binding/PWA behavior changed. No CV, AR, quality scoring or backend request added.
 Manual odometer entry and required walk-around video are implemented in Phase 05; see
-`ODOMETER_VIDEO.md`. Durable remote upload queue, final server summary and reviewer integration
-remain future work. No upload/submission success is fabricated.
+`ODOMETER_VIDEO.md`. Phase 06 adds the durable shared upload queue and mock Upload Center; see
+`UPLOAD.md`. Real transport, final submission/receipt and reviewer integration remain future work.
 
 ## Viewport and performance
 

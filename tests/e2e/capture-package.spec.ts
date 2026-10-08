@@ -54,7 +54,7 @@ test("video ready, deterministic recording, durable review and confirmation comp
   expect(await page.evaluate(() => (window as Window & { stoppedPhotoTracks?: number }).stoppedPhotoTracks)).toBeGreaterThan(0);
   await page.getByRole("button", { name: "تأیید و ذخیره" }).click(); await expect(page).toHaveURL(/capture\/review$/);
   await expect(page.getByRole("button", { name: "ادامه به ارسال" })).toBeEnabled(); await expect(page.getByText("ثبت شده", { exact: true })).toBeVisible(); await visual(page, "package-complete");
-  await page.getByRole("button", { name: "ادامه به ارسال" }).click(); await expect(page.getByText(/چیزی ارسال نشده است/)).toBeVisible();
+  await page.getByRole("button", { name: "ادامه به ارسال" }).click(); await expect(page).toHaveURL(/\/upload$/); await expect(page.getByRole("heading", { name: "همگام‌سازی فایل‌ها" })).toBeVisible();
   await page.goto("/"); await enterPhotography(page); await openPackageReview(page); await expect(page.getByRole("button", { name: "ادامه به ارسال" })).toBeEnabled();
 });
 test("native video fallback is playable and durable without MediaRecorder", async ({ page }) => {

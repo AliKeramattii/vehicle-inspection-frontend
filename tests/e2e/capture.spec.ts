@@ -88,7 +88,7 @@ test("retake reason maps to a requirement and full completion enables local fina
   await expect(page).toHaveURL(/video\/record$/);
   await page.getByRole("link", { name: "بازگشت به بررسی بازدید" }).click();
   await expect(page.getByRole("heading", { name: "عکاسی خودرو تکمیل شد" })).toBeVisible();
-  await expect(page.getByText(/پس از اتصال سرویس ارسال/)).toBeVisible();
+  await expect(page.getByText(/وضعیت ارسال را در مرکز ارسال فایل‌ها/)).toBeVisible();
 });
 
 test("denied camera supports native photo selection and durable evidence survives a fresh mock workflow", async ({ page }) => {

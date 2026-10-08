@@ -2,7 +2,7 @@ import type { PhotoRequirementStatus } from "@/schemas/photography";
 
 export type PhotoDraft = { blob: Blob; capturedAt: string };
 export type LocalPhoto = { key: string; namespace: string; requirementId: string; status: PhotoRequirementStatus;
-  blob?: Blob; capturedAt?: string; draft?: PhotoDraft; reviewerReason?: string };
+  blob?: Blob; capturedAt?: string; revisionId?: string; draft?: PhotoDraft; reviewerReason?: string };
 export interface PhotoStore {
   list(namespace: string): Promise<LocalPhoto[]>;
   saveDraft(namespace: string, requirementId: string, draft: PhotoDraft): Promise<void>;
@@ -61,8 +61,18 @@ export const indexedDBPhotoStore: PhotoStore = {
   async confirm(namespace, requirementId) {
     await change(namespace, requirementId, (photo) => {
       if (!photo.draft) throw new Error("ابتدا یک عکس بگیرید.");
-      return { ...photo, ...photo.draft, status: "captured", draft: undefined, reviewerReason: undefined };
+      return { ...photo, ...photo.draft, revisionId: crypto.getRandomValues(new Uint32Array(4)).join("-"), status: "captured", draft: undefined, reviewerReason: undefined };
     });
   },
   async discardDraft(namespace, requirementId) { await change(namespace, requirementId, (photo) => ({ ...photo, draft: undefined })); },
 };
+
+/** Read one durable media record without loading all full-resolution images. */
+export async function readPhoto(key: string): Promise<LocalPhoto | undefined> {
+  const database = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const transaction = database.transaction(photoDatabase.store), request = transaction.objectStore(photoDatabase.store).get(key);
+    transaction.oncomplete = () => { database.close(); resolve(request.result as LocalPhoto | undefined); };
+    transaction.onabort = transaction.onerror = () => { database.close(); reject(new Error("خواندن عکس ذخیره‌شده ممکن نشد.")); };
+  });
+}

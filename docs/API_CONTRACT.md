@@ -281,11 +281,17 @@ Example (abbreviated, remaining sections configured similarly):
 The frontend keeps draft and accepted blobs in IndexedDB, namespaced by inspection/template version/
 requirement. Confirmed local evidence is read through Query, not duplicated in Zustand or the mock
 inspection repository. Draft replacement retains the accepted original until atomic confirmation.
-No evidence HTTP calls, upload acknowledgement, background queue or submission is implemented here.
+Capture components make no evidence HTTP calls or submission. Phase 06 now owns the separate
+durable mock queue/Upload Center; actual server acknowledgement remains a future transport concern.
 Future GET evidence and additional-evidence adapters must map shotCode/requirementId and reviewerReason
 to the current template. Unrelated historical CAP codes in API examples are illustrative, not rules.
 
 ## Evidence/upload
+
+Phase 06 implements a **mock-only** photo/video transport behind a durable IndexedDB queue;
+see `docs/UPLOAD.md`. Below are planned authenticated ASP.NET operations, not runtime requests or
+confirmed storage-provider guarantees. Capture, binary upload and verification remain separate.
+Odometer PUT is data synchronization and does not count as a media file.
 
 Recommended flow:
 
@@ -323,7 +329,33 @@ Response:
 
 ### POST `/api/evidence/{evidenceId}/complete`
 
+Planned body: `{ "clientUploadId": "stable-local-job-id", "revision": "accepted-revision" }`.
+Registration should accept that same clientUploadId (or agreed Idempotency-Key) plus revision,
+requirementId/shotCode for photos, kind, MIME, sizeBytes, capturedAt, and durationSeconds for video.
+Repeated register/complete must resolve the same evidence after refresh/retry. Intended response
+includes evidenceId, binary-upload status and verification status. Idempotency retention and
+replacement linkage (`replacesEvidenceId`) need backend agreement.
+
+Planned signed-upload metadata: uploadUrl, expiresAt, optional method/requiredHeaders. Transport
+isolates provider details, refreshes expired URLs for the same identity, sends raw Blob/File (never
+base64/JSON bytes), and acknowledges only after transfer succeeds. Byte-range resume is not assumed;
+restart the individual file safely. Do not expose/log signed URLs or secrets in public configuration.
+Prior accepted server evidence remains valid until replacement completion/confirmation; obsolete
+pending local jobs must not become current.
+
 ### GET `/api/inspections/{inspectionId}/evidence`
+
+Planned items include evidenceId, clientUploadId/revision, kind/mediaType, requirement linkage where
+applicable, MIME/size/capture metadata, binary-upload status, verification status, reviewerReason and
+optional authorized preview metadata. Polling distinguishes uploaded, processing, verified and
+retakeRequired. Processing is not verification and has no fabricated percentage. Headline counts
+binary-uploaded-or-beyond. Future final submission rules remain a separate phase.
+
+Transport classification must cover structured validation/unsupported media (400/422), auth/ownership
+(401/403), not-found (404), revision/idempotency conflicts (409), rate limiting (429/Retry-After),
+transient 5xx/network/timeout and signed URL expiry. Finite backoff/manual recovery applies to retryable
+errors; permanent failures cannot loop forever. Session recovery resumes the same durable job.
+Current runtime mock has no credentials or production HTTP requests.
 
 Evidence state should support:
 - local (frontend only)

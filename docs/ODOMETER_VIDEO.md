@@ -1,5 +1,9 @@
 # Phase 05: manual odometer and walk-around video
 
+Phase 06 now connects completed capture review to the mocked Upload Center. Photo/video share
+metadata-only durable upload jobs referencing these stores; odometer remains separate numeric data.
+See `UPLOAD.md` for transfer/verification state, offline retry and replacement boundaries.
+
 The current configurable capture package is **12 required photographs + 1 manual odometer reading
 + 1 required 360 walk-around video**. The odometer photograph (`odometer-on.webp`) remains one of
 the twelve. Numeric data and video are not PhotoRequirements. Production photography remains 2D;
@@ -54,16 +58,15 @@ their timeout/abort listener. Recorder chunks are transient until the final Blob
 
 Review plays the durable video with native controls, duration and local status. Confirmation atomically
 promotes the draft. Re-record discards only a draft, never good accepted evidence. Playback failure
-has explicit feedback; save failure retains retryable evidence. No manual quality checklist or remote
-upload exists. Unique media blob keys and shared MIME/bytes/kind metadata prepare one future generic
-evidence queue, not a second upload pipeline.
+has explicit feedback; save failure retains retryable evidence. No manual quality checklist or real
+backend upload exists. Phase 06 uses these unique media keys and shared metadata in one durable
+mock photo/video queue, not a separate video pipeline.
 
 ## Local review and viewport
 
 PhotographyCompletion shows separate photos / kilometers / video statuses and editable/reopenable
-links. Its future-send control is disabled unless the package is locally complete; activation currently
-explains that the upload service is unavailable and nothing was sent. No broken upload route or
-Upload Center is introduced. The existing single internal scroll region, stable bottom actions,
+links. Its send continuation is disabled unless locally complete; Phase 06 activation opens the mocked
+Upload Center. It does not submit the inspection. The existing single internal scroll region, stable bottom actions,
 safe-area padding, keyboard resizing and physical/RTL semantics remain intact.
 
 ## Validation and limitations

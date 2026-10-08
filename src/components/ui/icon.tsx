@@ -35,6 +35,7 @@ const icons = {
   distance: "/icons/photography/distance.svg", stability: "/icons/camera/stability.svg",
   resetView: "/icons/upload/retry.svg", retake: "/icons/camera/retake.svg",
   enlarge: "/icons/camera/zoom-in.svg", evidenceCheck: "/icons/photography/evidence-check.svg",
+  video: "/icons/camera/video.svg",
 } as const;
 export type IconName = keyof typeof icons;
 

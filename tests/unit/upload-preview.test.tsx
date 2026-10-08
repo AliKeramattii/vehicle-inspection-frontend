@@ -1,0 +1,30 @@
+import { act, render, screen } from "@testing-library/react";
+import { afterEach, expect, it, vi } from "vitest";
+import { UploadPreview } from "@/features/upload/upload-preview";
+import { PhotographyRouteFocus } from "@/features/photography/photography-route-focus";
+import type { UploadJob } from "@/features/upload/upload-model";
+const read = vi.hoisted(() => vi.fn());
+vi.mock("@/features/upload/media-source", () => ({ durableUploadMedia: { read } }));
+const job: UploadJob = { id: "photo", namespace: "namespace", inspectionId: "inspection", evidenceKind: "photo", title: "عکس", localBlobKey: "key", revision: "revision", mimeType: "image/jpeg", byteSize: 100, capturedAt: "now", required: true, current: true, upload: "queued", verification: "not-started", bytesUploaded: 0, attemptCount: 0 };
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); read.mockReset(); });
+it("loads visible thumbnails once, closes bitmaps and revokes URLs without redecoding on progress updates", async () => {
+  const create = vi.fn(() => "blob:thumbnail"), revoke = vi.fn(), close = vi.fn(); let intersect: (entries: { isIntersecting: boolean }[]) => void = () => {};
+  vi.stubGlobal("IntersectionObserver", class { constructor(callback: typeof intersect) { intersect = callback; } observe() {} disconnect() {} });
+  vi.stubGlobal("createImageBitmap", vi.fn(async () => ({ width: 144, height: 96, close })));
+  vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({ drawImage: vi.fn() } as unknown as CanvasRenderingContext2D);
+  vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation((callback) => callback(new Blob(["small"], { type: "image/webp" })));
+  const NativeURL = URL;
+  vi.stubGlobal("URL", class extends NativeURL { static createObjectURL = create; static revokeObjectURL = revoke; }); read.mockResolvedValue(new Blob(["source"], { type: "image/jpeg" }));
+  const view = render(<UploadPreview job={job} />); expect(read).not.toHaveBeenCalled();
+  await act(async () => intersect([{ isIntersecting: true }])); expect(read).toHaveBeenCalledTimes(1); expect(close).toHaveBeenCalledOnce(); expect(create).toHaveBeenCalledOnce();
+  view.rerender(<UploadPreview job={{ ...job, upload: "uploading", bytesUploaded: 45 }} />); expect(read).toHaveBeenCalledTimes(1);
+  view.unmount(); expect(revoke).toHaveBeenCalledWith("blob:thumbnail");
+});
+it("does not load video bytes for an Upload Center preview", () => { render(<UploadPreview job={{ ...job, evidenceKind: "video-360" }} />); expect(read).not.toHaveBeenCalled(); });
+it("does not steal a user-focused input in the deferred photography route entry frame", async () => {
+  let frame: FrameRequestCallback = () => {}; vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => { frame = callback; return 1; }); vi.stubGlobal("cancelAnimationFrame", vi.fn());
+  const scroll = vi.fn(), previous = HTMLElement.prototype.scrollIntoView; HTMLElement.prototype.scrollIntoView = scroll;
+  render(<div className="photography-screen"><PhotographyRouteFocus routeKey="review"><div className="photo-route"><h2>بررسی</h2><input aria-label="کیلومتر فعلی" /></div></PhotographyRouteFocus></div>);
+  screen.getByLabelText("کیلومتر فعلی").focus(); await act(async () => frame(0)); expect(screen.getByLabelText("کیلومتر فعلی")).toHaveFocus(); expect(scroll).toHaveBeenCalledWith({ block: "nearest" });
+  if (previous) HTMLElement.prototype.scrollIntoView = previous; else Reflect.deleteProperty(HTMLElement.prototype, "scrollIntoView");
+});

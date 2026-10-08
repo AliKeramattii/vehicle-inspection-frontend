@@ -23,7 +23,7 @@ export type VideoDraft = { blob: Blob; durationSeconds: number; metadata: LocalM
 export type LocalVideo360 = { accepted?: VideoDraft; draft?: VideoDraft; state: EvidenceState; reviewerReason?: string };
 export type CapturePackageData = { namespace: string; odometer?: OdometerReading; video360?: LocalVideo360 };
 export function videoAccepted(video?: LocalVideo360) {
-  return Boolean(video?.accepted?.blob.size && Number.isFinite(video.accepted.durationSeconds) && video.accepted.durationSeconds > 0 && ["local", "queued", "uploading", "processing", "uploaded", "verified"].includes(video.state));
+  return Boolean(video?.accepted?.blob.size && Number.isFinite(video.accepted.durationSeconds) && video.accepted.durationSeconds > 0 && video.state !== "retakeRequired");
 }
 export function capturePackageProgress(template: PhotographyTemplate, photos: readonly LocalPhoto[], data?: CapturePackageData) {
   const images = photographyProgress(template, photos);

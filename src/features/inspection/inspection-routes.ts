@@ -7,4 +7,5 @@ export const inspectionRoutes = {
   photo: (id: string, photo: string, stage: "guide" | "camera" | "review") => `${inspectionPath(id)}/capture/photo/${encodeURIComponent(photo)}/${stage}`,
   photographyReview: (id: string) => `${inspectionPath(id)}/capture/review`,
   video: (id: string, stage: "record" | "review") => `${inspectionPath(id)}/capture/video/${stage}`,
+  upload: (id: string) => `${inspectionPath(id)}/upload`,
 };
