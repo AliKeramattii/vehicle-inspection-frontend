@@ -40,7 +40,7 @@ Unit request authorization/readiness/history/idempotency/replacement/queue tests
 - [x] Implement customer routes and reference-driven presentation.
 - [x] Add 36 unit cases and 24 customer browser scenarios; inspect all nine intended new baselines and responsive request/guidance views.
 - [x] Validate and review preservation/security.
-- [ ] Commit and push the focused implementation; verify remote HEAD.
+- [x] Commit and push the focused implementation; verify remote HEAD (`1b1e25c525652adf986210fc43a7a8cb15db3d66`, origin/main).
 
 ## Final technical validation
 All commands ran to a real process exit. On the full working tree: lint 0, typecheck 0, unit 0 (216 tests / 17 files), Playwright 1 (141 passed, 86 intentionally skipped, only the pre-existing readiness screenshot fails with exactly 4,010 pixels), build 0. No readiness fix or baseline update was made.
@@ -48,6 +48,8 @@ All commands ran to a real process exit. On the full working tree: lint 0, typec
 The exact staged source was exported under the ignored `.agent/reference-review/phase08-validation` directory, restoring HEAD versions only inside that export for the unrelated dirty files. Its lint, typecheck, unit (216), full Playwright (142 passed / 86 skipped), and production build all exited 0. The final full browser run completed in 2.7 minutes without a runner stall. It covers all 24 new customer scenarios and previous-phase regressions, including marker/control layout, recording cleanup, upload recovery and initial submission.
 
 Console/page/resource failures are assertions in the new browser scenarios. The nested validation export causes a Next.js workspace-root inference warning; Playwright also reports the existing NO_COLOR/FORCE_COLOR warning. Neither is a lint/type/build failure or a production UI change.
+
+The complete command/visual/preservation record is in `docs/PHASE08_VALIDATION.md`. A documentation-only validation commit follows the implementation, matching the previous phase workflow. No future phase started.
 
 ## Discoveries and decisions
 - Reviewer scope is enforced by the route guard and a re-read/transactional mutation claim below presentation. Each immutable request version has its own media namespace; initial submission data never changes.
