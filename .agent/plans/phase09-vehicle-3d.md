@@ -33,7 +33,7 @@ Unit: gate, presets, anchors, semantic aliases, loader lifecycle. Browser: real 
 - [x] Presets/markers/fallback accessible, selection synchronized, controls below.
 - [x] Production model handler/public path blocked; pre-stream preview gate added after production test caught HTTP 200 not-found streaming.
 - [x] Viewports and performance reviewed; real validation exits recorded.
-- [ ] User edits unchanged; focused code/docs committed and pushed, no model binaries.
+- [x] User edits unchanged; focused code/docs committed and pushed, no model binaries.
 
 ## Progress
 - [x] Required source exists (29,608,360 bytes); embedded noncommercial license found, no independent commercial permission found in project text.
@@ -41,7 +41,7 @@ Unit: gate, presets, anchors, semantic aliases, loader lifecycle. Browser: real 
 - [x] Audit/optimization: 584,865 → 238,087 mobile / 302,631 desktop triangles; 29,608,360 → 12,716,516 / 17,262,392 bytes. Official validator: 0 errors/warnings all three; source 293 unused-UV infos, candidates none. Goal budgets remain unmet.
 - [x] Viewer/integration: real GLB, actual-bounds framing, eight shared exterior anchors, contextual detail requirements, adaptive single-variant loading, material paint updates without refetch, semantic highlights, 2D fallback and disposal.
 - [x] Validation and documentation.
-- [ ] Focused Git delivery (only 31 task-owned code/docs files; no model assets or user changes).
+- [x] Focused Git delivery (only 31 task-owned code/docs files; no model assets or user changes).
 
 ## Discoveries and visual/performance results
 
@@ -91,4 +91,12 @@ No screenshot baselines, canonical automotive assets, package files or API contr
 
 Final staging/security review: 31 explicit intended files, all 24 unrelated tracked paths retain
 their initial SHA-256/deleted state. Original model hash unchanged. No model binary/render artifact,
-credential/environment file or unrelated user work is staged. Code/doc delivery is pending below.
+credential/environment file or unrelated user work was staged.
+
+## Delivery
+
+Implementation commit `c5f59a1` (`feat: add isolated local Sportage viewer`) was pushed normally to
+`origin/feat/optional-vehicle-3d`; remote HEAD matched the full local commit hash. This plan update
+records completed validation/delivery in a separate documentation commit. Source, both local
+variants, comparison renders and all unrelated user changes remain excluded. Production stays 2D;
+commercial clearance, source cleanup and real-device approval are the next gates, not automatic work.
