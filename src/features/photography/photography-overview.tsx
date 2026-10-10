@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ComponentType } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BottomStickyCTA } from "@/components/ui/bottom-sticky-cta";
@@ -12,11 +12,11 @@ import type { LocalPhoto } from "@/lib/media/photo-store";
 import { findRequirement, nextIncompleteRequirement, nextRequirement, photoRequirementEntry, photographyProgress, photoSatisfied, requirementStatus, requirementProgress } from "./photography-model";
 import { PhotographyProgress } from "./photography-progress";
 import { categoryRequirements, photographyCategories, sectionCategory, type PhotographyCategory } from "./vehicle-photo-config";
-import { VehiclePhotoNavigator } from "./vehicle-photo-navigator";
+import { VehiclePhotoNavigator, type VehiclePhotoNavigatorProps } from "./vehicle-photo-navigator";
 import { PhotographyShotCarousel } from "./photography-shot-carousel";
 import { nextCaptureTask, type CapturePackageData } from "@/features/capture-package/capture-package-model";
 
-export function PhotographyOverview({ template, records, inspectionId, data }: { template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string; data?: CapturePackageData }) {
+export function PhotographyOverview({ template, records, inspectionId, data, navigator: Navigator = VehiclePhotoNavigator, previewHref }: { template: PhotographyTemplate; records: readonly LocalPhoto[]; inspectionId: string; data?: CapturePackageData; navigator?: ComponentType<VehiclePhotoNavigatorProps>; previewHref?: string }) {
   const router = useRouter();
   const next = nextIncompleteRequirement(template, records), progress = photographyProgress(template, records);
   const [selectedId, select] = useState(next?.photo.id ?? template.sections[0].photoRequirements[0].id);
@@ -25,7 +25,7 @@ export function PhotographyOverview({ template, records, inspectionId, data }: {
   const record = records.find((record) => record.requirementId === photo.id), complete = photoSatisfied(requirementStatus(photo, records));
   const chooseSection = (id: InspectionSectionId) => {
     const target = template.sections.find((section) => section.id === id);
-    if (target) select((nextRequirement(target, records) ?? target.photoRequirements[0]).id);
+    if (target) { const id = (nextRequirement(target, records) ?? target.photoRequirements[0]).id; select(id); return id; }
   };
   const chooseCategory = (category: PhotographyCategory) => {
     const photos = categoryRequirements(template, category);
@@ -45,7 +45,7 @@ export function PhotographyOverview({ template, records, inspectionId, data }: {
   return <div className="photo-route photography-overview">
     <div className="photo-scroll photography-overview-content">
     <div className="photography-studio"><PhotographyProgress template={template} records={records} />
-      <VehiclePhotoNavigator template={template} photo={photo} sectionId={section.id} records={records} onActivate={activateMarker} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
+      <Navigator template={template} photo={photo} sectionId={section.id} records={records} onActivate={activateMarker} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
     </div>
     <section className="photography-shot-panel" aria-label="بخش‌ها و عکس‌های بازدید">
       <nav className="photography-categories" aria-label="دسته‌های عکاسی">{photographyCategories.map((item) => {
@@ -56,6 +56,7 @@ export function PhotographyOverview({ template, records, inspectionId, data }: {
       <div className="photography-selected-heading"><h2>{section.title}</h2><Link href={inspectionRoutes.section(inspectionId, section.id)}>مشاهده بخش<Icon name="chevronBack" size={15} /></Link></div>
       <PhotographyShotCarousel photos={categoryRequirements(template, category)} records={records} selectedId={photo.id} onSelect={select} />
       <Link className="capture-requirements-link" href={inspectionRoutes.photographyReview(inspectionId)}>بررسی نیازمندی‌های بازدید</Link>
+      {previewHref && <Link className="capture-requirements-link" href={previewHref}>پیش‌نمایش محلی مدل خودرو</Link>}
     </section>
     </div>
     <BottomStickyCTA className="photography-actions"><Link className="photography-primary" href={href}><Icon name={progress.complete ? "check" : review ? "viewFront" : "camera"} size={23} />{label}</Link></BottomStickyCTA>

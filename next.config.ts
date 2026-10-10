@@ -9,6 +9,8 @@ const developmentOrigins = Object.values(networkInterfaces()).flatMap((addresses
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  // Restricted local prototype assets must never enter production server deployment traces.
+  outputFileTracingExcludes: { "/*": ["./references/assets/3d/**/*", "./.agent/vehicle-3d/**/*", "./public/assets/models/*.glb"] },
   ...(process.env.NODE_ENV !== "production" ? { allowedDevOrigins: developmentOrigins } : {}),
 };
 

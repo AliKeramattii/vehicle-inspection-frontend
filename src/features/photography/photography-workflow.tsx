@@ -24,9 +24,11 @@ import { VideoCapture } from "@/features/capture-package/video-capture";
 import { VideoReview } from "@/features/capture-package/video-review";
 import { photoNamespace, photoKey } from "@/lib/media/photo-store";
 import { videoBlobKey } from "@/lib/media/capture-data-store";
+import type { ComponentType } from "react";
+import type { VehiclePhotoNavigatorProps } from "./vehicle-photo-navigator";
 
 export type PhotographyView = { kind: "overview" } | { kind: "completion" } | { kind: "video-record" } | { kind: "video-review" } | { kind: "section"; sectionId: string } | { kind: "guide" | "camera" | "review"; requirementId: string };
-export function PhotographyWorkflow({ inspectionId, view }: { inspectionId: string; view: PhotographyView }) {
+export function PhotographyWorkflow({ inspectionId, view, overviewNavigator, previewHref }: { inspectionId: string; view: PhotographyView; overviewNavigator?: ComponentType<VehiclePhotoNavigatorProps>; previewHref?: string }) {
   const { repository, authorized } = useInspectionAccess(inspectionId);
   const inspection = useQuery({ queryKey: ["inspection", inspectionId], queryFn: () => repository.getInspection(inspectionId), retry: false });
   const plan = useQuery({ queryKey: ["capture-plan", inspectionId], queryFn: () => repository.getCapturePlan(inspectionId), retry: false });
@@ -36,9 +38,9 @@ export function PhotographyWorkflow({ inspectionId, view }: { inspectionId: stri
   if (!authorized || !inspection.data?.location || !inspection.data.vehicle) return <div className="photography-recovery"><InlineAlert>برای شروع عکاسی، موقعیت و مشخصات خودرو را تأیید کنید.</InlineAlert><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
   const parsed = photographyTemplateSchema.safeParse(plan.data);
   if (!parsed.success) return <div className="photography-recovery"><InlineAlert>قالب عکاسی در دسترس نیست.</InlineAlert><SecondaryButton onClick={() => void plan.refetch()}>تلاش دوباره</SecondaryButton><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
-  return <PhotographySession inspectionId={inspectionId} template={parsed.data} view={view} />;
+  return <PhotographySession inspectionId={inspectionId} template={parsed.data} view={view} overviewNavigator={overviewNavigator} previewHref={previewHref} />;
 }
-function PhotographySession({ inspectionId, template, view }: { inspectionId: string; template: PhotographyTemplate; view: PhotographyView }) {
+function PhotographySession({ inspectionId, template, view, overviewNavigator, previewHref }: { inspectionId: string; template: PhotographyTemplate; view: PhotographyView; overviewNavigator?: ComponentType<VehiclePhotoNavigatorProps>; previewHref?: string }) {
   const router = useRouter(), photos = usePhotoRecords(inspectionId, template);
   const namespace = photoNamespace(inspectionId, template.templateId, template.templateVersion), capture = useCaptureData(namespace);
   if (photos.query.isPending || capture.query.isPending) return <PhotographyLoading message="در حال خواندن عکس‌های ذخیره‌شده…" />;
@@ -46,7 +48,7 @@ function PhotographySession({ inspectionId, template, view }: { inspectionId: st
   if (photos.query.error) return <div className="photography-recovery"><InlineAlert tone="destructive">{photos.query.error.message}</InlineAlert><SecondaryButton onClick={() => void photos.query.refetch()}>تلاش دوباره</SecondaryButton></div>;
   const shared = { inspectionId, records: photos.records, data: capture.data };
   const focus = (children: React.ReactNode) => <PhotographyRouteFocus routeKey={JSON.stringify(view)}>{children}</PhotographyRouteFocus>;
-  if (view.kind === "overview") return focus(<PhotographyOverview {...shared} template={template} />);
+  if (view.kind === "overview") return focus(<PhotographyOverview {...shared} template={template} navigator={overviewNavigator} previewHref={previewHref} />);
   if (view.kind === "completion") return focus(<PhotographyCompletion {...shared} template={template} />);
   if (view.kind === "video-record") return focus(<VideoCapture inspectionId={inspectionId} reason={capture.data?.video360?.reviewerReason} onRecorded={async ({ blob, durationSeconds }, signal) => {
     await capture.draft.mutateAsync({ blob, durationSeconds, metadata: { kind: "video-360", mimeType: blob.type, sizeBytes: blob.size, localBlobKey: videoBlobKey(namespace), capturedAt: new Date().toISOString() } });

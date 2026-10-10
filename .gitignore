@@ -42,3 +42,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Restricted vehicle source/derivatives stay local until commercial permission is established.
+/references/assets/3d/source/*.glb
+/public/assets/models/*.glb
+/.agent/vehicle-3d/

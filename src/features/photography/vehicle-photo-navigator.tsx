@@ -8,10 +8,12 @@ import { findRequirement, photoRequirementEntry, photographyStateLabels, photogr
 import { artworkForRequirement, vehiclePhotoControls } from "./vehicle-photo-config";
 import { EvidenceSymbol } from "./evidence-symbol";
 
-export function VehiclePhotoNavigator({ template, photo, sectionId, records, onActivate, onSection, onReset }: {
+export type VehiclePhotoNavigatorProps = {
   template: PhotographyTemplate; photo: PhotoRequirement; sectionId: InspectionSectionId; records: readonly LocalPhoto[];
-  onActivate: (id: PhotoRequirement["id"]) => void; onSection: (id: InspectionSectionId) => void; onReset: () => void;
-}) {
+  onActivate: (id: PhotoRequirement["id"]) => void; onSection: (id: InspectionSectionId) => PhotoRequirement["id"] | void; onReset: () => void;
+  controls?: boolean;
+};
+export function VehiclePhotoNavigator({ template, photo, sectionId, records, onActivate, onSection, onReset, controls = true }: VehiclePhotoNavigatorProps) {
   const artwork = artworkForRequirement(photo.id), requirements = template.sections.flatMap((section) => section.photoRequirements);
   return <section className="vehicle-photo-navigator" aria-label="انتخاب نما روی تصویر خودرو">
     <div className="vehicle-photo-scene">
@@ -29,8 +31,8 @@ export function VehiclePhotoNavigator({ template, photo, sectionId, records, onA
       })}</div>
     </div>
     </div>
-    <nav className="vehicle-photo-controls" aria-label="نماهای خودرو"><button type="button" aria-label="بازنشانی به نمای بعدی" onClick={onReset}><Icon name="resetView" size={20} /><span>بازنشانی</span></button>
+    {controls && <nav className="vehicle-photo-controls" aria-label="نماهای خودرو"><button type="button" aria-label="بازنشانی به نمای بعدی" onClick={onReset}><Icon name="resetView" size={20} /><span>بازنشانی</span></button>
       {vehiclePhotoControls.map((control) => <button type="button" key={control.sectionId} aria-label={`نمای خودرو: ${control.title}`} aria-pressed={sectionId === control.sectionId} onClick={() => onSection(control.sectionId)}><Icon name={control.icon} size={22} /><span>{control.title}</span></button>)}
-    </nav>
+    </nav>}
   </section>;
 }
