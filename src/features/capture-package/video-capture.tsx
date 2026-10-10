@@ -9,11 +9,11 @@ import type { RecordedVideo, VideoRecorderService } from "@/lib/media/video-reco
 import { useVideoRecording } from "./use-video-recording";
 import { VideoOrbit } from "./video-orbit";
 export function videoTimer(seconds: number) { return toPersianDigits(`${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`); }
-export function VideoCapture({ inspectionId, onRecorded, service, reason }: { inspectionId: string; onRecorded: (video: RecordedVideo, signal: AbortSignal) => Promise<void>; service?: VideoRecorderService; reason?: string }) {
+export function VideoCapture({ inspectionId, onRecorded, service, reason, backHref, backLabel }: { inspectionId: string; onRecorded: (video: RecordedVideo, signal: AbortSignal) => Promise<void>; service?: VideoRecorderService; reason?: string; backHref?: string; backLabel?: string }) {
   const { preview, state, elapsed, error, canRetrySave, retrySave, stop, start, native } = useVideoRecording(onRecorded, service);
   const recording = state === "recording", busy = state === "opening" || state === "saving";
   return <div className="photo-route camera-screen video-capture" data-recording-state={state}>
-    <header className="camera-header"><Link aria-label="بازگشت به بررسی بازدید" href={inspectionRoutes.photographyReview(inspectionId)}><Icon name="close" size={22} /></Link><h2>ویدیوی ۳۶۰ درجه</h2></header>
+    <header className="camera-header"><Link aria-label={backLabel ?? "بازگشت به بررسی بازدید"} href={backHref ?? inspectionRoutes.photographyReview(inspectionId)}><Icon name="close" size={22} /></Link><h2>ویدیوی ۳۶۰ درجه</h2></header>
     <div className="photo-scroll video-capture-content">
       <video ref={preview} className="walkaround-preview" playsInline autoPlay muted aria-label="تصویر زنده ضبط ویدیو" />
       <div className="walkaround-instructions"><h3>آرام دور خودرو حرکت کنید</h3><p>خودرو را در کادر نگه دارید</p>{reason && <p className="video-retake-reason">نیاز به ضبط مجدد: {reason}</p>}</div>

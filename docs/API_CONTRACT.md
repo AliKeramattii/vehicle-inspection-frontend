@@ -467,17 +467,32 @@ time is a mock/product estimate, not a confirmed backend SLA.
 
 ## Additional evidence
 
+Phase 08 is **planned/mock-only**. Authenticated backend ownership/version checks remain required.
+Initial submission, original media and history remain immutable. One active request may contain
+multiple photo/video items; subsequent rounds preserve prior requests and receipts. The original
+package stays twelve photos, a separate odometer number and one walk-around video.
+
 ### GET `/api/inspections/{inspectionId}/evidence-requests`
 
-Response:
+Planned authenticated response (frontend adapter consumes the current template's requirement IDs,
+not historical shot codes). Reasons are safe user-facing text. Template/version and original
+evidence links must be stable for the request round:
 ```json
 {
   "requests": [
     {
       "id": "req_123",
-      "shotCode": "CAP-05",
-      "reason": "plateUnreadable",
-      "message": "پلاک در تصویر قبلی خوانا نیست."
+      "inspectionId": "insp_123",
+      "version": 1,
+      "round": 1,
+      "status": "requested",
+      "requestedAt": "2026-10-10T07:00:00Z",
+      "templateId": "body-image-guided",
+      "templateVersion": 1,
+      "items": [
+        { "id": "item_front", "kind": "photo", "requirementId": "front-plate", "originalEvidenceId": "ev_front", "reviewerReason": "پلاک خوانا نیست." },
+        { "id": "item_chassis", "kind": "photo", "requirementId": "chassis-number", "originalEvidenceId": "ev_chassis", "reviewerReason": "لطفاً نزدیک‌تر و واضح‌تر عکاسی کنید." }
+      ]
     }
   ]
 }
@@ -485,7 +500,51 @@ Response:
 
 ### POST `/api/evidence-requests/{requestId}/replacement`
 
+Planned replacement registration/linkage, compatible with the existing generic evidence lifecycle.
+Metadata: inspectionId, requestVersion, requestItemId, originalEvidenceId, kind (`photo` or
+`video-360`), requirementId for photos, stable local candidate/revision ID, MIME type, size and
+idempotency key. The generic evidence registration/upload/completion transport still owns binary
+upload; this operation must not create a second uploader or duplicate server evidence. The backend
+may support this linkage directly in `POST /api/inspections/{inspectionId}/evidence` instead of a
+separate registration call. Signed upload details remain transport-owned and unconfirmed.
+
+Validate active request ownership/version and exact requested kind/requirement. Reject unrequested
+targets, mismatched inspection, stale rounds and resubmitted requests. Return candidate evidence ID
+and upload metadata as appropriate. Do not overwrite original accepted/submitted evidence. Numeric
+odometer correction is not authorized by an odometer-photo request.
+
 ### POST `/api/inspections/{inspectionId}/resubmit`
+
+Planned authenticated operation. Request:
+```json
+{
+  "requestId": "req_123",
+  "requestVersion": 1,
+  "candidateEvidenceIds": ["ev_new_front", "ev_new_chassis"],
+  "idempotencyKey": "stable-supplemental-attempt"
+}
+```
+The same key/payload must replay the same acknowledgement after double-click, refresh, timeout or
+uncertain response. A conflicting payload for a used key should return 409. Backend must validate
+the entire active item set, current candidate revisions and completed binary uploads transactionally;
+`processing` is eligible without claiming reviewer verification. Local/queued/uploading/failed/
+missing/stale/retake candidates block. No manual quality certification or new photo denominator.
+
+Expected response: existing inspection reference, request/version, receipt/submission timestamp,
+accepted supplemental evidence IDs and queued-for-review status. Link revisions to this supplemental
+submission and retain the initial submission/history. Success is rereview queued, not approved.
+Failure leaves original and candidate evidence intact. Frontend blocks formal resubmit offline.
+
+### GET `/api/inspections/{inspectionId}/status` (supplemental extension)
+
+Planned status includes active request IDs/version, `needs-more-evidence`, supplemental receipts and
+historical rounds, then queued rereview/result. A later round must explicitly authorize its targets;
+never globally unlock a submitted inspection. Frontend mock derives active supplemental status from
+durable requests without rewriting the initial submission record. No aggressive polling.
+
+Expected errors: 400/422 invalid/incomplete candidate metadata, 401/403 session/ownership, 404 request
+or evidence not found, 409 stale version/idempotency conflict/already finalized, 429 Retry-After,
+5xx/network/timeout. Keep user-facing reviewer reasons and structured errors; do not expose internals.
 
 ## Reviewer
 

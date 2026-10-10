@@ -9,6 +9,7 @@ export type MediaReference = {
   inspectionId: string; namespace: string; evidenceKind: "photo" | "video-360";
   requirementId?: string; title: string; localBlobKey: string; revision: string;
   mimeType: string; byteSize: number; capturedAt: string; required: boolean;
+  requestId?: string; requestVersion?: number; requestItemId?: string; replacesEvidenceId?: string;
 };
 export type UploadJob = MediaReference & {
   id: string; current: boolean; upload: UploadStatus; verification: VerificationStatus;

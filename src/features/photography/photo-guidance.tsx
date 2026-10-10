@@ -17,9 +17,9 @@ export function guidanceFrame(photo: PhotoRequirement): PhotoFrame {
   return photo.guidanceTopics?.includes("text") ? "technical-closeup" : photo.guidanceTopics?.some((topic) => topic === "interior" || topic === "ignition") ? "interior-guide" : "exterior-guide";
 }
 
-export function PhotoGuidance({ photo, section, records, inspectionId }: { photo: PhotoRequirement; section: InspectionSection; records: readonly LocalPhoto[]; inspectionId: string }) {
+export function PhotoGuidance({ photo, section, records, inspectionId, navigation }: { photo: PhotoRequirement; section: InspectionSection; records: readonly LocalPhoto[]; inspectionId: string; navigation?: { backHref: string; backLabel: string; cameraHref: string } }) {
   const reason = requirementRetakeReason(photo, records);
-  return <div className="photo-route photography-guide"><div className="photo-scroll photography-content photo-guide-content"><Link className="photo-back" href={inspectionRoutes.section(inspectionId, section.id)}>بازگشت به {section.title}</Link>
+  return <div className="photo-route photography-guide"><div className="photo-scroll photography-content photo-guide-content"><Link className="photo-back" href={navigation?.backHref ?? inspectionRoutes.section(inspectionId, section.id)}>{navigation?.backLabel ?? `بازگشت به ${section.title}`}</Link>
     <div className="photography-title"><h2>{photo.title}</h2><span>{fa(section.photoRequirements.indexOf(photo) + 1)} از {fa(section.photoRequirements.length)}</span></div>
     {reason && <p className="photo-retake-reason" role="status">نیاز به عکاسی مجدد: {reason}</p>}
     <PhotoImage src={photo.sampleImage} alt={`نمونه صحیح: ${photo.title}`} eager className="photo-guide-image" frame={guidanceFrame(photo)} />
@@ -28,5 +28,5 @@ export function PhotoGuidance({ photo, section, records, inspectionId }: { photo
       return <li key={instruction} data-topic={topic}><span aria-hidden="true"><Icon name={guidanceIcons[topic]} size={24} /></span>{instruction}</li>;
     })}</ol>
     <dl className="photo-guide-metadata">{photo.distance && <div><dt>فاصله</dt><dd>{photo.distance}</dd></div>}{photo.height && <div><dt>ارتفاع</dt><dd>{photo.height}</dd></div>}</dl>
-  </div><BottomStickyCTA className="photography-actions"><Link className="photography-primary" href={inspectionRoutes.photo(inspectionId, photo.id, "camera")}><Icon name="camera" size={23} />باز کردن دوربین</Link></BottomStickyCTA></div>;
+  </div><BottomStickyCTA className="photography-actions"><Link className="photography-primary" href={navigation?.cameraHref ?? inspectionRoutes.photo(inspectionId, photo.id, "camera")}><Icon name="camera" size={23} />باز کردن دوربین</Link></BottomStickyCTA></div>;
 }

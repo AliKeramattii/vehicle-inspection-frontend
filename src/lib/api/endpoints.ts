@@ -8,10 +8,13 @@ export const endpoints = {
     status: (id: string) => `/api/inspections/${segment(id)}/status`,
     summary: (id: string) => `/api/inspections/${segment(id)}/summary`,
     submit: (id: string) => `/api/inspections/${segment(id)}/submit`,
+    evidenceRequests: (id: string) => `/api/inspections/${segment(id)}/evidence-requests`,
+    resubmit: (id: string) => `/api/inspections/${segment(id)}/resubmit`,
     capturePlan: (id: string) => `/api/inspections/${segment(id)}/capture-plan`,
     consent: (id: string) => `/api/inspections/${segment(id)}/consent`,
     location: (id: string) => `/api/inspections/${segment(id)}/location`,
     vehicle: (id: string) => `/api/inspections/${segment(id)}/vehicle`,
     plate: (id: string) => `/api/inspections/${segment(id)}/vehicle/plate`,
   },
+  evidenceRequests: { replacement: (id: string) => `/api/evidence-requests/${segment(id)}/replacement` },
 } as const;
