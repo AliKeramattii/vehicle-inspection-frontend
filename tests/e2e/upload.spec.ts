@@ -32,7 +32,7 @@ for (const state of ["mixed", "offline", "uploading", "failed", "processing", "c
   else await expect(page.getByRole("button", { name: "ادامه به بررسی نهایی" })).toBeDisabled();
   if (state === "uploading") await expect(page.getByRole("progressbar", { name: "ارسال جلو ۴۵° راست" })).toHaveAttribute("aria-valuenow", "45");
   if (state === "offline") await expect(page.getByText("اتصال اینترنت برقرار نیست.")).toBeVisible();
-  if (state === "complete") { await page.getByRole("button", { name: "ادامه به بررسی نهایی" }).click(); await expect(page.getByText(/بازدید هنوز ثبت نهایی نشده است/)).toBeVisible(); }
+  if (state === "complete") { await page.getByRole("button", { name: "ادامه به بررسی نهایی" }).click(); await expect(page).toHaveURL(/\/review$/); await expect(page.getByRole("heading", { name: "آماده ارسال" })).toBeVisible(); }
 });
 test("photo and video queue start with bounded concurrency, meaningful byte progress and processing/verification", async ({ page }) => {
   await uploadWorkflow(page, "queued", true);

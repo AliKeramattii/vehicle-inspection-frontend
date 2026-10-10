@@ -77,7 +77,8 @@ decoding. Only metadata reaches Upload Center Query; source Blobs are read on de
 ## Limitations and reset
 
 No production API/auth-refresh integration, background worker, byte-range resume, cleanup policy or
-final submission. IndexedDB eviction/private-mode limits remain. Mock transfers do not guarantee
+real final submission. Phase 07 now provides durable mock submission/receipt via `SUBMISSION.md`.
+IndexedDB eviction/private-mode limits remain. Mock transfers do not guarantee
 delivery to a real server. GPS/media permissions are unaffected.
 
 Reset per origin by clearing `inspection-upload-queue` to remove mock jobs/settings while preserving

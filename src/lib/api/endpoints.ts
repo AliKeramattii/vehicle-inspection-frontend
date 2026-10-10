@@ -6,6 +6,8 @@ export const endpoints = {
     create: "/api/inspections",
     detail: (id: string) => `/api/inspections/${segment(id)}`,
     status: (id: string) => `/api/inspections/${segment(id)}/status`,
+    summary: (id: string) => `/api/inspections/${segment(id)}/summary`,
+    submit: (id: string) => `/api/inspections/${segment(id)}/submit`,
     capturePlan: (id: string) => `/api/inspections/${segment(id)}/capture-plan`,
     consent: (id: string) => `/api/inspections/${segment(id)}/consent`,
     location: (id: string) => `/api/inspections/${segment(id)}/location`,

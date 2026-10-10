@@ -414,16 +414,56 @@ captureRequirements, separate from sections/photoRequirements.
 
 ### GET `/api/inspections/{inspectionId}/summary`
 
+Planned authenticated, ownership-scoped ASP.NET operation; currently a derived local mock view
+model, not an HTTP call. Return confirmed location and vehicle (semantic plate/masked VIN),
+inspection reference, template/version, required photo counts, separate numeric odometer,
+accepted video metadata/duration, current evidence revisions and binary-upload/verification states.
+Do not serialize local Blobs/object URLs. Totals are template-driven: current package is twelve
+photos + one odometer value + one video; odometer is excluded from the media denominator.
+Frontend derives readiness once, using existing capture/upload policies. Missing capture or
+binary uploads block submit. Processing may be binary-complete without being verified.
+
 ### POST `/api/inspections/{inspectionId}/submit`
+
+Planned authenticated operation with ownership enforcement. Send a stable `Idempotency-Key`
+and the reviewed template/evidence revision references plus numeric-data revision/linkage. Backend
+must validate readiness against its own current authoritative state atomically. The intended
+threshold is all required media binary-upload-complete (`uploaded`, `processing`, `verified`),
+valid odometer and accepted capture; verification is not mandatory unless future contract changes.
+Not implemented/confirmed on ASP.NET yet. No local blob keys or bytes are production payloads.
+
+Intended idempotency: duplicate/double activation, refresh and uncertain-response retries return
+the same receipt/reference, not a second submission. An already submitted inspection returns its
+existing receipt/status. A mismatched payload revision for an existing key needs explicit 409
+handling/status recovery rather than silently creating a second submission. Stable frontend keys
+survive retries; future adapter resolves local evidence IDs to remote IDs. A status lookup recovers
+uncertain results. Submit failure must never reset uploaded evidence or accepted local media.
+Current mock persists acknowledgements/receipts in IndexedDB, not on a server.
 
 Response:
 ```json
 {
   "reference": "BDI-8F31K2",
   "status": "queuedForReview",
+  "submittedAt": "2026-10-08T07:00:00.000Z",
   "estimatedReviewMinutes": 120
 }
 ```
+
+### GET `/api/inspections/{inspectionId}/status`
+
+Planned authenticated operation. Return existing reference, formal submission/review status,
+submittedAt and estimate where supported. Status vocabulary maps to not-submitted/submitting/
+submitted/queued-for-review/needs-more-evidence/review-complete/submit-failed in the frontend;
+capture, upload and verification remain separate. Never equate processing with completed review.
+Current mock status reads durable local records; no post-receipt polling is needed.
+
+Expected failures: structured 400/422 readiness/field errors, 401/403 ownership/session, 404 missing
+inspection, 409 revision/idempotency conflict, 429 Retry-After, 5xx/network/timeout. Preserve evidence
+and provide safe retry/recovery; do not expose backend internals. Offline formal submit is blocked
+until connectivity returns (no background success). Successful submission locks ordinary edits;
+future additional-evidence status must explicitly authorize scoped replacement. Estimated review
+time is a mock/product estimate, not a confirmed backend SLA.
 
 ## Additional evidence
 

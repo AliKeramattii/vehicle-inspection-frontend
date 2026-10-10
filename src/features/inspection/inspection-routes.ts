@@ -8,4 +8,6 @@ export const inspectionRoutes = {
   photographyReview: (id: string) => `${inspectionPath(id)}/capture/review`,
   video: (id: string, stage: "record" | "review") => `${inspectionPath(id)}/capture/video/${stage}`,
   upload: (id: string) => `${inspectionPath(id)}/upload`,
+  summary: (id: string) => `${inspectionPath(id)}/review`,
+  receipt: (id: string) => `${inspectionPath(id)}/submitted`,
 };

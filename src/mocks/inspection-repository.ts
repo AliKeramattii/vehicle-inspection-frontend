@@ -5,6 +5,7 @@ import { inspectionFixture, mockInspectionId } from "./fixtures";
 import { templateCapturePlan } from "@/features/photography/inspection-template";
 import { consentInputSchema, type ConsentReceipt } from "@/features/consent/consent-model";
 import { vehicleConfirmationSchema, type VehicleConfirmationReceipt } from "@/features/vehicle/vehicle-model";
+import { assertInspectionEditable } from "@/features/submission/edit-policy";
 
 export function createMockInspectionRepository(): InspectionRepository {
   const consents = new Map<string, ConsentReceipt>();
@@ -27,6 +28,7 @@ export function createMockInspectionRepository(): InspectionRepository {
     },
     async saveLocation(id, input) {
       requireInspection(id);
+      await assertInspectionEditable(id);
       if (!consents.has(id)) throw new RepositoryError("CONSENT_REQUIRED", "ابتدا شرایط بازدید را بپذیرید.");
       inspection.location = inspectionLocationSchema.parse(input);
       return structuredClone(inspection.location);
@@ -34,6 +36,7 @@ export function createMockInspectionRepository(): InspectionRepository {
     async getVehicle(id) { requireInspection(id); return structuredClone(inspection.vehicle); },
     async confirmVehicle(id, input) {
       requireInspection(id);
+      await assertInspectionEditable(id);
       if (!inspection.location) throw new RepositoryError("LOCATION_REQUIRED", "ابتدا موقعیت بازدید را تأیید کنید.");
       if (!inspection.vehicle) throw new RepositoryError("NOT_FOUND", "مشخصات خودرو پیدا نشد.");
       const confirmation = vehicleConfirmationSchema.parse(input);

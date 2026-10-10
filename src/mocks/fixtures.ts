@@ -2,6 +2,7 @@ import type { InspectionDto } from "@/lib/api/adapters/inspection";
 import type { CapturePlan } from "@/types/domain";
 
 export const mockInspectionId = "insp_demo";
+export const mockInspectionReference = "BDI-8F31K2";
 export const mockReferralCode = "A4K9P2";
 export const mockOtpCode = "12345";
 export const inspectionFixture: InspectionDto = {

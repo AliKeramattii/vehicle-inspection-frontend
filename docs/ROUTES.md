@@ -21,8 +21,8 @@ viewing is supported, but submissions require the verified mock workflow and rep
 - `/inspection/[inspectionId]/capture/photo/[requirementId]/review` — comparison and confirmation
 - `/inspection/[inspectionId]/capture/review` — local completion review, no remote submission
 - `/inspection/[inspectionId]/upload` — durable local upload queue and mocked Upload Center
-- `/inspection/[inspectionId]/review`
-- `/inspection/[inspectionId]/submitted`
+- `/inspection/[inspectionId]/review` — final summary, readiness/recovery and mock submit
+- `/inspection/[inspectionId]/submitted` — durable receipt/status; submitted edits redirect here
 - `/inspection/[inspectionId]/additional-evidence`
 
 ## Reviewer

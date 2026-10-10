@@ -15,5 +15,5 @@ export async function readUploadPackage(inspectionId: string, namespace: string,
   }
   const data = await indexedDBCaptureDataStore.get(namespace);
   media.push(...acceptedMedia(inspectionId, namespace, template, [], data));
-  return { media, odometer: data.odometer, capture: capturePackageProgress(template, statuses, data) };
+  return { media, odometer: data.odometer, videoDurationSeconds: data.video360?.accepted?.durationSeconds, capture: capturePackageProgress(template, statuses, data) };
 }

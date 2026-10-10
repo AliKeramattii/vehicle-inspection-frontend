@@ -133,7 +133,8 @@ Camera security requirements remain HTTPS/localhost; LAN HTTP falls back to nati
 No origin/dev binding/PWA behavior changed. No CV, AR, quality scoring or backend request added.
 Manual odometer entry and required walk-around video are implemented in Phase 05; see
 `ODOMETER_VIDEO.md`. Phase 06 adds the durable shared upload queue and mock Upload Center; see
-`UPLOAD.md`. Real transport, final submission/receipt and reviewer integration remain future work.
+`UPLOAD.md`. Final summary and durable mock submission/receipt now use `SUBMISSION.md`.
+Real transport/backend and reviewer integration remain future work.
 
 ## Viewport and performance
 

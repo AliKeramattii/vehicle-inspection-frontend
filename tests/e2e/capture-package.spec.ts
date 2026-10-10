@@ -33,7 +33,7 @@ test("odometer review validates empty input, normalizes Persian kilometers, pers
   expect((await captureData(page))[0].kilometers).toBe(48320);
   await page.getByRole("link", { name: "بازگشت به بررسی بازدید" }).click(); await expect(page.getByRole("button", { name: "ادامه به ارسال" })).toBeDisabled();
   await expect(page.getByText("۴۸٬۳۲۰ کیلومتر")).toBeVisible(); await page.getByRole("link", { name: "ویرایش کیلومتر" }).click(); await expect(page.getByLabel("کیلومتر فعلی")).toHaveValue("۴۸٬۳۲۰");
-  await page.getByLabel("کیلومتر فعلی").fill("0"); await page.getByRole("button", { name: "تأیید و ادامه" }).click(); expect((await captureData(page))[0].kilometers).toBe(0);
+  await page.getByLabel("کیلومتر فعلی").fill("0"); await page.getByRole("button", { name: "تأیید و ادامه" }).click(); await expect(page).toHaveURL(/video\/record$/); expect((await captureData(page))[0].kilometers).toBe(0);
   await page.goto("/"); await enterPhotography(page); await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "12"); await openPackageReview(page); await expect(page.getByText("۰ کیلومتر")).toBeVisible();
 });
 test("odometer photo replacement preserves the reading and accepted evidence until confirmation", async ({ page }) => {
@@ -63,17 +63,17 @@ test("native video fallback is playable and durable without MediaRecorder", asyn
   const native = page.getByLabel("انتخاب یا ضبط ویدیو با دوربین دستگاه"); await expect(native).toHaveAttribute("accept", "video/*"); await expect(native).toHaveAttribute("capture", "environment");
   await native.setInputFiles("tests/e2e/fixtures/walkaround.webm"); await expect(page).toHaveURL(/video\/review$/); await expect(page.getByText("۰۰:۲۸", { exact: true })).toBeVisible();
   await page.locator(".walkaround-review").evaluate(async (video: HTMLVideoElement) => { await video.play(); video.pause(); });
-  await page.getByRole("button", { name: "تأیید و ذخیره" }).click(); expect((await captureData(page))[0].acceptedBytes).toBeGreaterThan(0);
+  await page.getByRole("button", { name: "تأیید و ذخیره" }).click(); await expect(page).toHaveURL(/capture\/review$/); expect((await captureData(page))[0].acceptedBytes).toBeGreaterThan(0);
 });
 test("re-record keeps accepted video until replacement succeeds, discard retains it and save failure is retryable", async ({ page }) => {
   await mockRecorder(page, true); await packageWorkflow(page, { kilometers: 48320, video: "accepted" }); await openPackageReview(page); await page.getByRole("link", { name: "مشاهده ویدیو" }).click();
-  const before = (await captureData(page))[0].acceptedBytes; await page.getByRole("button", { name: "ضبط مجدد" }).click(); expect((await captureData(page))[0].acceptedBytes).toBe(before);
+  const before = (await captureData(page))[0].acceptedBytes; await page.getByRole("button", { name: "ضبط مجدد" }).click(); await expect(page).toHaveURL(/video\/record$/); expect((await captureData(page))[0].acceptedBytes).toBe(before);
   await page.getByLabel("انتخاب یا ضبط ویدیو با دوربین دستگاه").setInputFiles("tests/e2e/fixtures/walkaround.webm"); await expect(page).toHaveURL(/video\/review$/);
   await expect(page.getByText(/ویدیوی قبلی تا تأیید/)).toBeVisible(); await visual(page, "video-replacement");
-  await page.getByRole("button", { name: "ضبط مجدد" }).click(); expect((await captureData(page))[0]).toMatchObject({ acceptedBytes: before, draftBytes: 0 });
+  await page.getByRole("button", { name: "ضبط مجدد" }).click(); await expect(page).toHaveURL(/video\/record$/); expect((await captureData(page))[0]).toMatchObject({ acceptedBytes: before, draftBytes: 0 });
   await page.getByLabel("انتخاب یا ضبط ویدیو با دوربین دستگاه").setInputFiles("tests/e2e/fixtures/walkaround.webm"); await expect(page).toHaveURL(/video\/review$/);
   await page.evaluate(() => { const put = IDBObjectStore.prototype.put; IDBObjectStore.prototype.put = function (...args: Parameters<IDBObjectStore["put"]>) { IDBObjectStore.prototype.put = put; if (this.name === "packages") throw new DOMException("simulated quota", "QuotaExceededError"); return Reflect.apply(put, this, args); }; });
-  await page.getByRole("button", { name: "تأیید و ذخیره" }).click(); await expect(page.getByRole("alert")).toBeVisible(); expect((await captureData(page))[0]).toMatchObject({ acceptedBytes: before, draftBytes: before });
+  await page.getByRole("button", { name: "تأیید و ذخیره" }).click(); await expect(page.getByRole("alert").filter({ hasText: "ذخیره اطلاعات ممکن نشد" })).toBeVisible(); expect((await captureData(page))[0]).toMatchObject({ acceptedBytes: before, draftBytes: before });
   await page.getByRole("button", { name: "تأیید و ذخیره" }).click(); await expect(page).toHaveURL(/capture\/review$/); expect((await captureData(page))[0].draftBytes).toBe(0);
 });
 test("video retake reason remains visible through recording/replacement context", async ({ page }) => {
