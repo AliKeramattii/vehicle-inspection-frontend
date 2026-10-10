@@ -40,7 +40,7 @@ Unit tests: readiness missing data/status policies, summary derivation, durable 
 - [x] Implement final review and receipt using existing planned routes and primitives.
 - [x] Add tests, manually review six visual states against references 14/15 and all widths; create only six intended baselines.
 - [x] Run lint/typecheck/unit/full browser/build scripts with successful intended-source exits and review preservation/visual results.
-- [ ] Complete focused commit/publication, verify remote and record final validation.
+- [x] Complete focused implementation commit/publication and verify remote; record validation in docs/SUBMISSION_VALIDATION.md.
 
 ## Discoveries / decisions
 - Offline policy: block formal submission until online. Uploaded files are not a submitted inspection.
@@ -52,3 +52,4 @@ Unit tests: readiness missing data/status policies, summary derivation, durable 
 - The final working-tree full browser run exits 1: 117 passed, 62 intentional desktop skips and only the known 4,010-pixel readiness mismatch. All Phase-07 cases pass. No readiness file or old baseline changed. Full intended-source validation runs from an index export, including the original readiness test/baseline, without skipping the known test.
 - Working-tree production build and intended-source lint/typecheck/unit scripts exit 0. Full intended-source Playwright exits 0: 118 passed and 62 intentional desktop skips, including the original readiness screenshot, all new baselines and prior capture/upload regressions. Both full runners exited normally; no lifecycle stall remains.
 - Standalone intended-source production build also exits 0. Only environment warnings remain: nested validation lockfile workspace inference and existing NO_COLOR/FORCE_COLOR conflict. No dependencies/configuration or browser-origin behavior changed.
+- Implementation cf6aec2 is pushed and verified on origin/main. The following documentation commit records validation and closes this plan; no later phase is started.
