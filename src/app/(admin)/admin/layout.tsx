@@ -1,3 +1,4 @@
 import type { ReactNode } from "react";
-import { OperationsShell } from "@/components/layout/operations-shell";
-export default function AdminLayout({ children }: { children: ReactNode }) { return <OperationsShell title="مدیریت سامانه">{children}</OperationsShell>; }
+import { AdminShell } from "@/features/admin/admin-shell";
+import "@/features/admin/admin.css";
+export default function AdminLayout({ children }: { children: ReactNode }) { return <AdminShell>{children}</AdminShell>; }

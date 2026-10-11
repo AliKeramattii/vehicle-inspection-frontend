@@ -600,3 +600,30 @@ Use one predictable shape:
   "traceId": "..."
 }
 ```
+
+## Phase 10 Admin contract clarification (planned / mock-only)
+
+The existing `/api/admin/capture-templates` namespace is retained. All operations below need authenticated server-derived actor/role and tenant/partner scope. The local identity chooser is NOT authentication. No runtime ASP.NET requests are implemented.
+
+- GET `/api/admin/capture-templates`: search/status filters, stable ID, title, partner, latest/current-publication metadata, photo count and update time. Counts come from template configuration; numeric odometer/video remain separate.
+- GET `/api/admin/capture-templates/{id}`: supported PhotographyTemplate snapshots plus version metadata/history and currentPublishedVersionId.
+- POST `/api/admin/capture-templates`: create a draft definition from an authorized existing published template; preserve configured photo identities.
+- POST `/api/admin/capture-templates/{id}/versions`: {sourceVersionId}; returns the existing open draft or a new stable version ID/number/revision.
+- PUT `/api/admin/capture-templates/{id}`: {versionId, expectedRevision, snapshot}; draft-only save. Snapshot reuses the frontend photography schema, including independent captureRequirements. Published snapshots cannot be mutated. The backend may use ETag/If-Match instead of expectedRevision once confirmed.
+- PUT `/api/admin/capture-templates/{id}/slots/{captureCode}`: optional granular compatibility operation; captureCode means the existing stable requirement ID, not invented CAP IDs. Same draft-only/revision validation.
+- POST `/api/admin/capture-templates/{id}/publish`: {versionId, expectedRevision, idempotencyKey}; validate/save prerequisites, immutable publication and current-pointer update transactionally; same key/version replays the acknowledgement, conflicting payload returns 409. Earlier versions remain available.
+- GET `/api/admin/capture-templates/{id}/versions`: immutable publication/history and draft/archive metadata.
+- PUT `/api/admin/capture-templates/{id}/versions/{versionId}/status`: draft to archived only in current UI; requires expectedRevision, cannot delete/alter published snapshots.
+
+Expected metadata: templateId, versionId, templateVersion, revision, publicationState (draft/published/archived), updatedAt, updatedBy and publishedAt. Admin extension metadata does not change the customer capture schema.
+Asset references must resolve to approved canonical assets; server must validate existence/ownership and prevent arbitrary external sources. Unsupported capture attributes are rejected. Existing inspections must pin a published template snapshot/version at creation. Admin publication must never rewrite evidence, submissions or additional-evidence IDs; automatic future-inspection template selection is not enabled in the mock.
+
+Secondary planned operations:
+- GET/PUT `/api/admin/branding`: tenant display settings; asset uploads/validation require a separate confirmed contract. Current mock only saves display name and retains approved logo/primary.
+- GET `/api/admin/policies`: supported/read-only policy descriptions in current phase; write/enforcement contract is pending.
+- GET/PUT `/api/admin/webhooks`: typed event/endpoint/enabled configuration. Delivery and signing secrets are server-owned; current mock only toggles enabled state, sends no requests.
+- GET `/api/admin/users`, PUT `/api/admin/users/{userId}/role`: authorized role assignment; retain at least one active administrator in the mock.
+- GET `/api/admin/permissions`: supported role/capability matrix; arbitrary capability editing is not currently supported.
+- GET `/api/admin/audit`: actor/action/resource/time history; production security retention guarantees remain a backend responsibility.
+
+Errors: 400/422 structured field validation, 401 unauthenticated, 403 operation/tenant permission, 404 template/version/asset not found, 409 stale revision or idempotency conflict, 429 Retry-After, 5xx/network. Frontend retains unsaved edits on failure and offers conflict reload without silent overwrite. All API shapes remain proposed, not a claim of implemented server behavior.
