@@ -1,3 +1,4 @@
+import { RuntimeBrokerName, RuntimeLogo } from "@/config/branding-assets";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { JourneyStepper, type JourneyStage } from "./journey-stepper";
@@ -11,7 +12,7 @@ export function InspectionJourneyHeader({ current, backHref, referenceCode, part
   ];
   return <div className="inspection-journey-header">
     <header><div><Icon name="platformCar" size={28} /><h1>بازدید خودرو</h1></div>
-      {(current === "capture" || current === "upload") && <div className="capture-partner"><Icon name="shield" size={24} /><span>{partnerName}</span></div>}
+      {(current === "capture" || current === "upload") && <div className="capture-partner"><RuntimeLogo width={24} height={24} fallback={<Icon name="shield" size={24} />} /><span><RuntimeBrokerName fallback={partnerName} /></span></div>}
       <Link href={backHref} aria-label="بازگشت">{referenceCode && <span className="capture-reference"><small>کد بازدید</small><bdi dir="ltr">{referenceCode}</bdi></span>}<Icon name="chevronForward" size={25} /></Link>
     </header>
     <JourneyStepper stages={stages} completedIcon="readinessTick" />

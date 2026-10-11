@@ -23,7 +23,7 @@ function Shell({ children }: { children: ReactNode }) {
   return <AppViewport className="admin-root">
     <aside className="admin-sidebar"><AdminLink href="/admin" className="admin-brand"><Icon name="platformCar" size={32} /><span><strong>سامانه بازدید خودرو</strong><small>مدیریت چندمستأجری</small></span></AdminLink>
       <nav aria-label="مدیریت سامانه">{adminNavigation.map(item => <AdminLink key={item.href} href={item.href}
-        current={item.href === "/admin" ? pathname === item.href : pathname.startsWith(item.href)}><AdminIcon name={item.icon} />{item.label}</AdminLink>)}</nav>
+        current={item.href === "/admin" ? pathname === item.href : (pathname.startsWith(item.href) || (item.href === "/admin/branding" && pathname === "/admin/site-settings"))}><AdminIcon name={item.icon} />{item.label}</AdminLink>)}</nav>
       <div className="admin-sidebar-note"><Icon name="lock" size={18} /><span>محیط مدیریت آزمایشی<small>اطلاعات محلی؛ بدون اتصال به سرور</small></span></div>
     </aside>
     <div className="admin-workspace">

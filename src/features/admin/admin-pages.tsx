@@ -35,7 +35,7 @@ function BrandingEditor({ initialName }: { initialName: string }) {
   const dirty = form.formState.isDirty;
   const displayName = useWatch({ control: form.control, name: "displayName" });
   useEffect(() => { setDirty(dirty); return () => setDirty(false); }, [dirty,setDirty]);
-  return <div className="admin-page-scroll"><AdminPageHeading title="برندینگ" description="تنظیمات نمایشی شریک در محیط مدیریت نمونه" />
+  return <div className="admin-page-scroll"><AdminPageHeading action={<AdminLink href="/admin/site-settings" className="admin-primary-link">تنظیمات سایت</AdminLink>} title="برندینگ" description="تنظیمات نمایشی شریک در محیط مدیریت نمونه" />
     <form className="admin-panel admin-compact-form" onSubmit={form.handleSubmit(async values => {
       setError(""); setFeedback("");
       try { await repository.saveBranding(actor, { ...workspace!.branding, displayName: values.displayName }); form.reset(values); setDirty(false); await refresh(); setFeedback("تنظیمات نمونه ذخیره شد."); }

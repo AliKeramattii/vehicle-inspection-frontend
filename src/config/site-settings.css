@@ -1,0 +1,8 @@
+.site-config-state {display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:24px;overflow:auto;text-align:center;}
+.site-config-state h1 {font-size:22px;font-weight:750;}
+.site-config-placeholder {width:min(360px,100%);height:200px;border-radius:16px;background:#e2e8f0;}
+:root[data-runtime-brand="custom"] .entry-screen {background:var(--brand-background);color:var(--brand-on-background);}
+:root[data-runtime-brand="custom"] .referral-submit {background:var(--brand-primary);color:var(--brand-on-primary);}
+:root[data-runtime-brand="custom"] .bg-primary {color:var(--brand-on-primary);}
+:root[data-runtime-brand="custom"] .entry-partner p {max-width:150px;overflow:hidden;text-overflow:ellipsis;}
+.runtime-logo {object-fit:contain;flex-shrink:0;}

@@ -1,3 +1,4 @@
+import { RuntimeBrokerName, RuntimeLogo } from "@/config/branding-assets";
 import type { ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
 
@@ -7,7 +8,7 @@ export function AppHeader({ partnerName, actions }: { partnerName?: string; acti
       <div><p className="text-sm font-bold">بازدید خودرو</p><p className="text-xs text-muted">بازدید آنلاین و امن</p></div>
     </div>
     {partnerName && <div className="flex items-center gap-2 border-s border-border ps-3">
-      <Icon name="shield" className="text-primary" /><span className="text-xs font-medium">{partnerName}</span>
+      <RuntimeLogo width={24} height={24} fallback={<Icon name="shield" className="text-primary" />} /><span className="text-xs font-medium"><RuntimeBrokerName fallback={partnerName} /></span>
     </div>}{actions}
   </header>;
 }

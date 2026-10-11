@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BrandingImage } from "@/config/branding-assets";
 import { EntryBranding } from "@/components/layout/entry-branding";
 import { ReferralForm } from "./referral-form";
 import { LandingBenefits } from "./landing-benefits";
@@ -11,7 +11,7 @@ export function LandingScreen() {
       <h1>بازدید آنلاین خودرو<br /><span>در کمتر از ۱۵ دقیقه</span></h1>
       <p>با چند مرحله ساده، از هر کجا خودروی خود را<br />به صورت آنلاین و راهنمایی‌شده بازدید کنید.</p>
     </div>
-    <div className="landing-art"><Image src="/images/auth/landing-suv.png" alt="خودروی سفید در استودیوی روشن" width={1536} height={1024} sizes="(max-width: 480px) 100vw, 480px" preload /></div>
+    <div className="landing-art"><BrandingImage role="landing" alt="خودروی سفید در استودیوی روشن" width={1536} height={1024} sizes="(max-width: 480px) 100vw, 480px" preload /></div>
     <ReferralForm />
     <LandingBenefits />
     <TrustFooter />
