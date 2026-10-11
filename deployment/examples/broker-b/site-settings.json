@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "tenantId": "broker-b",
+  "version": 1,
+  "publishedAt": "2026-10-11T06:30:00.000Z",
+  "identity": {
+    "brokerageName": "کارگزاری سبز",
+    "appTitle": "بازدید سبز",
+    "logo": "/icons/admin/partner.svg",
+    "favicon": null,
+    "publicEmail": "",
+    "publicPhone": ""
+  },
+  "theme": {
+    "primary": "#047857",
+    "secondary": "#64748B",
+    "background": "#F8FAFC",
+    "neutral": "#E2E8F0",
+    "onPrimary": "#FFFFFF",
+    "onBackground": "#111827"
+  },
+  "images": {
+    "landing": "/images/preparation/vehicle-inspection.webp",
+    "referral": null,
+    "otp": null,
+    "readiness": null,
+    "consent": null
+  },
+  "application": {
+    "apiBaseUrl": "https://api.broker-b.example/api",
+    "contractVersion": "1",
+    "template": {
+      "id": "body-image-guided",
+      "version": 1
+    },
+    "features": {
+      "nativeCaptureFallback": true,
+      "additionalEvidence": true,
+      "supportLink": true
+    }
+  }
+}

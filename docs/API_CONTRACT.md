@@ -627,3 +627,25 @@ Secondary planned operations:
 - GET `/api/admin/audit`: actor/action/resource/time history; production security retention guarantees remain a backend responsibility.
 
 Errors: 400/422 structured field validation, 401 unauthenticated, 403 operation/tenant permission, 404 template/version/asset not found, 409 stale revision or idempotency conflict, 429 Retry-After, 5xx/network. Frontend retains unsaved edits on failure and offers conflict reload without silent overwrite. All API shapes remain proposed, not a claim of implemented server behavior.
+
+## White-Label Phase 1: planned public settings and private storage
+
+See WHITE_LABEL_ARCHITECTURE.md, TENANT_CONFIGURATION_SPEC.md and BACKEND_TEAM_REQUIREMENTS.md. No ASP.NET endpoint is verified/implemented by this phase; current inspection/auth/upload services remain mocks. Runtime settings source api only adds the validated public configuration fetch boundary.
+
+| Planned endpoint | Contract |
+|---|---|
+| GET /api/public/site-settings | Server-resolved brokerage; strict schema 1 SiteSettings, no-store, version/publishedAt/identity/theme/branding images/public API and template reference only. No query-selected tenant authority or private fields. |
+| GET /api/admin/site-settings | Authenticated tenant-scoped settings permission; published/draft/revision/history and audit metadata. |
+| PUT /api/admin/site-settings/draft | Strict public settings + expectedRevision; validate assets/contrast/published template; 409 stale edit. |
+| POST /api/admin/site-settings/publish | Authorized publication, expectedRevision + durable idempotency key; immutable version; never mutate pinned inspections. |
+| POST /api/admin/branding-assets | Authorized binary asset upload, MIME/signature/size/dimension/sanitization; return immutable public asset reference. No Next filesystem writes. |
+| GET /api/admin/system/health | Authorized safe diagnostic codes/API/storage status/checkedAt/approved retention summary; never credentials or physical paths. |
+
+Future HTTP adapters resolve endpoint suffixes through validated runtime API context rather than build-time localhost/environment constants. Prefer same-origin /api; separate HTTPS origins need exact CORS, secure session and CSRF/Origin policy. Bootstrap is public configuration, not an authenticated tenant selection mechanism.
+
+### Evidence storage clarification (authoritative)
+Reuse POST /api/inspections/{inspectionId}/evidence, registration-provided binary transfer, POST /api/evidence/{evidenceId}/complete and GET /api/inspections/{inspectionId}/evidence. Retrieval is authorized GET /api/inspections/{inspectionId}/evidence/{evidenceId}/file with server-resolved revision/range support. Stable job/revision idempotency, signed URLs if negotiated, processing-vs-verified distinction and existing Additional Evidence linkage remain intact.
+Every brokerage uses a private server root and INSPECTION_{InspectionId} directly beneath it. No CustomerId in filesystem folder naming. MSSQL stores RelativeFilePath and metadata only; no image/video binary, VARBINARY(MAX) or FILESTREAM media storage. Odometer remains integer data via PUT /api/inspections/{inspectionId}/odometer, outside media denominator.
+Server validates authenticated ownership, canonical safe IDs, content signatures/limits, exclusive revision filenames and path containment. Staged file publication and SQL transactions need explicit compensation/reconciliation, not an assumed cross-resource atomic transaction. Retakes use independent revision files and preserve originals. Retention/cleanup is backend-owned, disabled until policy approval and never deletes active/referenced media. No publicly browsable upload directory or frontend storage root.
+
+All mutations require real backend tenant authorization, rate limits/audit and structured 400/422/401/403/404/409/413/415/429/5xx handling. Browser mock roles/IndexedDB binding do not provide these guarantees. Installation/static-export/PWA gates and detailed endpoint requests/responses/idempotency/storage duties are in the backend handoff.
