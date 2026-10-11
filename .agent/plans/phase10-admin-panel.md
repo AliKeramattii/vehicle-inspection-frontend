@@ -27,7 +27,7 @@ docs/API_CONTRACT.md clarifies planned /api/admin/capture-templates operations, 
 
 ## Testing
 25 domain/service tests plus 3 UI recovery tests. Fourteen desktop Playwright scenarios cover navigation, direct routes, draft save/refresh, publication/history, stale two-tab conflict, authorization/keyboard/preview, unsaved protection, new templates, secondary persistence, ordering/archive, storage/image recovery and four viewport sizes. Nine new Admin screenshot states.
-First complete production browser run: 156 passed, 100 intentionally skipped by project targeting, exit 0. All existing customer baselines unchanged; clean-base readiness screenshots pass. Final rerun follows the last background-read preservation fix.
+First complete production browser run: 156 passed, 100 intentionally skipped by project targeting, exit 0. All existing customer baselines unchanged; clean-base readiness screenshots pass. Final rerun after the background-read preservation fix also exited successfully.
 
 ## Acceptance criteria
 - Phase09 remains separately retrievable; original worktree and local GLBs untouched.
@@ -45,7 +45,7 @@ First complete production browser run: 156 passed, 100 intentionally skipped by 
 - [x] Implement Admin routes/editor and secondary modules.
 - [x] Add tests; inspect/reference-compare screenshots and create nine Admin-only baselines.
 - [x] Final validation after last recovery review and original-worktree hash/scope audit.
-- [ ] Focused commit, normal push and verified remote HEAD.
+- [x] Focused implementation commit 8cbf194, normal push and verified remote HEAD; main and optional-3D heads unchanged.
 
 ## Discoveries and corrections
 Windows PowerShell native piping initially replaced Persian characters; corrected with ASCII-escaped JSON/UTF-8 file writes and verified source text. RHF watch produced compiler warnings; changed to useWatch. Repository synchronous rejection conflicted with promised interfaces; operations are now async. Browser selectors were scoped away from Next route announcer and a filter received an explicit accessible label. New archive test exposed implicit version fallback; active version identity now stays stable. Senior review found background read error could unmount an edited form; retain cached children and test unsaved value preservation. Initial snapshot creation writes missing files and exits 1 in this Playwright version; the subsequent ordinary comparison passed. Temporary screenshot helper waits were corrected for lazy images and guaranteed browser close; repository test processes exit normally.
@@ -55,4 +55,4 @@ Existing NO_COLOR/FORCE_COLOR environment warnings remain informational and are 
 No automatic template rollout to future customer inspections; future server creation must explicitly pin a tested snapshot. Policies/matrix are read-only, user/auth and webhook delivery are mock-only. No logo upload or arbitrary new requirement type. Old user-worktree readiness drift remains out of scope; isolation validates committed intended source.
 
 ## Final validation outcomes
-All five scripts exited 0: lint/typecheck clean, 244 unit tests in 19 files, full Playwright 156 passed and 100 viewport-project skips, explicit production build. All nine Admin baselines pass without updates; all previous baselines unchanged. Applicable TasteSkill pre-flight passed. 24 original user-change hashes are unchanged; original and optimized restricted GLBs remain local. Commit/push remains the final delivery step.
+All five scripts exited 0: lint/typecheck clean, 244 unit tests in 19 files, full Playwright 156 passed and 100 viewport-project skips, explicit production build. All nine Admin baselines pass without updates; all previous baselines unchanged. Applicable TasteSkill pre-flight passed. 24 original user-change hashes are unchanged; original and optimized restricted GLBs remain local. Implementation commit 8cbf194 was pushed normally to origin/feat/admin-panel and verified remotely. origin/main remains 6228c67; origin/feat/optional-vehicle-3d remains c190012. This delivery record is a separate documentation-only follow-up.
