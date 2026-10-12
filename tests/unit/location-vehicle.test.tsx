@@ -26,9 +26,8 @@ describe("location form and map", () => {
   it("renders the address, GPS accuracy and accessible map/locate controls", () => {
     mount(<LocationForm initialLocation={location} onConfirm={vi.fn()} />);
     expect(screen.getByText(location.formattedAddress)).toBeVisible();
-    expect(screen.getByText("دقت موقعیت ± ۸ متر")).toBeVisible();
-    expect(screen.getByRole("group", { name: "جابجایی نقشه" })).toHaveAttribute("tabindex", "0");
-    expect(screen.getByRole("img", { name: "نشانگر ثابت موقعیت انتخابی" })).toBeVisible();
+    expect(screen.getByText("نقشه هنوز پیکربندی نشده است")).toBeVisible();
+    expect(screen.queryByText("دقت موقعیت ± ۸ متر")).toBeNull();
     expect(screen.getByRole("button", { name: "بازگشت به موقعیت من" })).toBeEnabled();
     expect(screen.getByLabelText("طبقه / واحد (اختیاری)")).toHaveValue(location.unitFloor);
   });
@@ -70,19 +69,11 @@ describe("location form and map", () => {
     fireEvent.submit(screen.getByRole("button", { name: "تأیید این موقعیت" }).closest("form")!);
     await waitFor(() => expect(confirm).not.toHaveBeenCalled());
   });
-  it("updates coordinates with keyboard panning and recenters deterministically", async () => {
-    const changed = vi.fn();
-    mount(<InspectionLocationMap location={location} onChange={changed} />);
-    const surface = screen.getByRole("group", { name: "جابجایی نقشه" });
-    fireEvent.keyDown(surface, { key: "ArrowLeft" });
-    expect(changed.mock.calls[0][0].longitude).toBeLessThan(location.longitude);
-    expect(changed.mock.calls[0][0].latitude).toBe(location.latitude);
-    expect(developmentLocationAdapter.coordinatesOffset(location, changed.mock.calls[0][0]).x).toBeCloseTo(20);
-    await userEvent.click(screen.getByRole("button", { name: "بازگشت به موقعیت من" }));
-    await waitFor(() => expect(changed).toHaveBeenCalledTimes(2));
-    expect(changed.mock.calls[1][0]).toEqual(location);
-    expect(isGpsMatched(location, location)).toBe(true);
-    expect(isGpsMatched({ ...location, latitude: location.latitude + 0.01 }, location)).toBe(false);
+  it("updates coordinates only through the explicit location service when map is unconfigured", async () => {
+    const changed=vi.fn();mount(<InspectionLocationMap location={location} onChange={changed} adapter={developmentLocationAdapter}/>);
+    expect(changed).not.toHaveBeenCalled();await userEvent.click(screen.getByRole("button",{name:"بازگشت به موقعیت من"}));
+    await waitFor(()=>expect(changed).toHaveBeenCalledTimes(1));expect(changed.mock.calls[0][0]).toEqual(location);
+    expect(isGpsMatched(location,location)).toBe(true);expect(isGpsMatched({...location,latitude:location.latitude+.01},location)).toBe(false);
   });
   it("preserves geometry/accuracy while locating and exposes denied/unavailable/unsupported states", async () => {
     let reject!: (error: Error) => void;
@@ -118,7 +109,7 @@ describe("vehicle and Iranian plate controls", () => {
     expect(screen.getByLabelText("دو رقم اول پلاک")).toBeDisabled();
     await userEvent.click(screen.getByRole("button", { name: "تأیید مشخصات و ادامه" }));
     await waitFor(() => expect(confirm).toHaveBeenCalled());
-    expect(confirm.mock.calls[0][0]).toEqual({ plate: vehicle.plate });
+    expect(confirm.mock.calls[0][0]).toMatchObject({ plate: vehicle.plate, colorId:"silver" });
     await userEvent.click(screen.getByRole("button", { name: "پلاک اشتباه است، اصلاح می‌کنم" }));
     expect(screen.getByLabelText("دو رقم اول پلاک")).toBeEnabled();
     expect(screen.getByLabelText("دو رقم اول پلاک")).toHaveFocus();
@@ -156,7 +147,7 @@ describe("vehicle and Iranian plate controls", () => {
     fireEvent.change(screen.getByLabelText("سه رقم اصلی پلاک"), { target: { value: "890" } });
     await userEvent.click(screen.getByRole("button", { name: "تأیید مشخصات و ادامه" }));
     await waitFor(() => expect(confirm).toHaveBeenCalled());
-    expect(confirm.mock.calls[0][0]).toEqual({ plate: { firstTwoDigits: "67", letter: "ج", threeDigits: "890", regionDigits: "22" } });
+    expect(confirm.mock.calls[0][0]).toMatchObject({ plate: { firstTwoDigits: "67", letter: "ج", threeDigits: "890", regionDigits: "22" } });
   });
   it("collapses/expands alternate-format guidance and blocks unverified/pending confirmation", async () => {
     const rendered = render(<VehicleForm vehicle={vehicle} onConfirm={vi.fn()} canConfirm={false} />);

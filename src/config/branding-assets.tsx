@@ -27,7 +27,7 @@ export function useBrandingBackground(role:BrandingAssetRole) {
 }
 export function RuntimeBrokerName({fallback}:{fallback:ReactNode}) {
   const site=useOptionalRuntimeSite();
-  return <>{site&&(site.settings.tenantId!=="demo"||site.settings.version>1)?site.settings.identity.brokerageName:fallback}</>;
+  return <>{site?site.settings.identity.brokerageName:fallback}</>;
 }
 export function RuntimeLogo({fallback,width=31,height=35}:{fallback:ReactNode;width?:number;height?:number}) {
   const src=useOptionalRuntimeSite()?.settings.identity.logo;const[failed,setFailed]=useState<string>();

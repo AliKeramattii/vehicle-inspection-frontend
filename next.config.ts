@@ -9,6 +9,7 @@ const developmentOrigins = Object.values(networkInterfaces()).flatMap((addresses
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  outputFileTracingExcludes: { "/*": ["./.agent/vehicle-3d/**/*", "./references/assets/3d/**/*"] },
   ...(process.env.NODE_ENV !== "production" ? { allowedDevOrigins: developmentOrigins } : {}),
 };
 

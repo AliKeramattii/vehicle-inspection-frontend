@@ -9,6 +9,7 @@ import { PrimaryButton } from "@/components/ui/button";
 import { BottomStickyCTA } from "@/components/ui/bottom-sticky-cta";
 import { InlineAlert } from "@/components/ui/status";
 import type { Vehicle } from "@/types/domain";
+import { vehicleColors } from "./vehicle-colors";
 import { PlateConfirmation, type PlateMode } from "./plate-confirmation";
 import { VehicleDiscrepancyControl } from "./vehicle-discrepancy";
 import { vehicleConfirmationSchema, type VehicleConfirmationInput } from "./vehicle-model";
@@ -20,8 +21,9 @@ export function VehicleForm({ vehicle, onConfirm, pending = false, error, canCon
   const [alternate, setAlternate] = useState(false);
   const alternateId = useId();
   const firstInput = useRef<HTMLInputElement>(null);
-  const { control, handleSubmit, setValue, formState: { errors } } = useForm<VehicleConfirmationInput>({ resolver: zodResolver(vehicleConfirmationSchema), defaultValues: { plate: vehicle.plate } });
+  const { register, control, handleSubmit, setValue, formState: { errors } } = useForm<VehicleConfirmationInput>({ resolver: zodResolver(vehicleConfirmationSchema), defaultValues: { plate: vehicle.plate, colorId: vehicleColors.find(c=>vehicle.colorName.startsWith(c.label))?.id ?? "white" } });
   const discrepancy = useWatch({ control, name: "discrepancy" });
+  const colorId = useWatch({control,name:"colorId"});
   return <div className="vehicle-confirmation-surface">
     <PlateConfirmation plate={vehicle.plate} mode={mode} disabled={pending} onModeChange={(next) => {
       setMode(next); if (next === "correct") setValue("plate", vehicle.plate);
@@ -36,6 +38,7 @@ export function VehicleForm({ vehicle, onConfirm, pending = false, error, canCon
         <button type="button" className="alternate-plate-toggle" aria-expanded={alternate} aria-controls={alternateId} onClick={() => setAlternate((value) => !value)}><Icon name="info" size={19} />پلاک من فرمت متفاوتی دارد</button>
         <p id={alternateId} hidden={!alternate} className="alternate-plate-help">برای پلاک با فرمت متفاوت، با نماینده شرکت بیمه هماهنگ کنید.</p>
       </section>
+      <div className="vehicle-color-field"><label htmlFor="vehicle-color">رنگ بدنه</label><span className="vehicle-color-swatch" style={{backgroundColor:vehicleColors.find(c=>c.id===colorId)?.hex}} aria-hidden="true"/><select id="vehicle-color" disabled={pending || !canConfirm} {...register("colorId")}>{vehicleColors.map(c=><option key={c.id} value={c.id}>{c.label}</option>)}</select></div>
       <VehicleDiscrepancyControl value={discrepancy} onChange={(value) => setValue("discrepancy", value, { shouldDirty: true })} disabled={pending} />
       {error && <InlineAlert tone="destructive">{error}</InlineAlert>}
       {!canConfirm && <InlineAlert>برای ادامه، ابتدا موقعیت بازدید را تأیید کنید.</InlineAlert>}

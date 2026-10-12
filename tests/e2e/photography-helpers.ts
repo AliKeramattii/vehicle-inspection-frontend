@@ -38,6 +38,8 @@ export async function enterPhotography(page: Page) {
   await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await page.getByRole("checkbox").check(); await page.getByRole("button", { name: "تأیید و ادامه" }).click();
+  await expect(page).toHaveURL(/\/location$/);await expect(page.getByRole("button",{name:"تأیید این موقعیت"})).toBeVisible();
+  const address=page.getByRole("textbox",{name:"آدرس بازدید"});if(!await address.isVisible())await page.getByRole("button",{name:"ویرایش",exact:true}).click();await expect(address).toBeVisible();await address.fill("تهران، خیابان نمونه، پلاک ۱۲");
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
   await expect(page).toHaveURL(/\/inspection\/insp_demo\/capture$/);

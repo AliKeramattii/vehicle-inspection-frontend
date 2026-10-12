@@ -1,13 +1,13 @@
 export interface CameraService { open(): Promise<MediaStream>; capture(video: HTMLVideoElement): Promise<Blob>; stop(stream: MediaStream): void }
 export function cameraError(error: unknown): string {
   const name = typeof error === "object" && error !== null && "name" in error ? error.name : "";
-  if (name === "NotAllowedError" || name === "SecurityError") return "دسترسی دوربین داده نشد. دسترسی مرورگر را بررسی کنید یا عکس را انتخاب کنید.";
+  if (name === "NotAllowedError" || name === "SecurityError") return "دسترسی دوربین داده نشد. دسترسی مرورگر را بررسی کنید و دوباره تلاش کنید.";
   if (name === "NotFoundError" || name === "NotReadableError") return "دوربین در دسترس نیست یا در برنامه دیگری استفاده می‌شود.";
-  return error instanceof Error ? error.message : "باز کردن دوربین ممکن نشد. دوباره تلاش کنید یا عکس را انتخاب کنید.";
+  return error instanceof Error ? error.message : "باز کردن دوربین ممکن نشد. دوباره تلاش کنید.";
 }
 export const browserCameraService: CameraService = {
   async open() {
-    if (!navigator.mediaDevices?.getUserMedia) throw new Error("دوربین زنده به اتصال امن نیاز دارد. از انتخاب عکس یا دوربین گوشی استفاده کنید.");
+    if (!navigator.mediaDevices?.getUserMedia) throw new Error("دوربین زنده به اتصال امن نیاز دارد. با HTTPS یا مرورگر پشتیبانی‌شده دوباره تلاش کنید.");
     return navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
   },
   async capture(video) {

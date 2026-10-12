@@ -26,7 +26,7 @@ export async function mockRecorder(page: Page, unsupported = false) {
   }, { bytes: [...readFileSync("tests/e2e/fixtures/walkaround.webm")], unsupported });
 }
 export async function packageWorkflow(page: Page, options: { photos?: number; kilometers?: number; video?: "accepted" | "draft" | "replacement" | "retake" } = {}) {
-  await page.goto("/"); await seedPhotos(page, options.photos ?? 12);
+  await page.goto("/"); await expect(page.getByRole("textbox",{name:"کد معرفی / کد ارجاع"})).toBeVisible(); await seedPhotos(page, options.photos ?? 12);
   const namespace = photoNamespace("insp_demo", template.templateId, template.templateVersion);
   await page.evaluate(async ({ config, namespace, options, bytes }) => {
     const database = await new Promise<IDBDatabase>((resolve, reject) => {

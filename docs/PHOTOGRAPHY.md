@@ -171,3 +171,8 @@ No canonical automotive asset was replaced by this modernisation. Suggested prio
 3. Interior/engine/odometer/spec/VIN/roof: check cabin generation and technical realism after
    exterior continuity. Readable characters and complete evidence framing take priority over
    matching decorative studio temperature. No image generation or replacement occurred here.
+
+
+## Approved UI refinement
+Production remains 2D and template-driven. Optional explicit loopback development may load one mobile Sportage model with twelve fixed screen-space requirement markers, sharing selection and downstream guarded routes. It never ships the restricted GLB or duplicates capture state. Successful checks are green; optional 3D upload checks require the current accepted revision's binary acknowledgement.
+Capture and retakes are live-only: no arbitrary gallery or File Manager import. Unsupported devices show recovery. Existing durable evidence, accepted replacement safety and automatic continuation remain. See UI_REFINEMENT.md.

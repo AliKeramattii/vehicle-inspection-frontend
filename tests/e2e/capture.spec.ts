@@ -91,21 +91,12 @@ test("retake reason maps to a requirement and full completion enables local fina
   await expect(page.getByText(/وضعیت ارسال را در مرکز ارسال فایل‌ها/)).toBeVisible();
 });
 
-test("denied camera supports native photo selection and durable evidence survives a fresh mock workflow", async ({ page }) => {
-  await page.addInitScript(() => Object.defineProperty(navigator, "mediaDevices", { value: { getUserMedia: async () => { throw new DOMException("denied", "NotAllowedError"); } } }));
-  await photography(page); await page.getByRole("link", { name: "مشاهده بخش" }).click();
-  await page.getByRole("link", { name: "شروع عکاسی", exact: true }).first().click(); await page.getByRole("link", { name: "باز کردن دوربین" }).click();
-  await expect(page.locator(".camera-message[role=alert]")).toContainText("دسترسی دوربین");
-  await page.getByLabel("انتخاب عکس از گوشی").setInputFiles("public/assets/inspection/photo-guides/front-45-right.webp");
-  await expect(page).toHaveURL(/front-45-right\/review$/);
-   await page.getByRole("button", { name: "تأیید و ادامه" }).click();
-  await expect(page).toHaveURL(/back-45-right\/guide$/);
-  await page.reload(); await expect(page.getByText("برای شروع عکاسی، موقعیت و مشخصات خودرو را تأیید کنید.")).toBeVisible();
-  expect((await records(page)).find((photo) => photo.id === "front-45-right")?.status).toBe("captured");
-  await page.goto("/"); await enterPhotography(page);
-  await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "1");
-  await page.getByRole("button", { name: "نمای خودرو: راست" }).click(); await page.getByRole("link", { name: "مشاهده بخش" }).click();
-  await expect(page.getByRole("link", { name: "مشاهده", exact: true })).toBeVisible();
+test("denied camera provides live-only recovery and preserves durable accepted evidence", async ({ page }) => {
+ await page.addInitScript(()=>Object.defineProperty(navigator,"mediaDevices",{value:{getUserMedia:async()=>{throw new DOMException("denied","NotAllowedError");}}}));
+ await photography(page,1);await page.getByRole("link",{name:"مشاهده بخش"}).click();await page.getByRole("link",{name:"شروع عکاسی",exact:true}).first().click();await page.getByRole("link",{name:"باز کردن دوربین"}).click();
+ await expect(page.locator(".camera-message[role=alert]")).toContainText("دسترسی دوربین");await expect(page.locator('input[type="file"]')).toHaveCount(0);await expect(page.getByRole("button",{name:"تلاش دوباره",exact:true})).toBeVisible();
+ expect((await records(page)).find(p=>p.id==="front-45-right")?.status).toBe("captured");
+ await page.goto("/");await enterPhotography(page);await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow","1");
 });
 
 test("overview, sections, guide and review have no overflow at 360, 390 and 430", async ({ page }) => {

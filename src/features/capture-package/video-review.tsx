@@ -16,7 +16,7 @@ export function VideoReview({ inspectionId, video, onConfirm, onRetake, pending,
     <div className="photography-title"><h2>بررسی ویدیو</h2><span>ویدیوی ۳۶۰ درجه</span></div>
     {video?.reviewerReason && <InlineAlert tone="warning">نیاز به ضبط مجدد: {video.reviewerReason}</InlineAlert>}
     {evidence ? <><video className="walkaround-review" src={url} controls playsInline preload="metadata" style={{ aspectRatio: ratio }} aria-label="ویدیوی ثبت‌شده دور خودرو" onLoadedMetadata={(event) => { const { videoWidth, videoHeight } = event.currentTarget; if (videoWidth && videoHeight) setRatio(videoWidth / videoHeight); }} onError={() => setFailed(true)} />
-      {failed && <InlineAlert tone="warning">پخش ویدیو ممکن نشد. ویدیوی ذخیره‌شده محفوظ است؛ دوباره ضبط کنید یا فایل دیگری انتخاب کنید.</InlineAlert>}
+      {failed && <InlineAlert tone="warning">پخش ویدیو ممکن نشد. ویدیوی ذخیره‌شده محفوظ است؛ در مرورگر پشتیبانی‌شده دوباره باز کنید یا ضبط مجدد انجام دهید.</InlineAlert>}
       <dl className="video-metadata"><div><dt>مدت ویدیو</dt><dd dir="ltr">{videoTimer(evidence.durationSeconds)}</dd></div><div><dt>وضعیت</dt><dd>{video?.draft ? "در انتظار تأیید" : video?.state === "retakeRequired" ? "نیاز به ضبط مجدد" : "ذخیره‌شده روی دستگاه"}</dd></div></dl>
       {video?.accepted && video.draft && <p className="photo-local-note">ویدیوی قبلی تا تأیید این جایگزین محفوظ است.</p>}
       <p className="photo-review-note">ویدیو را پخش کنید و مطمئن شوید یک دور پیوسته از خودرو ثبت شده است. ارسال هنوز انجام نشده است.</p></> : <div className="photo-empty"><p>هنوز ویدیویی ثبت نشده است.</p><Link className="photography-primary" href={navigation?.recordHref ?? inspectionRoutes.video(inspectionId, "record")}>شروع ضبط</Link></div>}

@@ -1,0 +1,45 @@
+import {describe,it,expect,vi} from "vitest";
+import {emptyReviewWorkspace,MemoryReviewPersistence} from "@/features/review-operations/persistence";
+import {assignCase,autoAssign,reviewerWorkload,type ReviewCase} from "@/features/review-operations/model";
+import {ReviewRepository} from "@/features/review-operations/repository";
+import {uploadedMarkerState,fixedMarkerPosition} from "@/features/vehicle-3d/marker-state";
+import {inspectionPhotographyTemplate as template} from "@/features/photography/inspection-template";
+import {photoRevision,type UploadJob} from "@/features/upload/upload-model";
+import type {LocalPhoto} from "@/lib/media/photo-store";
+import type {RequestRepository} from "@/features/additional-evidence/request-repository";
+import type {EvidenceRequest} from "@/features/additional-evidence/request-model";
+import {vehicleColors} from "@/features/vehicle/vehicle-colors";
+const admin={id:"admin-demo",role:"platform-admin" as const},actor={id:"reviewer-demo",role:"reviewer" as const};
+const photo=template.sections[0].photoRequirements[0];
+const record={requirementId:photo.id,status:"captured",blob:new Blob(["photo"],{type:"image/jpeg"}),capturedAt:"2026-10-12T00:00:00Z",revisionId:"r1"} as LocalPhoto;
+const job={id:"job",namespace:"ns",inspectionId:"case-1",evidenceKind:"photo",requirementId:photo.id,title:photo.title,revision:photoRevision(record),current:true,upload:"uploaded",verification:"processing",required:true,remoteEvidenceId:"server-evidence"} as UploadJob;
+const reviewCase=(id="case-1"):ReviewCase=>({id,reference:"BDI-8F31K2",submittedAt:"2026-10-12T00:00:00Z",template,summary:{namespace:"ns",jobs:[job]} as ReviewCase["summary"],status:"awaiting-assignment",decisions:[]});
+describe("refinement boundaries",()=>{
+ it("provides ten stable vehicle color values",()=>{expect(vehicleColors).toHaveLength(10);expect(new Set(vehicleColors.map(c=>c.id)).size).toBe(10);});
+ it("derives uploaded marker state only from matching accepted current revision",()=>{
+  expect(uploadedMarkerState(photo,[record],[],"ns")).toBe("pending");
+  expect(uploadedMarkerState(photo,[record],[job],"ns")).toBe("complete");
+  for(const upload of ["queued","uploading","failed"] as const)expect(uploadedMarkerState(photo,[record],[{...job,upload}],"ns")).toBe("pending");
+  expect(uploadedMarkerState(photo,[record],[{...job,revision:"stale"}],"ns")).toBe("pending");
+  expect(uploadedMarkerState(photo,[record],[{...job,current:false}],"ns")).toBe("pending");
+  expect(uploadedMarkerState(photo,[{...record,draft:{blob:record.blob!,capturedAt:"new"}}],[job],"ns")).toBe("attention");
+  expect(uploadedMarkerState(photo,[record],[{...job,verification:"retake-requested"}],"ns")).toBe("attention");
+ });
+ it("lays out twelve fixed controls without world-space projection",()=>{const positions=Array.from({length:12},(_,i)=>fixedMarkerPosition(i));expect(new Set(positions.map(p=>JSON.stringify(p))).size).toBe(12);expect(positions.every(p=>p.x>0&&p.x<100&&p.y>0&&p.y<100)).toBe(true);});
+ it("uses capacity-aware random assignment and leaves full cases unassigned",()=>{const w=emptyReviewWorkspace();w.reviewers.forEach(r=>r.capacity=1);w.cases=[reviewCase("a"),reviewCase("b"),reviewCase("c")];autoAssign(w,admin,()=>0,"now");expect(w.cases.map(c=>c.reviewerId)).toEqual(["reviewer-demo","reviewer-sara",undefined]);expect(reviewerWorkload(w,"reviewer-demo")).toBe(1);});
+ it("prevents duplicate assignment and non-admin mutations",()=>{const w=emptyReviewWorkspace();w.cases=[reviewCase()];assignCase(w,admin,"case-1","reviewer-demo","now");expect(()=>assignCase(w,admin,"case-1","reviewer-sara","now")).toThrow();expect(()=>assignCase(w,actor,"case-1","reviewer-sara","now",true)).toThrow();assignCase(w,admin,"case-1","reviewer-sara","now",true);expect(w.history).toHaveLength(2);});
+ it("permits only the assigned reviewer and creates an exact scoped rejection idempotently",async()=>{
+  const persistence=new MemoryReviewPersistence(),requests:EvidenceRequest[]=[];
+  const requestRepository={list:async()=>requests,create:vi.fn(async(r:EvidenceRequest)=>{requests.push(r);})} as unknown as RequestRepository;
+  const repository=new ReviewRepository(persistence,requestRepository,()=>0,()=>"2026-10-12T00:00:00Z");
+  await repository.importSubmitted([reviewCase()]);await repository.assign(admin,"case-1","reviewer-demo");
+  await expect(repository.decide({...actor,id:"other"},"case-1",photo.id,"r1","approved")).rejects.toThrow("دسترسی");
+  await expect(repository.decide(actor,"case-1",photo.id,"stale","approved")).rejects.toThrow("نسخه");
+  await repository.decide(actor,"case-1",photo.id,"r1","rejected","پلاک خوانا نیست.");
+  await repository.decide(actor,"case-1",photo.id,"r1","rejected","پلاک خوانا نیست.");
+  expect(requests).toHaveLength(1);expect(requests[0].items).toEqual([{id:JSON.stringify(["case-1",photo.id,"r1"]),kind:"photo",requirementId:photo.id,reviewerReason:"پلاک خوانا نیست.",originalEvidenceId:"server-evidence"}]);
+  expect((await repository.read(actor)).cases[0].summary.jobs[0].revision).toBe("r1");
+  expect((await repository.read({...actor,id:"other"})).cases).toHaveLength(0);
+ });
+ it("keeps approved decisions separate from upload and records history",async()=>{const repository=new ReviewRepository(new MemoryReviewPersistence());await repository.importSubmitted([reviewCase()]);await repository.assign(admin,"case-1","reviewer-demo");await repository.decide(actor,"case-1",photo.id,"r1","approved");const saved=(await repository.read(actor)).cases[0];expect(saved.status).toBe("review-complete");expect(saved.summary.jobs[0].verification).toBe("processing");expect(saved.decisions[0].decision).toBe("approved");});
+});

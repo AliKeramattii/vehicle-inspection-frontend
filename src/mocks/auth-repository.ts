@@ -19,17 +19,17 @@ export function createMockAuthRepository(now: () => number = Date.now, resendAft
       }
       const expiresAt = now() + 120_000;
       challenges.set(request.mobile, { expiresAt, attempts: 0, resendAt: now() + resendAfterSeconds * 1000 });
-      return { expiresAt: new Date(expiresAt).toISOString(), retryAfterSeconds: resendAfterSeconds, remainingAttempts: 3 };
+      return { expiresAt: new Date(expiresAt).toISOString(), retryAfterSeconds: resendAfterSeconds, remainingAttempts: 5 };
     },
     async verifyOtp(input) {
       const request = otpVerificationSchema.parse(input);
       const challenge = challenges.get(request.mobile);
       if (!challenge) throw new RepositoryError("OTP_NOT_REQUESTED", "ابتدا کد تأیید را درخواست کنید.");
       if (now() >= challenge.expiresAt) throw new RepositoryError("OTP_EXPIRED", "مهلت کد تأیید تمام شده است.");
-      if (challenge.attempts >= 3) throw new RepositoryError("OTP_LOCKED", "کد تازه درخواست کنید.", { remainingAttempts: 0 });
+      if (challenge.attempts >= 5) throw new RepositoryError("OTP_LOCKED", "کد تازه درخواست کنید.", { remainingAttempts: 0 });
       if (request.code !== mockOtpCode) {
         challenge.attempts += 1;
-        throw new RepositoryError("OTP_INVALID", "کد تأیید نادرست است.", { remainingAttempts: 3 - challenge.attempts });
+        throw new RepositoryError("OTP_INVALID", "کد تأیید نادرست است.", { remainingAttempts: 5 - challenge.attempts });
       }
       challenges.delete(request.mobile);
       return { verified: true, isNewUser: false, inspectionId: mockInspectionId };

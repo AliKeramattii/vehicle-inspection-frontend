@@ -2,19 +2,20 @@ import { z } from "zod";
 import { photographyTemplateSchema, photoRequirementSchema, inspectionSectionSchema, supplementalCaptureSchema, type PhotographyTemplate, type InspectionSectionId } from "@/schemas/photography";
 import { inspectionPhotographyTemplate as defaultPhotographyTemplate } from "@/features/photography/inspection-template";
 
-export const roles = ["platform-admin", "template-editor", "viewer"] as const;
+export const roles = ["platform-admin", "template-editor", "viewer", "reviewer"] as const;
 export type AdminRole = typeof roles[number];
-export const roleLabels: Record<AdminRole, string> = { "platform-admin": "مدیر سامانه", "template-editor": "ویرایشگر قالب", viewer: "مشاهده‌گر" };
+export const roleLabels: Record<AdminRole, string> = { "platform-admin": "مدیر سایت", "template-editor": "ویرایشگر قالب", reviewer: "کارشناس", viewer: "مشاهده‌گر" };
 export const permissions = ["viewTemplates", "editDraft", "publish", "branding", "policies", "webhooks", "users"] as const;
 export type Permission = typeof permissions[number];
 export const permissionLabels: Record<Permission, string> = { viewTemplates: "مشاهده قالب‌ها", editDraft: "ویرایش پیش‌نویس", publish: "انتشار نسخه", branding: "مدیریت برندینگ", policies: "مدیریت سیاست‌ها", webhooks: "مدیریت وب‌هوک‌ها", users: "مدیریت کاربران و دسترسی‌ها" };
 export function allowed(role: AdminRole, permission: Permission) {
-  return role === "platform-admin" || permission === "viewTemplates" || (role === "template-editor" && permission === "editDraft");
+  return role !== "reviewer" && (role === "platform-admin" || permission === "viewTemplates" || (role === "template-editor" && permission === "editDraft"));
 }
 export type AdminActor = { id: string; name: string; role: AdminRole };
 export const actors: Record<AdminRole, AdminActor> = {
   "platform-admin": { id: "admin-demo", name: "علی محمدی", role: "platform-admin" },
   "template-editor": { id: "editor-demo", name: "سارا رضایی", role: "template-editor" },
+  reviewer: {id:"reviewer-demo", name:"علی محمدی", role:"reviewer"},
   viewer: { id: "viewer-demo", name: "مشاهده‌گر نمونه", role: "viewer" },
 };
 export type PublicationState = "draft" | "published" | "archived";

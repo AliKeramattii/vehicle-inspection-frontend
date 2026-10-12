@@ -1,4 +1,5 @@
-import type { CSSProperties } from "react";
+import Image from "next/image";
+import type { CSSProperties, ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
 import { toPersianDigits as fa } from "@/lib/utils/persian";
 import type { LocalPhoto } from "@/lib/media/photo-store";
@@ -8,13 +9,11 @@ import { findRequirement, photoRequirementEntry, photographyStateLabels, photogr
 import { artworkForRequirement, vehiclePhotoControls } from "./vehicle-photo-config";
 import { EvidenceSymbol } from "./evidence-symbol";
 
-export function VehiclePhotoNavigator({ template, photo, sectionId, records, onActivate, onSection, onReset }: {
-  template: PhotographyTemplate; photo: PhotoRequirement; sectionId: InspectionSectionId; records: readonly LocalPhoto[];
-  onActivate: (id: PhotoRequirement["id"]) => void; onSection: (id: InspectionSectionId) => void; onReset: () => void;
-}) {
+export type VehiclePhotoNavigatorProps = { template: PhotographyTemplate; photo: PhotoRequirement; sectionId: InspectionSectionId; records: readonly LocalPhoto[]; onActivate: (id:string)=>void; onSection: (id:InspectionSectionId)=>string|void; onReset:()=>void; controls?:boolean; scene?:ReactNode; onView?:(id:InspectionSectionId,requirementId:string|void)=>void };
+export function VehiclePhotoNavigator({ template, photo, sectionId, records, onActivate, onSection, onReset, controls = true, scene, onView }: VehiclePhotoNavigatorProps) {
   const artwork = artworkForRequirement(photo.id), requirements = template.sections.flatMap((section) => section.photoRequirements);
   return <section className="vehicle-photo-navigator" aria-label="انتخاب نما روی تصویر خودرو">
-    <div className="vehicle-photo-scene">
+    {scene ?? <div className="vehicle-photo-scene">
     <div className="vehicle-photo-artwork" style={{ "--artwork-ratio": artwork.aspectRatio } as CSSProperties}>
       <PhotoImage src={photo.sampleImage} alt={`نمای راهنمای خودرو: ${photo.title}`} eager frame="vehicle-overview" />
       <div className="vehicle-photo-markers">{artwork.markers.map((marker) => {
@@ -29,8 +28,9 @@ export function VehiclePhotoNavigator({ template, photo, sectionId, records, onA
       })}</div>
     </div>
     </div>
-    <nav className="vehicle-photo-controls" aria-label="نماهای خودرو"><button type="button" aria-label="بازنشانی به نمای بعدی" onClick={onReset}><Icon name="resetView" size={20} /><span>بازنشانی</span></button>
-      {vehiclePhotoControls.map((control) => <button type="button" key={control.sectionId} aria-label={`نمای خودرو: ${control.title}`} aria-pressed={sectionId === control.sectionId} onClick={() => onSection(control.sectionId)}><Icon name={control.icon} size={22} /><span>{control.title}</span></button>)}
-    </nav>
+    }
+    {controls && <nav className="vehicle-photo-controls" aria-label="نماهای خودرو"><button type="button" aria-label="بازنشانی به نمای بعدی" onClick={onReset}><Icon name="resetView" size={20} /><span>بازنشانی</span></button>
+      {vehiclePhotoControls.map((control) => <button type="button" key={control.sectionId} aria-label={`نمای خودرو: ${control.title}`} aria-pressed={sectionId === control.sectionId} onClick={() => { const id=onSection(control.sectionId); onView?.(control.sectionId,id); }}><Image src={"/ui-refinement/navigation/view-"+(control.sectionId==="roof"?"top":control.sectionId)+".webp"} alt="" width={34} height={25}/><span>{control.title}</span></button>)}
+    </nav>}
   </section>;
 }

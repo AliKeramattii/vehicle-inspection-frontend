@@ -21,5 +21,5 @@ export function LocationWorkflow({ inspectionId }: { inspectionId: string }) {
   } });
   if (inspection.isPending) return <div className="location-loading" role="status" aria-busy="true">در حال آماده‌سازی موقعیت…</div>;
   if (inspection.isError) return <div className="identity-load-error"><InlineAlert tone="destructive">{inspection.error.message}</InlineAlert><SecondaryButton onClick={() => void inspection.refetch()}>تلاش دوباره</SecondaryButton></div>;
-  return <LocationForm initialLocation={inspection.data.location ?? developmentLocationAdapter.initialLocation} onConfirm={(location) => save.mutate(location)} pending={save.isPending} error={save.error?.message} canConfirm={authorized} />;
+  return <LocationForm initialLocation={inspection.data.location ?? { ...developmentLocationAdapter.initialLocation, accuracyMeters: 0, formattedAddress: "", buildingNumber: "", unitFloor: "", parkingDescription: "" }} onConfirm={(location) => save.mutate(location)} pending={save.isPending} error={save.error?.message} canConfirm={authorized} />;
 }

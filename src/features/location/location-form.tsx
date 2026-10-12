@@ -9,20 +9,20 @@ import { Icon } from "@/components/ui/icon";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import { BottomStickyCTA } from "@/components/ui/bottom-sticky-cta";
 import { InlineAlert } from "@/components/ui/status";
-import { developmentLocationAdapter, isGpsMatched, type InspectionLocationAdapter } from "@/lib/map/location-adapter";
+import {  type InspectionLocationAdapter } from "@/lib/map/location-adapter";
 import type { InspectionLocation } from "@/types/domain";
 import { locationFormSchema, type LocationFormValues } from "./location-model";
 
-export function LocationForm({ initialLocation, onConfirm, pending = false, error, canConfirm = true, adapter = developmentLocationAdapter }: {
+export function LocationForm({ initialLocation, onConfirm, pending = false, error, canConfirm = true, adapter }: {
   initialLocation: InspectionLocation; onConfirm: (location: InspectionLocation) => void; pending?: boolean; error?: string; canConfirm?: boolean; adapter?: InspectionLocationAdapter;
 }) {
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(!initialLocation.formattedAddress);
   const editButton = useRef<HTMLButtonElement>(null);
   const { register, handleSubmit, control, setValue, setFocus, formState: { errors } } = useForm<LocationFormValues>({
     resolver: zodResolver(locationFormSchema), defaultValues: { ...initialLocation, buildingNumber: initialLocation.buildingNumber ?? "", unitFloor: initialLocation.unitFloor ?? "", parkingDescription: initialLocation.parkingDescription ?? "" },
   });
   const location = useWatch({ control }) as LocationFormValues;
-  const matched = isGpsMatched(location, adapter.initialLocation);
+  const matched = false;
   return <form className="location-form" noValidate onSubmit={handleSubmit((values) => { if (canConfirm && !pending) onConfirm(values); })}>
     <InspectionLocationMap adapter={adapter} location={location} onChange={(next) => {
       setValue("latitude", next.latitude, { shouldDirty: true }); setValue("longitude", next.longitude, { shouldDirty: true }); setValue("accuracyMeters", next.accuracyMeters);

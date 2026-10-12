@@ -157,3 +157,8 @@ Studio:
 - completed: green
 - retake: amber
 - pending: neutral grey
+
+
+## UI refinement: runtime identity and stage-specific success
+CoBranding shares the established app mark and configured brokerage logo/name. Primary is tenant theme driven; successful checks remain #059669 independently. Gray pending, orange attention and an independent selected ring apply to both optional viewer markers and photography controls. Local capture, binary upload and reviewer approval are different labelled stages.
+Controls stay below the vehicle. Guidance uses consistent Lucide topic icons and approved custom camera assets. The live 360 route is intentionally dark, without fabricated quality/coverage. See UI_REFINEMENT.md for mappings and OPTIONAL_3D_VIEWER.md for the restricted development gate.

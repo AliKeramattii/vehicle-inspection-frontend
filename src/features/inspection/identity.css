@@ -9,9 +9,9 @@
 .inspection-journey-header nav li { gap: 3px; }
 .inspection-journey-header nav li > span:first-child { width: 25px; height: 25px; font-size: 12px; border-color: #d4ddeb; }
 .inspection-journey-header nav li[aria-current="step"] > span:first-child { background: var(--color-primary); border-color: var(--color-primary); }
-.inspection-journey-header nav li > span.bg-success { background: var(--color-primary); border-color: var(--color-primary); }
+.inspection-journey-header nav li > span.bg-success { background: var(--color-success); border-color: var(--color-success); }
 .inspection-journey-header nav li > span.absolute { top: 12px; }
-.inspection-journey-header nav li > span.absolute.bg-success { background: var(--color-primary); }
+.inspection-journey-header nav li > span.absolute.bg-success { background: var(--color-success); }
 .inspection-journey-header nav li > span.text-xs { font-size: 13px; line-height: 21px; }
 .location-form { flex: 1; display: flex; flex-direction: column; }
 .inspection-location-map { height: clamp(300px, 40.7dvh, 380px); position: relative; overflow: hidden; background: #eef2ef; }

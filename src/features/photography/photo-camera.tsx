@@ -29,9 +29,6 @@ export function PhotoCamera({ photo, inspectionId, onCapture, service, guideHref
     </div>
     <p className="camera-framing-tip">{photo.checks[2]}؛ گوشی را ثابت نگه دارید.</p>
     {error && <InlineAlert tone="destructive" className="camera-save-error">{error}</InlineAlert>}
-    <div className="camera-actions"><label className="camera-file">انتخاب عکس<input aria-label="انتخاب عکس از گوشی" type="file" accept="image/*" capture="environment" disabled={busy} onChange={(event) => {
-      const file = event.target.files?.[0]; event.target.value = "";
-      if (file) void save(async () => { validatePhotoBlob(file); try { const bitmap = await createImageBitmap(file); bitmap.close(); } catch { throw new Error("این فایل تصویر قابل نمایش نیست؛ عکس دیگری انتخاب کنید."); } return file; });
-    }} /></label><PrimaryButton className="camera-shutter" aria-label="ثبت عکس" disabled={state.status !== "ready" || busy} loading={busy} onClick={() => void save(take)}><span /></PrimaryButton><Link href={guide}>راهنما</Link></div>
+    <div className="camera-actions"><SecondaryButton className="camera-retry" disabled={busy} onClick={retry}>دوربین</SecondaryButton><PrimaryButton className="camera-shutter" aria-label="ثبت عکس" disabled={state.status !== "ready" || busy} loading={busy} onClick={() => void save(take)}><span /></PrimaryButton><Link href={guide}>راهنما</Link></div>
   </div>;
 }

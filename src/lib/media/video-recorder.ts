@@ -13,15 +13,15 @@ export interface VideoRecorderService { open(onFailure: (error: Error) => void):
 export function videoRecordingError(cause: unknown): string {
   const name = typeof cause === "object" && cause !== null && "name" in cause ? cause.name : "";
   if (name === "NotAllowedError" || name === "SecurityError") return "دسترسی دوربین داده نشد. دسترسی مرورگر را بررسی کنید یا از دوربین دستگاه برای ضبط ویدیو استفاده کنید.";
-  if (name === "NotFoundError" || name === "NotReadableError") return "دوربین در دسترس نیست یا در برنامه دیگری استفاده می‌شود. از انتخاب/ضبط با دوربین دستگاه استفاده کنید.";
-  return cause instanceof Error ? cause.message : "ضبط ویدیو ممکن نشد. دوباره تلاش کنید یا از دوربین دستگاه استفاده کنید.";
+  if (name === "NotFoundError" || name === "NotReadableError") return "دوربین در دسترس نیست یا در برنامه دیگری استفاده می‌شود. با HTTPS و مرورگر پشتیبانی‌شده دوباره تلاش کنید.";
+  return cause instanceof Error ? cause.message : "ضبط ویدیو ممکن نشد. دوباره تلاش کنید یا مرورگر پشتیبانی‌شده را بررسی کنید.";
 }
 /** Event-driven lifecycle: final dataavailable precedes stop; no React component owns a recorder. */
 export function createVideoRecorderService(camera: CameraService = browserCameraService, now: () => number = () => performance.now()): VideoRecorderService {
   return { async open(onFailure) {
     const mimeType = selectVideoMime(typeof MediaRecorder === "undefined" ? undefined : MediaRecorder);
-    if (!mimeType) throw new Error("ضبط مستقیم ویدیو در این مرورگر پشتیبانی نمی‌شود. از دوربین دستگاه استفاده کنید.");
-    if (camera === browserCameraService && !navigator.mediaDevices?.getUserMedia) throw new Error("ضبط مستقیم ویدیو به اتصال امن نیاز دارد. از انتخاب/ضبط با دوربین دستگاه استفاده کنید.");
+    if (!mimeType) throw new Error("ضبط مستقیم ویدیو در این مرورگر پشتیبانی نمی‌شود. مرورگر پشتیبانی‌شده را بررسی کنید.");
+    if (camera === browserCameraService && !navigator.mediaDevices?.getUserMedia) throw new Error("ضبط مستقیم ویدیو به اتصال امن نیاز دارد. با HTTPS و مرورگر پشتیبانی‌شده دوباره تلاش کنید.");
     const stream = await camera.open(); let recorder: MediaRecorder;
     try { recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 2_500_000 }); }
     catch (error) { camera.stop(stream); throw error; }
@@ -43,7 +43,7 @@ export function createVideoRecorderService(camera: CameraService = browserCamera
     };
     recorder.onstart = () => { started = now(); resolveStart?.(); };
     recorder.ondataavailable = (event) => { if (!disposed && event.data.size) { bytes += event.data.size; if (bytes > 250 * 1024 * 1024) fail(new Error("حجم ویدیو بیش از ۲۵۰ مگابایت شد؛ یک ویدیوی کوتاه‌تر ضبط کنید.")); else chunks.push(event.data); } };
-    recorder.onerror = () => fail(new Error("ضبط ویدیو متوقف شد. دوباره تلاش کنید یا از دوربین دستگاه استفاده کنید."));
+    recorder.onerror = () => fail(new Error("ضبط ویدیو متوقف شد. دوباره تلاش کنید یا مرورگر پشتیبانی‌شده را بررسی کنید."));
     recorder.onstop = () => {
       if (disposed) return;
       const durationSeconds = Math.max(0, (now() - started) / 1000);
@@ -53,7 +53,7 @@ export function createVideoRecorderService(camera: CameraService = browserCamera
       resolveResult({ blob, durationSeconds });
     };
     return { stream, mimeType,
-      start() { return new Promise<void>((resolve, reject) => { resolveStart = resolve; rejectStart = reject; try { recorder.start(1000); } catch { fail(new Error("شروع ضبط ممکن نشد. از دوربین دستگاه استفاده کنید.")); } }); },
+      start() { return new Promise<void>((resolve, reject) => { resolveStart = resolve; rejectStart = reject; try { recorder.start(1000); } catch { fail(new Error("شروع ضبط ممکن نشد. مرورگر پشتیبانی‌شده را بررسی کنید.")); } }); },
       stop() { if (recorder.state !== "inactive") recorder.stop(); return result; },
       dispose() { if (disposed) return; disposed = true; detach(); cancelRecorder(); release(); chunks.length = 0; const error = new Error("ضبط لغو شد."); rejectStart?.(error); rejectResult(error); },
     };

@@ -4,7 +4,7 @@ import { uploadWorkflow, queueJobs, setOnline, releaseFixtureJobs, type UploadFi
 import { enterPhotography, snapshotReady } from "./photography-helpers";
 import { openPackageReview, captureData } from "./capture-package-helpers";
 import { photoDatabase } from "../../src/lib/media/photo-store";
-import { mockRecorder } from "./capture-package-helpers";
+import { mockRecorder, recordedState } from "./capture-package-helpers";
 const renders = ".agent/reference-review/phase06-renders";
 const errors = new WeakMap<Page, string[]>();
 test.beforeEach(async ({ page }, info) => {
@@ -81,11 +81,11 @@ test("local odometer edits remain durable offline without increasing the media d
   await expect(page).toHaveURL(/capture\/review$/); expect((await captureData(page))[0].kilometers).toBe(48321);
   await page.getByRole("button", { name: "ادامه به ارسال" }).click(); await expect(page.getByText("۴۸٬۳۲۱ کیلومتر", { exact: true })).toBeVisible(); expect((await queueJobs(page)).filter((job) => job.current)).toHaveLength(13);
 });
-test("offline native video replacement persists before replacing its queued accepted revision", async ({ page }) => {
-  await mockRecorder(page, true); await uploadWorkflow(page, "offline"); const old = (await queueJobs(page)).find((job) => job.evidenceKind === "video-360")!;
+test("offline live video replacement persists before replacing its queued accepted revision", async ({ page }) => {
+  await mockRecorder(page); await uploadWorkflow(page, "offline"); const old = (await queueJobs(page)).find((job) => job.evidenceKind === "video-360")!;
   await page.getByRole("link", { name: "مشاهده ویدیوی ۳۶۰ درجه", exact: true }).scrollIntoViewIfNeeded(); await page.getByRole("link", { name: "مشاهده ویدیوی ۳۶۰ درجه", exact: true }).click();
   await page.getByRole("button", { name: "ضبط مجدد", exact: true }).click(); expect((await captureData(page))[0].acceptedBytes).toBeGreaterThan(0);
-  await page.getByLabel("انتخاب یا ضبط ویدیو با دوربین دستگاه").setInputFiles("tests/e2e/fixtures/walkaround.webm"); await expect(page).toHaveURL(/video\/review$/);
+  await recordedState(page);await page.clock.resume();await page.getByRole("button",{name:"پایان ضبط",exact:true}).click(); await expect(page).toHaveURL(/video\/review$/);
   await page.getByRole("button", { name: "تأیید و ذخیره" }).click(); await page.getByRole("button", { name: "ادامه به ارسال" }).click();
   await expect.poll(async () => (await queueJobs(page)).find((job) => job.id === old.id)?.upload).toBe("cancelled");
   expect((await queueJobs(page)).filter((job) => job.current && job.evidenceKind === "video-360")).toHaveLength(1); expect((await captureData(page))[0].acceptedBytes).toBeGreaterThan(0);

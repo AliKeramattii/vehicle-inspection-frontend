@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>360° Capture UI — Static Preview</title><link rel="stylesheet" href="./src/styles.css"></head>
+<body>
+<main class="capture-screen" dir="rtl">
+  <div class="scene-layer"><img class="demo-scene" src="./public/images/inspection-360/scene-background.webp" alt=""><div class="scene-vignette"></div></div>
+  <div class="capture-content">
+    <header class="capture-header">
+      <button type="button" class="icon-action exit-action" aria-label="خروج"><img src="./public/icons/inspection-360/close.svg" alt="" width="28" height="28" style="filter:invert(1)"></button>
+      <h1>فیلم ۳۶۰ درجه خودرو</h1>
+      <button type="button" class="help-action" onclick="document.getElementById('demo-help').hidden=false"><img src="./public/icons/inspection-360/guide-book.svg" alt="" width="25" height="25" style="filter:invert(1)"><span>راهنما</span></button>
+    </header>
+    <section class="capture-instructions"><h2>آرام دور خودرو حرکت کنید</h2><p>خودرو را در کادر نگه دارید.</p><span class="demo-tag">پیش‌نمایش نمونه</span></section>
+    <div class="middle-stack">
+      <div class="orbit-area">
+        <svg class="main-orbit" viewBox="0 0 400 450" aria-hidden="true"><defs><filter id="glow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <circle cx="200" cy="225" r="172" fill="none" stroke="#D7E3EC" stroke-width="4" stroke-dasharray="8 11" opacity=".65"/>
+          <circle cx="200" cy="225" r="172" fill="none" stroke="#1687FF" stroke-width="8" stroke-linecap="round" stroke-dasharray="702.46 1080.70" transform="rotate(130 200 225)" filter="url(#glow)"/>
+          <circle cx="370" cy="248" r="9" fill="white" stroke="#E7F3FF" stroke-width="3"/>
+        </svg>
+        <div class="orbit-progress-badge">۶۵٪</div>
+        <div class="mini-orbit"><svg viewBox="0 0 190 190" class="mini-orbit-ring" aria-hidden="true"><circle cx="95" cy="95" r="76" fill="none" stroke="#A5B2C2" stroke-width="3" stroke-dasharray="7 7" opacity=".7"/><path d="M94 19A76 76 0 0 1 168 116" fill="none" stroke="#218BFF" stroke-width="5" stroke-linecap="round"/><path d="m163 102 6 16 7-14" fill="none" stroke="#218BFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><img src="./public/images/inspection-360/top-view-car.webp" alt="نمای بالای خودرو" width="92" height="92"></div>
+      </div>
+      <div class="recording-timer" dir="ltr"><i class="record-led"></i><span>۰۰:۲۸</span></div>
+    </div>
+    <div class="status-list"><div class="capture-status-card"><span class="status-marker success">✓</span><img src="./public/icons/inspection-360/speed.svg" alt="" width="28" height="28" style="filter:invert(1)"><span class="status-label">سرعت حرکت مناسب</span></div><div class="capture-status-card"><span class="status-marker success">✓</span><img src="./public/icons/inspection-360/level.svg" alt="" width="28" height="28" style="filter:invert(1)"><span class="status-label">گوشی تراز</span></div><div class="capture-status-card"><span class="status-marker success">✓</span><img src="./public/icons/inspection-360/light.svg" alt="" width="28" height="28" style="filter:invert(1)"><span class="status-label">نور مناسب</span></div></div>
+    <footer class="capture-controls"><button type="button" class="side-control"><span class="control-ring"><img src="./public/icons/inspection-360/switch-camera.svg" alt="" width="30" height="30" style="filter:invert(1)"></span><span>تغییر دوربین</span></button><button type="button" class="record-main" aria-label="شروع ضبط"><span class="record-main-center"><span class="stop-square"></span></span></button><button type="button" class="side-control"><span class="control-ring"><img src="./public/icons/inspection-360/pause.svg" alt="" width="30" height="30" style="filter:invert(1)"></span><span>مکث</span></button></footer>
+  </div>
+</main>
+<div id="demo-help" class="modal-backdrop" hidden><div class="guide-dialog" role="dialog" aria-modal="true"><button class="modal-close" onclick="document.getElementById('demo-help').hidden=true">✕</button><h2>راهنمای فیلم‌برداری ۳۶۰ درجه</h2><img src="./public/images/inspection-360/orbit-360-illustration.webp" alt="راهنمای چرخش" class="guide-illustration"><p>به‌آرامی دور خودرو حرکت کنید و آن را در کادر نگه دارید.</p><button class="primary-button" onclick="document.getElementById('demo-help').hidden=true">متوجه شدم</button></div></div>
+<style>[hidden] { display: none !important; }</style>
+</body>
+</html>

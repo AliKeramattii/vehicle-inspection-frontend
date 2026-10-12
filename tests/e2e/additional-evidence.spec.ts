@@ -282,29 +282,11 @@ test("mixed photo/video requests keep separate evidence kinds and requested orde
     page.getByRole("heading", { name: "ویدیوی ۳۶۰ درجه", exact: true }),
   ).toBeVisible();
 });
-test("native video selection remains available for a requested video when recorder is unsupported", async ({
-  page,
-}) => {
-  await mockRecorder(page, true);
-  const { original } = await requestedWorkflow(page, "video");
-  await page.getByRole("link", { name: "ضبط مجدد", exact: true }).click();
-  await page.getByRole("button", { name: "شروع ضبط", exact: true }).click();
-  await expect(
-    page.getByText(
-      "ضبط مستقیم ویدیو در این مرورگر پشتیبانی نمی‌شود. از دوربین دستگاه استفاده کنید.",
-    ),
-  ).toBeVisible();
-  await page
-    .getByLabel("انتخاب یا ضبط ویدیو با دوربین دستگاه")
-    .setInputFiles("tests/e2e/fixtures/walkaround.webm");
-  await expect(
-    page.getByRole("heading", { name: "بررسی ویدیو" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "تأیید و ذخیره" }),
-  ).toBeEnabled();
-  expect(await submissionRecord(page)).toEqual(original);
+test("requested video stays live-only when the recorder is unsupported",async({page})=>{
+ await mockRecorder(page,true);const{original}=await requestedWorkflow(page,"video");await page.getByRole("link",{name:"ضبط مجدد",exact:true}).click();await page.getByRole("button",{name:"شروع ضبط",exact:true}).click();
+ await expect(page.locator(".video-capture-error")).toContainText("پشتیبانی");await expect(page.locator('input[type="file"]')).toHaveCount(0);expect(await submissionRecord(page)).toEqual(original);
 });
+
 test("uncertain acknowledgement recovers on refresh without a second supplemental attempt", async ({
   page,
 }) => {

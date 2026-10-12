@@ -10,7 +10,7 @@ export type SubmissionReadiness = {
   blockingUploadFailures: boolean; factsConfirmed: boolean; canSubmit: boolean;
 };
 export type InspectionSummary = {
-  inspection: Inspection; reference: string; namespace: string; odometerRequirementId?: string;
+  inspection: Inspection; reference: string; namespace: string; template?: PhotographyTemplate; odometerRequirementId?: string;
   capture: CaptureSummary["capture"]; odometer: CaptureSummary["odometer"]; videoDurationSeconds?: number;
   jobs: UploadJob[]; upload: ReturnType<typeof uploadProgress>; processingCount: number;
   readiness: SubmissionReadiness;
@@ -24,7 +24,7 @@ export function deriveInspectionSummary(inspection: Inspection, reference: strin
   const readiness = { captureComplete: capture.capture.complete, requiredMediaUploaded: upload.complete,
     odometerValid: capture.capture.odometer, blockingUploadFailures: upload.failed > 0, factsConfirmed,
     canSubmit: capture.capture.complete && upload.complete && factsConfirmed };
-  return { inspection, reference, namespace: capture.media[0]?.namespace ?? "", odometerRequirementId: template.captureRequirements?.odometerRequirementId,
+  return { inspection, reference, template: structuredClone(template), namespace: capture.media[0]?.namespace ?? "", odometerRequirementId: template.captureRequirements?.odometerRequirementId,
     capture: capture.capture, odometer: capture.odometer, videoDurationSeconds: capture.videoDurationSeconds,
     jobs, upload, processingCount: jobs.filter((job) => job.upload === "uploaded" && job.verification === "processing").length, readiness };
 }

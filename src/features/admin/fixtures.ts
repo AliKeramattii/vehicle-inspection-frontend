@@ -12,6 +12,8 @@ export function initialAdminWorkspace(): AdminWorkspace {
     users: [
       { id: "admin-demo", name: "علی محمدی", identifier: "admin-demo", role: "platform-admin", active: true },
       { id: "editor-demo", name: "سارا رضایی", identifier: "editor-demo", role: "template-editor", active: true },
+      { id: "reviewer-demo", name: "علی محمدی", identifier: "reviewer-demo", role: "reviewer", active: true },
+      { id: "reviewer-sara", name: "سارا رضایی", identifier: "reviewer-sara", role: "reviewer", active: true },
       { id: "viewer-demo", name: "مشاهده‌گر نمونه", identifier: "viewer-demo", role: "viewer", active: true },
     ],
     audit: [{ id: "audit-seed", at: seedTime, actor: "علی محمدی", action: "انتشار نسخه پایه", resource: snapshot.templateId + ":v1" }],

@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { browserVideoRecorder, readVideoDuration, videoRecordingError, type VideoRecorderService, type VideoRecordingSession, type RecordedVideo } from "@/lib/media/video-recorder";
+import { browserVideoRecorder, videoRecordingError, type VideoRecorderService, type VideoRecordingSession, type RecordedVideo } from "@/lib/media/video-recorder";
 
 export type RecordingState = "ready" | "opening" | "recording" | "saving" | "error";
 export function useVideoRecording(onRecorded: (video: RecordedVideo, signal: AbortSignal) => Promise<void>, service: VideoRecorderService = browserVideoRecorder) {
@@ -48,14 +48,5 @@ export function useVideoRecording(onRecorded: (video: RecordedVideo, signal: Abo
     try { const video = await current.stop(); if (mounted.current && token === generation.current) await save(video); }
     catch (cause) { if (mounted.current && token === generation.current) { release(); report(cause); } }
   }
-  async function native(file: File) {
-    release(); setCanRetrySave(false); setState("saving"); setError(undefined); const token = generation.current;
-    try {
-      if (!file.type.startsWith("video/") || !file.size || file.size > 250 * 1024 * 1024) throw new Error("یک ویدیوی معتبر با حجم کمتر از ۲۵۰ مگابایت انتخاب کنید.");
-      const controller = new AbortController(); operation.current = controller;
-      const durationSeconds = await readVideoDuration(file, controller.signal);
-      if (mounted.current && token === generation.current) await save({ blob: file, durationSeconds });
-    } catch (cause) { if (mounted.current && token === generation.current) report(cause); }
-  }
-  return { preview, state, error, elapsed, start, stop, native, canRetrySave, retrySave: () => { if (retryVideo.current) return save(retryVideo.current); } };
+  return { preview, state, error, elapsed, start, stop, canRetrySave, retrySave: () => { if (retryVideo.current) return save(retryVideo.current); } };
 }

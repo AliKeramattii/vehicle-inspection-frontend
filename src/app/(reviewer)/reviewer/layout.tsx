@@ -1,3 +1,2 @@
-import type { ReactNode } from "react";
-import { OperationsShell } from "@/components/layout/operations-shell";
-export default function ReviewerLayout({ children }: { children: ReactNode }) { return <OperationsShell title="فضای کارشناسان">{children}</OperationsShell>; }
+import "@/features/inspection/identity.css";
+import type {ReactNode} from "react";import {ReviewerShell} from "@/features/review-operations/reviewer-shell";export default function Layout({children}:{children:ReactNode}){return <ReviewerShell>{children}</ReviewerShell>;}
