@@ -75,3 +75,6 @@ During validation, an early fixture refreshed before vehicle persistence complet
 Warnings still visible: upstream Three.Clock deprecation through R3F, existing Next Image dimension warnings in upload/summary preview components, and terminal NO_COLOR/FORCE_COLOR notices. Dependency installation reported seven high audit findings; no forced or breaking dependency changes were made. The full historical visual suite was not represented as passing: intentionally changed identity/success/live-video presentation needs separately reviewed snapshot acceptance.
 
 No automotive asset replacement, original-readiness fix, real permission analysis, backend integration or deployment occurred.
+
+## Git delivery
+Implementation: 93d9266c7aec2311492f88293ccc4cf1ab689c93, `feat: modernize inspection UI and reviewer workflow`, on `feat/ui-modernization-2d-3d`. Pushed normally to the existing origin and verified with `git ls-remote`; remote HEAD matched. This branch starts from approved White-Label/Admin commit 9c75417. Phase 09 remains independently recoverable; main and all other worktrees are untouched. Original-worktree preservation recheck: all 24 records match, including pre-existing deletions. Restricted GLB/environment files, historical baselines and canonical photo-guide assets are excluded.
