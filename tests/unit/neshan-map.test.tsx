@@ -151,6 +151,19 @@ describe("official Leaflet adapter and lifecycle", () => {
     render(<InspectionLocationMap config={config} point={gps} onSelect={selected} factory={factory} />);
     await waitFor(() => expect(factory).toHaveBeenCalledTimes(2));
   });
+  it("recoverable tile failure retains the map, fixed pin and retry ownership", async () => {
+    const instance = { showGps: vi.fn(), remove: vi.fn(), resize: vi.fn() };
+    const factory = vi.fn<import("@/lib/map/neshan-adapter").MapFactory>().mockResolvedValue(instance);
+    const mounted = render(<InspectionLocationMap config={{...defaultLocationMap(),webMapKey:"web.unit-fixture"}} point={null} onSelect={vi.fn()} factory={factory}/>);
+    await waitFor(() => expect(factory).toHaveBeenCalledTimes(1));
+    await act(async () => factory.mock.calls[0][3].error());
+    expect(screen.getByRole("status")).toHaveTextContent("بارگذاری نقشه کامل نشد.");
+    expect(mounted.container.querySelector(".neshan-center-pin")).toBeVisible();
+    expect(mounted.container.querySelector(".neshan-map-message")).toBeNull();
+    fireEvent.click(screen.getByRole("button",{name:"تلاش دوباره برای بارگذاری نقشه"}));
+    await waitFor(() => expect(factory).toHaveBeenCalledTimes(2));
+    expect(instance.remove).toHaveBeenCalledTimes(1);
+  });
   it("late GPS completion after unmount cannot select; denied GPS remains recoverable", async () => {
     let finish!: (value: LocationSelection) => void;
     const selected = vi.fn(), service = { locate: vi.fn(() => new Promise<LocationSelection>(resolve => { finish = resolve; })) };

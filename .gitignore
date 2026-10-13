@@ -45,3 +45,7 @@ next-env.d.ts
 
 # Restricted development-only model; never publish
 .agent/vehicle-3d/
+
+# Local public map settings; tooling stays outside public/build output
+/tools/dev-neshan-proxy/site-settings.local.json
+!/tools/dev-neshan-proxy/.env.example

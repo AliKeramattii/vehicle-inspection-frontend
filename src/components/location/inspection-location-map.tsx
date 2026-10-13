@@ -20,6 +20,8 @@ export function InspectionLocationMap({ point, onSelect, config = defaultLocatio
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [locating, setLocating] = useState(false), [error, setError] = useState<string>();
   const [generation, setGeneration] = useState(0);
+  const [tileError, setTileError] = useState(false);
+  const retryMap = () => { setTileError(false); setError(undefined); setStatus("loading"); setGeneration(value => value + 1); };
   const configured = Boolean(config.enabled && config.webMapKey);
   useEffect(() => {
     if (!configured || !host.current) return;
@@ -27,7 +29,8 @@ export function InspectionLocationMap({ point, onSelect, config = defaultLocatio
     const initialization = new AbortController();
     const callbacks = {
       selected(next: LocationSelection) { if (active && !latest.current.disabled) latest.current.onSelect(next); },
-      error() { if (active) { setStatus("error"); setError("نقشه بارگذاری نشد؛ کلید وب و اتصال اینترنت را بررسی کنید."); } },
+      // A missing/empty tile is recoverable; do not hide the fixed pin or cover an initialized map.
+      error() { if (active) setTileError(true); },
     };
     const observer = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(() => owned?.resize());
     observer?.observe(host.current);
@@ -58,9 +61,10 @@ export function InspectionLocationMap({ point, onSelect, config = defaultLocatio
       <Icon name="mapPin" size={32} />
       <strong>{!configured ? "نقشه هنوز پیکربندی نشده است" : status === "loading" ? "در حال بارگذاری نقشه…" : "نقشه در دسترس نیست"}</strong>
       <p>{!configured ? "کلید عمومی وب نقشه نشان را در تنظیمات این کارگزاری ثبت کنید. موقعیت ذخیره‌شده تغییر نکرده است." : error}</p>
-      {status === "error" && <SecondaryButton onClick={() => { setStatus("loading"); setGeneration(value => value + 1); }}>تلاش دوباره</SecondaryButton>}
+      {status === "error" && <SecondaryButton onClick={retryMap}>تلاش دوباره</SecondaryButton>}
     </div>}
     <button type="button" className="neshan-locate" aria-label="بازگشت به موقعیت من" disabled={locating || disabled} onClick={() => void locate()}><Icon name="locate" size={21} /><span>{locating ? "در حال یافتن موقعیت…" : "موقعیت من"}</span></button>
+    {tileError && status === "ready" && !error && <div className="neshan-location-error neshan-tile-warning" role="status"><span>بارگذاری نقشه کامل نشد.</span><button type="button" onClick={retryMap} aria-label="تلاش دوباره برای بارگذاری نقشه">تلاش دوباره</button></div>}
     {error && status !== "error" && <p className="neshan-location-error" role="alert">{error}</p>}
   </section>;
 }

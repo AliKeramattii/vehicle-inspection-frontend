@@ -670,3 +670,18 @@ All mutations require real backend tenant authorization, rate limits/audit and s
 Existing reviewer cases/evidence/decision/Additional Evidence endpoint boundaries remain. Decision payloads must identify requirementId (or video-360), evidence revision and evidenceId; stable decision identity makes retries idempotent. Backend must authorize the assigned reviewer and reject stale/conflicting revisions. Rejections create immutable scoped requests only for affected items, preserving original submission and historical evidence. Assignment/capacity require server-side atomic concurrency later; the current serialized IndexedDB workspace is a local mock and makes no such guarantee.
 Public Neshan web-map configuration is separate from private reverse-geocoding credentials. No private Neshan/API token is sent by this frontend. Live-only capture removes gallery import without changing generic evidence registration, upload, completion or private INSPECTION_{InspectionId} storage intent.
 The legacy nativeCaptureFallback configuration field is retained for schema compatibility; it no longer grants file-selection UX. A future versioned settings migration may remove it. No new backend endpoint is treated as implemented.
+
+## Temporary authorized Neshan development adapter
+Local development implements only the already-planned GET /api/maps/reverse contract in
+tools/dev-neshan-proxy/server.mjs; it is not a production Next endpoint or a brokerage API.
+Coordinates are strict finite WGS84; successful JSON contains only formatted_address.
+The v5 provider request uses a private server-side Api-Key. Authorization rejection maps to
+safe 502, provider/local rate limiting to 429 with Retry-After, timeout to 504.
+Existing client cancellation/edit-version protections and manual address recovery are unchanged.
+
+A separate loopback public settings host supplies validated Site Settings for local preview.
+Business API_MODE remains mock: settingsSource api here means only a public configuration fetch;
+it does not enable real inspection/auth/upload/submission repositories.
+Both local services and their ignored configurations are excluded from production.
+Production ASP.NET owns the identical reverse endpoint, authorization, private key and CORS.
+Development-only rewrites are absent from build/production-server phases.

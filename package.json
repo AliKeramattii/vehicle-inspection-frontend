@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:dev": "playwright test --config playwright.dev.config.ts",
-    "test:visual:update": "playwright test --update-snapshots=all"
+    "test:visual:update": "playwright test --update-snapshots=all",
+    "dev:neshan-proxy": "node tools/dev-neshan-proxy/run.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

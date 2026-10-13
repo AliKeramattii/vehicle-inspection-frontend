@@ -55,3 +55,17 @@ save/publish. Actual API installations publish through their authorized backend 
 local mock Admin cannot update that server. Scope browser keys to each frontend origin in
 the Neshan account. No rebuild or NEXT_PUBLIC_NESHAN key needed. Private service keys stay
 in ASP.NET secret storage. See NESHAN_LOCATION_INTEGRATION.md and API_CONTRACT.md.
+
+## Authorized local Neshan preview
+Ignored tools/dev-neshan-proxy/site-settings.local.json is a complete, strictly validated public
+Site Settings document with the authorized Web Map key and reverseGeocoding api. A separate
+loopback configuration host supplies it through the existing runtime provider contract when
+DEV_NESHAN_ENABLED=1 during Next development only. Existing Admin publication/history is not
+rewritten. Local override is not a production publication or business API integration.
+
+NESHAN_SERVICE_KEY lives only in tools/dev-neshan-proxy/.env.local and the reverse server process.
+Root .env.local contains development flags/ports only. Never place the service credential in
+public settings, NEXT_PUBLIC variables, public assets or browser persistence.
+Production ignores these local services even if the development flag exists during build.
+Future deployments publish their own domain-authorized web key and use the configured ASP.NET
+/api/maps/reverse endpoint. See tools/dev-neshan-proxy/README.md for exact startup and exclusion.
