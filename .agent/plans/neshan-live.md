@@ -28,7 +28,7 @@ Proxy security/timeout/rate/error tests; production isolation tests; existing Ne
 - [x] Read request, inspect branch/worktrees and local reference.
 - [x] Implement development services and opt-in configuration.
 - [x] Live provider/browser verification (real PNG/address success; empty tiles/provider timeouts recorded as limitations).
-- [ ] Validation and focused Git delivery.
+- [x] Validation and focused Git delivery (implementation pushed; provider coverage limitation remains explicit).
 
 ## Discoveries
 - Real v5 reverse returned HTTP 200 and Persian address.
@@ -36,4 +36,8 @@ Proxy security/timeout/rate/error tests; production isolation tests; existing Ne
 - Initial test selectors and Node fetch Host override caused test failures; corrected selectors and HTTP rebinding test.
 
 ## Validation progress
-343 unit tests pass; typecheck/lint pass. Production build succeeds with tools stopped and an empty rewrite manifest. Five fixture browser tests and one live scenario exit 0. No baseline changed. Final small security/error-layer review edits require final rerun before commit.
+Final lint/typecheck exit 0; all 343 unit tests across 25 files exit 0. Production build exits 0 with both local tools stopped and an empty production rewrite manifest. Five deterministic Neshan browser scenarios and one non-intercepted live scenario exit 0. Final security/error-layer edits, decoded-PNG assertion and plain-node startup were reverified before delivery. No baseline changed.
+
+Implementation commit de45f4a (feat: activate Neshan services for local development) is pushed to origin/feat/neshan-live-integration; remote HEAD verified as de45f4a46a263028161d47546b980969e712789b. Original 24 recorded user-state files remain unchanged. Loopback proxy/settings listeners and the frontend are running for local review at http://localhost:3114/inspection/insp_demo/location.
+
+The integration is delivered, but uniformly complete map coverage is not claimed: some real provider tile hosts still return HTTP 204 empty images, especially at zoomed GPS views. Provider/network investigation is a separate follow-up, with no origin or shard-routing bypass.
