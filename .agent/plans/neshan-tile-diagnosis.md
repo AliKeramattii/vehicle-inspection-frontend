@@ -24,9 +24,9 @@ Real authorized SDK traffic, layer/coordinate/status/content/timing/header diagn
 - [x] Classify: 70 base PNG/200, 70 empty label/204, 12 style/area/zoom combinations, cache/SW isolated.
 - [x] Observe only base failures; both-style, late-layer and cleanup regressions.
 - [x] Real live scenario exits 0: full coverage, GPS/reverse/edit/persistence/refresh; before/after, mobile and desktop screenshots reviewed.
-- [ ] Validation and scoped Git delivery.
+- [x] Validation and scoped Git delivery: all required checks exited 0; b08fff7 pushed normally and remote HEAD verified.
 
 ## Discoveries
 Previous host-only attribution of 204 to missing base tiles was incorrect. SDK labels return empty responses. Earlier partial screenshots did not wait for base decoding; no persistent base defect reproduced. No CSS/rendering fix supported, so layout untouched.
 ## Validation progress
-Lint and typecheck exit 0. Focused unit: 34 pass, exit 0. All unit: 346 across 25 files, exit 0. Real-provider browser: 1 pass, exit 0. Production build exits 0 with both local services stopped; production rewrite manifest remains empty. Five deterministic Neshan browser scenarios exit 0. All checks returned actual successful process exits. Credential scan is clean; original 24 user-state entries match. Focused Git delivery is the remaining step.
+Lint and typecheck exit 0. Focused unit: 34 pass, exit 0. All unit: 346 across 25 files, exit 0. Real-provider browser: 1 pass, exit 0. Production build exits 0 with both local services stopped; production rewrite manifest remains empty. Five deterministic Neshan browser scenarios exit 0. All checks returned actual successful process exits. Credential scan is clean; original 24 user-state entries match. Implementation b08fff7ae737f97a2830c946445aedbfb39a4cf4 is pushed to origin/feat/neshan-live-integration and remote HEAD matches. Local development preview/proxy are restored for user review.
