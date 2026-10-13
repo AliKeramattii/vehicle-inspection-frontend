@@ -5,6 +5,23 @@ test.skip(process.env.NESHAN_LIVE_CHECK !== "1", "Explicit authorized live-provi
 const folder = ".agent/reference-review/neshan-live";
 const diagnostics = new WeakMap<Page,()=>Promise<void>>();
 test.afterEach(async ({page}) => {await diagnostics.get(page)?.();diagnostics.delete(page);});
+/** Wait for visible base imagery, never count empty overlays or a single successful tile as coverage. */
+async function expectBaseCoverage(page: Page) {
+  await expect.poll(() => page.locator('[data-neshan-layer="base"]').evaluateAll(layers => {
+    const layer = layers[0], host = layer?.closest(".leaflet-container");
+    if (!layer || !host) return { complete: false, covered: false };
+    const bounds = host.getBoundingClientRect();
+    const tiles = Array.from(layer.querySelectorAll("img")).map(image => ({ image, rect: image.getBoundingClientRect() }))
+      .filter(({ rect }) => rect.right > bounds.left && rect.left < bounds.right && rect.bottom > bounds.top && rect.top < bounds.bottom);
+    const decoded = tiles.filter(({ image }) => image.complete && image.naturalWidth >= 256 && image.classList.contains("leaflet-tile-loaded"));
+    let covered = true;
+    for (let y = bounds.top + 1; y < bounds.bottom; y += 32) for (let x = bounds.left + 1; x < bounds.right; x += 32)
+      if (!decoded.some(({ rect }) => x >= rect.left && x < rect.right && y >= rect.top && y < rect.bottom)) covered = false;
+    return { complete: tiles.length > 0 && decoded.length === tiles.length, covered };
+  }), { message: "All visible base tiles decode and cover the map; optional 204 overlays are excluded." }).toEqual({ complete: true, covered: true });
+  await expect(page.locator(".neshan-tile-warning")).not.toBeVisible();
+}
+
 test("real provider tiles, real address, manual edit and durable confirmation", async ({ page, context }) => {
   await mkdir(folder, { recursive: true });
   const provider: { status: number; host: string; type: string; contentType: string }[] = [];
@@ -40,6 +57,7 @@ test("real provider tiles, real address, manual edit and durable confirmation", 
   await expect.poll(() => page.locator("img.leaflet-tile").evaluateAll(images => images.filter(image => image instanceof HTMLImageElement && image.complete && image.naturalWidth >= 256).length)).toBeGreaterThan(0);
   await expect(page.getByRole("button", { name: "تأیید این موقعیت" })).toBeDisabled();
   const pin = page.locator(".neshan-center-pin");
+  await expectBaseCoverage(page);
   await page.screenshot({path:folder+"/initial-live.png"});
   await expect(pin).toBeVisible({timeout:15000});
   const original = await pin.boundingBox();
@@ -54,6 +72,7 @@ test("real provider tiles, real address, manual edit and durable confirmation", 
     await expect(address).not.toHaveValue("");
   };
   await resolveAddress();
+  await expectBaseCoverage(page);
   expect(await address.inputValue()).not.toContain("آدرس آزمایشی");
   await page.locator(".leaflet-container").focus();
   await page.keyboard.press("ArrowRight");
@@ -68,6 +87,7 @@ test("real provider tiles, real address, manual edit and durable confirmation", 
   expect((await pin.boundingBox())!.x).toBeCloseTo(original!.x, 0);
   for (const [width,height] of [[360,800],[390,844],[430,932],[1440,960]]) {
     await page.setViewportSize({ width, height }); await page.evaluate(() => document.fonts.ready);
+    await expectBaseCoverage(page);
     await page.screenshot({ path: folder + "/location-real-" + width + ".png" });
     expect(await page.evaluate(() => [document.documentElement.scrollWidth,document.documentElement.scrollHeight])).toEqual([width,height]);
     const button = await page.getByRole("button", { name: "تأیید این موقعیت" }).boundingBox();
@@ -79,7 +99,9 @@ test("real provider tiles, real address, manual edit and durable confirmation", 
   await expect(page).toHaveURL(/\/vehicle$/);
   await page.goto(locationUrl);
   await expect(address).toHaveValue("تهران، بزرگراه جناح، ورودی پارکینگ بازدید");
+  await expectBaseCoverage(page);
   await page.reload();
+  await expectBaseCoverage(page);
   await expect(address).toHaveValue("تهران، بزرگراه جناح، ورودی پارکینگ بازدید");
   await expect(page.locator(".location-coordinate-values")).toContainText("35.6997390");
   const saved = await page.evaluate(async () => {

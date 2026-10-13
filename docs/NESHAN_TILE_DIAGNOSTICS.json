@@ -1,0 +1,215 @@
+{
+  "sdk": "@neshan-maps-platform/leaflet 1.0.8",
+  "testedAt": "2026-10-13",
+  "configuration": {
+    "poi": false,
+    "traffic": false
+  },
+  "browserCacheDisabled": true,
+  "serviceWorkers": "blocked",
+  "areas": {
+    "tehran": [
+      35.699739,
+      51.338097
+    ],
+    "mashhad": [
+      36.2972,
+      59.6067
+    ]
+  },
+  "results": [
+    {
+      "scenario": "dreamy-tehran-12",
+      "visibleBaseTiles": 6,
+      "decodedBaseTiles": 6,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "dreamy-tehran-14",
+      "visibleBaseTiles": 9,
+      "decodedBaseTiles": 9,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "dreamy-tehran-16",
+      "visibleBaseTiles": 6,
+      "decodedBaseTiles": 6,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "dreamy-mashhad-12",
+      "visibleBaseTiles": 6,
+      "decodedBaseTiles": 6,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "dreamy-mashhad-14",
+      "visibleBaseTiles": 4,
+      "decodedBaseTiles": 4,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "dreamy-mashhad-16",
+      "visibleBaseTiles": 4,
+      "decodedBaseTiles": 4,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "standard-night-tehran-12",
+      "visibleBaseTiles": 6,
+      "decodedBaseTiles": 6,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "standard-night-tehran-14",
+      "visibleBaseTiles": 9,
+      "decodedBaseTiles": 9,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "standard-night-tehran-16",
+      "visibleBaseTiles": 6,
+      "decodedBaseTiles": 6,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "standard-night-mashhad-12",
+      "visibleBaseTiles": 6,
+      "decodedBaseTiles": 6,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "standard-night-mashhad-14",
+      "visibleBaseTiles": 4,
+      "decodedBaseTiles": 4,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    },
+    {
+      "scenario": "standard-night-mashhad-16",
+      "visibleBaseTiles": 4,
+      "decodedBaseTiles": 4,
+      "baseHttpStatuses": [
+        200
+      ],
+      "labelHttpStatuses": [
+        204
+      ]
+    }
+  ],
+  "sanitizedExamples": [
+    {
+      "host": "tile1.neshan.org",
+      "path": "/301235621680884226129010.png",
+      "layer": "base",
+      "coordinates": {
+        "x": 42113,
+        "y": 25802,
+        "z": 16
+      },
+      "status": 200,
+      "headers": {
+        "content-type": "image/png",
+        "cache-control": "public, max-age=86400, must-revalidate, stale-while-revalidate=28800, stale-if-error=28800",
+        "date": "Tue, 13 Oct 2026 09:27:03 GMT",
+        "server": "Sotoon CDN"
+      },
+      "timing": {
+        "startTime": 1791883623839.988,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.536,
+        "responseStart": 27.605,
+        "responseEnd": 60.365
+      },
+      "fromServiceWorker": false
+    },
+    {
+      "host": "tile5.neshan.org",
+      "path": "/3012456216160884226129015.png",
+      "layer": "labels",
+      "coordinates": {
+        "x": 42113,
+        "y": 25803,
+        "z": 16
+      },
+      "status": 204,
+      "headers": {
+        "cache-control": "public, max-age=86400, must-revalidate, stale-while-revalidate=28800, stale-if-error=28800",
+        "date": "Tue, 13 Oct 2026 09:27:03 GMT",
+        "server": "Sotoon CDN"
+      },
+      "timing": {
+        "startTime": 1791883623839.851,
+        "domainLookupStart": -1,
+        "domainLookupEnd": -1,
+        "connectStart": -1,
+        "secureConnectionStart": -1,
+        "connectEnd": -1,
+        "requestStart": 0.542,
+        "responseStart": 15.452,
+        "responseEnd": 16.383
+      },
+      "fromServiceWorker": false
+    }
+  ],
+  "pageErrors": [],
+  "note": "SDK-generated encoded PNG paths; query credentials omitted. Empty labels are not missing base tiles. Coordinates come from the actual SDK tile objects, not a guessed path decoder."
+}

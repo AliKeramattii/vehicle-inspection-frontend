@@ -121,6 +121,34 @@ describe("official Leaflet adapter and lifecycle", () => {
     const sdk = { Map: vi.fn(function () { return raw; }), circle: vi.fn(() => layer), circleMarker: vi.fn(() => layer) } as unknown as NeshanLeaflet;
     return { handlers, raw, sdk, setCenter: (next: typeof center) => { center = next; } };
   }
+  function tileLayer(url: string) {
+    const listeners = new Map<string, () => void>(), element = document.createElement("div");
+    return { _url: url, element, getContainer: () => element,
+      on: vi.fn((event: string, handler: () => void) => listeners.set(event, handler)),
+      off: vi.fn((event: string) => listeners.delete(event)),
+      fail: () => listeners.get("tileerror")?.() };
+  }
+  it.each(["dreamy", "standard-night"] as const)("observes only %s base failures, leaving empty label overlays intact", mapType => {
+    const f = fixture(), base = tileLayer(mapType), labels = tileLayer(""), error = vi.fn();
+    f.raw.eachLayer.mockImplementation((visit: (layer: typeof base) => void) => { visit(base); visit(labels); });
+    const map = attachNeshan(f.sdk, document.createElement("div"), { ...defaultLocationMap(), mapType }, null, { selected: vi.fn(), error });
+    expect(f.sdk.Map).toHaveBeenCalledWith(expect.any(HTMLElement), expect.objectContaining({ maptype: mapType, poi: false, traffic: false, attributionControl: true }));
+    expect(base.element).toHaveAttribute("data-neshan-layer", "base");
+    expect(labels.on).not.toHaveBeenCalled(); labels.fail(); expect(error).not.toHaveBeenCalled();
+    base.fail(); expect(error).toHaveBeenCalledTimes(1);
+    map.remove(); expect(base.off).toHaveBeenCalledWith("tileerror", expect.any(Function));
+    expect(labels.off).not.toHaveBeenCalled(); base.fail(); expect(error).toHaveBeenCalledTimes(1);
+  });
+  it("observes later base layers once and never attaches a map failure listener to overlays", () => {
+    const f = fixture(), base = tileLayer("dreamy"), labels = tileLayer(""), error = vi.fn();
+    const map = attachNeshan(f.sdk, document.createElement("div"), defaultLocationMap(), null, { selected: vi.fn(), error });
+    // SDK layeradd callbacks also cover reinitialization/style-layer lifecycle.
+    const added = f.handlers.get("layeradd") as ((event: { layer: typeof base }) => void) | undefined;
+    added?.({ layer: labels }); added?.({ layer: base }); added?.({ layer: base });
+    expect(base.on).toHaveBeenCalledTimes(1); expect(labels.on).not.toHaveBeenCalled();
+    labels.fail(); expect(error).not.toHaveBeenCalled(); base.fail(); expect(error).toHaveBeenCalledTimes(1);
+    map.remove(); expect(base.off).toHaveBeenCalledTimes(1);
+  });
   it("initialization/resize/zoom do not select; drag selects manual and cleanup unregisters listeners", () => {
     const f = fixture(), selected = vi.fn(), host = document.createElement("div");
     const map = attachNeshan(f.sdk, host, { ...defaultLocationMap(), webMapKey: "fixture" }, null, { selected, error: vi.fn() });

@@ -5,7 +5,12 @@ import { coordinatesSchema, samePoint, type LocationSelection } from "./location
 type LatLng = { lat: number; lng: number };
 type MapEvent = { latlng?: LatLng; layer?: RawLayer };
 type Handler = (event: MapEvent) => void;
-type RawLayer = { on(event: string, handler: Handler): RawLayer; off(event: string, handler: Handler): RawLayer;
+type RawLayer = {
+  // Pinned Neshan Leaflet 1.0.8 uses the selected style as its base TileLayer URL;
+  // its separate label TileLayer uses an empty URL.
+  _url?: string;
+  getContainer?(): HTMLElement;
+  on(event: string, handler: Handler): RawLayer; off(event: string, handler: Handler): RawLayer;
   addTo(map: RawMap): RawLayer; remove(): void; setLatLng(point: [number, number]): RawLayer; setRadius(radius: number): RawLayer };
 type RawMap = {
   on(event: string, handler: Handler): RawMap; off(event: string, handler: Handler): RawMap;
@@ -43,7 +48,14 @@ export function attachNeshan(sdk: NeshanLeaflet, container: HTMLElement, config:
   let accuracy: RawLayer | undefined, position: RawLayer | undefined;
   const layers = new Set<RawLayer>();
   const error: Handler = () => { if (!removed) callbacks.error(); };
-  const observeLayer = (layer: RawLayer) => { if (!layers.has(layer)) { layers.add(layer); layer.on("tileerror", error); } };
+  const observeLayer = (layer: RawLayer) => {
+    if (layer._url !== config.mapType || layers.has(layer)) return;
+    // Empty label overlays legitimately return 204 even with POI/traffic disabled.
+    // Only a missing base tile represents missing map imagery. Keep provider layers intact.
+    layers.add(layer);
+    layer.getContainer?.()?.setAttribute("data-neshan-layer", "base");
+    layer.on("tileerror", error);
+  };
   const layerAdded: Handler = event => { if (event.layer) observeLayer(event.layer); };
   raw.eachLayer(observeLayer); raw.on("layeradd", layerAdded);
   const select = (latlng: LatLng) => {

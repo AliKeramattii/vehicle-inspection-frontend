@@ -176,3 +176,12 @@ settings schema; it correctly reparses it as ESM. No global package/module setti
 just to suppress this notice. An attempted default-module CLI flag was unsupported on the
 installed Node and was removed; the actual plain-node startup was reverified.
 Playwright still emits the existing FORCE_COLOR/NO_COLOR notice.
+
+## Layer-level correction to the activation report
+The later diagnosis found that the observed tile5–8 HTTP 204 responses belong to empty
+label overlays, not base imagery. Both supported styles rendered every visible base tile
+at zoom 12/14/16 in Tehran and Mashhad. The adapter now observes base failures only;
+overlays stay intact and permanent empty overlays are not retried. The live test waits
+for full decoded base coverage instead of one successful image. See
+docs/NESHAN_TILE_DIAGNOSTICS.md and its sanitized JSON. Earlier host-only and premature
+screenshot conclusions are superseded by that layer-level evidence.
