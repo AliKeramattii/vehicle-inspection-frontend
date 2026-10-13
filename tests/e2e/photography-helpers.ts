@@ -1,3 +1,4 @@
+import { chooseDemoLocation } from "./location-helpers";
 import { expect, type Page } from "@playwright/test";
 import { inspectionPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
 import { photoDatabase, photoKey, photoNamespace } from "../../src/lib/media/photo-store";
@@ -39,7 +40,7 @@ export async function enterPhotography(page: Page) {
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await page.getByRole("checkbox").check(); await page.getByRole("button", { name: "تأیید و ادامه" }).click();
   await expect(page).toHaveURL(/\/location$/);await expect(page.getByRole("button",{name:"تأیید این موقعیت"})).toBeVisible();
-  const address=page.getByRole("textbox",{name:"آدرس بازدید"});if(!await address.isVisible())await page.getByRole("button",{name:"ویرایش",exact:true}).click();await expect(address).toBeVisible();await address.fill("تهران، خیابان نمونه، پلاک ۱۲");
+  await chooseDemoLocation(page);
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
   await expect(page).toHaveURL(/\/inspection\/insp_demo\/capture$/);

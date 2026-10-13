@@ -14,6 +14,19 @@ export const bootstrapSchema = z.object({
 }).strict();
 const imageRef = publicUrl.refine(value => /\.(png|webp|jpe?g|ico)$/i.test(value) || /^\/icons\/[\w/-]+\.svg$/.test(value), "تصویر معتبر PNG، WebP یا JPEG انتخاب کنید.");
 const color = z.string().regex(/^#[0-9a-fA-F]{6}$/);
+export const locationMapSchema = z.object({
+  enabled: z.boolean(),
+  webMapKey: z.string().trim().min(1).max(250).nullable(),
+  mapType: z.enum(["dreamy", "standard-night"]),
+  initialViewport: z.object({
+    latitude: z.number().finite().min(-90).max(90),
+    longitude: z.number().finite().min(-180).max(180),
+    zoom: z.number().int().min(3).max(18),
+  }).strict(),
+  reverseGeocoding: z.enum(["unavailable", "mock", "api"]),
+}).strict();
+export type LocationMapConfiguration = z.infer<typeof locationMapSchema>;
+export const defaultLocationMap = (): LocationMapConfiguration => ({ enabled: true, webMapKey: null, mapType: "dreamy", initialViewport: { latitude: 35.699739, longitude: 51.338097, zoom: 12 }, reverseGeocoding: "unavailable" });
 export const siteSettingsSchema = z.object({
   schemaVersion: z.literal(1), tenantId: tenantIdSchema, version: z.number().int().positive(),
   publishedAt: z.iso.datetime(),
@@ -28,6 +41,7 @@ export const siteSettingsSchema = z.object({
     readiness: imageRef.nullable(), consent: imageRef.nullable() }).strict(),
   application: z.object({
     apiBaseUrl: publicUrl, contractVersion: z.literal("1"),
+    locationMap: locationMapSchema.optional(),
     template: z.object({ id: z.string().min(1).max(80), version: z.number().int().positive() }).strict(),
     features: z.object({ nativeCaptureFallback: z.literal(true), additionalEvidence: z.literal(true), supportLink: z.boolean() }).strict(),
   }).strict(),

@@ -1,40 +1,105 @@
-import type { Coordinates, LocationFix } from "./location-adapter";
-export type NeshanMap = {
- on(event:string,callback:()=>void):void; off(event:string,callback:()=>void):void;
- getCenter():{lat:number;lng:number}; easeTo(options:{center:[number,number];zoom?:number}):void;
- remove():void; resize():void;
- addSource(id:string,value:unknown):void; addLayer(value:unknown):void;
- getSource(id:string):{setData(data:unknown):void}|undefined;
+
+import type { LocationMapConfiguration } from "@/config/site-settings.schema";
+import { coordinatesSchema, samePoint, type LocationSelection } from "./location-selection";
+
+type LatLng = { lat: number; lng: number };
+type MapEvent = { latlng?: LatLng; layer?: RawLayer };
+type Handler = (event: MapEvent) => void;
+type RawLayer = { on(event: string, handler: Handler): RawLayer; off(event: string, handler: Handler): RawLayer;
+  addTo(map: RawMap): RawLayer; remove(): void; setLatLng(point: [number, number]): RawLayer; setRadius(radius: number): RawLayer };
+type RawMap = {
+  on(event: string, handler: Handler): RawMap; off(event: string, handler: Handler): RawMap;
+  getCenter(): LatLng; panTo(point: [number, number], options: { animate: boolean }): RawMap;
+  flyTo(point: [number, number], zoom: number, options: { animate: boolean; duration: number }): RawMap;
+  invalidateSize(options: { animate: boolean; pan: boolean }): RawMap;
+  eachLayer(callback: (layer: RawLayer) => void): RawMap; remove(): void; stop(): RawMap;
 };
-type SDK={Map:(new(options:Record<string,unknown>)=>NeshanMap)&{mapTypes:{neshanVector:string}}};
-declare global {interface Window {nmp_mapboxgl?:SDK}}
-let loading:Promise<SDK>|undefined;
-/** Official browser SDK loaded only for an explicitly configured public web-map key. */
-export function loadNeshan():Promise<SDK>{
- if(window.nmp_mapboxgl)return Promise.resolve(window.nmp_mapboxgl);
- if(loading)return loading;
- loading=new Promise<SDK>((resolve,reject)=>{
-  const css=document.createElement("link");css.rel="stylesheet";css.href="https://static.neshan.org/sdk/mapboxgl/v1.13.2/neshan-sdk/v1.1.3/index.css";document.head.append(css);
-  const script=document.createElement("script");script.src="https://static.neshan.org/sdk/mapboxgl/v1.13.2/neshan-sdk/v1.1.3/index.js";script.async=true;
-  script.onload=()=>window.nmp_mapboxgl?resolve(window.nmp_mapboxgl):reject(new Error("Map SDK unavailable"));
-  script.onerror=()=>{script.remove();css.remove();loading=undefined;reject(new Error("Map SDK unavailable"));};document.head.append(script);
- }).catch(error=>{loading=undefined;throw error;});return loading!;
-}
-export async function createNeshan(container:HTMLElement,center:Coordinates,key:string){
- const sdk=await loadNeshan();return new sdk.Map({container,center:[center.longitude,center.latitude],zoom:16,mapType:sdk.Map.mapTypes.neshanVector,mapKey:key,poi:false,traffic:false,trackResize:true});
-}
-export interface DeviceLocationService {locate():Promise<LocationFix>}
-export const browserLocationService:DeviceLocationService={
- locate:()=>new Promise((resolve,reject)=>{
-  if(!navigator.geolocation){reject(new Error("موقعیت‌یابی در این مرورگر پشتیبانی نمی‌شود."));return;}
-  navigator.geolocation.getCurrentPosition(p=>resolve({latitude:p.coords.latitude,longitude:p.coords.longitude,accuracyMeters:p.coords.accuracy}),
-   e=>reject(new Error(e.code===1?"اجازه دسترسی به موقعیت داده نشد. تنظیمات مرورگر را بررسی کنید.":"دریافت موقعیت ممکن نشد. دوباره تلاش کنید.")),{enableHighAccuracy:true,timeout:15000,maximumAge:30000});
- })
+export type NeshanLeaflet = {
+  Map: new (container: HTMLElement, options: Record<string, unknown>) => RawMap;
+  circle(point: [number, number], options: Record<string, unknown>): RawLayer;
+  circleMarker(point: [number, number], options: Record<string, unknown>): RawLayer;
 };
-/** Private reverse-geocoding credentials belong to a future backend adapter. */
-export interface ReverseGeocoder {address(coordinates:Coordinates):Promise<string|undefined>}
-export const unavailableReverseGeocoder:ReverseGeocoder={address:async()=>undefined};
-export function accuracyPolygon(fix:LocationFix){
- const points=Array.from({length:65},(_,i)=>{const a=i/64*Math.PI*2;return [fix.longitude+Math.cos(a)*fix.accuracyMeters/(111320*Math.cos(fix.latitude*Math.PI/180)),fix.latitude+Math.sin(a)*fix.accuracyMeters/111320];});
- return {type:"Feature",properties:{},geometry:{type:"Polygon",coordinates:[points]}};
+export interface NeshanMap {
+  showGps(point: LocationSelection): void;
+  resize(): void;
+  remove(): void;
 }
+export type MapCallbacks = { selected(point: LocationSelection): void; error(): void };
+export type MapFactory = (container: HTMLElement, config: LocationMapConfiguration, point: LocationSelection | null, callbacks: MapCallbacks, signal: AbortSignal) => Promise<NeshanMap>;
+
+/** Official package imported only inside a mounted browser map. No global window SDK. */
+export const createNeshan: MapFactory = async (container, config, point, callbacks, signal) => {
+  const { default: sdk } = await import("@neshan-maps-platform/leaflet");
+  signal.throwIfAborted();
+  return attachNeshan(sdk, container, config, point, callbacks);
+};
+/** Own adapter behavior is testable independently of Leaflet's rendering internals. */
+export function attachNeshan(sdk: NeshanLeaflet, container: HTMLElement, config: LocationMapConfiguration, initial: LocationSelection | null, callbacks: MapCallbacks): NeshanMap {
+  const center = initial ?? config.initialViewport;
+  const raw = new sdk.Map(container, { key: config.webMapKey, maptype: config.mapType,
+    center: [center.latitude, center.longitude], zoom: config.initialViewport.zoom,
+    poi: false, traffic: false, zoomControl: true, attributionControl: true });
+  let current = initial, manualMove = false, removed = false;
+  let accuracy: RawLayer | undefined, position: RawLayer | undefined;
+  const layers = new Set<RawLayer>();
+  const error: Handler = () => { if (!removed) callbacks.error(); };
+  const observeLayer = (layer: RawLayer) => { if (!layers.has(layer)) { layers.add(layer); layer.on("tileerror", error); } };
+  const layerAdded: Handler = event => { if (event.layer) observeLayer(event.layer); };
+  raw.eachLayer(observeLayer); raw.on("layeradd", layerAdded);
+  const select = (latlng: LatLng) => {
+    const next = { latitude: latlng.lat, longitude: latlng.lng };
+    if (!coordinatesSchema.safeParse(next).success || (current && samePoint(next, current))) return;
+    current = { ...next, selectionSource: "manual", accuracyMeters: null }; callbacks.selected(current);
+  };
+  const drag: Handler = () => { manualMove = true; };
+  const move: Handler = () => {
+    if (!manualMove) return; manualMove = false; select(raw.getCenter());
+  };
+  const click: Handler = event => {
+    if (!event.latlng) return; manualMove = false; select(event.latlng);
+    raw.panTo([event.latlng.lat, event.latlng.lng], { animate: false });
+  };
+  const key = (event: KeyboardEvent) => { if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(event.key)) manualMove = true; };
+  container.addEventListener("keydown", key);
+  raw.on("dragstart", drag); raw.on("moveend", move); raw.on("click", click);
+  function drawGps(fix: LocationSelection) {
+    const coords: [number, number] = [fix.latitude, fix.longitude];
+    position?.remove(); accuracy?.remove();
+    position = sdk.circleMarker(coords, { radius: 5, color: "#FFFFFF", weight: 2, fillColor: "#2563EB", fillOpacity: 1, interactive: false }).addTo(raw);
+    accuracy = fix.accuracyMeters === null ? undefined : sdk.circle(coords, { radius: fix.accuracyMeters, color: "#2563EB", weight: 1, fillColor: "#2563EB", fillOpacity: 0.12, interactive: false }).addTo(raw);
+  }
+  if (initial?.selectionSource === "gps") drawGps(initial);
+  return {
+    showGps(fix) {
+      current = fix; manualMove = false; raw.stop(); drawGps(fix);
+      raw.flyTo([fix.latitude, fix.longitude], 16, { animate: !window.matchMedia("(prefers-reduced-motion: reduce)").matches, duration: 0.5 });
+    },
+    resize() { if (!removed) raw.invalidateSize({ animate: false, pan: false }); },
+    remove() {
+      if (removed) return; removed = true;
+      container.removeEventListener("keydown", key);
+      raw.off("dragstart", drag); raw.off("moveend", move); raw.off("click", click); raw.off("layeradd", layerAdded);
+      layers.forEach(layer => layer.off("tileerror", error)); raw.remove();
+    },
+  };
+}
+export interface DeviceLocationService { locate(signal: AbortSignal): Promise<LocationSelection> }
+export const browserLocationService: DeviceLocationService = {
+  locate: signal => new Promise((resolve, reject) => {
+    if (signal.aborted) { reject(new DOMException("Aborted", "AbortError")); return; }
+    if (!navigator.geolocation) { reject(new Error("موقعیت‌یابی در این مرورگر پشتیبانی نمی‌شود؛ نقطه را دستی انتخاب کنید.")); return; }
+    if (!window.isSecureContext) { reject(new Error("برای دریافت موقعیت، صفحه را با HTTPS یا localhost باز کنید.")); return; }
+    const abort = () => reject(new DOMException("Aborted", "AbortError"));
+    signal.addEventListener("abort", abort, { once: true });
+    navigator.geolocation.getCurrentPosition(position => {
+      signal.removeEventListener("abort", abort); if (signal.aborted) return;
+      const point = { latitude: position.coords.latitude, longitude: position.coords.longitude };
+      if (!coordinatesSchema.safeParse(point).success) { reject(new Error("مختصات دریافت‌شده معتبر نیست؛ نقطه را دستی انتخاب کنید.")); return; }
+      const accuracy = position.coords.accuracy;
+      resolve({ ...point, selectionSource: "gps", accuracyMeters: Number.isFinite(accuracy) && accuracy >= 0 ? accuracy : null });
+    }, failure => {
+      signal.removeEventListener("abort", abort); if (signal.aborted) return;
+      reject(new Error(({ 1: "اجازه دسترسی به موقعیت داده نشد؛ نقطه را روی نقشه انتخاب کنید.", 2: "موقعیت دستگاه در دسترس نیست؛ دوباره تلاش کنید یا نقطه را دستی انتخاب کنید.", 3: "زمان دریافت موقعیت تمام شد؛ دوباره تلاش کنید یا نقطه را دستی انتخاب کنید." })[failure.code] ?? "دریافت موقعیت ممکن نشد؛ نقطه را دستی انتخاب کنید."));
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 });
+  }),
+};

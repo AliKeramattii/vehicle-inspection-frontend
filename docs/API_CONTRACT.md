@@ -164,36 +164,51 @@ and explicit permission requests in the relevant feature, not a new API endpoint
 
 ## Location
 
-### PUT `/api/inspections/{inspectionId}/location`
-Planned contract, not a confirmed ASP.NET implementation. Phase 03 calls the typed in-memory
-`InspectionRepository.saveLocation`. Its frontend model is flat; a future transport adapter maps
-`formattedAddress`, building, unit/floor and parking into the nested `address` payload below.
-Coordinates/accuracy are numbers; unit/floor and parking may be empty or omitted. Building numbers
-are strings (the form normalizes Persian/Arabic numeric glyphs to ASCII). The server should return
-the authoritative saved coordinates, accuracy and address in the same shape, adapted back to
-`InspectionLocation`. It must authorize the inspection owner and require accepted consent.
+### PUT /api/inspections/{inspectionId}/location
+Planned ASP.NET contract. Runtime calls InspectionRepository.saveLocation with existing durable
+inspection-facts storage, not real HTTP. A future adapter maps flat formattedAddress/building/
+unit/parking to nested address. Require inspection ownership, consent and submitted-edit rules.
 
-```json
-{
-  "latitude": 35.721,
-  "longitude": 51.334,
-  "accuracyMeters": 8,
-  "address": {
-    "formatted": "تهران، ...",
-    "buildingNumber": "123",
-    "unitFloor": "طبقه ۳، واحد ۱۲",
-    "parkingDescription": "پارکینگ ورودی ساختمان، سمت راست"
-  }
-}
-```
+    {
+      "latitude": 35.721,
+      "longitude": 51.334,
+      "accuracyMeters": null,
+      "selectionSource": "manual",
+      "recordedAt": "2026-10-13T09:00:00.000Z",
+      "address": {
+        "formatted": "تهران، ...",
+        "buildingNumber": "123",
+        "unitFloor": "طبقه ۳، واحد ۱۲",
+        "parkingDescription": "پارکینگ ورودی ساختمان، سمت راست"
+      }
+    }
 
-The development map/GPS adapter returns one deterministic suggested location with 8m accuracy.
-Dragging or keyboard panning changes coordinates; the pin remains anchored and the GPS marker
-moves with the map. There is no production tile/geocoding provider, browser GPS prompt, external
-map URL or API key. A real provider must implement the stable map/location boundary and perform
-permission requests only after explicit locate interaction. This does not require a new endpoint.
-Distinguish 400/422 field validation, 401/403, 404, 409 missing consent/stale inspection, 429 and
-server/network/timeout errors. The mock enforces consent and validates coordinate bounds.
+Coordinates are finite WGS84 numbers (-90..90, -180..180). selectionSource is gps/manual;
+manual accuracy is null; GPS accuracy is nonnegative meters or null. recordedAt is the actual
+client confirmation time, not server-authoritative evidence. Return saved facts and server
+audit timestamps. Address is required/current, 1–300 trimmed characters. Optional details
+may be empty; building numbers stay strings with numeric glyph normalization.
+Legacy records lacking source/time remain compatible, without claiming GPS provenance.
+
+The official Neshan Leaflet picker initializes only a viewport. Deliberate manual selection
+or explicit My Location supplies the point; zoom/resize alone never select. No fixed 8m
+accuracy or fabricated match. Distinguish 400/422 validation, 401/403, 404, 409 consent/
+submission/stale data, 429, server/network/timeout failures.
+
+### GET /api/maps/reverse?lat={latitude}&lng={longitude}
+Planned first-party ASP.NET boundary, not a Next.js route and not implemented here.
+Resolved from validated deployment apiBaseUrl. Authentication follows deployment cookie/
+session policy. Authorize tenant/user, validate coordinates, rate-limit and hide upstream
+internals. Separate API origins need allowlisted CORS and credential policy.
+Response: {"formatted_address":"آدرس پیشنهادی"}, 1–300 characters. Editable suggestion, not
+location verification. Errors: 400/422 invalid input, 401/403, 429, 502/503 upstream failure,
+504 timeout.
+
+Server upstream: GET https://api.neshan.org/v5/reverse?lat=...&lng=... with private Api-Key
+from server secret storage. Never expose it in browser/public settings/NEXT_PUBLIC.
+Public domain-restricted Web Map key is separate client configuration. Browser debounces,
+aborts, times out and guards request/edit identity; failure preserves the point and manual
+entry. Default lookup unavailable; explicit mock mode is visibly labelled.
 
 ## Vehicle
 

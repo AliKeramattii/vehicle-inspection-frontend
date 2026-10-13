@@ -21,3 +21,11 @@ inspection-site-settings IndexedDB stores small JSON workspace per origin/tenant
 
 ## Scope limits
 No branding upload endpoint, backend health probe, real publication, production authentication or client filesystem browser. The current template remains configurable through existing Admin and pinned for customers; Site Settings does not alter evidence count. Static export and PWA cold-start/installability remain separate documented blockers.
+
+
+## Location map settings
+Existing API settings tab exposes map enable, public Neshan Web Map key and address lookup
+mode. These are published per-tenant runtime configuration, not build variables or private
+reverse credentials. Missing keys show an honest configuration state. Legacy workspace
+defaults apply to the editing view without rewriting history.
+Shape/setup: TENANT_CONFIGURATION_SPEC.md and NESHAN_LOCATION_INTEGRATION.md.

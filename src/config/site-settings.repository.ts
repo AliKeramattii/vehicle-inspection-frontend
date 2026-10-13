@@ -1,6 +1,6 @@
 import { allowed, type AdminActor } from "@/features/admin/model";
 import { defaultSiteSettings } from "./site-settings.defaults";
-import { siteSettingsSchema, validateContext, type SiteBootstrap, type SiteSettings } from "./site-settings.schema";
+import { defaultLocationMap, siteSettingsSchema, validateContext, type SiteBootstrap, type SiteSettings } from "./site-settings.schema";
 
 export type SettingsWorkspace = { revision: number; published: SiteSettings; draft: SiteSettings;
   history: SiteSettings[]; audit: { actor: string; action: string; at: string }[] };
@@ -37,7 +37,11 @@ export class SiteSettingsRepository {
   constructor(private storage: SettingsPersistence, private key: string, private bootstrap: SiteBootstrap, private origin: string,
     private initial = defaultSiteSettings(bootstrap.tenantId,bootstrap.apiBaseUrl), private now=()=>new Date().toISOString(), private publishedTemplates: readonly {id:string;version:number}[] = [{id:"body-image-guided",version:1}]) {}
   private seed=():SettingsWorkspace=>({revision:1,published:structuredClone(this.initial),draft:structuredClone(this.initial),history:[structuredClone(this.initial)],audit:[]});
-  read() { return this.storage.transact(this.key,this.seed,state=>structuredClone(state)); }
+  read() { return this.storage.transact(this.key,this.seed,state=>{
+    const result = structuredClone(state);
+    for (const settings of [result.published, result.draft]) settings.application.locationMap ??= defaultLocationMap();
+    return result;
+  }); }
   private authorize(actor:AdminActor) { if(!allowed(actor.role,"branding")) throw new Error("نقش فعلی اجازه تغییر تنظیمات سایت را ندارد."); }
   private validate(settings:SiteSettings) { const value=siteSettingsSchema.parse(settings);validateContext(this.bootstrap,value,this.origin);if(!this.publishedTemplates.some(t=>t.id===value.application.template.id&&t.version===value.application.template.version))throw new Error("نسخه قالب منتشرشده معتبر نیست.");return value; }
   save(actor:AdminActor, revision:number, settings:SiteSettings) {

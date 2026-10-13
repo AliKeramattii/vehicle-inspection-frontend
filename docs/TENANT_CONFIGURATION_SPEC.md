@@ -24,3 +24,34 @@ apiUrl resolves only a validated deployment base plus a restricted relative endp
 
 ## Private configuration (never public)
 ASP.NET environment/secret store owns MSSQL credentials, physical filesystem root, OTP credentials, signing keys, webhook secrets and authorization policies. Admin forms/public JSON contain none of those. Client tenantId, branding, API origin and folder pattern are not authorization credentials.
+
+
+## Public Neshan map extension
+Optional application.locationMap keeps old schema-1 publications readable. Missing configuration
+uses defaults below. Local Admin normalizes its returned editing view, not old publication
+history. No private reverse credential belongs in this strict public object.
+
+    {
+      "application": {
+        "locationMap": {
+          "enabled": true,
+          "webMapKey": null,
+          "mapType": "dreamy",
+          "initialViewport": { "latitude": 35.699739, "longitude": 51.338097, "zoom": 12 },
+          "reverseGeocoding": "unavailable"
+        }
+      }
+    }
+
+Extension fragment only: preserve the rest of Site Settings. webMapKey is null or nonempty
+public domain-restricted Neshan Web Map key. mapType: dreamy / standard-night; bright dreamy
+is default. Initial coordinates must be finite WGS84; zoom integer 3–18. Camera defaults are
+never automatic inspection selection. reverseGeocoding: unavailable / mock / api. Mock is
+visibly labelled; api uses trusted bootstrap apiBaseUrl + /maps/reverse, not arbitrary URL/
+query override. Unknown/private fields fail validation.
+
+Local mock setup: /admin/site-settings → API settings → map enable/public key/address mode,
+save/publish. Actual API installations publish through their authorized backend lifecycle;
+local mock Admin cannot update that server. Scope browser keys to each frontend origin in
+the Neshan account. No rebuild or NEXT_PUBLIC_NESHAN key needed. Private service keys stay
+in ASP.NET secret storage. See NESHAN_LOCATION_INTEGRATION.md and API_CONTRACT.md.

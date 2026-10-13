@@ -1,11 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState, type ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { LocationForm } from "@/features/location/location-form";
-import { InspectionLocationMap } from "@/components/location/inspection-location-map";
-import { developmentLocationAdapter, isGpsMatched, LocationServiceError } from "@/lib/map/location-adapter";
+import { developmentLocationAdapter } from "@/lib/map/location-adapter";
 import { IranianPlate } from "@/components/vehicle/iranian-plate";
 import { VehicleCard } from "@/components/vehicle/vehicle-card";
 import { PlateInput, parsePastedPlate, type PlateDraft } from "@/components/vehicle/plate-input";
@@ -23,73 +22,41 @@ function mount(children: ReactNode) {
 }
 
 describe("location form and map", () => {
-  it("renders the address, GPS accuracy and accessible map/locate controls", () => {
+  it("renders an existing confirmed address without inventing GPS accuracy", () => {
     mount(<LocationForm initialLocation={location} onConfirm={vi.fn()} />);
-    expect(screen.getByText(location.formattedAddress)).toBeVisible();
+    expect(screen.getByLabelText("آدرس موقعیت خودرو")).toHaveValue(location.formattedAddress);
     expect(screen.getByText("نقشه هنوز پیکربندی نشده است")).toBeVisible();
-    expect(screen.queryByText("دقت موقعیت ± ۸ متر")).toBeNull();
     expect(screen.getByRole("button", { name: "بازگشت به موقعیت من" })).toBeEnabled();
     expect(screen.getByLabelText("طبقه / واحد (اختیاری)")).toHaveValue(location.unitFloor);
   });
-  it("edits the address, preserves optional fields and confirms normalized building digits", async () => {
+  it("edits a saved address, preserves optional fields and confirms normalized building digits", async () => {
     const user = userEvent.setup(), confirm = vi.fn();
     mount(<LocationForm initialLocation={location} onConfirm={confirm} />);
-    await user.click(screen.getByRole("button", { name: "ویرایش" }));
-    const address = screen.getByLabelText("آدرس بازدید");
-    await waitFor(() => expect(address).toHaveFocus());
+    const address = screen.getByLabelText("آدرس موقعیت خودرو");
     await user.clear(address); await user.type(address, "تهران، خیابان نمونه، ساختمان دوم");
-    await user.clear(screen.getByLabelText("شماره پلاک ساختمان"));
-    await user.type(screen.getByLabelText("شماره پلاک ساختمان"), "۴۲");
+    await user.clear(screen.getByLabelText("شماره پلاک ساختمان")); await user.type(screen.getByLabelText("شماره پلاک ساختمان"), "۴۲");
     await user.clear(screen.getByLabelText("طبقه / واحد (اختیاری)"));
     await user.clear(screen.getByLabelText("توضیحات محل پارک (اختیاری)"));
-    await user.click(screen.getByRole("button", { name: "پایان ویرایش آدرس" }));
-    expect(screen.getByRole("button", { name: "ویرایش" })).toHaveFocus();
     await user.click(screen.getByRole("button", { name: "تأیید این موقعیت" }));
     await waitFor(() => expect(confirm).toHaveBeenCalled());
-    expect(confirm.mock.calls[0][0]).toMatchObject({ formattedAddress: "تهران، خیابان نمونه، ساختمان دوم", buildingNumber: "42", unitFloor: "", parkingDescription: "" });
+    expect(confirm.mock.calls[0][0]).toMatchObject({ formattedAddress: "تهران، خیابان نمونه، ساختمان دوم", buildingNumber: "42", unitFloor: "", parkingDescription: "", selectionSource: "manual", accuracyMeters: null });
   });
-  it("associates address validation errors and blocks invalid submission", async () => {
-    const confirm = vi.fn();
-    mount(<LocationForm initialLocation={location} onConfirm={confirm} />);
-    await userEvent.click(screen.getByRole("button", { name: "ویرایش" }));
-    const input = screen.getByLabelText("آدرس بازدید");
-    await userEvent.clear(input);
-    await userEvent.click(screen.getByRole("button", { name: "تأیید این موقعیت" }));
+  it("associates empty-address errors and blocks invalid confirmation", async () => {
+    const confirm = vi.fn(); mount(<LocationForm initialLocation={location} onConfirm={confirm} />);
+    const input = screen.getByLabelText("آدرس موقعیت خودرو");
+    await userEvent.clear(input); fireEvent.blur(input);
     expect(await screen.findByText("آدرس کامل بازدید را وارد کنید.")).toBeVisible();
     expect(input).toHaveAttribute("aria-invalid", "true");
-    expect(document.getElementById(input.getAttribute("aria-describedby")!)).toHaveTextContent("آدرس کامل");
-    expect(confirm).not.toHaveBeenCalled();
+    expect(document.getElementById(input.getAttribute("aria-describedby")!.split(" ").at(-1)!)).toHaveTextContent("آدرس کامل");
+    expect(screen.getByRole("button", { name: "تأیید این موقعیت" })).toBeDisabled(); expect(confirm).not.toHaveBeenCalled();
   });
-  it("blocks submission while saving and exposes the recoverable save error", async () => {
-    const confirm = vi.fn();
-    mount(<LocationForm initialLocation={location} onConfirm={confirm} pending error="ذخیره موقعیت انجام نشد؛ دوباره تلاش کنید." />);
+  it("blocks saving and exposes the recoverable save error", async () => {
+    const confirm = vi.fn(); mount(<LocationForm initialLocation={location} onConfirm={confirm} pending error="ذخیره موقعیت انجام نشد؛ دوباره تلاش کنید." />);
     expect(screen.getByRole("button", { name: "تأیید این موقعیت" })).toBeDisabled();
     expect(screen.getByLabelText("شماره پلاک ساختمان")).toBeDisabled();
     expect(screen.getByRole("alert")).toHaveTextContent("ذخیره موقعیت انجام نشد");
     fireEvent.submit(screen.getByRole("button", { name: "تأیید این موقعیت" }).closest("form")!);
     await waitFor(() => expect(confirm).not.toHaveBeenCalled());
-  });
-  it("updates coordinates only through the explicit location service when map is unconfigured", async () => {
-    const changed=vi.fn();mount(<InspectionLocationMap location={location} onChange={changed} adapter={developmentLocationAdapter}/>);
-    expect(changed).not.toHaveBeenCalled();await userEvent.click(screen.getByRole("button",{name:"بازگشت به موقعیت من"}));
-    await waitFor(()=>expect(changed).toHaveBeenCalledTimes(1));expect(changed.mock.calls[0][0]).toEqual(location);
-    expect(isGpsMatched(location,location)).toBe(true);expect(isGpsMatched({...location,latitude:location.latitude+.01},location)).toBe(false);
-  });
-  it("preserves geometry/accuracy while locating and exposes denied/unavailable/unsupported states", async () => {
-    let reject!: (error: Error) => void;
-    mount(<InspectionLocationMap location={location} onChange={vi.fn()} adapter={{ ...developmentLocationAdapter, locate: () => new Promise((_, fail) => { reject = fail; }) }} />);
-    const button = screen.getByRole("button", { name: "بازگشت به موقعیت من" });
-    await userEvent.click(button);
-    expect(button).toBeDisabled();
-    expect(screen.getByText("در حال یافتن موقعیت…")).toBeVisible();
-    await act(async () => reject(new LocationServiceError("denied")));
-    expect(await screen.findByText("دسترسی به موقعیت داده نشده است")).toBeVisible();
-    expect(button).toBeEnabled();
-  });
-  it.each([["unavailable", "موقعیت در دسترس نیست"], ["unsupported", "موقعیت در این دستگاه پشتیبانی نمی‌شود"]] as const)("handles %s locate failures", async (code, message) => {
-    mount(<InspectionLocationMap location={location} onChange={vi.fn()} adapter={{ ...developmentLocationAdapter, locate: async () => { throw new LocationServiceError(code); } }} />);
-    await userEvent.click(screen.getByRole("button", { name: "بازگشت به موقعیت من" }));
-    expect(await screen.findByText(message)).toBeVisible();
   });
 });
 

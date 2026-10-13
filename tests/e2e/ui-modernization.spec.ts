@@ -1,3 +1,4 @@
+import { chooseDemoLocation } from "./location-helpers";
 import {test,expect,type Page} from "@playwright/test";
 import {mkdir} from "node:fs/promises";
 import {photography,mockCamera,snapshotReady} from "./photography-helpers";
@@ -43,7 +44,7 @@ test("manual address and ten-color vehicle selection persist through repository"
  await page.getByRole("textbox",{name:"کد معرفی / کد ارجاع"}).fill("A4K9P2");await page.getByRole("button",{name:"شروع بازدید"}).click();await screenshot(page,"otp-branding");
  await page.getByRole("textbox",{name:"کد تأیید پنج‌رقمی"}).fill("12345");await page.getByRole("button",{name:"همه چیز آماده است"}).click();await page.getByRole("checkbox").check();await page.getByRole("button",{name:"تأیید و ادامه"}).click();
  await expect(page.getByText("نقشه هنوز پیکربندی نشده است")).toBeVisible();await expect(page.getByText("موقعیت شما با GPS تطبیق داده شد")).toHaveCount(0);
- await page.getByRole("textbox",{name:"آدرس بازدید"}).fill("تهران، خیابان نمونه، پلاک ۱۲");await page.getByRole("button",{name:"تأیید این موقعیت"}).click();
+ await chooseDemoLocation(page);await page.getByRole("button",{name:"تأیید این موقعیت"}).click();
  const color=page.getByRole("combobox",{name:"رنگ بدنه"});await expect(color.locator("option")).toHaveCount(10);await color.selectOption("blue");
  await page.getByRole("button",{name:"تأیید مشخصات و ادامه"}).click();await expect(page).toHaveURL(/\/capture$/);await page.goto("/inspection/insp_demo/vehicle");await expect(color).toHaveValue("blue");await screenshot(page,"vehicle-color-persisted");
 });
