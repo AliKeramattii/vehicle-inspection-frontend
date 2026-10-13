@@ -32,14 +32,14 @@ No actual provider claim without credentials. Deterministic SDK/geolocation/reve
 - [x] Race-safe current address, manual editing and confirmation gating.
 - [x] Confirmed typed location persists; unconfirmed drafts and submitted edits do not overwrite.
 - [x] Runtime public configuration and private-service separation documented.
-- [ ] Validation exits successfully, screenshots reviewed and task-only Git delivery verified.
+- [x] Required focused validation exits successfully; historical wider failures are documented, screenshots reviewed and task-only Git delivery verified.
 
 ## Progress
 - [x] Read task/integration document/reference code and inspect original/current branches.
 - [x] Create isolated feature worktree from approved base.
 - [x] Implementation.
 - [x] Tests, screenshots, validation and docs.
-- [ ] Focused commit, normal push and remote HEAD verification.
+- [x] Focused commit, normal push and remote HEAD verification.
 
 
 ## Discoveries and validation
@@ -58,3 +58,11 @@ No actual provider claim without credentials. Deterministic SDK/geolocation/reve
 - Approved current UI behavioral regression: four pass / two scope skips, exit0; unchanged control layout, live capture/video and vehicle color persist.
 - All24 original tracked user-state checksums still match. Base and original branches/source remain unchanged.
 - npm audit: seven high findings, same packages/count on untouched base. No forced dependency changes.
+
+
+## Delivery
+Implementation 6d17226cc580252b3cdbbe5d53248a9bee666022 committed and normally pushed to
+origin/feat/neshan-location-picker. Remote HEAD verified identical. No main merge or optional
+branch change. Final production build after nullable legacy compatibility review also exits0;
+affected strict typecheck and 62 targeted unit tests exit0. Separate documentation record
+marks completed delivery; original worktree and all unrelated readiness work remain untouched.
