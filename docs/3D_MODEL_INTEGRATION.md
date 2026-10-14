@@ -1,0 +1,8 @@
+# Optional vehicle model integration
+Current unified port: src/features/vehicle-3d. See UNIFIED_APPLICATION.md for marker/state/interaction details and WORKTREE_INTEGRATION_PLAN.md for source ancestry.
+The original Phase09 branch is preserved, not merged wholesale. The newer approved UI port uses one optimized Sportage mobile GLB for every viewport, loaded only after the explicit3D toggle in authorized loopback development.
+Ignored local path: .agent/vehicle-3d/mobile.glb (12,716,516bytes). Source/licence: Kia sportage GT line2023,3D Cars Studio,CC BY-NC-SA4.0. Commercial clearance false. No commercial enable switch is added. No GLB is committed or copied into public. Production endpoint404 regardless of development flag values.
+Local ignored .env.local needs VEHICLE_3D_PREVIEW=1 and NEXT_PUBLIC_VEHICLE_3D_PREVIEW=1; NODE_ENV must be development and browser/request host loopback. Run npm.cmd run dev -- --port 3114 using the existing script. Default customer route remains2D.
+Model loader/adapter owns raw GLTF; camera presets centralize physical axes; Canvas uses bounded DPR/demand frames;2D fallback remains on load/WebGL failure. Technical VIN/engine/interior regions are contextual only, not claimed as complete meshes.
+Twelve screen-space markers now show local accepted capture independently of upload. Queue matching is revision/namespace/current-specific. Selected blue ring does not overwrite green/orange/red evidence state. Marker opens view + canonical reference/guidance and shared capture/review action. Existing bottom CTA, atomic replacement and submitted/retake guards remain.
+Runtime deprecation warning THREE.Clock originates in the installed R3F stack; no breaking package upgrade was made for this integration.

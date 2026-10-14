@@ -80,3 +80,6 @@ does not claim durable remote backup. Camera secure-context requirements still a
 Planned API details are in API_CONTRACT.md; no runtime ASP.NET requests, secrets, automotive asset
 replacement, upload implementation or optional 3D work were added. Known readiness user edits and
 their unrelated screenshot mismatch remain outside this task.
+
+## Recorder V2
+Eight supplied transparent WebPs overlay only live preview; manual angles, no coverage or quality measurement. Explicit activation, supported pause/resume and camera switching. Active time excludes pauses; configurable60s target does not auto-stop. Existing durable draft/acceptance/shared queue preserved. No gallery fallback or standalone reference DB. See UNIFIED_APPLICATION.md.

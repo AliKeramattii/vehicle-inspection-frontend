@@ -685,3 +685,8 @@ it does not enable real inspection/auth/upload/submission repositories.
 Both local services and their ignored configurations are excluded from production.
 Production ASP.NET owns the identical reverse endpoint, authorization, private key and CORS.
 Development-only rewrites are absent from build/production-server phases.
+
+## Planned Admin branding asset upload (unified local mock)
+Not implemented server behavior. Proposed authenticated POST /api/admin/branding-assets takes one multipart web image and slot metadata, Site Admin authorization only. ASP.NET must validate content/type/size/dimensions, bind tenant and return an assetId, appropriately public authorized URL, MIME, dimensions and byte size. Route/shape require backend agreement. No frontend runtime request is made. MSSQL stores paths/metadata, not image bytes.
+Current mock uses existing inspection-site-settings IndexedDB v2 (settings preserved, branding-assets added). Immutable /__local-branding/{tenantId}/{uuid}.{ext} references are context-bound browser-local identifiers, never cross-device server URLs. Blobs remain separate from JSON and customer evidence queue.
+Additive optional images.submission keeps schemaVersion1/legacy settings compatible. Existing generic photo/video evidence contract remains. Future evidence storage: INSPECTION_{InspectionId}; no CustomerId folders or filesystem APIs added.

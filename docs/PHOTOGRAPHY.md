@@ -176,3 +176,6 @@ No canonical automotive asset was replaced by this modernisation. Suggested prio
 ## Approved UI refinement
 Production remains 2D and template-driven. Optional explicit loopback development may load one mobile Sportage model with twelve fixed screen-space requirement markers, sharing selection and downstream guarded routes. It never ships the restricted GLB or duplicates capture state. Successful checks are green; optional 3D upload checks require the current accepted revision's binary acknowledgement.
 Capture and retakes are live-only: no arbitrary gallery or File Manager import. Unsupported devices show recovery. Existing durable evidence, accepted replacement safety and automatic continuation remain. See UI_REFINEMENT.md.
+
+## Unified optional-viewer interaction
+Production remains2D. Optional3D pins derive accepted local capture separately from matching-current-revision upload status. Parent selection synchronizes cards/CTA. Pin shows reference/guidance before shared capture/review action. Completed evidence remains replaceable atomically. Controls stay below image. See UNIFIED_APPLICATION.md.

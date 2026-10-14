@@ -19,8 +19,11 @@ All request criteria and feature rows verified; original files remain unchanged,
 ## Progress
 - [x] Inventory, integration base and safe worktree.
 - [x] A: inherited integration smoke/documentation. Typecheck, 346 baseline unit tests and production build exit 0. Approved reference kit copied selectively; single restricted mobile GLB remains ignored local-only.
-- [ ] B: Admin/theme/readiness/header foundations.
-- [ ] C: eight local branding image slots.
-- [ ] D: 3D canonical status and guidance-first interaction.
-- [ ] E: V2 live recorder and eight ghosts.
-- [ ] F: guide, visual review, final validation, Git delivery.
+- [x] B: Admin/theme/readiness/header foundations.
+- [x] C: eight local branding image slots.
+- [x] D: 3D canonical status and guidance-first interaction.
+- [x] E: V2 live recorder and eight ghosts.
+- [x] F: guide, visual review and focused final validation; see docs/UNIFIED_VALIDATION.md for explicit historical snapshot debt.
+- [ ] Git delivery: final documentation commit, push and remote HEAD verification.
+
+B/C validated by unit/build/Admin browser; D by real mobileGLB browser; E by pause-aware unit and real browser fixture tests. Real Neshan, broad behavioral regressions, licensed real-model checks and final review passed. Historical baselines intentionally remain unchanged; final Git delivery pending.

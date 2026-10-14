@@ -99,3 +99,6 @@ now decodes the optimized CSS background instead of expecting an inner image. Br
 used the committed diagnostic GPS icon; an unrelated local edit to that icon was restored
 byte-for-byte afterward and is excluded from this change. The existing Phase-01 baselines,
 capability/consent behavior, API contract, routes and development configuration are unchanged.
+
+## Unified readiness correction
+Four customer diagnostics: camera, location, storage, video recording support. WebGL stays internal/optional. Permission queries never request access; ungranted GPS is neutral, manual map selection remains. Exact approved pin copied to public/icons/readiness/inspection-pin.svg.

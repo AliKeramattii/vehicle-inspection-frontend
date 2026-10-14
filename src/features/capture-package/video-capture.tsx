@@ -48,7 +48,7 @@ export function VideoCapture({ inspectionId, onRecorded, service, reason, backHr
         <div className="recorder-status"><h3 role="status" aria-live="polite">{status}</h3><p>پیشرفت زمانی ضبط</p><small>تأیید پوشش کامل خودرو انجام نشده است.</small></div>
         <div className="recorder-time-ring" data-error={Boolean(error)}>
           <svg viewBox="0 0 100 100" role="progressbar" aria-label="پیشرفت زمان پیشنهادی ضبط" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress)}><circle cx="50" cy="50" r="44" className="recorder-ring-track"/><circle cx="50" cy="50" r="44" className="recorder-ring-value" pathLength="100" strokeDasharray="100" strokeDashoffset={100 - progress}/></svg>
-          <div><output aria-label="مدت ضبط" dir="ltr">{videoTimer(elapsed)}</output><small>{fa(Math.floor(progress))}٪ زمان پیشنهادی</small></div>
+          <div><output aria-label="مدت ضبط" aria-live="off" dir="ltr">{videoTimer(elapsed)}</output><small>{fa(Math.floor(progress))}٪ زمان پیشنهادی</small></div>
         </div>
       </section>
       {error && <InlineAlert tone="warning" role="alert">{error}</InlineAlert>}

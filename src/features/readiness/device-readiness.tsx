@@ -27,7 +27,7 @@ export function DeviceReadiness({ service }: { service?: CapabilityService }) {
             {definition.id === "location" ? <Image src="/icons/readiness/inspection-pin.svg" width={23} height={29} alt="" unoptimized /> : <Icon name={definition.icon} size={23} />}<span>{definition.label}</span>
             <span className="capability-status" title={result.message ?? capabilityStatusLabels[result.status]}>
               <Icon name={result.status === "ready" ? "readinessTick" : result.status === "checking" || result.status === "unknown" || result.id === "location" ? "clock" : "warning"} size={22} />
-              <span className={result.status === "ready" || result.status === "checking" ? "sr-only" : "capability-status-label"}>{capabilityStatusLabels[result.status]}</span>
+              <span className="capability-status-label">{capabilityStatusLabels[result.status]}</span>
             </span>
           </li>;
         })}
