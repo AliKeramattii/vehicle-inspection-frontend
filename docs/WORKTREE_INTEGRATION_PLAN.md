@@ -41,3 +41,6 @@ No automatic merge conflict is currently required because latest approved code i
 
 ## Production boundary
 No new required Node server endpoint. Existing local-only preview/proxy remain development tools; licensing gates unchanged. Future branding upload/settings publication/reverse/evidence belong to ASP.NET. Canonical backend storage contract: INSPECTION_{InspectionId}; never CustomerId folders.
+
+## Delivery
+Approved committed features are now available together in C:/Projects/vehicle-inspection-integrated on feat/unified-ui-admin-3d. Older Admin/White-Label/UI/Neshan/optional-preview worktrees are functionally superseded for this integrated development flow, but all seven remain recoverable. Original uncommitted readiness/UI work and the Neshan adapter edit are deliberately excluded, not declared superseded. Do not remove any old worktree without explicit user confirmation. Final source HEAD/status and160file checks match inventory; no conflicts remain.

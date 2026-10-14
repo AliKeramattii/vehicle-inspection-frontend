@@ -43,3 +43,6 @@ URLs/nav labels/anchors/legal copy preserved; added image inputs and fourth capa
 ## Remaining limitations/warnings
 Physical iOS/Android, camera switching, long-record storage pressure and hardware interruption tests pending device access. Commercial GLB rights unresolved; local-only gates remain. No production backend or completed static export claim.
 Known dependency/tool warnings: deprecated eslint9.39.5 package, blocked unrs-resolver install script, NO_COLOR/FORCE_COLOR, local R3F THREE.Clock deprecation, local Node module-type warning. Supplied reference Markdown retains intentional hard-break trailing spaces/trailing blank line; source package preserved. Git CRLF normalization warnings are informational. No dependency breaking changes made.
+
+## Git delivery
+Focused commits:5f5e613 integration base;da2c78d Admin/branding/readiness;d66c2c5 reviewer theme;8b7e61f marker synchronization;88d84a6 recorderV2;9e2f436 validation/Admin guide. Normal push of feat/unified-ui-admin-3d succeeded; remote9e2f4364292acc4c6be29f70c6f0363fbbbf12a5 matched local before this final record commit. Existing source worktrees unchanged. One frontend listener3114 and one loopback tool process8787/8788 remain; temporary test servers are stopped. No Git history rewrite or restricted asset publication.
