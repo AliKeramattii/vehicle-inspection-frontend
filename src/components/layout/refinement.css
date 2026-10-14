@@ -142,3 +142,7 @@
 .review-true-success{display:flex;align-items:center;gap:6px}.review-true-success>span{color:#059669;flex:none}
 
 .receipt-header .brokerage-mark{color:var(--color-ink)}.receipt-header>a{margin-inline-start:auto}
+
+.fixed-inspection-marker[data-state=failed]>span{background:#DC2626;color:white}
+.marker-guidance{margin:12px 16px;padding:16px;border:1px solid var(--color-border);border-radius:16px;background:var(--color-surface)}
+.marker-guidance header{display:flex;align-items:center;justify-content:space-between;gap:12px}.marker-guidance header button{min-width:44px;min-height:44px}.marker-guidance h3{font-size:16px;font-weight:800}.marker-guidance .photo-image{margin:8px 0;max-height:210px}.marker-guidance p,.marker-guidance li{font-size:13px;line-height:1.9}.marker-guidance ul{list-style:disc;padding-inline-start:18px}.marker-upload-status{color:var(--color-muted);margin-block:8px}.marker-attention{color:#92400e}.marker-guidance-note{margin-top:8px;color:var(--color-muted)}

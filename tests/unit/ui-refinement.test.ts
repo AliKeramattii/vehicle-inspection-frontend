@@ -2,7 +2,7 @@ import {describe,it,expect,vi} from "vitest";
 import {emptyReviewWorkspace,MemoryReviewPersistence} from "@/features/review-operations/persistence";
 import {assignCase,autoAssign,reviewerWorkload,type ReviewCase} from "@/features/review-operations/model";
 import {ReviewRepository} from "@/features/review-operations/repository";
-import {uploadedMarkerState,fixedMarkerPosition} from "@/features/vehicle-3d/marker-state";
+import {markerEvidence,fixedMarkerPosition} from "@/features/vehicle-3d/marker-state";
 import {inspectionPhotographyTemplate as template} from "@/features/photography/inspection-template";
 import {photoRevision,type UploadJob} from "@/features/upload/upload-model";
 import type {LocalPhoto} from "@/lib/media/photo-store";
@@ -11,19 +11,21 @@ import type {EvidenceRequest} from "@/features/additional-evidence/request-model
 import {vehicleColors} from "@/features/vehicle/vehicle-colors";
 const admin={id:"admin-demo",role:"platform-admin" as const},actor={id:"reviewer-demo",role:"reviewer" as const};
 const photo=template.sections[0].photoRequirements[0];
-const record={requirementId:photo.id,status:"captured",blob:new Blob(["photo"],{type:"image/jpeg"}),capturedAt:"2026-10-12T00:00:00Z",revisionId:"r1"} as LocalPhoto;
+const record={requirementId:photo.id,status:"captured",blob:new Blob(["photo"],{type:"image/jpeg"}),capturedAt:"2026-10-12T00:00:00Z",revisionId:"r1",namespace:"ns"} as LocalPhoto;
 const job={id:"job",namespace:"ns",inspectionId:"case-1",evidenceKind:"photo",requirementId:photo.id,title:photo.title,revision:photoRevision(record),current:true,upload:"uploaded",verification:"processing",required:true,remoteEvidenceId:"server-evidence"} as UploadJob;
 const reviewCase=(id="case-1"):ReviewCase=>({id,reference:"BDI-8F31K2",submittedAt:"2026-10-12T00:00:00Z",template,summary:{namespace:"ns",jobs:[job]} as ReviewCase["summary"],status:"awaiting-assignment",decisions:[]});
 describe("refinement boundaries",()=>{
  it("provides ten stable vehicle color values",()=>{expect(vehicleColors).toHaveLength(10);expect(new Set(vehicleColors.map(c=>c.id)).size).toBe(10);});
- it("derives uploaded marker state only from matching accepted current revision",()=>{
-  expect(uploadedMarkerState(photo,[record],[],"ns")).toBe("pending");
-  expect(uploadedMarkerState(photo,[record],[job],"ns")).toBe("complete");
-  for(const upload of ["queued","uploading","failed"] as const)expect(uploadedMarkerState(photo,[record],[{...job,upload}],"ns")).toBe("pending");
-  expect(uploadedMarkerState(photo,[record],[{...job,revision:"stale"}],"ns")).toBe("pending");
-  expect(uploadedMarkerState(photo,[record],[{...job,current:false}],"ns")).toBe("pending");
-  expect(uploadedMarkerState(photo,[{...record,draft:{blob:record.blob!,capturedAt:"new"}}],[job],"ns")).toBe("attention");
-  expect(uploadedMarkerState(photo,[record],[{...job,verification:"retake-requested"}],"ns")).toBe("attention");
+ it("separates accepted capture from current-revision upload and selection",()=>{
+  expect(markerEvidence(photo,[],[],"ns").state).toBe("pending");
+  expect(markerEvidence(photo,[{...record,namespace:"other",draft:{blob:record.blob!,capturedAt:"new"}}],[],"ns").state).toBe("pending");
+  expect(markerEvidence(photo,[record],[],"ns")).toMatchObject({state:"complete",captureComplete:true});
+  for(const upload of ["queued","uploading","uploaded"] as const)expect(markerEvidence(photo,[record],[{...job,upload}],"ns").state).toBe("complete");
+  expect(markerEvidence(photo,[record],[{...job,upload:"failed"}],"ns").state).toBe("failed");
+  expect(markerEvidence(photo,[record],[{...job,revision:"stale",upload:"failed"}],"ns").state).toBe("complete");
+  expect(markerEvidence(photo,[record],[{...job,current:false,upload:"failed"}],"ns").state).toBe("complete");
+  expect(markerEvidence(photo,[{...record,draft:{blob:record.blob!,capturedAt:"new"}}],[job],"ns")).toMatchObject({state:"attention",captureComplete:true});
+  expect(markerEvidence(photo,[record],[{...job,verification:"retake-requested"}],"ns").state).toBe("attention");
  });
  it("lays out twelve fixed controls without world-space projection",()=>{const positions=Array.from({length:12},(_,i)=>fixedMarkerPosition(i));expect(new Set(positions.map(p=>JSON.stringify(p))).size).toBe(12);expect(positions.every(p=>p.x>0&&p.x<100&&p.y>0&&p.y<100)).toBe(true);});
  it("uses capacity-aware random assignment and leaves full cases unassigned",()=>{const w=emptyReviewWorkspace();w.reviewers.forEach(r=>r.capacity=1);w.cases=[reviewCase("a"),reviewCase("b"),reviewCase("c")];autoAssign(w,admin,()=>0,"now");expect(w.cases.map(c=>c.reviewerId)).toEqual(["reviewer-demo","reviewer-sara",undefined]);expect(reviewerWorkload(w,"reviewer-demo")).toBe(1);});

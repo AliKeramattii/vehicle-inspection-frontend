@@ -1,13 +1,16 @@
-import type {LocalPhoto} from "@/lib/media/photo-store";
-import type {PhotoRequirement} from "@/schemas/photography";
-import {photographyVisualState} from "@/features/photography/photography-model";
-import {photoRevision,uploadComplete,type UploadJob} from "@/features/upload/upload-model";
-/** Green here means current accepted revision binary-upload-complete, never reviewer approval. */
-export function uploadedMarkerState(photo:PhotoRequirement,records:readonly LocalPhoto[],jobs:readonly UploadJob[],namespace:string){
- const local=photographyVisualState(photo,records);if(local==="attention")return local;
- const record=records.find(r=>r.requirementId===photo.id);if(!record||local!=="complete")return "pending" as const;
- const job=jobs.find(j=>j.namespace===namespace&&j.requirementId===photo.id&&j.evidenceKind==="photo"&&j.current&&j.revision===photoRevision(record));
- if(job?.verification==="retake-requested")return "attention" as const;
- return job&&uploadComplete(job)?"complete" as const:"pending" as const;
+import type { LocalPhoto } from "@/lib/media/photo-store";
+import type { PhotoRequirement } from "@/schemas/photography";
+import { photographyVisualState } from "@/features/photography/photography-model";
+import { photoRevision, uploadLabel, type UploadJob } from "@/features/upload/upload-model";
+export type MarkerState = "pending" | "complete" | "attention" | "failed";
+/** Capture is local acceptance; upload is a separate current-revision fact. Selection belongs to the parent. */
+export function markerEvidence(photo: PhotoRequirement, records: readonly LocalPhoto[], jobs: readonly UploadJob[], namespace: string) {
+  const scoped = records.filter(item => item.namespace === namespace);
+  const record = scoped.find(item => item.requirementId === photo.id);
+  const capture = photographyVisualState(photo, scoped);
+  const accepted = Boolean(record?.blob?.size && record.capturedAt && ["captured","uploading","uploaded","verified"].includes(record.status));
+  const job = record && jobs.find(item => item.namespace === namespace && item.requirementId === photo.id && item.evidenceKind === "photo" && item.current && item.revision === photoRevision(record));
+  const state: MarkerState = capture === "attention" || job?.verification === "retake-requested" ? "attention" : job?.upload === "failed" ? "failed" : accepted ? "complete" : "pending";
+  return { state, captureComplete: accepted, upload: job ? uploadLabel(job) : accepted ? "روی دستگاه؛ هنوز ارسال نشده" : "عکسی ثبت نشده", reason: job?.reviewerReason ?? record?.reviewerReason ?? photo.reviewerReason };
 }
-export const fixedMarkerPosition=(index:number)=>({x:index<6?9:91,y:14+(index%6)*14});
+export const fixedMarkerPosition = (index: number) => ({ x: index < 6 ? 9 : 91, y: 14 + (index % 6) * 14 });

@@ -46,7 +46,7 @@ export function PhotographyOverview({ template, records, inspectionId, data, bod
   return <div className="photo-route photography-overview">
     <div className="photo-scroll photography-overview-content">
     <div className="photography-studio"><PhotographyProgress template={template} records={records} />
-      <OptionalVehicleNavigator inspectionId={inspectionId} bodyColor={bodyColor} template={template} photo={photo} sectionId={section.id} records={records} onActivate={activateMarker} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
+      <OptionalVehicleNavigator inspectionId={inspectionId} bodyColor={bodyColor} template={template} photo={photo} sectionId={section.id} records={records} onSelect={select} onActivate={activateMarker} onSection={chooseSection} onReset={() => select(next?.photo.id ?? template.sections[0].photoRequirements[0].id)} />
     </div>
     <section className="photography-shot-panel" aria-label="بخش‌ها و عکس‌های بازدید">
       <nav className="photography-categories" aria-label="دسته‌های عکاسی">{photographyCategories.map((item) => {
