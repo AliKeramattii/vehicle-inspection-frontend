@@ -8,12 +8,14 @@ import { InlineAlert } from "@/components/ui/status";
 import { loadBootstrap, loadSettings } from "./site-settings.loader";
 import { SiteConfigurationError, configurationKey, type SiteBootstrap, type SiteSettings } from "./site-settings.schema";
 import "./site-settings.css";
+import { useBrandingAsset } from "@/features/admin/assets/use-branding-asset";
 type RuntimeSite = { bootstrap:SiteBootstrap; settings:SiteSettings; origin:string; contextKey:string; refresh:()=>Promise<void> };
 const Context=createContext<RuntimeSite|null>(null);
 export function useRuntimeSite() { const context=useContext(Context);if(!context)throw new Error("Runtime Site Settings unavailable");return context; }
 export function useOptionalRuntimeSite() { return useContext(Context); }
 function AppliedSite({site,children}:{site:RuntimeSite;children:ReactNode}) {
   const pathname=usePathname();
+  const resolvedFavicon=useBrandingAsset(site.settings.identity.favicon,{contextKey:site.contextKey,tenantId:site.bootstrap.tenantId}).url;
   useEffect(()=> {
     const root=document.documentElement,theme=site.settings.theme;
     const names:Record<string,string>={"--brand-primary":theme.primary,"--brand-secondary":theme.secondary,"--brand-background":theme.background,"--brand-neutral":theme.neutral,"--brand-on-primary":theme.onPrimary,"--brand-on-background":theme.onBackground,
@@ -27,15 +29,15 @@ function AppliedSite({site,children}:{site:RuntimeSite;children:ReactNode}) {
     // App Router metadata can arrive after navigation effects. Keep runtime identity consistent.
     const applyMetadata=()=>{
       if(custom&&document.title!==site.settings.identity.appTitle)document.title=site.settings.identity.appTitle;
-      const icon=document.querySelector<HTMLLinkElement>('link[rel="icon"]'),asset=site.settings.identity.favicon;
+      const icon=document.querySelector<HTMLLinkElement>('link[rel="icon"]'),asset=resolvedFavicon;
       if(icon&&asset&&icon.href!==new URL(asset,site.origin).href)icon.href=asset;
     };
-    if(site.settings.identity.favicon) {favicon=document.querySelector('link[rel="icon"]');if(favicon)previousIcon=favicon.href;}
+    if(resolvedFavicon) {favicon=document.querySelector('link[rel="icon"]');if(favicon)previousIcon=favicon.href;}
     applyMetadata();
     const observer=custom?new MutationObserver(applyMetadata):null;
     observer?.observe(document.head,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["href"]});
     return ()=> {observer?.disconnect();if(custom&&document.title===site.settings.identity.appTitle)document.title=previousTitle;for(const [name,value]of previous){if(value)root.style.setProperty(name,value);else root.style.removeProperty(name);}delete root.dataset.runtimeBrand;if(favicon&&previousIcon)favicon.href=previousIcon;};
-  },[site.settings,site.origin,pathname]);
+  },[site.settings,site.origin,pathname,resolvedFavicon]);
   return <Context.Provider value={site}>{children}</Context.Provider>;
 }
 export function SiteSettingsProvider({children}:{children:ReactNode}) {

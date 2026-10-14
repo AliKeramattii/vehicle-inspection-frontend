@@ -1,13 +1,13 @@
-export const capabilityIds = ["camera", "location", "webgl", "storage"] as const;
+export const capabilityIds = ["camera", "location", "webgl", "storage", "video"] as const;
 export type CapabilityId = typeof capabilityIds[number];
-export type CapabilityStatus = "checking" | "ready" | "unavailable" | "permission-required" | "unsupported";
+export type CapabilityStatus = "checking" | "ready" | "unavailable" | "permission-required" | "unsupported" | "unknown";
 export type CapabilityResult = { id: CapabilityId; status: CapabilityStatus; message?: string };
 export interface CapabilityService {
   readonly mode: "mock" | "browser";
   check(signal: AbortSignal): Promise<readonly CapabilityResult[]>;
 }
 export const capabilityStatusLabels: Record<CapabilityStatus, string> = {
-  checking: "در حال بررسی", ready: "آماده", unavailable: "در دسترس نیست",
+  unknown: "بررسی هنگام ثبت", checking: "در حال بررسی", ready: "آماده", unavailable: "در دسترس نیست",
   "permission-required": "نیاز به اجازه", unsupported: "پشتیبانی نمی‌شود",
 };
 export const capabilityDefinitions = [
@@ -15,6 +15,7 @@ export const capabilityDefinitions = [
   { id: "location", label: "موقعیت مکانی", icon: "gpsReady" },
   { id: "webgl", label: "نمایش سه‌بعدی", icon: "webglReady" },
   { id: "storage", label: "فضای ذخیره‌سازی", icon: "storageReady" },
+  { id: "video", label: "ضبط ویدیوی ۳۶۰ درجه", icon: "cameraReady" },
 ] as const;
 export const customerCapabilityDefinitions = capabilityDefinitions.filter(({ id }) => id !== "webgl");
 export function initialCapabilities(): CapabilityResult[] {
@@ -25,7 +26,7 @@ export function normalizeCapabilities(results: readonly CapabilityResult[]): Cap
 }
 export function canContinueReadiness(results: readonly CapabilityResult[]): boolean {
   const normalized = normalizeCapabilities(results);
-  return normalized.filter(({ id }) => id !== "webgl").every(({ status }) => status !== "checking" &&
+  return normalized.filter(({ id }) => id !== "webgl" && id !== "location").every(({ status }) => status !== "checking" &&
     status !== "unavailable" && status !== "unsupported");
 }
 // Diagnostic only: these fixtures do not grant camera/GPS permission, reserve

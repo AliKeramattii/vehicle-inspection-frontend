@@ -3,7 +3,7 @@ export function defaultSiteSettings(tenantId: string, apiBaseUrl = "/api"): Site
   return { schemaVersion: 1, tenantId, version: 1, publishedAt: "2026-10-11T06:30:00.000Z",
     identity: { brokerageName: "شریک بیمه", appTitle: "بازدید خودرو", logo: null, favicon: null, publicEmail: "", publicPhone: "" },
     theme: { primary: "#2563EB", secondary: "#64748B", background: "#F8FAFC", neutral: "#E2E8F0", onPrimary: "#FFFFFF", onBackground: "#111827" },
-    images: { landing: null, referral: null, otp: null, readiness: null, consent: null },
+    images: { landing: null, referral: null, otp: null, readiness: null, consent: null, submission: null },
     application: { apiBaseUrl, contractVersion: "1", locationMap: defaultLocationMap(), template: { id: "body-image-guided", version: 1 },
       features: { nativeCaptureFallback: true, additionalEvidence: true, supportLink: true } } };
 }

@@ -38,7 +38,7 @@ export const siteSettingsSchema = z.object({
   theme: z.object({ primary: color, secondary: color, background: color, neutral: color,
     onPrimary: color, onBackground: color }).strict(),
   images: z.object({ landing: imageRef.nullable(), referral: imageRef.nullable(), otp: imageRef.nullable(),
-    readiness: imageRef.nullable(), consent: imageRef.nullable() }).strict(),
+    readiness: imageRef.nullable(), consent: imageRef.nullable(), submission: imageRef.nullable().optional() }).strict(),
   application: z.object({
     apiBaseUrl: publicUrl, contractVersion: z.literal("1"),
     locationMap: locationMapSchema.optional(),
@@ -70,7 +70,7 @@ export function validateContext(bootstrap: SiteBootstrap, settings: SiteSettings
     !endpoint.pathname.startsWith(base.pathname.replace(/\/$/,"") + "/")) throw new SiteConfigurationError("نشانی API با تنظیمات نصب سازگار نیست.");
   if (settings.tenantId !== bootstrap.tenantId || settings.application.apiBaseUrl !== bootstrap.apiBaseUrl) throw new SiteConfigurationError("تنظیمات متعلق به این نصب نیست.");
   const assets=[settings.identity.logo,settings.identity.favicon,...Object.values(settings.images)].filter((v):v is string=>Boolean(v));
-  if (assets.some(value => { const url=new URL(value,origin); return ![origin,base.origin].includes(url.origin) || (!value.startsWith("https:") && !/^\/(images|icons|branding)\//.test(value) && value !== "/favicon.ico"); })) throw new SiteConfigurationError("نشانی دارایی برند مجاز نیست.");
+  if (assets.some(value => { const url=new URL(value,origin); const local = new RegExp("^/__local-branding/"+bootstrap.tenantId+"/[a-f0-9-]{36}\\.(png|jpg|webp|ico)$").test(value); return ![origin,base.origin].includes(url.origin) || (!value.startsWith("https:") && !/^\/(images|icons|branding)\//.test(value) && value !== "/favicon.ico" && !local); })) throw new SiteConfigurationError("نشانی دارایی برند مجاز نیست.");
 }
 export function configurationKey(bootstrap: SiteBootstrap, origin: string) {
   return JSON.stringify([new URL(origin).origin, bootstrap.tenantId, resolvePublicUrl(bootstrap.apiBaseUrl,origin), resolvePublicUrl(bootstrap.siteSettingsEndpoint,origin)]);

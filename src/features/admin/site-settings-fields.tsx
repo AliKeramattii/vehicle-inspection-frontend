@@ -1,13 +1,15 @@
 "use client";
 import type { UseFormReturn, FieldPath } from "react-hook-form";
 import type { SiteSettings } from "@/config/site-settings.schema";
+import { AdminImageAssetField, imageSlots } from "./assets/admin-image-asset-field";
+import "./assets/admin-assets.css";
 import { TextInput } from "@/components/ui/text-input";
 export const settingTabs=["هویت کارگزاری","رنگ‌بندی","تصاویر","تنظیمات عمومی","اتصال API","فضای ذخیره‌سازی"] as const;
-export function SiteSettingsFields({form,tab}:{form:UseFormReturn<SiteSettings>;tab:typeof settingTabs[number]}) {
+export function SiteSettingsFields({form,tab,published}:{form:UseFormReturn<SiteSettings>;tab:typeof settingTabs[number];published:SiteSettings}) {
   const field=(name:FieldPath<SiteSettings>,label:string,readOnly=false)=> <TextInput key={name} label={label} error={form.getFieldState(name,form.formState).error?.message} {...form.register(name,{setValueAs:value=>name==="application.template.version"?Number(value):value===""&&["application.locationMap.webMapKey","identity.logo","identity.favicon","images.landing","images.referral","images.otp","images.readiness","images.consent"].includes(name)?null:value})} aria-label={label} dir={name.includes("Name")||name.includes("Title")?"rtl":"ltr"} readOnly={readOnly}/>;
-  if(tab==="هویت کارگزاری") return <>{field("identity.brokerageName","نام کارگزاری")}{field("identity.appTitle","عنوان اپلیکیشن")}{field("identity.logo","نشانی لوگو")}{field("identity.favicon","نشانی فاویکن")}{field("identity.publicEmail","ایمیل عمومی")}{field("identity.publicPhone","تلفن عمومی")}<p>نشانی دارایی تأییدشده را وارد کنید. بارگذاری و بررسی فایل در سرویس آینده انجام می‌شود.</p></>;
+  if(tab==="هویت کارگزاری") return <>{field("identity.brokerageName","نام کارگزاری")}{field("identity.appTitle","عنوان اپلیکیشن")}{imageSlots.filter(slot=>slot.name.startsWith("identity.")).map(slot=><AdminImageAssetField key={slot.name} name={slot.name} form={form} published={published}/>)}{field("identity.publicEmail","ایمیل عمومی")}{field("identity.publicPhone","تلفن عمومی")}<p>تصویرها در این محیط محلی ذخیره می‌شوند؛ انتشار روی دستگاه یا مرورگر دیگر منتقل نمی‌شود.</p></>;
   if(tab==="رنگ‌بندی")return <>{(["primary","secondary","background","neutral","onPrimary","onBackground"] as const).map((name,index)=>field(`theme.${name}`,["رنگ اصلی","رنگ ثانویه","پس‌زمینه","رنگ خنثی","متن روی رنگ اصلی","متن روی پس‌زمینه"][index]))}<p>حداقل کنتراست متن ۴٫۵ است. رنگ‌های وضعیت مدارک با رنگ برند جایگزین نمی‌شوند.</p></>;
-  if(tab==="تصاویر")return <>{(["landing","referral","otp","readiness","consent"] as const).map((name,index)=>field(`images.${name}`,["تصویر شروع","تصویر معرفی","تصویر تأیید موبایل","تصویر آمادگی","تصویر حریم خصوصی"][index]))}<p>خالی یعنی دارایی پیش‌فرض. تصاویر راهنمای عکاسی مستقل و بدون تغییر هستند.</p></>;
+  if(tab==="تصاویر")return <>{imageSlots.filter(slot=>slot.name.startsWith("images.")).map(slot=><AdminImageAssetField key={slot.name} name={slot.name} form={form} published={published}/>)}<p>خالی یعنی دارایی پیش‌فرض. تصاویر راهنمای عکاسی مستقل و بدون تغییر هستند.</p></>;
   if(tab==="اتصال API")return <>{field("application.apiBaseUrl","نشانی عمومی API",true)}{field("application.contractVersion","نسخه قرارداد",true)}<p>این نشانی از فایل نصب معتبر می‌آید. تغییر آن نیازمند تنظیم مجدد نصب روی دامنه مستقل است.</p><p>وضعیت اتصال: بررسی نشده؛ سرویس واقعی متصل نیست.</p>
 <h2>نقشه عمومی نشان</h2>{field("application.locationMap.webMapKey","کلید عمومی وب نقشه نشان")}
 <p>فقط کلید وب محدودشده به دامنه؛ کلید خصوصی سرویس آدرس‌یابی را اینجا وارد نکنید.</p>

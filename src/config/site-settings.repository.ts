@@ -1,3 +1,4 @@
+import { openSiteSettingsDb } from "./site-settings-db";
 import { allowed, type AdminActor } from "@/features/admin/model";
 import { defaultSiteSettings } from "./site-settings.defaults";
 import { defaultLocationMap, siteSettingsSchema, validateContext, type SiteBootstrap, type SiteSettings } from "./site-settings.schema";
@@ -17,13 +18,7 @@ export class MemorySettingsPersistence implements SettingsPersistence {
 }
 export class IndexedDbSettingsPersistence implements SettingsPersistence {
   async transact<T>(key: string, seed: () => SettingsWorkspace, change: (state: SettingsWorkspace) => T): Promise<T> {
-    const database=await new Promise<IDBDatabase>((resolve,reject)=> {
-      let abandoned=false; const r=indexedDB.open("inspection-site-settings",1);
-      r.onupgradeneeded=()=>r.result.createObjectStore("settings");
-      r.onsuccess=()=> { if(abandoned) {r.result.close();return;} r.result.onversionchange=()=>r.result.close();resolve(r.result); };
-      r.onerror=()=>reject(new Error("خواندن تنظیمات ممکن نشد."));
-      r.onblocked=()=> {abandoned=true;reject(new Error("صفحه‌های دیگر را ببندید و دوباره تلاش کنید."));};
-    });
+    const database=await openSiteSettingsDb();
     return new Promise((resolve,reject)=> {
       const tx=database.transaction("settings","readwrite"), store=tx.objectStore("settings"), request=store.get(key);
       let result:T; let failure:unknown;
@@ -37,7 +32,7 @@ export class SiteSettingsRepository {
   constructor(private storage: SettingsPersistence, private key: string, private bootstrap: SiteBootstrap, private origin: string,
     private initial = defaultSiteSettings(bootstrap.tenantId,bootstrap.apiBaseUrl), private now=()=>new Date().toISOString(), private publishedTemplates: readonly {id:string;version:number}[] = [{id:"body-image-guided",version:1}]) {}
   private seed=():SettingsWorkspace=>({revision:1,published:structuredClone(this.initial),draft:structuredClone(this.initial),history:[structuredClone(this.initial)],audit:[]});
-  read() { return this.storage.transact(this.key,this.seed,state=>{
+  read(actor?: AdminActor) { if (actor) this.authorize(actor); return this.storage.transact(this.key,this.seed,state=>{
     const result = structuredClone(state);
     for (const settings of [result.published, result.draft]) settings.application.locationMap ??= defaultLocationMap();
     return result;

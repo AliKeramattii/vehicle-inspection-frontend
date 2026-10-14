@@ -97,3 +97,8 @@
 .preparation-screen .preparation-actions > button { font: var(--customer-button-primary); }
 .preparation-screen .preparation-actions { padding-bottom: max(16px, env(safe-area-inset-bottom, 0px)); }
 .readiness-screen .device-diagnostics li:last-child { grid-column: 1 / -1; }
+
+/* Four genuine support/permission diagnostics; location never blocks manual selection. */
+.device-diagnostics li { min-width:0; }
+.device-diagnostics li > span:nth-child(2) { white-space:normal; }
+.readiness-location-note { font-size:11px; line-height:1.8; color:var(--color-muted); margin-top:6px; }

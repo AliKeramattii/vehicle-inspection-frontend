@@ -28,5 +28,11 @@ export async function loadSettings(bootstrap:SiteBootstrap,origin:string,signal:
   await bindDeployment(bootstrap,origin);
   const raw=bootstrap.settingsSource==="mock" ? (await mockSettingsRepository(bootstrap,origin).read()).published :
     await readJson(new URL(bootstrap.siteSettingsEndpoint,origin).href,signal,fetcher);
-  const settings=siteSettingsSchema.parse(raw);validateContext(bootstrap,settings,origin);return settings;
+  let settings=siteSettingsSchema.parse(raw);validateContext(bootstrap,settings,origin);
+  // Opt-in local publication overlay for the live development seed only; never production API mode.
+  if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW === "1" && bootstrap.settingsSource === "api") {
+    const repository = new SiteSettingsRepository(new IndexedDbSettingsPersistence(), configurationKey(bootstrap, origin), bootstrap, origin, settings);
+    settings = siteSettingsSchema.parse((await repository.read()).published); validateContext(bootstrap, settings, origin);
+  }
+  return settings;
 }

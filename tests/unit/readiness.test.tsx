@@ -21,7 +21,7 @@ describe("capability boundary", () => {
   it.each<CapabilityStatus>(["checking", "ready", "unavailable", "permission-required", "unsupported"])("handles %s without losing required diagnostic rows", async (status) => {
     const service = createMockCapabilityService({ camera: status });
     const results = await service.check(new AbortController().signal);
-    expect(normalizeCapabilities(results)).toHaveLength(4);
+    expect(normalizeCapabilities(results)).toHaveLength(capabilityIds.length);
     expect(canContinueReadiness(results)).toBe(status === "ready" || status === "permission-required");
   });
   it("blocks missing core results and permits the planned WebGL fallback", async () => {
@@ -39,11 +39,11 @@ describe("capability boundary", () => {
     const button = screen.getByRole("button", { name: "همه چیز آماده است" });
     expect(button).toBeDisabled();
     expect(screen.getByRole("list")).toHaveAttribute("aria-busy", "true");
-    expect(container.querySelectorAll('.device-diagnostics li[data-status="checking"]')).toHaveLength(3);
+    expect(container.querySelectorAll('.device-diagnostics li[data-status="checking"]')).toHaveLength(4);
     await act(async () => resolve(capabilityIds.map((id) => ({ id, status: "ready" }))));
     await waitFor(() => expect(button).toBeEnabled());
     expect(screen.getByRole("list")).toHaveAttribute("aria-busy", "false");
-    expect(container.querySelectorAll('.device-diagnostics li[data-status="ready"]')).toHaveLength(3);
+    expect(container.querySelectorAll('.device-diagnostics li[data-status="ready"]')).toHaveLength(4);
     await userEvent.click(button);
     expect(push).toHaveBeenCalledWith("/consent");
   });

@@ -4,6 +4,7 @@ import { useQuery,useQueryClient } from "@tanstack/react-query";
 import { useForm,useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { useBrandingAsset } from "./assets/use-branding-asset";
 import { useRuntimeSite } from "@/config/site-settings.provider";
 import { siteSettingsSchema,validateContext,contrast,type SiteSettings } from "@/config/site-settings.schema";
 import { SiteSettingsRepository,IndexedDbSettingsPersistence,type SettingsWorkspace } from "@/config/site-settings.repository";
@@ -18,7 +19,8 @@ import "./site-settings.css";
 export function SiteSettingsPage() {
   const site=useRuntimeSite(),admin=useAdmin(),cache=useQueryClient();
   const repository=useMemo(()=>new SiteSettingsRepository(new IndexedDbSettingsPersistence(),site.contextKey,site.bootstrap,site.origin,site.settings,undefined,admin.workspace?.templates.flatMap(t=>t.versions.filter(v=>v.state==="published").map(v=>({id:t.id,version:v.version})))),[site.contextKey,site.bootstrap,site.origin,site.settings,admin.workspace]);
-  const query=useQuery({queryKey:["admin-site-settings",site.contextKey],queryFn:()=>repository.read(),refetchOnWindowFocus:true});
+  const query=useQuery({queryKey:["admin-site-settings",site.contextKey,admin.actor.id,admin.actor.role],queryFn:()=>repository.read(admin.actor),enabled:allowed(admin.actor.role,"branding"),refetchOnWindowFocus:true});
+  if(!allowed(admin.actor.role,"branding"))return <div className="admin-recovery"><InlineAlert tone="destructive">تنظیمات سایت فقط برای مدیر سایت در دسترس است.</InlineAlert></div>;
   if(query.isPending)return <div className="admin-loading" role="status"><div/><div/><p>بارگذاری تنظیمات سایت</p></div>;
   if(!query.data)return <div className="admin-recovery"><InlineAlert tone="destructive">خواندن تنظیمات ممکن نشد.</InlineAlert><SecondaryButton onClick={()=>void query.refetch()}>تلاش مجدد</SecondaryButton></div>;
   return <WorkspaceState><SettingsEditor key={site.contextKey+admin.actor.id+admin.actor.role} state={query.data} repository={repository} reload={async()=>{await cache.invalidateQueries({queryKey:["admin-site-settings",site.contextKey]});}}/></WorkspaceState>;
@@ -44,6 +46,7 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
     const checked=siteSettingsSchema.parse({...site.settings,identity:{...site.settings.identity,logo:values.identity.logo}});
     validateContext(site.bootstrap,checked,site.origin);previewLogo=checked.identity.logo;
   } catch { /* Never request an unvalidated asset entered in the editor. */ }
+  const resolvedLogo=useBrandingAsset(previewLogo,{contextKey:site.contextKey,tenantId:site.bootstrap.tenantId});
   const errors=Object.values(form.formState.errors);
   const candidates=workspace?.templates.flatMap(t=>t.versions.filter(v=>v.state==="published").map(v=>({id:t.id,version:v.version,title:t.title})))??[];
   return <div className="site-settings-workspace">
@@ -56,13 +59,13 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
       await apply(()=>repository.save(actor,revision,value),"پیش‌نویس محلی ذخیره شد.");
     })}>
       <div className="site-settings-content">
-        <fieldset disabled={!canEdit||busy} className="site-settings-fields" id="settings-panel" role="tabpanel" aria-labelledby={"settings-tab-"+settingTabs.indexOf(tab)}><SiteSettingsFields form={form} tab={tab}/>
+        <fieldset disabled={!canEdit||busy} className="site-settings-fields" id="settings-panel" role="tabpanel" aria-labelledby={"settings-tab-"+settingTabs.indexOf(tab)}><SiteSettingsFields form={form} tab={tab} published={state.published}/>
           {tab==="تنظیمات عمومی"&&<label>قالب منتشرشده<select aria-label="قالب منتشرشده" value={JSON.stringify([values.application.template.id,values.application.template.version])} onChange={event=>{
             const [id,version]=JSON.parse(event.target.value) as [string,number];form.setValue("application.template",{id,version},{shouldDirty:true});
           }}>{candidates.map(c=><option key={c.id+":"+c.version} value={JSON.stringify([c.id,c.version])}>{c.title} / نسخه {persian(c.version)}</option>)}</select></label>}
         </fieldset>
         <aside className="site-settings-preview" style={{background:values.theme.background,color:values.theme.onBackground}}>
-          <p>پیش‌نمایش برند</p>{previewLogo&&<Image src={previewLogo} alt="لوگوی پیش‌نمایش" width={48} height={48} unoptimized/>}<h2>{values.identity.brokerageName}</h2><p>{values.identity.appTitle}</p>
+          <p>پیش‌نمایش برند</p>{resolvedLogo.url&&<Image src={resolvedLogo.url!} alt="لوگوی پیش‌نمایش" width={48} height={48} unoptimized/>}<h2>{values.identity.brokerageName}</h2><p>{values.identity.appTitle}</p>
           <span className="site-settings-preview-action" style={{background:values.theme.primary,color:values.theme.onPrimary}}>شروع بازدید</span>
           <p>کنتراست: <bdi>{contrast(values.theme.primary,values.theme.onPrimary).toFixed(2)}</bdi></p><p>تنها پیش‌نمایش؛ قالب و مدارک موجود تغییر نمی‌کنند.</p>
         </aside>

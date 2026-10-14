@@ -42,7 +42,7 @@ function BrandingEditor({ initialName }: { initialName: string }) {
       catch(e) { setError(adminErrorMessage(e)); }
     })}><fieldset disabled={!allowed(actor.role,"branding")}><TextInput label="نام نمایشی بیمه‌گر" {...form.register("displayName")} error={form.formState.errors.displayName?.message} />
       <div className="admin-brand-preview"><Icon name="shield" size={40} /><strong>{displayName}</strong></div>
-      <TextInput label="رنگ اصلی برند" value="#2563EB" dir="ltr" readOnly hint="رنگ مصوب در این فاز ثابت است." /><p>نشانه موجود شریک حفظ می‌شود. بارگذاری لوگوی جدید به سرویس دارایی نیاز دارد و در این فاز فعال نیست.</p>
+      <TextInput label="رنگ اصلی برند" value="#2563EB" dir="ltr" readOnly hint="رنگ مصوب در این فاز ثابت است." /><p>نشانه موجود شریک حفظ می‌شود. برای انتخاب لوگو و تصاویر محلی از صفحه تنظیمات سایت استفاده کنید. انتشار روی سرور به سرویس آینده نیاز دارد.</p>
       <PrimaryButton type="submit" loading={form.formState.isSubmitting} disabled={!dirty}>ذخیره تنظیمات نمونه</PrimaryButton></fieldset>
       {error && <InlineAlert tone="destructive">{error}</InlineAlert>}{feedback && <InlineAlert tone="success">{feedback}</InlineAlert>}
     </form><InlineAlert>این تنظیمات فقط در Admin ذخیره می‌شوند و ظاهر مشتری را تغییر نمی‌دهند.</InlineAlert>

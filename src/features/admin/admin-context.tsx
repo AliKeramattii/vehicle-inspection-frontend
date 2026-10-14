@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import { actors, type AdminActor, type AdminRole, type AdminWorkspace } from "./model";
 import { MockAdminRepository, type AdminRepository } from "./repository";
 import { IndexedDbAdminPersistence } from "./persistence";
+import { readMockRole, persistMockRole, subscribeMockRole } from "./mock-identity";
 type AdminContextValue = {
   actor: AdminActor; identity: AdminRole; setIdentity: (role: AdminRole) => void;
   repository: AdminRepository; workspace?: AdminWorkspace; loading: boolean; error: boolean;
@@ -17,11 +18,12 @@ type AdminContextValue = {
 const Context = createContext<AdminContextValue | null>(null);
 export function AdminProvider({ children }: { children: ReactNode }) {
   const [repository] = useState(() => new MockAdminRepository(new IndexedDbAdminPersistence()));
-  const [identity, setIdentity] = useState<AdminRole>("platform-admin");
+  const storedIdentity = useSyncExternalStore(subscribeMockRole, readMockRole, () => null);
+  const identity = storedIdentity ?? "platform-admin";
   const [dirty, setDirty] = useState(false);
   const [pending, setPending] = useState<(() => void) | null>(null);
   const router = useRouter(); const client = useQueryClient();
-  const query = useQuery({ queryKey: ["admin-workspace"], queryFn: () => repository.read(actors[identity]), refetchOnWindowFocus: true });
+  const query = useQuery({ queryKey: ["admin-workspace", identity], enabled: storedIdentity !== null, queryFn: () => repository.read(actors[identity]), refetchOnWindowFocus: true });
   const actor = { ...actors[identity], role: query.data?.users.find(u => u.id === actors[identity].id)?.role ?? identity };
   useEffect(() => {
     if (!dirty) return;
@@ -31,12 +33,12 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   }, [dirty]);
   function confirmAction(action: () => void) { if (dirty) setPending(() => action); else action(); }
   const value: AdminContextValue = {
-    actor, identity, setIdentity: role => confirmAction(() => setIdentity(role)), repository, workspace: query.data,
+    actor, identity, setIdentity: role => confirmAction(() => persistMockRole(role)), repository, workspace: query.data,
     loading: query.isPending, error: query.isError,
     refresh: async () => { await client.invalidateQueries({ queryKey: ["admin-workspace"] }); },
     setDirty, confirmAction, navigate: href => confirmAction(() => router.push(href)),
   };
-  return <Context.Provider value={value}>{children}{pending && <NativeDialog title="تغییرات ذخیره نشده" onDismiss={() => setPending(null)}>
+  return <Context.Provider value={value}>{storedIdentity ? children : <div className="admin-loading" role="status">در حال بررسی هویت آزمایشی…</div>}{pending && <NativeDialog title="تغییرات ذخیره نشده" onDismiss={() => setPending(null)}>
     <p>تغییرات این پیش‌نویس هنوز ذخیره نشده‌اند. بدون ذخیره ادامه می‌دهید؟</p>
     <div className="admin-dialog-actions"><SecondaryButton onClick={() => setPending(null)}>ماندن در صفحه</SecondaryButton>
       <PrimaryButton onClick={() => { setDirty(false); pending(); setPending(null); }}>ادامه بدون ذخیره</PrimaryButton></div>
