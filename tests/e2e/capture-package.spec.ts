@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }, info) => {
 });
 test.afterEach(({ page }) => expect(errors.get(page) ?? [], "Console/page/resource errors").toEqual([]));
 async function visual(page: Page, name: string) {
-  if (name.startsWith("video-ready") || name === "video-recording" || name === "video-fallback") await expect(page.locator(".video-orbit-guide img")).toBeVisible();
+  if (name.startsWith("video-ready") || name === "video-recording" || name === "video-fallback") await expect(page.locator(".recorder-ghost img")).toBeVisible();
   if (name.startsWith("video-review") || name === "video-replacement") {
     await expect(page.locator(".walkaround-review")).toBeVisible();
     await expect.poll(() => page.locator(".walkaround-review").evaluate((video: HTMLVideoElement) => video.readyState)).toBeGreaterThanOrEqual(2);
@@ -58,8 +58,8 @@ test("video ready, deterministic recording, durable review and confirmation comp
   await page.goto("/"); await enterPhotography(page); await openPackageReview(page); await expect(page.getByRole("button", { name: "ادامه به ارسال" })).toBeEnabled();
 });
 test("unsupported recorder exposes live-only recovery without a gallery input", async ({ page }) => {
- await mockRecorder(page,true);await packageWorkflow(page,{kilometers:48320});await page.getByRole("link",{name:"ادامه به ویدیوی ۳۶۰ درجه"}).click();
- await page.getByRole("button",{name:"شروع ضبط",exact:true}).click();await expect(page.locator(".video-capture-error[role=alert]")).toContainText("پشتیبانی");
+ await mockRecorder(page);await packageWorkflow(page,{kilometers:48320});await page.getByRole("link",{name:"ادامه به ویدیوی ۳۶۰ درجه"}).click();
+ await page.evaluate(() => Object.defineProperty(window,"MediaRecorder",{configurable:true,value:undefined}));await page.getByRole("button",{name:"فعال کردن دوربین",exact:true}).click();await expect(page.locator(".video-capture [role=alert]")).toContainText("پشتیبانی");
  await expect(page.locator('input[type="file"]')).toHaveCount(0);expect((await captureData(page))[0].acceptedBytes).toBe(0);
 });
 
@@ -90,7 +90,7 @@ test("new inputs fit all application viewports and a keyboard-sized view", async
     await page.getByLabel("کیلومتر فعلی").fill("۴۸٬۳۲۰"); await page.getByRole("button", { name: "تأیید و ادامه" }).click();
     await expect(page).toHaveURL(/video\/(record|review)$/); if (viewport.width !== 360) await page.getByRole("button", { name: "ضبط مجدد" }).click();
     await expect(page).toHaveURL(/video\/record$/); await bounds(page); await visual(page, `video-ready-${viewport.width}`);
-    const button = await page.getByRole("button", { name: "شروع ضبط", exact: true }).boundingBox(); expect(button!.y + button!.height).toBeLessThanOrEqual(viewport.height);
+    const button = await page.getByRole("button", { name: "فعال کردن دوربین", exact: true }).boundingBox(); expect(button!.y + button!.height).toBeLessThanOrEqual(viewport.height);
     await recordedState(page);await page.clock.resume();await page.getByRole("button",{name:"پایان ضبط",exact:true}).click(); await expect(page).toHaveURL(/video\/review$/); await bounds(page); await visual(page, `video-review-${viewport.width}`);
     await page.getByRole("link", { name: "بازگشت به بررسی بازدید", exact: true }).click(); await page.getByRole("link", { name: "بازگشت به عکاسی", exact: true }).click();
     await page.getByRole("button", { name: /کابین.*۲ از ۲/ }).click(); await page.locator('.vehicle-photo-marker[data-requirement="odometer-on"]').click(); await expect(page.getByLabel("کیلومتر فعلی")).toBeVisible();
@@ -105,6 +105,7 @@ test("new inputs fit all application viewports and a keyboard-sized view", async
 test("route exit while recording releases stream/recorder and never creates accepted evidence", async ({ page }) => {
   await mockRecorder(page); await packageWorkflow(page, { kilometers: 48320 }); await page.getByRole("link", { name: "ادامه به ویدیوی ۳۶۰ درجه" }).click();
   await recordedState(page); await page.clock.resume(); await page.getByRole("link", { name: "بازگشت به بررسی بازدید" }).click();
+  await expect(page.getByRole("dialog")).toBeVisible(); await page.getByRole("button", { name: "خروج و کنار گذاشتن ضبط" }).click();
   await expect(page).toHaveURL(/capture\/review$/); await expect.poll(() => page.evaluate(() => (window as Window & { recorderStops?: number }).recorderStops)).toBe(1); expect(await page.evaluate(() => (window as Window & { stoppedPhotoTracks?: number }).stoppedPhotoTracks)).toBeGreaterThan(0);
   expect((await captureData(page))[0]).toMatchObject({ acceptedBytes: 0, draftBytes: 0 });
 });

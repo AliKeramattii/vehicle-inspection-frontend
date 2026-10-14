@@ -11,8 +11,10 @@ export async function mockRecorder(page: Page, unsupported = false) {
     class TestRecorder {
       static isTypeSupported(mime: string) { return mime === "video/webm"; }
       state = "inactive"; mimeType = "video/webm";
-      onstart?: () => void; onstop?: () => void; onerror?: () => void; ondataavailable?: (event: { data: Blob }) => void;
+      onpause?: () => void; onresume?: () => void; onstart?: () => void; onstop?: () => void; onerror?: () => void; ondataavailable?: (event: { data: Blob }) => void;
       start() { this.state = "recording"; counters.recorderStarts = (counters.recorderStarts ?? 0) + 1; queueMicrotask(() => this.onstart?.()); }
+      pause() { this.state = "paused"; queueMicrotask(() => this.onpause?.()); }
+      resume() { this.state = "recording"; queueMicrotask(() => this.onresume?.()); }
       stop() { this.state = "inactive"; counters.recorderStops = (counters.recorderStops ?? 0) + 1; queueMicrotask(() => { this.ondataavailable?.({ data: new Blob([new Uint8Array(bytes)], { type: this.mimeType }) }); this.onstop?.(); }); }
     }
     Object.defineProperty(window, "MediaRecorder", { configurable: true, value: unsupported ? undefined : TestRecorder });
@@ -48,6 +50,8 @@ export async function packageWorkflow(page: Page, options: { photos?: number; ki
 export async function openPackageReview(page: Page) { await page.getByRole("link", { name: "بررسی نیازمندی‌های بازدید" }).click(); await expect(page.getByRole("heading", { name: "بررسی و ارسال", exact: true })).toBeVisible(); }
 export async function recordedState(page: Page) {
   await page.clock.install(); await page.clock.pauseAt(new Date(Date.now() + 1000));
+  const activate = page.getByRole("button", { name: "فعال کردن دوربین", exact: true });
+  if (await activate.isVisible()) await activate.click();
   await page.getByRole("button", { name: "شروع ضبط", exact: true }).click();
   await expect(page.locator(".video-capture")).toHaveAttribute("data-recording-state", "recording");
   await page.clock.fastForward(28000); await expect(page.getByLabel("مدت ضبط")).toContainText("۰۰:۲۸");

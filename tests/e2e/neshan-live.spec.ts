@@ -41,7 +41,7 @@ test("real provider tiles, real address, manual edit and durable confirmation", 
     const url = new URL(response.url());
     if (url.hostname.includes("neshan")) provider.push({ status: response.status(), host: url.hostname, type:response.request().resourceType(), contentType:response.headers()["content-type"] ?? "" });
   });
-  await context.grantPermissions(["geolocation"]);
+  await context.grantPermissions(["geolocation", "camera"]);
   await context.setGeolocation({ latitude: 35.699739, longitude: 51.338097, accuracy: 7 });
   await page.goto("/");
   await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");

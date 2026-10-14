@@ -60,14 +60,14 @@ test("walk-around uses live recording, neutral kit guidance and clean review",as
  expect(await page.evaluate(()=>(window as Window&{stoppedPhotoTracks?:number}).stoppedPhotoTracks)).toBeGreaterThan(0);
 });
 test("unsupported recorder has recovery and no gallery fallback",async({page},info)=>{
- test.skip(info.project.name!=="customer");await mockRecorder(page,true);await packageWorkflow(page,{kilometers:48320});await page.getByRole("link",{name:"ادامه به ویدیوی ۳۶۰ درجه"}).click();
- await page.getByRole("button",{name:"شروع ضبط"}).click();await expect(page.locator(".video-capture-error[role=alert]")).toContainText("پشتیبانی");await expect(page.locator('input[type="file"]')).toHaveCount(0);await screenshot(page,"360-live-unavailable");
+ test.skip(info.project.name!=="customer");await mockRecorder(page);await packageWorkflow(page,{kilometers:48320});await page.getByRole("link",{name:"ادامه به ویدیوی ۳۶۰ درجه"}).click();
+ await page.evaluate(() => Object.defineProperty(window,"MediaRecorder",{configurable:true,value:undefined}));await page.getByRole("button",{name:"فعال کردن دوربین"}).click();await expect(page.locator(".video-capture [role=alert]")).toContainText("پشتیبانی");await expect(page.locator('input[type="file"]')).toHaveCount(0);await screenshot(page,"360-live-unavailable");
 });
-test("optional mobile GLB has twelve fixed upload-aware markers and no reload on toggle",async({page},info)=>{
+test("optional mobile GLB has twelve fixed capture-aware markers and no reload on toggle",async({page},info)=>{
  test.skip(info.project.name!=="customer"||process.env.UI_REFINEMENT_DEV!=="1","Explicit local licensed development preview only");
  let downloads=0;page.on("response",r=>{if(r.url().includes("/api/development/vehicle-model/mobile"))downloads++;});
  await packageWorkflow(page,{kilometers:48320,video:"accepted"});expect(downloads).toBe(0);await page.getByRole("button",{name:"3D",exact:true}).click();
- await expect(page.locator(".fixed-inspection-marker")).toHaveCount(12,{timeout:60000});await expect(page.locator(".fixed-inspection-marker").first()).toHaveAttribute("data-state","pending");
+ await expect(page.locator(".fixed-inspection-marker")).toHaveCount(12,{timeout:60000});await expect(page.locator(".fixed-inspection-marker").first()).toHaveAttribute("data-state","complete");
  await seedQueue(page,"complete");await expect(page.locator(".fixed-inspection-marker").first()).toHaveAttribute("data-state","complete");
  await page.evaluate(async()=>{const r=indexedDB.open("inspection-upload-queue",1);const db=await new Promise<IDBDatabase>(ok=>r.onsuccess=()=>ok(r.result));await new Promise<void>(ok=>{const tx=db.transaction("jobs","readwrite"),store=tx.objectStore("jobs"),read=store.getAll();read.onsuccess=()=>{const j=read.result.find((j:{requirementId:string})=>j.requirementId==="front-45-right");store.put({...j,verification:"retake-requested",reviewerReason:"پلاک خوانا نیست."});};tx.oncomplete=()=>ok();});db.close();});
  await expect(page.locator('[data-requirement="front-45-right"].fixed-inspection-marker')).toHaveAttribute("data-state","attention");
@@ -75,7 +75,7 @@ test("optional mobile GLB has twelve fixed upload-aware markers and no reload on
  const before=await positions(),canvas=await page.locator("canvas").boundingBox();await page.mouse.move(canvas!.x+canvas!.width/2,canvas!.y+canvas!.height/2);await page.mouse.down();await page.mouse.move(canvas!.x+canvas!.width/2+60,canvas!.y+canvas!.height/2+20,{steps:8});await page.mouse.up();await page.mouse.wheel(0,-160);expect(await positions()).toEqual(before);
  for(const name of ["عقب","بالا","جلو","چپ","راست"]){await page.getByRole("button",{name:"نمای خودرو: "+name,exact:true}).click();}
  await page.getByRole("button",{name:"2D",exact:true}).click();await page.getByRole("button",{name:"3D",exact:true}).click();expect(downloads).toBe(1);await screenshot(page,"3d-uploaded-and-attention");
- await page.locator('.fixed-inspection-marker[data-requirement="front-45-right"]').click();await expect(page).toHaveURL(/front-45-right\/review$/);
+ await page.locator('.fixed-inspection-marker[data-requirement="front-45-right"]').click();await expect(page.locator(".marker-guidance")).toContainText("پلاک خوانا نیست.");await expect(page).toHaveURL(/\/capture$/);await page.getByRole("button",{name:"مشاهده عکس ثبت‌شده"}).click();await expect(page).toHaveURL(/front-45-right\/review$/);
 });
 test("admin assignment and exact reviewer rejection reuse the scoped customer request",async({page},info)=>{
  test.skip(info.project.name!=="desktop");

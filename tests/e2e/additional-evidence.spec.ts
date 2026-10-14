@@ -283,8 +283,8 @@ test("mixed photo/video requests keep separate evidence kinds and requested orde
   ).toBeVisible();
 });
 test("requested video stays live-only when the recorder is unsupported",async({page})=>{
- await mockRecorder(page,true);const{original}=await requestedWorkflow(page,"video");await page.getByRole("link",{name:"ضبط مجدد",exact:true}).click();await page.getByRole("button",{name:"شروع ضبط",exact:true}).click();
- await expect(page.locator(".video-capture-error")).toContainText("پشتیبانی");await expect(page.locator('input[type="file"]')).toHaveCount(0);expect(await submissionRecord(page)).toEqual(original);
+ await mockRecorder(page);const{original}=await requestedWorkflow(page,"video");await page.getByRole("link",{name:"ضبط مجدد",exact:true}).click();await page.evaluate(() => Object.defineProperty(window,"MediaRecorder",{configurable:true,value:undefined}));await page.getByRole("button",{name:"فعال کردن دوربین",exact:true}).click();
+ await expect(page.locator(".video-capture [role=alert]")).toContainText("پشتیبانی");await expect(page.locator('input[type="file"]')).toHaveCount(0);expect(await submissionRecord(page)).toEqual(original);
 });
 
 test("uncertain acknowledgement recovers on refresh without a second supplemental attempt", async ({
@@ -433,6 +433,7 @@ test("requested video reuses recorder/review and preserves accepted original thr
       "نیاز به ضبط مجدد: یک دور کامل و پیوسته از خودرو دیده نمی‌شود.",
     ),
   ).toBeVisible();
+  await page.getByRole("button", { name: "فعال کردن دوربین", exact: true }).click();
   await page.getByRole("button", { name: "شروع ضبط", exact: true }).click();
   await expect(page.locator(".video-capture")).toHaveAttribute(
     "data-recording-state",

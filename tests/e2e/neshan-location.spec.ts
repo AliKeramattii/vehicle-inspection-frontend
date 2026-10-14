@@ -58,7 +58,7 @@ test("missing key: initial viewport is not selected; explicit manual point persi
   await expect(page.locator(".location-coordinate-values")).toContainText("35.7350000");
 });
 test("official SDK pan, zoom, fixed pin, explicit GPS and viewport layout", async ({ page, context }) => {
-  await configureMap(page); await context.grantPermissions(["geolocation"]); await context.setGeolocation({ latitude: 35.7, longitude: 51.4, accuracy: 8 });
+  await configureMap(page); await context.grantPermissions(["geolocation", "camera"]); await context.setGeolocation({ latitude: 35.7, longitude: 51.4, accuracy: 8 });
   await page.addInitScript(() => {
     const original = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
     let calls = 0; Object.defineProperty(window, "locationGpsCalls", { get: () => calls });
@@ -109,7 +109,7 @@ test("GPS denial allows manual point; late first-party address cannot overwrite 
   await shot(page, "location-address-edited");
 });
 test("address failure remains recoverable; selected point and GPS accuracy survive zoom", async ({ page, context }) => {
-  await configureMap(page, "api"); await context.grantPermissions(["geolocation"]); await context.setGeolocation({ latitude: 35.7, longitude: 51.4, accuracy: 12 });
+  await configureMap(page, "api"); await context.grantPermissions(["geolocation", "camera"]); await context.setGeolocation({ latitude: 35.7, longitude: 51.4, accuracy: 12 });
   await page.route("**/api/maps/reverse?**", route => route.fulfill({ status: 200, json: {} }));
   await enter(page); await page.getByRole("button", { name: "بازگشت به موقعیت من" }).click();
   await expect(page.getByText("آدرس به‌صورت خودکار دریافت نشد. لطفاً آدرس را دستی وارد کنید.")).toBeVisible();
