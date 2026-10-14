@@ -69,3 +69,20 @@ test("published local receipt illustration survives submission and refresh", asy
   await page.reload(); await expect(page.locator(".receipt-hero")).toHaveAttribute("src", /^blob:/);
   await expect(page.getByRole("heading", { name: "بازدید با موفقیت ارسال شد" })).toBeVisible();
 });
+test("dark theme covers Admin routes, dialogs, tables and assigned reviewer workspace", async ({ page }) => {
+  await page.setViewportSize({width:1440,height:960}); await page.goto("/admin"); await page.getByLabel("پوسته مدیریت").selectOption("dark");
+  for (const route of ["/admin","/admin/templates","/admin/templates/body-image-guided","/admin/branding","/admin/policies","/admin/webhooks","/admin/assignments","/admin/users","/admin/permissions"]) {
+    await page.goto(route); await expect(page.locator("html")).toHaveAttribute("data-admin-theme","dark");
+    await expect(page.locator(".admin-root")).toHaveCSS("background-color","rgb(15, 23, 42)");
+    const panel = page.locator(".admin-panel").first(); if (await panel.isVisible()) await expect(panel).toHaveCSS("background-color","rgb(23, 34, 52)");
+  }
+  await submissionWorkflow(page); await page.getByRole("button",{name:"ارسال برای بررسی",exact:true}).click(); await expect(page).toHaveURL(/submitted$/);
+  await page.goto("/admin/assignments"); await page.getByRole("combobox",{name:"ارجاع BDI-8F31K2"}).selectOption("reviewer-demo");
+  await page.goto("/reviewer/cases/insp_demo"); await expect(page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true})).toBeVisible();
+  await expect(page.locator(".reviewer-root")).toHaveCSS("background-color","rgb(15, 23, 42)");
+  await expect(page.locator(".review-facts>section").first()).toHaveCSS("background-color","rgb(23, 34, 52)");
+  await page.getByRole("textbox",{name:"دلیل درخواست ثبت مجدد"}).fill("پلاک خوانا نیست.");
+  await page.screenshot({path:folder+"/reviewer-workspace-dark-1440.png"});
+  await page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true}).click(); await expect(page.getByText("نیاز به مدرک تکمیلی",{exact:true})).toBeVisible();
+  await page.getByRole("combobox",{name:"کارشناس نمونه"}).selectOption("reviewer-sara"); await expect(page.getByText("این پرونده در صف شما نیست.")).toBeVisible();
+});

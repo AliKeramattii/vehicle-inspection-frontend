@@ -16,3 +16,10 @@ html[data-admin-theme="dark"] .admin-theme-scope :is(.native-dialog,.admin-dialo
  .admin-mobile-nav a[aria-current="page"] { color:var(--admin-accent); background:var(--admin-selected); font-weight:700; }
  .admin-root .admin-sidebar { display:none; }
 }
+
+.admin-theme-scope .bg-slate-100{background:var(--admin-soft);color:var(--admin-muted)}
+.admin-theme-scope .bg-sky-50{background:var(--admin-selected);color:var(--admin-accent)}
+.admin-theme-scope .bg-emerald-50{background:var(--admin-success-bg);color:var(--admin-success-ink)}
+.admin-theme-scope .bg-amber-50{background:var(--admin-warning-bg);color:var(--admin-warning-ink)}
+.admin-theme-scope .bg-red-50{background:var(--admin-error-bg);color:var(--admin-error-ink)}
+.admin-theme-scope .review-decisions textarea,.admin-theme-scope .assignment-capacity{background:var(--admin-surface);color:var(--admin-ink)}

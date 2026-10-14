@@ -52,7 +52,7 @@
 .admin-root tbody tr:last-child td { border-bottom:0; }
 .admin-root .admin-technical { font-family:var(--font-vazirmatn),sans-serif; font-size:11px; unicode-bidi:isolate; direction:ltr; }
 .admin-root .admin-text-action { color:var(--admin-accent); min-height:44px; display:inline-flex; align-items:center; padding:6px 8px; font-size:13px; font-weight:600; }
-.admin-primary-link { display:inline-flex; align-items:center; min-height:48px; padding:10px 20px; background:var(--admin-accent); border-radius:9px; color:var(--brand-on-primary,#FFFFFF); font-size:14px; font-weight:700; }
+.admin-primary-link { display:inline-flex; align-items:center; min-height:48px; padding:10px 20px; background:var(--color-primary); border-radius:9px; color:var(--brand-on-primary,#FFFFFF); font-size:14px; font-weight:700; }
 .admin-empty { padding:40px 20px; text-align:center; color:var(--admin-muted); font-size:14px; }
 .admin-footnote { color:var(--admin-muted); font-size:12px; }
 .admin-template-workspace { flex:1; min-height:0; display:flex; flex-direction:column; background:var(--admin-surface); }
