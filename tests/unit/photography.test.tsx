@@ -28,8 +28,8 @@ describe("authoritative photography configuration", () => {
     expect(template.sections.map((section) => section.photoRequirements.length)).toEqual([2, 2, 1, 1, 2, 3, 1]);
     expect(all).toHaveLength(12); expect(new Set(all.map((photo) => photo.id)).size).toBe(12);
     for (const photo of all) {
-      expect(photo.required).toBe(true); expect(photo.sampleImage).toBe(`/assets/inspection/photo-guides/${photo.id}.webp`);
-      const source = readFileSync(`references/assets/vehicle-inspection-ui-assets/photo-guides/${photo.id}.webp`);
+      expect(photo.required).toBe(true); expect(photo.sampleImage).toBe(`/assets/inspection-vehicle/photo-guides/${photo.id}.webp`);
+      const source = readFileSync(`references/assets/new-vehicle/source/${photo.id}.webp`);
       const runtime = readFileSync(`public${photo.sampleImage}`);
       expect(createHash("sha256").update(runtime).digest("hex")).toBe(createHash("sha256").update(source).digest("hex"));
     }

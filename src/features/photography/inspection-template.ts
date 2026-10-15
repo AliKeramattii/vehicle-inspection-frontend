@@ -1,9 +1,10 @@
+import { vehicleGuideAssets, type VehicleGuideId } from "@/config/vehicle-assets";
 import { photographyTemplateSchema, type PhotoRequirement, type InspectionSection } from "@/schemas/photography";
 import type { CapturePlan, CaptureCategory } from "@/types/domain";
 
 const exteriorChecks = ["واضح", "نور مناسب", "خودرو کامل در کادر"];
-function photo(id: string, title: string, description: string, instructions: string[], extra: Partial<PhotoRequirement> = {}): PhotoRequirement {
-  return { id, title, description, instructions, sampleImage: `/assets/inspection/photo-guides/${id}.webp`,
+function photo(id: VehicleGuideId, title: string, description: string, instructions: string[], extra: Partial<PhotoRequirement> = {}): PhotoRequirement {
+  return { id, title, description, instructions, sampleImage: vehicleGuideAssets[id].src,
     required: true, status: "pending", checks: exteriorChecks, distance: "۳ متر", height: "کمر", orientation: "landscape", guidanceTopics: ["frame", "distance", "angle"], ...extra };
 }
 function side(side: "راست" | "چپ", direction: "right" | "left") {

@@ -102,3 +102,7 @@ capability/consent behavior, API contract, routes and development configuration 
 
 ## Unified readiness correction
 Four customer diagnostics: camera, location, storage, video recording support. WebGL stays internal/optional. Permission queries never request access; ungranted GPS is neutral, manual map selection remains. Exact approved pin copied to public/icons/readiness/inspection-pin.svg.
+
+## Approved sedan artwork update
+
+The prior vehicle-inspection/consent-hero filenames above document the original asset phase. Active defaults now use `hero/readiness-vehicle.webp` and `hero/consent-vehicle.webp` under `/assets/inspection-vehicle/`. The readiness background is shifted right only when the default asset is resolved, retaining the text/gradient region. Tenant override framing is unchanged. Clean-vehicle/open-space rows use the same supplied sedan; power/phone illustrations, all four requirements, capability behavior and copy remain unchanged. No historical readiness baseline was overwritten.

@@ -1,4 +1,5 @@
 "use client";
+import { resolveVehicleGuide } from "@/config/vehicle-assets";
 import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { InlineAlert, StatusBadge } from "@/components/ui/status";
@@ -11,7 +12,7 @@ export function PublicationBadge({ state }: { state: PublicationState }) { retur
 export function GuideImage({ src, title, className = "", sizes = "(max-width: 1100px) 340px, 420px" }: { src: string; title: string; className?: string; sizes?: string }) {
   const [failed, setFailed] = useState(false); const [attempt, setAttempt] = useState(0);
   if (failed) return <div className={"admin-image-error " + className} role="status"><p>تصویر مرجع بارگذاری نشد.</p><button type="button" onClick={() => { setAttempt(attempt+1); setFailed(false); }}>تلاش مجدد تصویر</button></div>;
-  return <Image key={src + attempt} src={src} alt={title} width={760} height={440} sizes={sizes} onError={() => setFailed(true)} className={"admin-guide-image " + className} />;
+  return <Image key={src + attempt} src={resolveVehicleGuide(src)} alt={title} width={760} height={440} sizes={sizes} onError={() => setFailed(true)} className={"admin-guide-image " + className} />;
 }
 export function AdminPageHeading({ title, description, action }: { title: string; description: string; action?: ReactNode }) {
   return <div className="admin-page-heading"><div><p className="admin-breadcrumb">مدیریت سامانه / {title}</p><h1>{title}</h1><p>{description}</p></div>{action}</div>;

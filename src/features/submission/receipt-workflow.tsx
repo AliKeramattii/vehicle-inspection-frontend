@@ -31,7 +31,7 @@ export function ReceiptWorkflow({ inspectionId }: { inspectionId: string }) {
   if (!receipt) return <SubmissionLoading />;
   return <div className="receipt-route">
     <div className="receipt-content">
-      <BrandingImage role="submission" className="receipt-hero" alt="خودرو با نشان تأیید ارسال" width={240} height={180} unoptimized preload />
+      <BrandingImage role="submission" className="receipt-hero" alt="خودروی سدان سفید در استودیوی روشن" width={240} height={180} unoptimized preload />
       <h2>بازدید با موفقیت ارسال شد</h2><p className="receipt-intro">کارشناسان نتیجه بازدید را بررسی خواهند کرد.</p>
       {requests.error && <InlineAlert tone="warning">خواندن درخواست‌های کارشناس ممکن نشد.<SecondaryButton onClick={() => void requests.refetch()}>تلاش مجدد</SecondaryButton></InlineAlert>}
       {latest && <section className="additional-receipt-notice"><h3>{requestActive(latest) ? "مدارک تکمیلی مورد نیاز است" : "مدارک تکمیلی ارسال شدند"}</h3><p>{requestActive(latest) ? "کارشناس برای ادامه بررسی، تصاویر جدیدی درخواست کرده است." : "مدارک جدید برای بررسی مجدد ارسال شدند."}</p><Link href={additionalRoutes.list(inspectionId, latest.id)}>{requestActive(latest) ? "مشاهده درخواست" : "مشاهده رسید مدارک تکمیلی"}<Icon name="chevronForward" size={20} /></Link></section>}

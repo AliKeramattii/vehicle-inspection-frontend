@@ -1,4 +1,5 @@
 "use client";
+import { resolveVehicleGuide } from "@/config/vehicle-assets";
 import type { UseFormReturn } from "react-hook-form";
 import type { PhotographyTemplate, InspectionSectionId } from "@/schemas/photography";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -37,7 +38,7 @@ export function RequirementFields({ form, snapshot, requirementId, editable }: {
     <div className="admin-large-guide"><GuideImage key={requirement.sampleImage} src={requirement.sampleImage} title={"تصویر مرجع " + requirement.title} /></div>
     <details className="admin-advanced-fields" open={error?.description ? true : undefined}><summary>توضیح کوتاه و تصویر مرجع</summary><fieldset disabled={!editable}>
       <label>توضیح کوتاه<textarea rows={2} {...form.register(`${prefix}.description`)} aria-invalid={!!error?.description} /></label>
-      <label>تصویر مرجع<select aria-label="تصویر مرجع" value={requirement.sampleImage} onChange={e => form.setValue(`${prefix}.sampleImage`, e.target.value, { shouldDirty: true })}>{canonicalAssets.map(asset => <option key={asset} value={asset}>{asset.split("/").at(-1)}</option>)}</select></label>
+      <label>تصویر مرجع<select aria-label="تصویر مرجع" value={resolveVehicleGuide(requirement.sampleImage)} onChange={e => form.setValue(`${prefix}.sampleImage`, e.target.value, { shouldDirty: true })}>{canonicalAssets.map(asset => <option key={asset} value={asset}>{asset.split("/").at(-1)}</option>)}</select></label>
     </fieldset></details>
     <p className="admin-footnote">نمای دوبعدی مرتبط: {sectionLabels[snapshot.sections[si].id]}. شناسه مارکر از پیکربندی فعلی خوانده می‌شود.</p>
   </aside>;

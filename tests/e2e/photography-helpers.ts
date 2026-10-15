@@ -8,7 +8,7 @@ export async function seedPhotos(page: Page, count: number, retakeId?: string, d
   const namespace = photoNamespace("insp_demo", template.templateId, template.templateVersion);
   const photos = requirements.slice(0, count).map((photo) => ({ key: photoKey(namespace, photo.id), namespace, requirementId: photo.id, image: photo.sampleImage,
     status: photo.id === retakeId ? "retake-requested" : "captured" }));
-  if (draftId && !photos.some((photo) => photo.requirementId === draftId)) photos.push({ key: photoKey(namespace, draftId), namespace, requirementId: draftId, image: `/assets/inspection/photo-guides/${draftId}.webp`, status: "pending" });
+  if (draftId && !photos.some((photo) => photo.requirementId === draftId)) photos.push({ key: photoKey(namespace, draftId), namespace, requirementId: draftId, image: `/assets/inspection-vehicle/photo-guides/${draftId}.webp`, status: "pending" });
   await page.evaluate(async ({ photos, databaseConfig, draftId }) => {
     // Test-only deterministic evidence. Runtime never treats sample images as customer captures.
     const records = await Promise.all(photos.map(async ({ image, ...record }) => {
@@ -57,7 +57,7 @@ export async function mockCamera(page: Page) {
     Object.defineProperty(navigator, "mediaDevices", { configurable: true, value: { getUserMedia: async () => {
       target.photographyCameraCalls!++;
       const id = location.pathname.split("/").at(-2) ?? "front-45-right";
-      const blob = await (await fetch(`/assets/inspection/photo-guides/${id}.webp`)).blob();
+      const blob = await (await fetch(`/assets/inspection-vehicle/photo-guides/${id}.webp`)).blob();
       const bitmap = await createImageBitmap(blob), canvas = document.createElement("canvas"); canvas.width = bitmap.width; canvas.height = bitmap.height;
       canvas.getContext("2d")!.drawImage(bitmap, 0, 0); bitmap.close();
       const stream = canvas.captureStream(5);

@@ -57,8 +57,8 @@ test("query parameters cannot replace deployment API configuration",async({page}
   await expect(page.getByRole("textbox",{name:"کد معرفی / کد ارجاع"})).toBeVisible();expect(dangerous).toEqual([]);
 });
 test("failed brokerage image falls back while preserving its frame",async({page},info)=>{
-  test.skip(info.project.name!=="customer");await brokerage(page,"broker-b");await page.route("**/images/preparation/vehicle-inspection.webp",r=>r.abort());
-  await page.goto("/");await expect(page.locator(".landing-art img")).toHaveAttribute("src",/_next\/image.*landing-suv/);await overflow(page);
+  test.skip(info.project.name!=="customer");await brokerage(page,"broker-b");await page.route("**/assets/inspection-vehicle/hero/readiness-vehicle.webp",r=>r.abort());
+  await page.goto("/");await expect(page.locator(".landing-art img")).toHaveAttribute("src",/_next\/image.*landing-vehicle/);await overflow(page);
 });
 for(const viewport of [{width:360,height:800},{width:390,height:844},{width:430,height:932}])test("brokerage customer workflow and viewport "+viewport.width,async({page},info)=>{
   test.skip(info.project.name!=="customer");await page.setViewportSize(viewport);await brokerage(page,"broker-b");await page.goto("/");

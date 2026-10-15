@@ -48,7 +48,7 @@ describe("inspection contracts", () => {
     const inspection = await repository.getInspection(mockInspectionId);
     expect(inspection).not.toHaveProperty("vehicleDetails");
     if (inspection.vehicle) inspection.vehicle.model = "changed";
-    expect((await repository.getInspection(mockInspectionId)).vehicle?.model).toBe("اسپورتیج");
+    expect((await repository.getInspection(mockInspectionId)).vehicle?.model).toBe("سدان نمونه");
     const plan = await repository.getCapturePlan(mockInspectionId);
     plan.shots[0].highlightNodes.push("changed");
     expect((await repository.getCapturePlan(mockInspectionId)).shots[0].highlightNodes).not.toContain("changed");

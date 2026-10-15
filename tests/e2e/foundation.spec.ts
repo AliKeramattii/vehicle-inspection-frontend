@@ -47,13 +47,13 @@ test("RTL shell, local font, safe-area action, and screenshots", async ({
   await expect(
     page.getByRole("heading", { name: "اجزای رابط کاربری", exact: true }),
   ).toBeVisible();
-  await expect(page.getByText("کیا اسپورتیج", { exact: true })).toBeVisible();
+  await expect(page.getByText("خودروی سدان نمونه", { exact: true })).toBeVisible();
   await expect(page.locator('li[aria-current="step"]')).toContainText("خودرو");
   await expect(
     page.getByRole("textbox", { name: "شناسه نمونه" }),
   ).toHaveAttribute("dir", "ltr");
-  await page.getByText("کیا اسپورتیج", { exact: true }).scrollIntoViewIfNeeded();
-  await expect(page.getByText("کیا اسپورتیج", { exact: true })).toBeInViewport();
+  await page.getByText("خودروی سدان نمونه", { exact: true }).scrollIntoViewIfNeeded();
+  await expect(page.getByText("خودروی سدان نمونه", { exact: true })).toBeInViewport();
   expect(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight)).toBe(true);
   await page.locator(".app-scroll").evaluate((element) => { element.scrollTop = 0; });
   expect(

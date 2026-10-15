@@ -11,7 +11,7 @@ export function LandingScreen() {
       <h1>بازدید آنلاین خودرو<br /><span>در کمتر از ۱۵ دقیقه</span></h1>
       <p>با چند مرحله ساده، از هر کجا خودروی خود را<br />به صورت آنلاین و راهنمایی‌شده بازدید کنید.</p>
     </div>
-    <div className="landing-art"><BrandingImage role="landing" alt="خودروی سفید در استودیوی روشن" width={1536} height={1024} sizes="(max-width: 480px) 100vw, 480px" preload /></div>
+    <div className="landing-art"><BrandingImage role="landing" alt="خودروی سدان سفید در استودیوی روشن" width={1672} height={941} sizes="(max-width: 480px) 100vw, 480px" preload /></div>
     <ReferralForm />
     <LandingBenefits />
     <TrustFooter />

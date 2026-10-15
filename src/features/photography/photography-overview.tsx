@@ -1,4 +1,5 @@
 "use client";
+import { vehicleViewAssets } from "@/config/vehicle-assets";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -52,7 +53,7 @@ export function PhotographyOverview({ template, records, inspectionId, data, bod
       <nav className="photography-categories" aria-label="دسته‌های عکاسی">{photographyCategories.map((item) => {
         const photos = categoryRequirements(template, item.id).filter((photo) => photo.required);
         const { completed, state, attention } = requirementProgress(photos, records);
-        return <button key={item.id} type="button" data-state={state} aria-pressed={category === item.id} onClick={() => chooseCategory(item.id)}><Image src={"/ui-refinement/navigation/view-"+(item.id==="details"?"engine-specs":item.id)+".webp"} alt="" width={35} height={28}/><span><strong>{item.title}</strong><small>{fa(completed)} از {fa(photos.length)} تصویر{attention && <span className="category-attention"><Icon name="retake" size={12} /><span className="sr-only">نیاز به بررسی / عکاسی مجدد</span></span>}</small></span></button>;
+        return <button key={item.id} type="button" data-state={state} aria-pressed={category === item.id} onClick={() => chooseCategory(item.id)}><Image src={vehicleViewAssets[item.id === "details" ? "engine-specs" : item.id]} alt="" width={35} height={28}/><span><strong>{item.title}</strong><small>{fa(completed)} از {fa(photos.length)} تصویر{attention && <span className="category-attention"><Icon name="retake" size={12} /><span className="sr-only">نیاز به بررسی / عکاسی مجدد</span></span>}</small></span></button>;
       })}</nav>
       <div className="photography-selected-heading"><h2>{section.title}</h2><Link href={inspectionRoutes.section(inspectionId, section.id)}>مشاهده بخش<Icon name="chevronBack" size={15} /></Link></div>
       <PhotographyShotCarousel photos={categoryRequirements(template, category)} records={records} selectedId={photo.id} onSelect={select} />

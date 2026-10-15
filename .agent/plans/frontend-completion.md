@@ -39,4 +39,4 @@ Actual lint/typecheck/test/build scripts, relevant existing Playwright plus targ
 - [x] Full feature inventory/source review; matrix in FRONTEND_COMPLETION_AUDIT.md.
 - [x] Three P1 corrections, two unit regressions and four browser scenarios; broad functional173 and premium8 pass, historical suite failures explicitly classified.
 - [x] Three required documents; lint/typecheck/374 units/build exit 0; real Neshan and GLB checks each exit 0.
-- [ ] Focused commit/push and preservation verification.
+- [x] Focused commit e41df97 pushed; remote HEAD verified. Eight unrelated local edits and 160 historical source checks preserved.

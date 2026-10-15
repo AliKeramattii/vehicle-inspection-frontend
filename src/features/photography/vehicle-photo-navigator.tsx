@@ -1,3 +1,4 @@
+import { vehicleViewAssets } from "@/config/vehicle-assets";
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
@@ -30,7 +31,7 @@ export function VehiclePhotoNavigator({ template, photo, sectionId, records, onA
     </div>
     }
     {controls && <nav className="vehicle-photo-controls" aria-label="نماهای خودرو"><button type="button" aria-label="بازنشانی به نمای بعدی" onClick={onReset}><Icon name="resetView" size={20} /><span>بازنشانی</span></button>
-      {vehiclePhotoControls.map((control) => <button type="button" key={control.sectionId} aria-label={`نمای خودرو: ${control.title}`} aria-pressed={sectionId === control.sectionId} onClick={() => { const id=onSection(control.sectionId); onView?.(control.sectionId,id); }}><Image src={"/ui-refinement/navigation/view-"+(control.sectionId==="roof"?"top":control.sectionId)+".webp"} alt="" width={34} height={25}/><span>{control.title}</span></button>)}
+      {vehiclePhotoControls.map((control) => <button type="button" key={control.sectionId} aria-label={`نمای خودرو: ${control.title}`} aria-pressed={sectionId === control.sectionId} onClick={() => { const id=onSection(control.sectionId); onView?.(control.sectionId,id); }}><Image src={vehicleViewAssets[control.sectionId === "roof" ? "top" : control.sectionId]} alt="" width={34} height={25}/><span>{control.title}</span></button>)}
     </nav>}
   </section>;
 }

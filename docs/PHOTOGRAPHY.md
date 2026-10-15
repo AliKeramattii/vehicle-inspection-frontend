@@ -54,7 +54,7 @@ scroll. Loading/missing/unauthorized/storage failure/retry states remain explici
 
 ## Artwork, status and reference decisions
 
-The twelve canonical WebPs remain byte-identical under `public/assets/inspection/photo-guides/`,
+The twelve supplied sedan WebPs remain byte-identical under `public/assets/inspection-vehicle/photo-guides/`,
 with the original filenames documented in INDEX. Next Image optimizes static guidance/artwork;
 local Blob URLs bypass HTTP optimization and are revoked on change/unmount.
 
@@ -179,3 +179,7 @@ Capture and retakes are live-only: no arbitrary gallery or File Manager import. 
 
 ## Unified optional-viewer interaction
 Production remains2D. Optional3D pins derive accepted local capture separately from matching-current-revision upload status. Parent selection synchronizes cards/CTA. Pin shows reference/guidance before shared capture/review action. Completed evidence remains replaceable atomically. Controls stay below image. See UNIFIED_APPLICATION.md.
+
+## Supplied sedan reference consolidation
+
+Active reference artwork now comes from `src/config/vehicle-assets.ts`: twelve exact guides, eight explicit physical/category view roles and eight transparent recording ghosts. Known old built-in guide URLs resolve at presentation time for pinned template history; actual captured Blobs and tenant custom images do not pass through a replacement migration. Marker/image layers share the source aspect ratio. See `NEW_VEHICLE_ASSET_AUDIT.md` and `NEW_VEHICLE_ASSET_MIGRATION.md`; the earlier asset-continuity candidate list is historical and has been superseded for active 2D defaults. The optional Sportage 3D subsystem is unchanged.

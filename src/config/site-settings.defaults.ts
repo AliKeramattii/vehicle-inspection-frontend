@@ -1,3 +1,4 @@
+import { vehicleHeroAssets } from "./vehicle-assets";
 import { defaultLocationMap, type SiteSettings } from "./site-settings.schema";
 export function defaultSiteSettings(tenantId: string, apiBaseUrl = "/api"): SiteSettings {
   return { schemaVersion: 1, tenantId, version: 1, publishedAt: "2026-10-11T06:30:00.000Z",
@@ -12,6 +13,6 @@ export function brokerageFixture(tenantId: "broker-a" | "broker-b", apiBaseUrl =
   settings.identity = { ...settings.identity, brokerageName: tenantId === "broker-a" ? "کارگزاری آبی" : "کارگزاری سبز",
     appTitle: "بازدید " + (tenantId === "broker-a" ? "آبی" : "سبز"), logo: tenantId === "broker-a" ? "/icons/security/shield.svg" : "/icons/admin/partner.svg" };
   if (tenantId === "broker-b") settings.theme.primary = "#047857";
-  settings.images.landing = tenantId === "broker-a" ? "/images/auth/landing-suv.png" : "/images/preparation/vehicle-inspection.webp";
+  settings.images.landing = tenantId === "broker-a" ? vehicleHeroAssets.landing : vehicleHeroAssets.readiness;
   return settings;
 }

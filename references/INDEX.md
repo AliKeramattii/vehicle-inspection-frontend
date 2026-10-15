@@ -54,19 +54,23 @@ These are canonical photography guidance/reference assets, not decorative images
 
 | Canonical path | Section |
 |---|---|
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/front-45-right.webp` | نمای راست |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/back-45-right.webp` | نمای راست |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/front-45-left.webp` | نمای چپ |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/back-45-left.webp` | نمای چپ |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/front-plate.webp` | جلو |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/rear-plate.webp` | عقب |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/odometer-on.webp` | کابین |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/driver-interior.webp` | کابین |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/engine-bay.webp` | موتور و مشخصات |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/spec-plate.webp` | موتور و مشخصات |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/chassis-number.webp` | موتور و مشخصات |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/car-roof.webp` | سقف |
+| `references/assets/new-vehicle/source/front-45-right.webp` | نمای راست |
+| `references/assets/new-vehicle/source/back-45-right.webp` | نمای راست |
+| `references/assets/new-vehicle/source/front-45-left.webp` | نمای چپ |
+| `references/assets/new-vehicle/source/back-45-left.webp` | نمای چپ |
+| `references/assets/new-vehicle/source/front-plate.webp` | جلو |
+| `references/assets/new-vehicle/source/rear-plate.webp` | عقب |
+| `references/assets/new-vehicle/source/odometer-on.webp` | کابین |
+| `references/assets/new-vehicle/source/driver-interior.webp` | کابین |
+| `references/assets/new-vehicle/source/engine-bay.webp` | موتور و مشخصات |
+| `references/assets/new-vehicle/source/spec-plate.webp` | موتور و مشخصات |
+| `references/assets/new-vehicle/source/chassis-number.webp` | موتور و مشخصات |
+| `references/assets/new-vehicle/source/car-roof.webp` | سقف |
 
-The single documented runtime copy is `public/assets/inspection/photo-guides/`, served as
-`/assets/inspection/photo-guides/<exact-filename>`. Preserve bytes/names and full framing. Never
+The single documented runtime copy is `public/assets/inspection-vehicle/photo-guides/`, served as
+`/assets/inspection-vehicle/photo-guides/<exact-filename>`. Preserve bytes/names and full framing. Never
 mirror physical vehicle directions. Configuration, rather than old PNG counts, defines totals.
+
+## Approved white sedan asset migration
+
+The latest supplied `references/assets/new-vehicle/` photographs supersede the older SUV imagery for active 2D defaults and guidance, while PNGs still define layout. The old guide source folder and screenshot baselines remain historical evidence. Twelve guide IDs/seven sections are unchanged. See `docs/NEW_VEHICLE_ASSET_AUDIT.md` for all 40 supplied assets, eight navigation roles and genuine-alpha Recorder V2 ghosts. Optional Sportage 3D remains intentionally unchanged.

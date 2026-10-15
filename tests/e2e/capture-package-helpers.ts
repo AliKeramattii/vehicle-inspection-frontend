@@ -21,7 +21,7 @@ export async function mockRecorder(page: Page, unsupported = false) {
     Object.defineProperty(navigator, "mediaDevices", { configurable: true, value: { async getUserMedia() {
       const counters = window as Window & { photographyCameraCalls?: number; stoppedPhotoTracks?: number };
       counters.photographyCameraCalls = (counters.photographyCameraCalls ?? 0) + 1;
-      const image = new Image(); image.src = location.pathname.includes("/photo/odometer-on/") ? "/assets/inspection/photo-guides/odometer-on.webp" : "/assets/inspection/photo-guides/front-45-right.webp"; await image.decode();
+      const image = new Image(); image.src = location.pathname.includes("/photo/odometer-on/") ? "/assets/inspection-vehicle/photo-guides/odometer-on.webp" : "/assets/inspection-vehicle/photo-guides/front-45-right.webp"; await image.decode();
       const canvas = document.createElement("canvas"); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight; canvas.getContext("2d")!.drawImage(image, 0, 0);
       const stream = canvas.captureStream(5); for (const track of stream.getTracks()) { const stop = track.stop.bind(track); track.stop = () => { counters.stoppedPhotoTracks = (counters.stoppedPhotoTracks ?? 0) + 1; stop(); }; } return stream;
     } } });

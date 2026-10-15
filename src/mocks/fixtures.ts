@@ -7,7 +7,7 @@ export const mockReferralCode = "A4K9P2";
 export const mockOtpCode = "12345";
 export const inspectionFixture: InspectionDto = {
   inspectionId: mockInspectionId, status: "draft", locationDetails: null, evidenceItems: [],
-  vehicleDetails: { make: "کیا", model: "اسپورتیج", year: 2023, colorName: "نقره‌ای متالیک", colorHex: "#b5bac1",
+  vehicleDetails: { make: "خودروی", model: "سدان نمونه", year: 2023, colorName: "نقره‌ای متالیک", colorHex: "#b5bac1",
     vinMasked: "NAAP******3F56", plate: { firstTwoDigits: "45", letter: "ب", threeDigits: "723", regionDigits: "11" } },
 };
 // A deliberately small bootstrap fixture, not the current customer photography template.

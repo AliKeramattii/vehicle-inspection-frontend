@@ -1,4 +1,5 @@
 "use client";
+import { vehicleGhostAssets } from "@/config/vehicle-assets";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -39,7 +40,7 @@ export function VideoCapture({ inspectionId, onRecorded, service, reason, backHr
         <div className="recorder-live">
           <video ref={preview} playsInline autoPlay muted aria-label="تصویر زنده ضبط ویدیو" />
           {["ready","error"].includes(state) && <div className="recorder-camera-placeholder"><Camera size={30}/><p>{error ? "دوربین در دسترس نیست" : "دوربین پس از انتخاب شما فعال می‌شود"}</p></div>}
-          {showGhost && <div className="recorder-ghost" data-guide={current.id}><Image src={"/assets/360-recording/ghost-guides/" + current.file} alt={"راهنمای قاب‌بندی: نمای " + current.title} fill sizes="(max-width: 480px) 90vw, 430px" unoptimized /></div>}
+          {showGhost && <div className="recorder-ghost" data-guide={current.id}><Image src={vehicleGhostAssets[current.id]} alt={"راهنمای قاب‌بندی: نمای " + current.title} fill sizes="(max-width: 480px) 90vw, 430px" unoptimized /></div>}
           <div className="recorder-corners" aria-hidden="true"/>
         </div>
         <div className="recorder-angle"><button type="button" aria-label="نمای راهنمای قبلی" onClick={() => setAngle(index => (index + 7) % 8)}><ChevronRight size={22}/></button><div><small>زاویه راهنمای فعلی: {fa(angle + 1)} از {fa(recordingGuides.length)}</small><strong>نمای {current.title}</strong></div><button type="button" aria-label="نمای راهنمای بعدی" onClick={() => setAngle(index => (index + 1) % 8)}><ChevronLeft size={22}/></button></div>

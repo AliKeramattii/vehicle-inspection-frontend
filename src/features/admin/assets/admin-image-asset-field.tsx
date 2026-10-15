@@ -20,7 +20,7 @@ export const imageSlots: readonly { name: ImageSettingPath; label: string; fallb
   { name: "images.otp", label: "تصویر تأیید موبایل", fallback: brandingAssets.otp.src },
   { name: "images.readiness", label: "تصویر آمادگی", fallback: brandingAssets.readiness.src },
   { name: "images.consent", label: "تصویر حریم خصوصی", fallback: brandingAssets.consent.src },
-  { name: "images.submission", label: "تصویر ارسال موفق و انتظار کارشناس", fallback: "/illustrations/success/inspection-submitted.svg" },
+  { name: "images.submission", label: "تصویر ارسال موفق و انتظار کارشناس", fallback: brandingAssets.submission.src },
 ];
 export function imageSetting(settings: SiteSettings, name: ImageSettingPath) {
   return name.startsWith("identity.") ? settings.identity[name.slice(9) as "logo" | "favicon"] : settings.images[name.slice(7) as keyof SiteSettings["images"]];

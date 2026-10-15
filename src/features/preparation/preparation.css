@@ -120,3 +120,6 @@
 .readiness-screen .readiness-hero{height:176px;min-height:176px}
 
 .customer-viewport>.readiness-screen{scroll-padding-block-end:88px}
+
+/* Supplied sedan hero: preserve the existing text region and tenant override framing. */
+.readiness-hero[data-default-asset=true] { background-position: calc(50% + 100px) center; background-repeat: no-repeat; }

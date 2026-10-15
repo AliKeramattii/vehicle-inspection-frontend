@@ -1,3 +1,4 @@
+import { resolveVehicleGuide } from "@/config/vehicle-assets";
 import { z } from "zod";
 import { photographyTemplateSchema, photoRequirementSchema, inspectionSectionSchema, supplementalCaptureSchema, type PhotographyTemplate, type InspectionSectionId } from "@/schemas/photography";
 import { inspectionPhotographyTemplate as defaultPhotographyTemplate } from "@/features/photography/inspection-template";
@@ -42,7 +43,7 @@ export const adminSnapshotSchema = photographyTemplateSchema.safeExtend({ sectio
   if (snapshot.sections.length !== defaultPhotographyTemplate.sections.length) fail("هر هفت بخش قالب باید حفظ شود.");
   if (requirements.length !== canonicalIds.size || requirements.some(r => !canonicalIds.has(r.id))) fail("شناسه‌های دوازده تصویر باید حفظ شوند.");
   if (snapshot.sections.some((s, i) => s.order !== i + 1)) fail("ترتیب بخش‌ها باید پیوسته باشد.");
-  if (requirements.some(r => !canonicalAssets.includes(r.sampleImage))) fail("تصویر راهنما باید از دارایی‌های تأییدشده باشد.");
+  if (requirements.some(r => !canonicalAssets.includes(resolveVehicleGuide(r.sampleImage)))) fail("تصویر راهنما باید از دارایی‌های تأییدشده باشد.");
   if (requirements.some(r => r.status !== "pending" || r.reviewerReason !== undefined)) fail("وضعیت شواهد در تعریف قالب قابل ویرایش نیست.");
   if (snapshot.captureRequirements?.odometerRequirementId !== "odometer-on" || snapshot.captureRequirements?.video360Required !== true) fail("کیلومتر و ویدیوی الزامی باید جدا از تصاویر حفظ شوند.");
   if (!requirements.find(r => r.id === "odometer-on")?.required) fail("تصویر کیلومترشمار باید الزامی بماند.");
