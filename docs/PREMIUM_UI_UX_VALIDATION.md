@@ -62,3 +62,6 @@ Admin: http://localhost:3120/admin
 Settings: http://localhost:3120/admin/site-settings
 Reviewer: http://localhost:3120/reviewer
 Ignored authorized local settings/model fixtures are required for live-provider/optional-GLB checks. Never commit them.
+
+## Git delivery
+Focused checkpoints:6b2356c branding/readiness/theme;18db78e Admin/settings;9bb310b Reviewer/receipt;299fc50 tests/docs and nine new baselines. Normal push to origin/feat/premium-ui-ux-refinement succeeded. Remote299fc507b4170fc2eb61894111ed0c5f1a12aa45 matched local, ahead/behind0/0 before this final documentation record. No main merge, history rewrite, source-worktree cleanup, secrets or GLB publication. The temporary source3114 server was stopped after before captures; refined3120 and loopback8787/8788 remain available.

@@ -45,7 +45,7 @@ Run npm.cmd run lint, typecheck, test and build. Focused Playwright covers logo,
 - [x] Reviewer workstation.
 - [x] Customer refinement/regressions.
 - [x] Documentation, visual validation and technical checks.
-- [ ] Focused commits, normal push and remote verification.
+- [x] Focused commits, normal push and remote verification.
 
 ## Validation discoveries
 All372 unit tests, lint, typecheck/build pass. Existing65 browser regressions pass. Final eight production refinement scenarios and nine individually reviewed new snapshots pass, exit0. Real Neshan and actual local GLB each pass, exit0. Historical baselines remain unchanged; source-worktree local work and160 recorded file hashes are preserved. See docs/PREMIUM_UI_UX_VALIDATION.md for the full correction/limitation record.
