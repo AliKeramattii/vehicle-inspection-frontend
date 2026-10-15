@@ -2,6 +2,7 @@
 import {createContext,useContext,useState,useEffect,type ReactNode} from "react";
 import { AdminThemeScope, AdminThemeControl } from "@/features/admin/admin-theme";
 import "@/features/admin/admin-theme.css";
+import "./reviewer-premium.css";
 import Link from "next/link";
 import {AppViewport} from "@/components/layout/app-viewport";
 import {CoBranding} from "@/components/layout/co-branding";
