@@ -1,6 +1,6 @@
 "use client";
 import { useEffect,useMemo,useState } from "react";
-import { useQuery,useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useForm,useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -19,15 +19,15 @@ import { SettingsNavigation, settingsDescriptions } from "./settings-navigation"
 import { ApplicationLogo } from "@/components/layout/application-logo";
 import "./site-settings.css";
 export function SiteSettingsPage() {
-  const site=useRuntimeSite(),admin=useAdmin(),cache=useQueryClient();
+  const site=useRuntimeSite(),admin=useAdmin();
   const repository=useMemo(()=>new SiteSettingsRepository(new IndexedDbSettingsPersistence(),site.contextKey,site.bootstrap,site.origin,site.settings,undefined,admin.workspace?.templates.flatMap(t=>t.versions.filter(v=>v.state==="published").map(v=>({id:t.id,version:v.version})))),[site.contextKey,site.bootstrap,site.origin,site.settings,admin.workspace]);
   const query=useQuery({queryKey:["admin-site-settings",site.contextKey,admin.actor.id,admin.actor.role],queryFn:()=>repository.read(admin.actor),enabled:allowed(admin.actor.role,"branding"),refetchOnWindowFocus:true});
   if(!allowed(admin.actor.role,"branding"))return <div className="admin-recovery"><InlineAlert tone="destructive">تنظیمات سایت فقط برای مدیر سایت در دسترس است.</InlineAlert></div>;
   if(query.isPending)return <div className="admin-loading" role="status"><div/><div/><p>بارگذاری تنظیمات سایت</p></div>;
   if(!query.data)return <div className="admin-recovery"><InlineAlert tone="destructive">خواندن تنظیمات ممکن نشد.</InlineAlert><SecondaryButton onClick={()=>void query.refetch()}>تلاش مجدد</SecondaryButton></div>;
-  return <WorkspaceState><SettingsEditor key={site.contextKey+admin.actor.id+admin.actor.role} state={query.data} repository={repository} reload={async()=>{await cache.invalidateQueries({queryKey:["admin-site-settings",site.contextKey]});}}/></WorkspaceState>;
+  return <WorkspaceState><SettingsEditor key={site.contextKey+admin.actor.id+admin.actor.role} state={query.data} repository={repository} reload={async()=>{const result=await query.refetch({throwOnError:true});if(!result.data)throw new Error("خواندن تنظیمات ممکن نشد.");return result.data;}}/></WorkspaceState>;
 }
-function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repository:SiteSettingsRepository;reload:()=>Promise<void>}) {
+function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repository:SiteSettingsRepository;reload:()=>Promise<SettingsWorkspace>}) {
   const site=useRuntimeSite(),{actor,setDirty,workspace,confirmAction}=useAdmin();
   const form=useForm<SiteSettings>({resolver:zodResolver(siteSettingsSchema),defaultValues:state.draft});
   const values=useWatch({control:form.control}) as SiteSettings;
@@ -42,6 +42,12 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
     try{const next=await operation();setRevision(next.revision);form.reset(next.draft);setMessage(notice);await reload();return true;}
     catch(e){setError(e instanceof Error&&!(e instanceof DOMException)?e.message:"ذخیره انجام نشد. تغییرات شما محفوظ است.");return false;}
     finally{setBusy(false);}
+  }
+  async function reloadLatest() {
+    setBusy(true);setMessage("");
+    try {const latest=await reload();setRevision(latest.revision);form.reset(latest.draft);setError("");setMessage("نسخه تازه بارگذاری شد.");}
+    catch {setDirty(form.formState.isDirty);setError("خواندن نسخه تازه ممکن نشد. تغییرات شما محفوظ است؛ دوباره تلاش کنید.");}
+    finally {setBusy(false);}
   }
   let previewLogo:string|null=null;
   try {
@@ -75,7 +81,7 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
           <p>کنتراست: <bdi>{contrast(values.theme.primary,values.theme.onPrimary).toFixed(2)}</bdi></p><p>تنها پیش‌نمایش؛ قالب و مدارک موجود تغییر نمی‌کنند.</p>
         </aside>
         {(errors.length>0)&&<InlineAlert tone="destructive"><p>تنظیمات معتبر نیست. عنوان، رنگ‌ها و نشانی تصاویر را بررسی کنید.</p>{Object.entries(form.formState.errors.theme??{}).map(([key,value])=><p key={key}>{typeof value==="object"&&value&&"message" in value?String(value.message):""}</p>)}</InlineAlert>}
-        {error&&<InlineAlert tone="destructive">{error}<button type="button" className="admin-text-action" onClick={()=>confirmAction(()=>{setRevision(state.revision);form.reset(state.draft);setError("");void reload();})}>بارگذاری نسخه تازه</button></InlineAlert>}
+        {error&&<InlineAlert tone="destructive">{error}<button type="button" className="admin-text-action" disabled={busy} onClick={()=>confirmAction(()=>void reloadLatest())}>بارگذاری نسخه تازه</button></InlineAlert>}
         {message&&<InlineAlert tone="success">{message}</InlineAlert>}
         {!canEdit&&<InlineAlert>نقش فعلی فقط اجازه مشاهده دارد.</InlineAlert>}
       </div>

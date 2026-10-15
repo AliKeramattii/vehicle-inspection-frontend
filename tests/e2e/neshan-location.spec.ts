@@ -93,7 +93,7 @@ test("official SDK pan, zoom, fixed pin, explicit GPS and viewport layout", asyn
     await page.setViewportSize({ width, height }); await bounded(page); await shot(page, "location-sdk-fixture-" + width);
   }
 });
-test("GPS denial allows manual point; late first-party address cannot overwrite user edits", async ({ page }) => {
+test("GPS denial allows manual point; late first-party address cannot overwrite user edits", async ({ page }, info) => {
   await configureMap(page, "api");
   await page.addInitScript(() => { navigator.geolocation.getCurrentPosition = (_ok, fail) => fail?.({ code: 1, message: "", PERMISSION_DENIED: 1, POSITION_UNAVAILABLE: 2, TIMEOUT: 3 }); });
   let finish!: () => void;
@@ -101,7 +101,8 @@ test("GPS denial allows manual point; late first-party address cannot overwrite 
   await enter(page); await expect(page.locator(".leaflet-container")).toBeVisible();
   await page.getByRole("button", { name: "بازگشت به موقعیت من" }).click();
   await expect(page.locator(".neshan-location-error")).toContainText("اجازه دسترسی");
-  await page.locator(".neshan-map-canvas").tap({ position: { x: 180, y: 190 } });
+  if (info.project.use.hasTouch) await page.locator(".neshan-map-canvas").tap({ position: { x: 180, y: 190 } });
+  else await page.locator(".neshan-map-canvas").click({ position: { x: 180, y: 190 } });
   await expect.poll(() => Boolean(finish)).toBe(true);
   await page.getByRole("textbox", { name: "آدرس موقعیت خودرو" }).fill("آدرس اصلاح‌شده توسط کاربر"); finish();
   await expect(page.getByRole("textbox", { name: "آدرس موقعیت خودرو" })).toHaveValue("آدرس اصلاح‌شده توسط کاربر");

@@ -33,7 +33,10 @@ test("Phase 01 flows through readiness and consent, without permissions or backe
   await verifyReferral(page);
   await expect(page.getByRole("heading", { name: "قبل از شروع، آماده‌اید؟" })).toBeVisible();
   await expect(page.locator(".readiness-requirements li")).toHaveCount(4);
-  await expect(page.locator('.device-diagnostics li[data-status="ready"]')).toHaveCount(3);
+  await expect(page.locator(".device-diagnostics li")).toHaveCount(4);
+  await expect(page.locator('.device-diagnostics li[data-status="checking"]')).toHaveCount(0);
+  await expect(page.locator(".device-diagnostics")).toContainText("ضبط ویدیوی ۳۶۰ درجه");
+  await expect(page.locator(".device-diagnostics li").filter({hasText:"موقعیت مکانی"})).not.toHaveAttribute("data-status","ready");
   await noOverflow(page);
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await expect(page).toHaveURL(/\/consent$/);
@@ -55,7 +58,7 @@ test("Phase 01 flows through readiness and consent, without permissions or backe
   await noOverflow(page);
   await button.click();
   await expect(page).toHaveURL(/\/inspection\/insp_demo\/location$/);
-  await expect(page.getByRole("heading", { name: "آدرس شناسایی‌شده" })).toBeVisible();
+  await expect(page.getByLabel("آدرس موقعیت خودرو", { exact: true })).toBeVisible();
   await expect(page.locator("a[href*='/capture']")).toHaveCount(0);
   expect(await page.evaluate(() => (window as Window & { permissionCalls?: string[] }).permissionCalls)).toEqual([]);
   expect(errors).toEqual([]);
@@ -102,7 +105,7 @@ test("preparation remains usable at 320, 390 and 480px without horizontal overfl
     await noOverflow(page);
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "تأیید و ادامه" }).click();
-    await expect(page.getByRole("heading", { name: "آدرس شناسایی‌شده" })).toBeVisible();
+    await expect(page.getByLabel("آدرس موقعیت خودرو", { exact: true })).toBeVisible();
     await page.goto("/readiness");
     await noOverflow(page);
     await expect(page.getByRole("button", { name: "همه چیز آماده است" })).toBeEnabled();

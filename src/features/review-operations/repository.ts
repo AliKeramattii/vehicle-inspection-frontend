@@ -34,10 +34,17 @@ export class ReviewRepository{
  /** Durable decisions act as an outbox; request creation is idempotent and can be retried after interruption. */
  async flushRequest(record:ReviewCase){
   if(record.demo)return;
-  const rejected=record.decisions.filter(d=>d.decision==="rejected"&&!d.requestId);if(!rejected.length)return;
   const previous=await this.requests.list(record.id);
+  // A request may have committed before its acknowledgement/link was interrupted.
+  // Reconcile exact decision identities before creating a later round.
+  const links=record.decisions.filter(d=>d.decision==="rejected"&&!d.requestId).flatMap(d=>{
+   const request=previous.find(r=>r.originalNamespace===record.summary.namespace&&r.items.some(i=>i.id===d.id&&i.originalEvidenceId===d.evidenceId&&(i.kind==="photo"?i.requirementId:i.kind)===d.requirementId));
+   return request?[{decisionId:d.id,requestId:request.id}]:[];
+  });
+  if(links.length)await this.persistence.transact(w=>{const saved=w.cases.find(c=>c.id===record.id)!;for(const link of links){const decision=saved.decisions.find(d=>d.id===link.decisionId);if(decision&&!decision.requestId)decision.requestId=link.requestId;}});
+  const rejected=record.decisions.filter(d=>d.decision==="rejected"&&!d.requestId&&!links.some(l=>l.decisionId===d.id));if(!rejected.length)return;
   const active=previous.find(requestActive);
-  const bytes=new TextEncoder().encode(JSON.stringify([record.id,...rejected.map(d=>d.revision)]));
+  const bytes=new TextEncoder().encode(JSON.stringify([record.id,...rejected.map(d=>d.id)]));
   const id="review-request-"+btoa(Array.from(bytes,b=>String.fromCharCode(b)).join("")).replaceAll("+","-").replaceAll("/","_").replace(/=+$/,"");
   if(active&&active.id!==id)return;
   const request:EvidenceRequest={id,inspectionId:record.id,version:1,round:Math.max(0,...previous.map(r=>r.round))+1,requestedAt:rejected[0].at,template:record.template,originalNamespace:record.summary.namespace,status:"requested",attemptCount:0,items:rejected.map(d=>d.requirementId==="video-360"?{id:d.id,kind:"video-360",reviewerReason:d.reason!,originalEvidenceId:d.evidenceId}:{id:d.id,kind:"photo",requirementId:d.requirementId,reviewerReason:d.reason!,originalEvidenceId:d.evidenceId})};

@@ -33,7 +33,7 @@ Mock development values:
 - Inspection: `insp_demo`; a draft with sample vehicle, no location, and no evidence.
 - Capture plan: production mock uses the configurable seven-section/twelve-photo template. The exported two-slot bootstrap fixture remains only for foundation tests.
 
-Mock OTP challenges expire after two minutes, allow three incorrect attempts, and are consumed
+Mock OTP challenges expire after two minutes, allow five incorrect attempts, and are consumed
 on successful verification. The factory defaults to a 60-second resend window; phase 01's customer
 provider configures 120 seconds to match the reference countdown. The mock enforces this window.
 SMS delivery, durable sessions, and production authentication remain backend responsibilities.
@@ -59,7 +59,7 @@ Repository errors expose stable codes; Zod rejects malformed input or fixture da
 Frontend-required challenge metadata (a requested future API shape, not a finalized response):
 
 ```json
-{ "expiresAt": "2026-10-04T00:02:00Z", "retryAfterSeconds": 120, "remainingAttempts": 3 }
+{ "expiresAt": "2026-10-04T00:02:00Z", "retryAfterSeconds": 120, "remainingAttempts": 5 }
 ```
 
 Failed verification must expose `remainingAttempts`; early resend must expose `retryAfterSeconds`.
@@ -237,7 +237,7 @@ Backend agreement on this atomic request remains pending; no extra endpoint is a
 
 The mock requires previously saved location, validates semantic plate values, returns cloned
 receipts and keeps per-instance confirmation/plate state. Query owns reads and save results;
-local forms own only editing drafts. Refresh resets auth/consent/location/confirmation. Authentication,
+local forms own only editing drafts. Refresh resets transient auth/consent; confirmed location and vehicle facts persist in IndexedDB. Authentication,
 owner authorization and durable records remain production backend responsibilities. Distinguish
 400/422 plate/discrepancy errors, 401/403, 404 missing vehicle, 409 missing location/stale data,
 429, server/network/timeout failures. No real ASP.NET requests are enabled.

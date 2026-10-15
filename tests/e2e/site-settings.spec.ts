@@ -15,7 +15,7 @@ test("two brokerage deployments load their own identity, colors, image and confi
     const errors:string[]=[];tab.on("pageerror",e=>errors.push(e.message));
     const urls:string[]=[];tab.on("request",r=>{if(r.url().includes("/public/site-settings"))urls.push(r.url());});
     await brokerage(tab,id);await tab.goto(info.project.use.baseURL! as string);
-    await expect(tab.locator(".entry-partner")).toContainText(id==="broker-a"?"کارگزاری آبی":"کارگزاری سبز");
+    await expect(tab.locator(".entry-branding .brokerage-mark")).toContainText(id==="broker-a"?"کارگزاری آبی":"کارگزاری سبز");
     expect(new URL((await tab.locator(".landing-art img").getAttribute("src"))!,tab.url()).pathname).toBe(brokerageFixture(id).images.landing);
     expect(await tab.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue("--brand-primary"))).toBe(id==="broker-a"?"#2563EB":"#047857");
     expect(urls).toContain(id==="broker-a"?(info.project.use.baseURL as string)+"/api/public/site-settings":"https://api.broker-b.example/api/public/site-settings");
@@ -29,11 +29,11 @@ test("configuration failure never falls back to another brokerage and retry reco
   await page.route("**/api/public/site-settings",r=>r.fulfill({json:brokerageFixture(broken?"broker-a":"broker-b")}));
   await page.goto("/");await expect(page.getByRole("heading",{name:"تنظیمات سایت بارگذاری نشد"})).toBeVisible();
   await expect(page.locator(".landing-screen")).toHaveCount(0);broken=false;await page.getByRole("button",{name:"تلاش مجدد"}).click();
-  await expect(page.locator(".entry-partner")).toContainText("کارگزاری سبز");
+  await expect(page.locator(".entry-branding .brokerage-mark")).toContainText("کارگزاری سبز");
 });
 test("a changed tenant on an existing origin is blocked without deleting durable data",async({page},info)=>{
   test.skip(info.project.name!=="customer");await brokerage(page,"broker-a");await page.goto("/");
-  await expect(page.locator(".entry-partner")).toContainText("کارگزاری آبی");
+  await expect(page.locator(".entry-branding .brokerage-mark")).toContainText("کارگزاری آبی");
   await page.evaluate(()=>new Promise<void>((resolve,reject)=>{
     const open=indexedDB.open("inspection-photos",1);
     open.onupgradeneeded=()=>{if(!open.result.objectStoreNames.contains("photos"))open.result.createObjectStore("photos",{keyPath:"key"});};
@@ -68,7 +68,7 @@ for(const viewport of [{width:360,height:800},{width:390,height:844},{width:430,
 });
 test("Site Settings save, preview, publication and reset survive refresh",async({page},info)=>{
   test.skip(info.project.name!=="desktop");await page.goto("/admin/branding");
-  await page.getByRole("link",{name:"تنظیمات سایت",exact:true}).click();await expect(page.getByRole("heading",{name:"تنظیمات سایت",exact:true})).toBeVisible();
+  await page.locator(".admin-main").getByRole("link",{name:"تنظیمات سایت",exact:true}).click();await expect(page.getByRole("heading",{name:"تنظیمات سایت",exact:true})).toBeVisible();
   await page.getByRole("tab",{name:"تنظیمات عمومی",exact:true}).click();
   await page.getByLabel("نمایش پشتیبانی").uncheck();
   await page.getByRole("tab",{name:"هویت کارگزاری",exact:true}).click();
@@ -79,7 +79,7 @@ test("Site Settings save, preview, publication and reset survive refresh",async(
   await expect(page.getByLabel("نام کارگزاری",{exact:true})).toHaveValue("کارگزاری نمونه جدید");
   await page.getByRole("button",{name:"انتشار تنظیمات",exact:true}).click();await page.getByRole("button",{name:"تأیید انتشار",exact:true}).click();
   await expect(page.getByText("نسخه منتشرشده ۲",{exact:true})).toBeVisible();
-  await page.goto("/");await expect(page.locator(".entry-partner")).toContainText("کارگزاری نمونه جدید");await expect(page.locator("#support")).toHaveCount(0);
+  await page.goto("/");await expect(page.locator(".entry-branding .brokerage-mark")).toContainText("کارگزاری نمونه جدید");await expect(page.locator("#support")).toHaveCount(0);
   await page.goto("/admin/site-settings");await page.getByLabel("نام کارگزاری",{exact:true}).fill("پیش‌نویس دیگری");await page.getByRole("button",{name:"ذخیره پیش‌نویس",exact:true}).click();
   await page.getByRole("button",{name:"بازگردانی پیش‌نویس"}).click();await expect(page.getByLabel("نام کارگزاری",{exact:true})).toHaveValue("کارگزاری نمونه جدید");
 });
@@ -101,7 +101,7 @@ test("runtime title and favicon survive late route metadata",async({page},info)=
   const settings=brokerageFixture("broker-a");settings.identity.favicon="/icons/security/shield.svg";
   await page.route("**/api/public/site-settings",r=>r.fulfill({json:settings}));
   await page.goto("/");
-  await expect(page.locator(".entry-partner")).toContainText("کارگزاری آبی");
+  await expect(page.locator(".entry-branding .brokerage-mark")).toContainText("کارگزاری آبی");
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href","/icons/security/shield.svg");
   await page.evaluate(()=>{document.title="Route metadata";document.querySelector<HTMLLinkElement>('link[rel="icon"]')!.href="/favicon.ico";});
   await expect(page).toHaveTitle(settings.identity.appTitle);

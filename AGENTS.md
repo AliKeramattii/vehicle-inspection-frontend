@@ -240,6 +240,11 @@ Do not create a plan for trivial one-file changes.
 
 ## Git behavior
 
+The permanent active development worktree is `C:/Projects/vehicle-inspection-integrated`, branch
+`feat/unified-ui-admin-3d`. Integrate approved feature branches there, preferring a verified
+fast-forward. Do not create another worktree for each phase. Inspect and preserve local changes;
+never assume a clean tree, auto-stash/reset, delete historical worktrees, or merge main automatically.
+
 - Do not rewrite existing history.
 - Prefer focused commits when explicitly asked to commit.
 - Do not commit generated secrets or `.env.local`.
