@@ -18,6 +18,14 @@ describe("readiness requirements", () => {
   });
 });
 describe("capability boundary", () => {
+  it("keeps four quiet preparation items without repeated ready badges",async()=>{
+    const {container}=render(<DeviceReadiness service={createMockCapabilityService()}/>);
+    await waitFor(()=>expect(screen.getByRole("button",{name:"همه چیز آماده است"})).toBeEnabled());
+    expect(container.querySelectorAll(".device-diagnostics li")).toHaveLength(4);
+    expect(container.querySelector(".capability-status")).toBeNull();
+    expect(screen.queryByText("آماده",{exact:true})).not.toBeInTheDocument();
+    expect(screen.getByRole("heading",{name:"ضبط ویدیوی ۳۶۰ درجه"})).toBeVisible();
+  });
   it.each<CapabilityStatus>(["checking", "ready", "unavailable", "permission-required", "unsupported"])("handles %s without losing required diagnostic rows", async (status) => {
     const service = createMockCapabilityService({ camera: status });
     const results = await service.check(new AbortController().signal);
@@ -51,7 +59,7 @@ describe("capability boundary", () => {
     const service = createMockCapabilityService({ camera: "unavailable", location: "permission-required", webgl: "unsupported" });
     render(<DeviceReadiness service={service} />);
     expect(await screen.findByText("در دسترس نیست")).toBeVisible();
-    expect(screen.getByText("نیاز به اجازه")).toBeVisible();
+    expect(screen.getByRole("heading",{name:"موقعیت مکانی"}).closest("li")).toHaveAttribute("data-status","permission-required");
     expect(screen.queryByText("نمایش سه‌بعدی")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "همه چیز آماده است" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "بررسی دوباره" })).toBeEnabled();

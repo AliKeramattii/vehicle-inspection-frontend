@@ -5,8 +5,10 @@ import { contrast } from "@/config/site-settings.schema";
 import { useOptionalRuntimeSite } from "@/config/site-settings.provider";
 export type AdminThemePreference = "light" | "dark" | "system";
 const key = "inspection-admin-theme";
+let transientPreference: AdminThemePreference | undefined;
 let fallback: AdminThemePreference = "system";
 export function readAdminTheme(): AdminThemePreference {
+  if (transientPreference) return transientPreference;
   try { const value = localStorage.getItem(key); return value === "dark" || value === "light" ? value : "system"; }
   catch { return fallback; }
 }
@@ -20,12 +22,13 @@ function subscribe(callback: () => void) {
 }
 export function setAdminTheme(value: AdminThemePreference) {
   fallback = value; let persisted = true;
-  try { localStorage.setItem(key, value); } catch { persisted = false; }
+  try { localStorage.setItem(key, value); transientPreference = undefined; } catch { persisted = false; transientPreference = value; }
   apply(); window.dispatchEvent(new Event("admin-theme-change")); return persisted;
 }
 /** Keep configured primary hue, lightening only operations text accents to achieve AA. */
 export function readableAdminAccent(primary: string, dark: boolean) {
-  const surface = dark ? "#172234" : "#FFFFFF";
+  // Selected navigation is the least-contrasting operations surface.
+  const surface = dark ? "#203C66" : "#E8F0FF";
   if (contrast(primary, surface) >= 4.5) return primary;
   const rgb = [1, 3, 5].map(start => parseInt(primary.slice(start, start + 2), 16)), target = dark ? 255 : 0;
   for (let step = 1; step <= 20; step++) {
@@ -45,9 +48,14 @@ export function AdminThemeScope({ children }: { children: ReactNode }) {
 }
 export function AdminThemeControl() {
   const { preference, dark } = useContext(Theme), [error, setError] = useState(false);
-  const Glyph = preference === "system" ? Monitor : dark ? Moon : Sun;
-  return <div className="admin-theme-control"><label><Glyph size={19} aria-hidden="true" /><span>پوسته مدیریت</span>
-    <select aria-label="پوسته مدیریت" value={preference} onChange={e => setError(!setAdminTheme(e.target.value as AdminThemePreference))}>
-      <option value="light">روشن</option><option value="dark">تیره</option><option value="system">مطابق دستگاه</option>
-    </select></label>{error && <small role="status">ذخیره پوسته ممکن نشد؛ انتخاب فقط در این صفحه اعمال می‌شود.</small>}</div>;
+  const change = (value: AdminThemePreference) => setError(!setAdminTheme(value));
+  return <div className="admin-theme-control">
+    <div className="admin-theme-actions">
+      <button type="button" role="switch" aria-label="پوسته تیره" aria-checked={dark} aria-describedby="admin-theme-mode" className="theme-toggle" data-dark={dark} onClick={() => change(dark ? "light" : "dark")}>
+        <span className="theme-toggle-track" aria-hidden="true"><Sun size={18} className="theme-sun"/><Moon size={18} className="theme-moon"/><span className="theme-toggle-thumb"/></span>
+      </button>
+      <button type="button" className="theme-system" aria-label="استفاده از پوسته دستگاه" aria-pressed={preference === "system"} onClick={() => change("system")}><Monitor size={16} aria-hidden="true"/><span id="admin-theme-mode">{preference === "system" ? "مطابق دستگاه" : dark ? "تیره" : "روشن"}</span></button>
+    </div>
+    {error && <small role="status">ذخیره پوسته ممکن نشد؛ انتخاب فقط در این صفحه اعمال می‌شود.</small>}
+  </div>;
 }

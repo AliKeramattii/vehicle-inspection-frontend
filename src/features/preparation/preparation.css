@@ -28,11 +28,6 @@
 .device-diagnostics li { min-height: 35px; display: flex; align-items: center; gap: 7px; background: var(--color-surface); border: 1px solid #e8f0fa; border-radius: 10px; padding: 4px 8px; }
 .device-diagnostics li > span:first-child { color: var(--color-primary); }
 .device-diagnostics li > span:nth-child(2) { font-size: 12px; white-space: nowrap; flex: 1; }
-.capability-status { display: flex; align-items: center; justify-content: center; gap: 3px; flex-shrink: 0; min-width: 25px; min-height: 25px; background: #e0f7ee; border-radius: 50%; color: var(--color-success); }
-.device-diagnostics li:not([data-status="ready"]) { flex-wrap: wrap; }
-.device-diagnostics li:not([data-status="ready"]) .capability-status { background: #fff7ed; border-radius: 6px; color: #92400e; }
-.device-diagnostics li[data-status="checking"] .capability-status { color: var(--color-muted); background: #f1f5f9; }
-.capability-status-label { font-size: 10px; line-height: 16px; }
 .capability-help { font-size: 12px; line-height: 22px; color: var(--color-muted); padding-block: 10px; }
 .capability-help button { margin-top: 6px; }
 .preparation-screen .preparation-actions { background: #f7fbff; border-top: 0; padding: 10px 14px max(14px, env(safe-area-inset-bottom, 0px)); }
@@ -105,9 +100,23 @@
 
 /* Four diagnostics share one stable two-column layout, including longer video copy. */
 .readiness-screen .device-diagnostics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.readiness-screen .device-diagnostics li{display:grid;grid-template-columns:24px minmax(0,1fr);grid-template-rows:minmax(36px,auto) 22px;column-gap:7px;row-gap:2px;min-width:0;min-height:76px;padding:8px}
+.readiness-screen .device-diagnostics li{display:grid;grid-template-columns:24px minmax(0,1fr);grid-template-rows:auto;column-gap:7px;row-gap:2px;min-width:0;min-height:76px;padding:8px}
 .readiness-screen .device-diagnostics li>:first-child{grid-column:1;grid-row:1;justify-self:center}
-.readiness-screen .device-diagnostics li>span:nth-child(2){grid-column:2;grid-row:1;font-size:12px;line-height:1.7}
-.readiness-screen .device-diagnostics .capability-status{grid-column:2;grid-row:2;justify-self:start;display:flex;gap:4px;align-items:center}
-.readiness-screen .device-diagnostics .capability-status-label{font-size:10px;line-height:1.5}
-.readiness-screen .device-diagnostics .capability-status .icon{width:18px!important;height:18px!important}
+.readiness-screen .device-diagnostics .capability-copy{grid-column:2;grid-row:1}
+
+/* Four quiet preparation rows; successful capability checks need no repeated badge. */
+.device-diagnostics{gap:0 16px;margin-top:8px}
+.device-diagnostics li{align-items:flex-start;min-height:76px;padding:10px 0;background:transparent;border:0;border-bottom:1px solid var(--color-border);border-radius:0;flex-wrap:nowrap}
+.device-diagnostics li>img,.device-diagnostics li>span{margin-top:3px;flex:none;color:var(--color-primary)}
+.capability-copy{min-width:0}
+.capability-copy h3{font-size:12px;font-weight:700;line-height:1.65}
+.capability-copy p{font-size:11px;line-height:1.7;color:var(--color-muted);margin-top:2px}
+.capability-copy .capability-feedback{font-size:11px;color:#92400e}
+.capability-copy .capability-feedback[data-status=unknown]{color:var(--color-muted)}
+.capability-checking{font-size:12px;color:var(--color-muted);padding-block:6px}
+
+/* The existing main scroller owns long preparation content; never flex-collapse the hero. */
+.customer-viewport>.readiness-screen{display:block}
+.readiness-screen .readiness-hero{height:176px;min-height:176px}
+
+.customer-viewport>.readiness-screen{scroll-padding-block-end:88px}

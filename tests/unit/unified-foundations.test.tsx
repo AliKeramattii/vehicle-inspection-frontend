@@ -46,7 +46,7 @@ describe("unified readiness and operations foundations", () => {
   });
   it("persists Admin preference and derives readable brand accents for both modes", () => {
     setAdminTheme("dark"); expect(readAdminTheme()).toBe("dark");
-    for (const dark of [true, false]) expect(contrast(readableAdminAccent("#2563EB", dark), dark ? "#172234" : "#FFFFFF")).toBeGreaterThanOrEqual(4.5);
+    for (const primary of ["#2563EB", "#047857", "#FFFFFF"]) for (const dark of [true, false]) for (const surface of dark ? ["#172234", "#202D42", "#203C66"] : ["#FFFFFF", "#F1F5F9", "#E8F0FF"]) expect(contrast(readableAdminAccent(primary, dark), surface)).toBeGreaterThanOrEqual(4.5);
     setAdminTheme("light"); expect(readAdminTheme()).toBe("light");
   });
   it("ordinary customer journey headers do not reveal the internal inspection reference", () => {
