@@ -41,7 +41,7 @@ Unit mapping/durability invariants and asset metadata tests; explicit browser as
 - [x] Asset inventory and explicit registry.
 - [x] Runtime asset mappings and compatibility.
 - [x] Visually reviewed 67 comparison screenshots/contact sheets; four focused scenarios pass. Final production functional selection: 177 passed/99 skipped, exit 0. Lint/typecheck/383 units/build exit 0. Historical baselines unchanged.
-- [ ] Asset docs, commit/push/remote verification.
+- [x] Asset docs and implementation 2531bc47985f56a3672623be59cd358314de6c80 committed/pushed normally; remote HEAD verified.
 
 ## Validation command and discoveries
 

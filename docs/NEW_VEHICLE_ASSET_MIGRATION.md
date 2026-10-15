@@ -61,3 +61,7 @@ The separate historical approximately 4,010-pixel readiness mismatch and unrelat
 ## Final preservation audit
 
 Route URLs, form field names, navigation labels, anchors, logos, partner identity, legal copy, fonts and brand tokens: unchanged. Only the approved asset URLs, image alt text and generic new-demo make/model label changed. Existing AppViewport/internal scroll architecture and controls-below-image layout are preserved. No stylistic em dash was introduced in customer copy. No canonical PNG/baseline, optional 3D file, GLB, backend contract or local credential is part of this migration. All 151 historical file hashes still match; prior deleted-file/directory entries remain unchanged.
+
+## Git delivery
+
+Implementation: 2531bc47985f56a3672623be59cd358314de6c80, feat: consolidate supplied sedan vehicle imagery. Pushed normally to origin/feat/unified-ui-admin-3d; remote HEAD matched. Prior functional audit checkpoint: e41df970dd425629c4c56f943715c99c72d7a236. No main merge, force push, source worktree cleanup or model publication. A final documentation commit records this validation. Standard Windows CRLF and Playwright NO_COLOR/FORCE_COLOR notices were non-blocking; no application console/page/resource failures remained in the successful asset scenarios.
