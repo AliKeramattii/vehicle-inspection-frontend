@@ -165,3 +165,9 @@ Controls stay below the vehicle. Guidance uses consistent Lucide topic icons and
 
 ## Unified customization scope
 Admin/reviewer theme uses scoped semantic surface/ink/border/status variables and persistent light/dark/system preference independent of customer branding. Existing Lucide family retained. RecorderV2 follows supplied light-shell/dark-live-stage reference. AppViewport, Vazirmatn and physical direction semantics preserved.
+
+
+## Premium refinement (2026-10-15)
+PRESERVE retains RTL, Vazirmatn, configured primary and the existing Lucide/custom icon family. Additive app spacing roles in product-tokens.css are 4/8/12/16/20/24/32; controls 10, inputs 12, cards 16, sheets 24; target 44/action 48. Operations retain scoped light/dark surfaces and status colors.
+ApplicationLogo renders the approved unchanged multicolor SVG, proportionally cropping only transparent viewBox margins. RuntimeLogo remains brokerage identity. The sun/moon control uses a 0.22s CSS state transition, disabled by reduced-motion, with a separate system action. Customer remains light and camera remains intentionally dark.
+Readiness has four quiet icon/title/explanation items and no repeated ready badge. Genuine failures, unsupported features and storage uncertainty retain text/recovery; no automatic camera/GPS permission. Reviewer uses current-revision counts, visible-only durable thumbnails and full contain evidence. Upload completion and reviewer approval remain separate. Admin navigation groups existing routes and settings exposes local draft/publication/history. No new framework, production server dependency, fake quality result or customer review checklist.

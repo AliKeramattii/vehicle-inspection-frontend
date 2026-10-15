@@ -5,11 +5,13 @@ test("eight local image slots publish and recover after refresh; theme and autho
   const errors: string[] = []; page.on("pageerror", e => errors.push(e.message));
   await mkdir(folder, { recursive: true }); await page.goto("/admin/site-settings");
   await expect(page.getByRole("heading", { name: "تنظیمات سایت", exact: true })).toBeVisible();
-  await expect(page.locator(".admin-mobile-nav").getByRole("link", { name: "تنظیمات سایت" })).toBeVisible();
-  await expect(page.getByLabel("انتخاب فایل لوگوی برنامه و کارگزاری")).toHaveCount(1);
+  await page.getByRole("button", {name:"باز کردن منوی مدیریت"}).click();
+  await expect(page.getByRole("dialog").getByRole("link", { name: "تنظیمات سایت" })).toBeVisible();
+  await page.getByRole("dialog").getByRole("button",{name:"بستن",exact:true}).click();
+  await expect(page.getByLabel("انتخاب فایل لوگوی کارگزاری")).toHaveCount(1);
   await expect(page.getByLabel("انتخاب فایل فاویکن")).toHaveCount(1);
-  await page.getByLabel("انتخاب فایل لوگوی برنامه و کارگزاری").setInputFiles("public/images/auth/landing-suv.png");
-  await expect(page.getByLabel("نشانی لوگوی برنامه و کارگزاری")).toHaveValue(/\/__local-branding\/demo\//);
+  await page.getByLabel("انتخاب فایل لوگوی کارگزاری").setInputFiles("public/images/auth/landing-suv.png");
+  await expect(page.getByLabel("نشانی لوگوی کارگزاری")).toHaveValue(/\/__local-branding\/demo\//);
   const icon = Buffer.from(await page.evaluate(() => { const canvas = document.createElement("canvas"); canvas.width = canvas.height = 32; canvas.getContext("2d")!.fillRect(0,0,32,32); return canvas.toDataURL("image/png").split(",")[1]; }), "base64");
   await page.getByLabel("انتخاب فایل فاویکن").setInputFiles({ name: "favicon.png", mimeType: "image/png", buffer: icon });
   await expect(page.getByLabel("نشانی فاویکن")).toHaveValue(/\/__local-branding\/demo\//);
@@ -27,10 +29,10 @@ test("eight local image slots publish and recover after refresh; theme and autho
   await page.getByRole("button", { name: "تأیید انتشار", exact: true }).click();
   await expect(page.getByText("تنظیمات نمونه منتشر شد.")).toBeVisible();
   await expect(page.locator(".runtime-logo")).toHaveAttribute("src", /^blob:/);
-  await page.getByLabel("پوسته مدیریت").selectOption("dark");
+  await page.getByRole("switch", { name: "پوسته تیره" }).check();
   await expect(page.locator("html")).toHaveAttribute("data-admin-theme", "dark");
   await page.reload();
-  await expect(page.getByLabel("پوسته مدیریت")).toHaveValue("dark");
+  await expect(page.getByRole("switch", {name:"پوسته تیره"})).toBeChecked();
   await expect(page.locator(".runtime-logo")).toHaveAttribute("src", /^blob:/);
   await page.getByRole("tab", { name: "تصاویر", exact: true }).click();
   const references: string[] = [];
@@ -70,7 +72,7 @@ test("published local receipt illustration survives submission and refresh", asy
   await expect(page.getByRole("heading", { name: "بازدید با موفقیت ارسال شد" })).toBeVisible();
 });
 test("dark theme covers Admin routes, dialogs, tables and assigned reviewer workspace", async ({ page }) => {
-  await page.setViewportSize({width:1440,height:960}); await page.goto("/admin"); await page.getByLabel("پوسته مدیریت").selectOption("dark");
+  await page.setViewportSize({width:1440,height:960}); await page.goto("/admin"); await page.getByRole("switch", { name: "پوسته تیره" }).check();
   for (const route of ["/admin","/admin/templates","/admin/templates/body-image-guided","/admin/branding","/admin/policies","/admin/webhooks","/admin/assignments","/admin/users","/admin/permissions"]) {
     await page.goto(route); await expect(page.locator("html")).toHaveAttribute("data-admin-theme","dark");
     await expect(page.locator(".admin-root")).toHaveCSS("background-color","rgb(15, 23, 42)");
