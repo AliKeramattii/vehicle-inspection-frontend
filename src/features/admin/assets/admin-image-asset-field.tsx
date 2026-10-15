@@ -13,8 +13,8 @@ import { BrandingAssetRepository, type LocalBrandingAsset } from "./asset-reposi
 import { useBrandingAsset } from "./use-branding-asset";
 export type ImageSettingPath = "identity.logo" | "identity.favicon" | "images.landing" | "images.referral" | "images.otp" | "images.readiness" | "images.consent" | "images.submission";
 export const imageSlots: readonly { name: ImageSettingPath; label: string; fallback: string }[] = [
-  { name: "identity.logo", label: "لوگوی برنامه و کارگزاری", fallback: "/icons/admin/partner.svg" },
-  { name: "identity.favicon", label: "فاویکن", fallback: "/favicon.ico" },
+  { name: "identity.logo", label: "لوگوی کارگزاری", fallback: "/icons/admin/partner.svg" },
+  { name: "identity.favicon", label: "فاویکن", fallback: "/brand/application-logo.svg" },
   { name: "images.landing", label: "تصویر شروع", fallback: brandingAssets.landing.src },
   { name: "images.referral", label: "تصویر معرفی", fallback: brandingAssets.referral.src },
   { name: "images.otp", label: "تصویر تأیید موبایل", fallback: brandingAssets.otp.src },

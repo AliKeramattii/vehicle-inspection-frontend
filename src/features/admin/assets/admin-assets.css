@@ -6,3 +6,5 @@
 .admin-asset-actions { display:flex; flex-wrap:wrap; gap:8px; } .admin-asset-actions button { min-height:44px; padding-inline:12px; font-size:12px; }
 .admin-image-asset-field > p { font-size:11px; line-height:1.8; } .admin-asset-feedback { min-height:18px; font-size:11px; color:var(--admin-muted); }
 .admin-image-asset-field > .admin-field-error { color:var(--admin-error-ink); }
+
+.admin-asset-heading{align-items:flex-start}.admin-asset-heading>span{padding:3px 7px;border-radius:6px;background:var(--admin-soft);white-space:nowrap}.admin-asset-preview{min-height:140px}.admin-asset-preview img{height:140px;width:100%;padding:12px}.admin-image-asset-field .admin-asset-local{color:var(--admin-muted);padding-top:8px;border-top:1px solid var(--admin-border)}

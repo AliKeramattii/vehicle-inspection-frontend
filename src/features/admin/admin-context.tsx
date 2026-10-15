@@ -45,9 +45,9 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   </NativeDialog>}</Context.Provider>;
 }
 export function useAdmin() { const context = useContext(Context); if (!context) throw new Error("AdminProvider missing"); return context; }
-export function AdminLink({ href, children, className, current }: { href: string; children: ReactNode; className?: string; current?: boolean }) {
+export function AdminLink({ href, children, className, current, title }: { title?: string; href: string; children: ReactNode; className?: string; current?: boolean }) {
   const { navigate } = useAdmin();
-  return <Link href={href} className={className} aria-current={current ? "page" : undefined} onClick={e => {
+  return <Link href={href} title={title} className={className} aria-current={current ? "page" : undefined} onClick={e => {
     if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) { e.preventDefault(); navigate(href); }
   }}>{children}</Link>;
 }

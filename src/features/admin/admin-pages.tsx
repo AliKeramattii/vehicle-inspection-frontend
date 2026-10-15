@@ -11,12 +11,13 @@ import { PrimaryButton } from "@/components/ui/button";
 import { TextInput } from "@/components/ui/text-input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { InlineAlert } from "@/components/ui/status";
+import { OperationalSnapshot } from "./operational-snapshot";
 import { Icon } from "@/components/ui/icon";
 export function AdminOverview() {
   const { workspace } = useAdmin();
   const counts = [{ title: "قالب‌های بازدید", value: workspace?.templates.length ?? 0 }, { title: "نسخه‌های منتشرشده", value: workspace?.templates.flatMap(t => t.versions).filter(v => v.state === "published").length ?? 0 }, { title: "پیش‌نویس‌ها", value: workspace?.templates.flatMap(t => t.versions).filter(v => v.state === "draft").length ?? 0 }, { title: "کاربران نمونه", value: workspace?.users.length ?? 0 }];
   return <WorkspaceState><div className="admin-page-scroll"><AdminPageHeading title="داشبورد" description="نمای کلی تنظیمات و فعالیت‌های محیط نمونه" action={<AdminLink href="/admin/templates" className="admin-primary-link">مدیریت قالب بازدید</AdminLink>} />
-    <div className="admin-metrics">{counts.map(c => <section key={c.title}><p>{c.title}</p><strong>{persian(c.value)}</strong></section>)}</div>
+    <OperationalSnapshot/><div className="admin-metrics" aria-label="پیکربندی محیط نمونه">{counts.map(c => <section key={c.title}><p>{c.title}</p><strong>{persian(c.value)}</strong></section>)}</div>
     <div className="admin-overview-grid"><section className="admin-panel admin-panel-padding"><h2>فعالیت‌های اخیر</h2><ul className="admin-audit-list">{workspace?.audit.slice(0,8).map(a => <li key={a.id}><strong>{a.action}</strong><span>{a.actor} · {adminDate(a.at)}</span><bdi className="admin-technical">{a.resource}</bdi></li>)}</ul></section>
       <section className="admin-panel admin-panel-padding"><h2>بازدید تصویرمحور</h2><p>قالب پایه شامل هفت بخش و دوازده تصویر است. کیلومتر دستی و ویدیوی ۳۶۰ درجه به‌صورت مستقل تعریف شده‌اند.</p><p>انتشار نسخه جدید، بازدیدهای ثبت‌شده یا درخواست‌های شواهد تکمیلی را تغییر نمی‌دهد.</p><AdminLink href="/admin/templates/body-image-guided" className="admin-text-action">مشاهده قالب پایه</AdminLink></section></div>
     <InlineAlert>این آمار از مخزن محلی نمونه محاسبه می‌شود؛ آمار تولید یا بازدیدهای واقعی نیست.</InlineAlert>
