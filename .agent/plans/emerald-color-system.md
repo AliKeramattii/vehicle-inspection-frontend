@@ -39,7 +39,7 @@ Exact 69-primitives comparison, semantic tokens, default/tenant separation, ligh
 - [x] Before screenshots and detailed semantic audit (56 screenshots; 611 literal occurrences reviewed).
 - [x] Token/runtime/feature color integration; exact LAB primitives and HEX-only settings compatibility retained.
 - [x] Contrast/visual validation: 63 after screenshots, 1,472 visible text checks, 104 semantic pairs, 7 dedicated browser tests. Lint/typecheck/392 units/build and 181 selected functional browser regressions exited 0.
-- [ ] Documentation, focused commit/push/remote verification.
+- [x] Documentation and focused implementation delivery: 0dab293 committed/pushed; remote hash verified. Validation record documents actual exits, screenshots, contrast and remaining historical debt.
 
 ## Discoveries and decisions
 - PRESERVE mode: variance 3/10, motion 2/10 and density 6/10 remain unchanged. Project palette and reference composition override generic marketing preferences.
