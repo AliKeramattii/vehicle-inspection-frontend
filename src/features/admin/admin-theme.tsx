@@ -1,7 +1,7 @@
 "use client";
+import { customPrimaryHover, defaultThemeColors, hasDefaultPrimary, readableBrandInk } from "@/config/theme-colors";
 import { createContext, useContext, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { Moon, Sun, Monitor } from "lucide-react";
-import { contrast } from "@/config/site-settings.schema";
 import { useOptionalRuntimeSite } from "@/config/site-settings.provider";
 export type AdminThemePreference = "light" | "dark" | "system";
 const key = "inspection-admin-theme";
@@ -26,24 +26,20 @@ export function setAdminTheme(value: AdminThemePreference) {
   apply(); window.dispatchEvent(new Event("admin-theme-change")); return persisted;
 }
 /** Keep configured primary hue, lightening only operations text accents to achieve AA. */
-export function readableAdminAccent(primary: string, dark: boolean) {
-  // Selected navigation is the least-contrasting operations surface.
-  const surface = dark ? "#203C66" : "#E8F0FF";
-  if (contrast(primary, surface) >= 4.5) return primary;
-  const rgb = [1, 3, 5].map(start => parseInt(primary.slice(start, start + 2), 16)), target = dark ? 255 : 0;
-  for (let step = 1; step <= 20; step++) {
-    const color = "#" + rgb.map(value => Math.round(value + (target - value) * step / 20).toString(16).padStart(2, "0")).join("");
-    if (contrast(color, surface) >= 4.5) return color;
-  }
-  return dark ? "#FFFFFF" : "#111827";
-}
+export function readableAdminAccent(primary: string, dark: boolean) { return readableBrandInk(primary,dark); }
+
 const Theme = createContext<{ preference: AdminThemePreference; dark: boolean }>({ preference: "system", dark: false });
 export function AdminThemeScope({ children }: { children: ReactNode }) {
   const value = useSyncExternalStore(subscribe, snapshot, () => "system:light"), site = useOptionalRuntimeSite();
   const [preference, mode] = value.split(":");
   useEffect(apply, [value]);
   return <Theme.Provider value={{ preference: preference as AdminThemePreference, dark: mode === "dark" }}>
-    <div className="admin-theme-scope" style={{ "--admin-accent": readableAdminAccent(site?.settings.theme.primary ?? "#2563EB", mode === "dark") } as React.CSSProperties}>{children}</div>
+    <div className="admin-theme-scope" style={{
+      "--admin-accent": hasDefaultPrimary(site?.settings.theme.primary ?? defaultThemeColors.primary) ? "var(--color-primary)" : readableAdminAccent(site?.settings.theme.primary ?? defaultThemeColors.primary, mode === "dark"),
+      "--color-primary": hasDefaultPrimary(site?.settings.theme.primary ?? defaultThemeColors.primary) ? mode === "dark" ? "var(--color-emerald-400)" : "var(--color-emerald-700)" : site?.settings.theme.primary,
+      "--color-primary-hover": hasDefaultPrimary(site?.settings.theme.primary ?? defaultThemeColors.primary) ? mode === "dark" ? "var(--color-emerald-300)" : "var(--color-emerald-800)" : customPrimaryHover(site?.settings.theme ?? defaultThemeColors),
+      "--color-on-primary": mode === "dark" && hasDefaultPrimary(site?.settings.theme.primary ?? defaultThemeColors.primary) ? "var(--color-slate-900)" : site?.settings.theme.onPrimary ?? "#ffffff",
+    } as React.CSSProperties}>{children}</div>
   </Theme.Provider>;
 }
 export function AdminThemeControl() {

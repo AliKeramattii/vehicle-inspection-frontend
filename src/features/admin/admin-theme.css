@@ -1,5 +1,16 @@
-.admin-theme-scope { display:contents; --admin-background:#F8FAFC; --admin-surface:#FFFFFF; --admin-soft:#F1F5F9; --admin-hover:#EEF4FC; --admin-selected:#E8F0FF; --admin-border:#D8E1EF; --admin-ink:#111827; --admin-muted:#64748B; --admin-heading:#172554; --admin-success-bg:#ECFDF5; --admin-success-ink:#047857; --admin-warning-bg:#FFFBEB; --admin-warning-ink:#92400E; --admin-error-bg:#FEF2F2; --admin-error-ink:#DC2626; --color-surface:var(--admin-surface); --color-ink:var(--admin-ink); --color-muted:var(--admin-muted); --color-border:var(--admin-border); --color-background:var(--admin-background); }
-html[data-admin-theme="dark"] .admin-theme-scope { color-scheme:dark; --admin-background:#0F172A; --admin-surface:#172234; --admin-soft:#202D42; --admin-hover:#26364E; --admin-selected:#203C66; --admin-border:#3C4E67; --admin-ink:#E5EDF8; --admin-muted:#A7B8CE; --admin-heading:#F0F6FF; --admin-success-bg:#123B31; --admin-success-ink:#6EE7B7; --admin-warning-bg:#40321C; --admin-warning-ink:#FCD34D; --admin-error-bg:#452A31; --admin-error-ink:#FCA5A5; }
+.admin-theme-scope { display:contents;
+ --admin-background:var(--color-slate-50); --admin-surface:#ffffff; --admin-soft:var(--color-slate-100); --admin-hover:var(--color-slate-100); --admin-selected:var(--color-sky-50); --admin-border:var(--color-slate-200); --admin-ink:var(--color-slate-900); --admin-muted:var(--color-slate-600); --admin-heading:var(--color-slate-900);
+ --admin-success-bg:var(--color-emerald-50); --admin-success-ink:var(--color-emerald-800); --admin-warning-bg:var(--color-amber-50); --admin-warning-ink:var(--color-amber-800); --admin-error-bg:var(--color-red-50); --admin-error-ink:var(--color-rose-700);
+ --color-surface:var(--admin-surface); --color-surface-soft:var(--admin-soft); --color-ink:var(--admin-ink); --color-muted:var(--admin-muted); --color-border:var(--admin-border); --color-background:var(--admin-background);
+ --color-primary-soft:color-mix(in srgb,var(--color-primary) 8%,var(--admin-surface));
+ --color-success-soft:var(--admin-success-bg); --color-success-ink:var(--admin-success-ink); --color-warning-soft:var(--admin-warning-bg); --color-warning-ink:var(--admin-warning-ink); --color-destructive-soft:var(--admin-error-bg); --color-destructive-ink:var(--admin-error-ink);
+ --admin-sidebar:var(--color-slate-900); --admin-sidebar-active:var(--brand-primary,var(--color-emerald-700));
+}
+html[data-admin-theme="dark"] .admin-theme-scope { color-scheme:dark;
+ --admin-background:var(--color-slate-900); --admin-surface:var(--color-slate-800); --admin-soft:var(--color-slate-700); --admin-hover:var(--color-slate-700); --admin-selected:var(--color-slate-700); --admin-border:var(--color-slate-700); --admin-ink:var(--color-slate-50); --admin-muted:var(--color-slate-300); --admin-heading:var(--color-slate-50);
+ --admin-success-bg:var(--color-slate-700); --admin-success-ink:var(--color-emerald-300); --admin-warning-bg:var(--color-slate-700); --admin-warning-ink:var(--color-amber-400); --admin-error-bg:var(--color-slate-700); --admin-error-ink:var(--color-rose-300);
+ --color-primary-soft:var(--color-slate-700); --color-success:var(--color-emerald-400); --color-pending:var(--color-slate-400); --color-on-status:var(--color-slate-900); --color-warning:var(--color-amber-400); --color-destructive:var(--color-rose-400); --color-information:var(--color-sky-300); --color-information-soft:var(--color-slate-700); --color-selected:var(--color-sky-300); --color-selected-soft:var(--color-slate-700); --color-accent:var(--color-amber-400); --color-accent-soft:var(--color-slate-700); --color-on-accent:var(--color-slate-900); --color-accent-ink:var(--color-amber-400); --color-focus:var(--color-teal-500); --color-map:var(--color-teal-500); --color-map-ink:var(--color-teal-200);
+}
 .admin-theme-control label { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--admin-muted); }
 .admin-root .admin-theme-control select,.reviewer-root .admin-theme-control select { width:auto; min-width:88px; min-height:44px; border:1px solid var(--admin-border); background:var(--admin-surface); color:var(--admin-ink); border-radius:8px; padding:6px; }
 .admin-theme-control small { display:block; max-width:190px; color:var(--admin-error-ink); }
@@ -27,11 +38,36 @@ html[data-admin-theme="dark"] .admin-theme-scope :is(.native-dialog,.admin-dialo
 /* Lightweight sun/moon control inspired by the supplied interaction, never a GIF. */
 .admin-theme-actions{display:flex;align-items:center;gap:4px}
 .theme-toggle{display:grid;place-items:center;width:72px;min-width:72px;min-height:44px;border-radius:24px}
-.theme-toggle-track{position:relative;display:block;width:66px;height:36px;border-radius:24px;background:#c2e5fa;transition:background .22s ease}
-.theme-toggle-thumb{position:absolute;left:3px;top:3px;width:30px;height:30px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgb(15 23 42/.18);transition:transform .22s ease}
-.theme-toggle .theme-sun{position:absolute;right:8px;top:9px;color:#486679}
-.theme-toggle .theme-moon{position:absolute;left:8px;top:9px;color:#ffe68a}
-.theme-toggle[data-dark=true] .theme-toggle-track{background:#234d78}
+.theme-toggle-track{position:relative;display:block;width:66px;height:36px;border-radius:24px;background:var(--color-surface-soft);transition:background .22s ease}
+.theme-toggle-thumb{position:absolute;left:3px;top:3px;width:30px;height:30px;border-radius:50%;background:var(--color-surface);box-shadow:0 1px 3px color-mix(in srgb, var(--color-slate-900) 18%, transparent);transition:transform .22s ease}
+.theme-toggle .theme-sun{position:absolute;right:8px;top:9px;color:var(--color-ink)}
+.theme-toggle .theme-moon{position:absolute;left:8px;top:9px;color:var(--color-warning-ink)}
+.theme-toggle[data-dark=true] .theme-toggle-track{background:var(--color-primary)}
 .theme-toggle[data-dark=true] .theme-toggle-thumb{transform:translateX(30px)}
 .admin-theme-control .theme-system{display:flex;align-items:center;gap:5px;padding:5px 8px;min-height:44px;font-size:11px;color:var(--admin-muted);border-radius:8px;white-space:nowrap}
 .theme-system[aria-pressed=true]{background:var(--admin-soft);color:var(--admin-accent)}
+
+/* Sidebar is a neutral navigation foundation, independent of the content theme. */
+.admin-sidebar { background:var(--admin-sidebar); --admin-heading:var(--color-slate-50); --admin-ink:var(--color-slate-100); --admin-muted:var(--color-slate-300); --admin-accent:var(--color-slate-100); --admin-soft:var(--color-slate-800); --admin-selected:var(--admin-sidebar-active); }
+.admin-sidebar nav a[aria-current=page] { background:var(--admin-sidebar-active); color:var(--brand-on-primary,#ffffff); }
+.admin-sidebar nav a[aria-current=page]::before { background:currentColor; }
+.admin-theme-scope [data-variant=primary], .admin-theme-scope .admin-primary-link { color:var(--color-on-primary); }
+.admin-theme-scope :is(input,select,textarea,button,a):focus-visible { outline-color:var(--color-focus); }
+.admin-theme-scope :is(.admin-tabs,.site-settings-tabs) [aria-selected=true] { color:var(--color-selected); border-color:var(--color-selected); }
+.admin-theme-scope .review-shot-strip [aria-pressed=true] { border-color:var(--color-selected); box-shadow:0 0 0 1px var(--color-selected); }
+.theme-toggle-track { background:var(--color-slate-200); }
+.theme-toggle[data-dark=true] .theme-toggle-track { background:var(--color-slate-700); }
+.theme-toggle .theme-sun { color:var(--color-slate-600); }
+.theme-toggle .theme-moon { color:var(--color-amber-400); }
+
+.theme-toggle-thumb { background:var(--color-slate-50); border:1px solid var(--color-slate-500); }
+.theme-toggle-track { border:1px solid var(--color-slate-500); }
+
+.admin-theme-scope .admin-sidebar { background:var(--admin-sidebar); }
+html[data-admin-theme=dark] .admin-theme-scope { --color-control-border:var(--color-slate-400); }
+
+.admin-theme-scope { --color-primary-ink:var(--admin-accent); }
+
+/* Keep tenant foregrounds readable despite later legacy sidebar hover rules. */
+.admin-theme-scope .admin-sidebar nav a[aria-current=page] { background:var(--admin-sidebar-active); color:var(--brand-on-primary,#ffffff); }
+.admin-theme-scope .admin-sidebar nav a:not([aria-current=page]):hover { background:var(--color-slate-800); color:var(--color-slate-50); }

@@ -1,12 +1,12 @@
 /* Shared product roles, additive to existing customer and operations geometry. */
 :root{--app-space-1:4px;--app-space-2:8px;--app-space-3:12px;--app-space-4:16px;--app-space-5:20px;--app-space-6:24px;--app-space-8:32px;--app-control-radius:10px;--app-input-radius:12px;--app-card-radius:16px;--app-sheet-radius:24px;--app-target:44px;--app-action:48px}
-:where(.customer-viewport button[data-variant=primary]){color:var(--brand-on-primary,#fff)}
+:where(.customer-viewport button[data-variant=primary]){color:var(--brand-on-primary,var(--color-on-status))}
 .admin-theme-scope button[data-variant=secondary]:hover:not(:disabled){background:var(--admin-hover);color:var(--admin-ink);border-color:var(--admin-border)}
 .customer-viewport :is(.receipt-reference,.summary-card,.upload-evidence-row) button{touch-action:manipulation}
 .receipt-reference bdi{user-select:all;unicode-bidi:isolate}
 .receipt-copy-feedback{font:var(--customer-caption);color:var(--color-muted);text-align:center}
 .receipt-support{font:var(--customer-body-secondary);color:var(--color-muted)}
-.receipt-support summary{min-height:44px;display:flex;gap:8px;align-items:center;justify-content:center;cursor:pointer;color:var(--color-primary);font-weight:600}
+.receipt-support summary{min-height:44px;display:flex;gap:8px;align-items:center;justify-content:center;cursor:pointer;color:var(--color-primary-ink);font-weight:600}
 .receipt-support .entry-support p{font-size:12px;line-height:1.9;margin-block:8px}
 .preparation-actions>button{font-size:16px;font-weight:750}
 

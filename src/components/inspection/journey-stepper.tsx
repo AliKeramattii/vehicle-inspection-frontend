@@ -7,14 +7,14 @@ export function JourneyStepper({ stages, completedIcon = "check" }: { stages: re
     {stages.map((stage, index) => <li key={stage.id} aria-current={stage.state === "current" ? "step" : undefined}
       className="relative flex min-w-0 flex-1 flex-col items-center gap-2 text-center">
       <span className={cn("z-10 flex size-7 items-center justify-center rounded-full border text-xs font-semibold",
-        stage.state === "current" && "border-primary bg-primary text-white",
-        stage.state === "completed" && "border-success bg-success text-white",
-        stage.state === "error" && "border-warning bg-amber-50 text-amber-800",
+        stage.state === "current" && "border-selected bg-selected text-on-status",
+        stage.state === "completed" && "border-success bg-success text-on-status",
+        stage.state === "error" && "border-warning bg-warning-soft text-warning-ink",
         stage.state === "upcoming" && "border-border bg-surface text-muted")}>
         {stage.state === "completed" ? <Icon name={completedIcon} size={18} /> : stage.state === "error" ? <Icon name="warning" size={18} /> : (index + 1).toLocaleString("fa-IR")}
       </span>
       {index < stages.length - 1 && <span aria-hidden="true" className={cn("absolute start-1/2 top-3.5 h-px w-full bg-border", stage.state === "completed" && "bg-success")} />}
-      <span className={cn("text-xs leading-5", stage.state === "current" ? "font-semibold text-primary" : "text-muted")}>{stage.label}</span>
+      <span className={cn("text-xs leading-5", stage.state === "current" ? "font-semibold text-selected" : "text-muted")}>{stage.label}</span>
       <span className="sr-only">{stage.state === "completed" ? "تکمیل شده" : stage.state === "error" ? "نیاز به بررسی" : stage.state === "upcoming" ? "مرحله بعدی" : "مرحله جاری"}</span>
     </li>)}
   </ol></nav>;

@@ -46,7 +46,7 @@ Production flow: 2D overview → section → required photo → sample/guidance 
 Reference 07 defines the primary composition, using static 2D photography instead of WebGL.
 Its historical fourteen-photo counts do not override the template. Markers on the vehicle, compact
 side controls, circular/segmented progress, categories and two rows of shot images are required.
-Gray = uncaptured, blue = complete, orange = attention/retake; selection adds an outline.
+Gray = uncaptured, Emerald = locally accepted, Amber = attention/retake; selection adds a Sky outline.
 PNGs 08–11 support guidance/camera/review ergonomics. Review prioritizes the actual captured image
 with a compact expandable sample, simple confirmation and retake; no customer quality checklist.
 
@@ -74,3 +74,14 @@ mirror physical vehicle directions. Configuration, rather than old PNG counts, d
 ## Approved white sedan asset migration
 
 The latest supplied `references/assets/new-vehicle/` photographs supersede the older SUV imagery for active 2D defaults and guidance, while PNGs still define layout. The old guide source folder and screenshot baselines remain historical evidence. Twelve guide IDs/seven sections are unchanged. See `docs/NEW_VEHICLE_ASSET_AUDIT.md` for all 40 supplied assets, eight navigation roles and genuine-alpha Recorder V2 ghosts. Optional Sportage 3D remains intentionally unchanged.
+
+## Approved Emerald, Amber and Slate palette (2026-10-16)
+
+`design/vehicle-inspection-color-system/vehicle-palette.css` contains the 69 exact approved LAB
+primitives. Its Persian guide and offline palette-preview.html explain color combinations, not
+replacement layouts. The approved color refinement supersedes historical PNG brand blue while
+preserving PNG composition, current sedan/guide/ghost assets and optional 3D implementation.
+Existing semantic runtime tokens and scoped Admin/Reviewer light/dark/system themes consume it.
+Tenant brand customization remains supported; evidence statuses are independent. See
+`docs/COLOR_SYSTEM.md` for mapping and measured contrast. Historical screenshot baselines are
+not overwritten by this refinement.

@@ -30,7 +30,7 @@ uncaptured/retake photos (including reviewer reasons), review for accepted photo
 `photoRequirementEntry` derives this destination and action label from existing records; no
 marker-specific evidence state or route map exists. Review keeps replacement optional and accepted
 evidence untouched. Enter/Space use native button behavior; focus and selection rings remain
-independent of gray/blue/orange status. Direction controls remain below the scene at every width.
+independent of gray/Emerald/Amber status. Direction controls remain below the scene at every width.
 Retake drafts reopen review with the same reviewer reason as guidance; the original remains stored.
 
 ## Components and routes
@@ -71,22 +71,22 @@ scrolls to the second card row while the header/actions stay visible.
 
 Presentation palette:
 - Gray: no photo, numbered marker / `ثبت نشده`.
-- Blue #2563EB: complete, checkmark / `ثبت شد`.
-- Orange #D97706: draft/retake or partially completed section, retake symbol / explicit attention text.
-- Selected: extra blue outline independent of completion state.
+- Emerald success role: locally accepted, checkmark / `ثبت شد`; not an upload or reviewer approval claim.
+- Amber warning role: draft/retake or partially completed section, retake symbol / explicit attention text.
+- Selected: extra Sky outline independent of completion state and tenant brand.
 
 A replacement draft adds attention while preserving the accepted original and its progress credit.
 `requirementProgress` derives section/category totals and attention from the same records;
 `photographyProgress` aggregates it. No duplicate section state is persisted. Completed sections
-with replacement drafts keep their count and expose attention, rather than a misleading blue-only
+with replacement drafts keep their count and expose attention, rather than a misleading completion-only
 state. Progress segments also show attention independently from the circular accepted count.
-A reviewer retake removes progress credit until replacement. Completed journey steps also use blue
+A reviewer retake removes progress credit until replacement. Completed journey steps use the independent Emerald success role
 on capture surfaces. The circular count and segments derive from real local evidence (fresh 0/12);
 `تصویر ذخیره‌شده روی دستگاه` is truthful local status, not fake uploaded/synchronized progress.
 No manual standing-position certification, arbitrary 2D toggle or remote upload implementation.
 
 Reference differences are intentional: current template/counts, canonical photographed vehicle,
-blue completion palette, no fake sync copy and compact sample beside a dominant actual review image.
+semantic Emerald completion/Sky selection palette, no fake sync copy and compact sample beside a dominant actual review image.
 No reference PNG is rendered as UI. Vazirmatn, RTL, safe areas and technical LTR identifiers remain.
 
 ## Guidance and continuation

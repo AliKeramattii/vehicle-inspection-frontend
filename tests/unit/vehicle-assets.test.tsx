@@ -16,7 +16,10 @@ const boot:SiteBootstrap={schemaVersion:1,tenantId:"demo",apiBaseUrl:"/api",site
 afterEach(()=>vi.restoreAllMocks());
 describe("supplied sedan image boundaries",()=>{
  it("keeps nineteen supplied sources and twelve exact required guides",()=>{
-  expect(readdirSync("references/assets/new-vehicle/source").filter(file=>file.endsWith(".webp"))).toHaveLength(19);
+  const approved = JSON.parse(readFileSync("docs/NEW_VEHICLE_ASSETS.json", "utf8")) as { assets: { source: string }[] };
+  const names = approved.assets.filter(asset => asset.source.includes("/source/")).map(asset => asset.source.split("/").at(-1));
+  expect(names).toHaveLength(19);
+  expect(readdirSync("references/assets/new-vehicle/source")).toEqual(expect.arrayContaining(names));
   const photos=template.sections.flatMap(section=>section.photoRequirements);expect(template.sections).toHaveLength(7);expect(photos).toHaveLength(12);
   for(const photo of photos)expect(digest("public"+photo.sampleImage)).toBe(digest("references/assets/new-vehicle/source/"+photo.id+".webp"));
  });

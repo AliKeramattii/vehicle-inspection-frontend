@@ -1,3 +1,4 @@
+import { semanticHex } from "./color-helpers";
 import {test,expect,type Page} from "@playwright/test";
 import {brokerageFixture} from "../../src/config/site-settings.defaults";
 import {enterPhotography,snapshotReady} from "./photography-helpers";
@@ -17,7 +18,7 @@ test("two brokerage deployments load their own identity, colors, image and confi
     await brokerage(tab,id);await tab.goto(info.project.use.baseURL! as string);
     await expect(tab.locator(".entry-branding .brokerage-mark")).toContainText(id==="broker-a"?"کارگزاری آبی":"کارگزاری سبز");
     expect(new URL((await tab.locator(".landing-art img").getAttribute("src"))!,tab.url()).pathname).toBe(brokerageFixture(id).images.landing);
-    expect(await tab.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue("--brand-primary"))).toBe(id==="broker-a"?"#2563EB":"#047857");
+    expect(await semanticHex(tab,"--brand-primary")).toBe(brokerageFixture(id).theme.primary.toLowerCase());
     expect(urls).toContain(id==="broker-a"?(info.project.use.baseURL as string)+"/api/public/site-settings":"https://api.broker-b.example/api/public/site-settings");
     await snapshotReady(tab);await expect(tab).toHaveTitle(brokerageFixture(id).identity.appTitle);await overflow(tab);expect(errors).toEqual([]);await expect(tab).toHaveScreenshot(id+"-landing.png");
     } finally { await own.close(); }

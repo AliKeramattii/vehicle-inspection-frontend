@@ -9,12 +9,12 @@ function Button({ loading = false, disabled, children, className, type = "button
   </button>;
 }
 export function PrimaryButton({ className, ...props }: ButtonProps) {
-  return <Button {...props} data-variant="primary" className={cn("bg-primary text-white hover:brightness-95", className)} />;
+  return <Button {...props} data-variant="primary" className={cn("bg-primary text-on-primary hover:bg-primary-hover", className)} />;
 }
 export function SecondaryButton({ className, ...props }: ButtonProps) {
-  return <Button {...props} data-variant="secondary" className={cn("border border-border bg-surface text-ink hover:bg-slate-100", className)} />;
+  return <Button {...props} data-variant="secondary" className={cn("border border-control-border bg-surface text-ink hover:bg-surface-soft", className)} />;
 }
 export type IconButtonProps = Omit<ButtonProps, "children" | "aria-label"> & { "aria-label": string; children: ReactNode };
 export function IconButton({ className, ...props }: IconButtonProps) {
-  return <Button {...props} className={cn("min-h-11 min-w-11 rounded-control p-2 text-muted hover:bg-slate-100 hover:text-ink", className)} />;
+  return <Button {...props} className={cn("min-h-11 min-w-11 rounded-control p-2 text-muted hover:bg-surface-soft hover:text-ink", className)} />;
 }

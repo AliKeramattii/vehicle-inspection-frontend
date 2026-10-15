@@ -1,4 +1,5 @@
 "use client";
+import { runtimeThemeVariables } from "./theme-colors";
 import { createContext, useContext, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -18,8 +19,7 @@ function AppliedSite({site,children}:{site:RuntimeSite;children:ReactNode}) {
   const resolvedFavicon=useBrandingAsset(site.settings.identity.favicon,{contextKey:site.contextKey,tenantId:site.bootstrap.tenantId}).url;
   useEffect(()=> {
     const root=document.documentElement,theme=site.settings.theme;
-    const names:Record<string,string>={"--brand-primary":theme.primary,"--brand-secondary":theme.secondary,"--brand-background":theme.background,"--brand-neutral":theme.neutral,"--brand-on-primary":theme.onPrimary,"--brand-on-background":theme.onBackground,
-      "--color-primary":theme.primary,"--color-background":theme.background,"--color-border":theme.neutral,"--color-ink":theme.onBackground};
+    const names = runtimeThemeVariables(theme);
     const previous=Object.keys(names).map(name=>[name,root.style.getPropertyValue(name)]);
     for(const [name,value] of Object.entries(names))root.style.setProperty(name,value);
     const custom=site.settings.tenantId!=="demo"||site.settings.version>1;

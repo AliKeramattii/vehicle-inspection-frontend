@@ -12,20 +12,38 @@ Customer screens should feel calm and premium rather than governmental or like g
 
 ## Core colors
 
-| Token | Value | Use |
-|---|---|---|
-| background | `#F8FAFC` | app background |
-| surface | `#FFFFFF` | cards/sheets |
-| primary | `#2563EB` | primary actions/selected state |
-| ink | `#111827` | primary text |
-| muted | `#6B7280` | secondary text |
-| border | `#E2E8F0` | separators/borders |
-| success | `#059669` | completed/verified |
-| warning | `#D97706` | retake/SLA attention |
-| destructive | `#DC2626` | true failure/destructive |
-| information | `#0284C7` | informational state |
+The approved default is **Emerald + Amber + Slate**. The exact 69 LAB primitives live in
+`components/ui/color-palette.css`, copied without numerical changes from
+`references/design/vehicle-inspection-color-system/vehicle-palette.css`.
+The supplied HTML is a color preview only. Existing PNG composition, type, geometry and assets
+remain authoritative; this approved palette supersedes their historical brand-blue paint.
 
-Status colors communicate state, not decoration.
+| Existing semantic role | Light default | Scoped operations dark |
+|---|---|---|
+| background / surface / surface-soft | Slate 50 / white / Slate 100 | Slate 900 / Slate 800 / Slate 700 |
+| ink / muted / border | Slate 900 / Slate 600 / Slate 200 | Slate 50 / Slate 300 / Slate 700 |
+| primary / hover / on-primary | Emerald 700 / Emerald 800 / white | Emerald 400 / Emerald 300 / Slate 900 |
+| primary-soft | Emerald 50 | Slate 700 |
+| accent / accent-soft | Amber 500 / Amber 50 | Amber 400 / Slate 700 |
+| success / success-ink | Emerald 600 / Emerald 800 | Emerald 400 / Emerald 300 |
+| warning / warning-ink | Amber 700 / Amber 800 | Amber 400 / Amber 400 |
+| destructive / destructive-ink | Red 600 / Rose 700 | Rose 400 / Rose 300 |
+| selected / information | Sky 800 | Sky 300 |
+| map / map-ink | Teal 600 / Teal 700 | Teal 500 / Teal 200 |
+| focus / control-border | Teal 700 / Slate 500 | Teal 500 / Slate 400 |
+| Admin sidebar | Slate 900 | Slate 900 |
+
+Use soft/ink companions for small text rather than putting white text on every status fill.
+Red 600 remains the error indicator; Rose 700 supplies readable small error text on Red 50.
+Dark status fills use a dark foreground. Decorative dividers can stay subtle; meaningful form
+boundaries use control-border. Camera/live-stage roles stay separately dark and readable.
+
+White-Label primary/on-primary, canvas/ink and other existing settings remain configurable.
+The HEX-only settings schema is unchanged: `config/theme-colors.ts` serializes defaults for
+forms, resolves default paint back to LAB variables, and derives readable text/hover accents
+for custom brands. Semantic evidence, error and selection colors do not follow tenant primary.
+Existing light/dark/system preference is scoped to Admin/Reviewer and never inverts customer UI.
+See [COLOR_SYSTEM.md](COLOR_SYSTEM.md) for implementation, contrast checks and preservation.
 
 ## Typography
 
@@ -101,7 +119,7 @@ image markers, physical-direction controls, compact categories, two-row shot car
 The vehicle uses canonical 2D photography in a contained artwork layer with matching percentage
 marker coordinates. Direction controls sit below the image in normal flow at every breakpoint.
 Guidance/review retain full-frame contain images for evidence inspection.
-Gray = uncaptured, blue = complete, orange = attention/retake. Selection adds a blue outline;
+Gray = uncaptured, Emerald = locally accepted, Amber = attention/retake. Selection adds a Sky outline;
 text and check/retake symbols accompany color. No production WebGL, 3D toggle or mesh selection.
 Camera is dark; section/review screens are light. Review shows the captured photo prominently and
 a small expandable sample, retake and simple confirmation. No customer quality checkbox or
@@ -131,7 +149,7 @@ Compact photography cards intentionally retain 10px corners. Customer gutters ar
 reading gutters 20px, compact gaps 4/8px, section gaps 12/16/24px. Image → controls gap is
 8px. Relevant primary CTAs are at least 48px tall, 16px/750, with native disabled/busy
 semantics, visible focus, and bottom spacing `max(16px, safe-area-inset-bottom)`. Loading
-must preserve action geometry. Identity primary overrides use #2563EB; semantic colors remain.
+must preserve action geometry. Primary actions use the runtime brand role; semantic status colors remain independent.
 
 Image intent is explicit: automotive-hero (cover where appropriate), vehicle-overview
 (contained shared image/marker layer), exterior-guide, interior-guide, technical-closeup
@@ -160,7 +178,7 @@ Studio:
 
 
 ## UI refinement: runtime identity and stage-specific success
-CoBranding shares the established app mark and configured brokerage logo/name. Primary is tenant theme driven; successful checks remain #059669 independently. Gray pending, orange attention and an independent selected ring apply to both optional viewer markers and photography controls. Local capture, binary upload and reviewer approval are different labelled stages.
+CoBranding shares the established app mark and configured brokerage logo/name. Primary is tenant theme driven; successful checks use the independent Emerald success role. Gray pending, orange attention and an independent selected ring apply to both optional viewer markers and photography controls. Local capture, binary upload and reviewer approval are different labelled stages.
 Controls stay below the vehicle. Guidance uses consistent Lucide topic icons and approved custom camera assets. The live 360 route is intentionally dark, without fabricated quality/coverage. See UI_REFINEMENT.md for mappings and OPTIONAL_3D_VIEWER.md for the restricted development gate.
 
 ## Unified customization scope

@@ -1,3 +1,4 @@
+import { semanticColor } from "./color-helpers";
 import { chooseDemoLocation } from "./location-helpers";
 import {test,expect,type Page} from "@playwright/test";
 import {mkdir} from "node:fs/promises";
@@ -25,7 +26,7 @@ test("live photography preserves navigation, colors, success and below-image con
  await mockCamera(page);await photography(page);
  await page.evaluate(()=>document.documentElement.style.setProperty("--color-primary","#8B3B18"));
  const completed=page.locator(".inspection-journey-header .bg-success").first();
- await expect(completed).toHaveCSS("background-color","rgb(5, 150, 105)");
+ await expect(completed).toHaveCSS("background-color",await semanticColor(page,"--color-success"));
  for(const [width,height] of [[360,800],[390,844],[430,932]]){
   await page.setViewportSize({width,height});await viewport(page);
   const image=await page.locator(".photography-image").first().boundingBox(),controls=await page.locator(".vehicle-photo-controls").boundingBox();

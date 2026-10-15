@@ -77,16 +77,15 @@ The application is natively Persian RTL.
 
 The target visual direction is "bright automotive studio":
 
-- Background: #F8FAFC
-- Surfaces: #FFFFFF
-- Primary: #2563EB
-- Ink: #111827
-- Muted: #6B7280
-- Border: #E2E8F0
-- Success: #059669
-- Warning: #D97706
-- Destructive: #DC2626
-- Information: #0284C7
+- Approved primitives: exact 69 LAB definitions in references/design/vehicle-inspection-color-system/vehicle-palette.css; runtime copy in src/components/ui/color-palette.css.
+- Background/surface/soft: Slate 50 / white / Slate 100.
+- Primary/hover/soft: Emerald 700 / Emerald 800 / Emerald 50; configured White-Label brand overrides remain supported.
+- Ink/muted/border: Slate 900 / Slate 600 / Slate 200.
+- Success: Emerald 600; warning: Amber 700; error indicator: Red 600.
+- Selected/information: Sky 800; map tools: Teal 600; selective accent: Amber 500.
+- Readable status-ink, focus and scoped dark companions: docs/DESIGN_SYSTEM.md and docs/COLOR_SYSTEM.md.
+- Scoped operations dark: Slate 900/800/700 surfaces, Slate 50/300 text, Emerald 400 primary with dark foreground. Preserve light/dark/system preference and customer light theme.
+- This approved palette overrides historical PNG colors only; preserve their composition and all actual imagery.
 
 Radii:
 - controls: 8–10px
@@ -180,7 +179,7 @@ Reference 07 remains the primary composition: compact journey/progress, dominant
 markers directly on the image, physical-direction controls, categories and image shot cards.
 Use canonical 2D photography and the current seven-section/twelve-photo template, never customer
 WebGL/3D. Marker coordinates share the image crop; card/marker/view/CTA derive from one selection.
-Gray = no photo, blue = completed, orange = incomplete/retake; accompany color with text/icons.
+Gray = no photo, Emerald = locally accepted, Amber = incomplete/retake; selection uses an independent Sky ring. Keep upload and reviewer approval distinct with text/icons.
 Review prioritizes actual captured evidence and a compact sample, retake and simple confirmation.
 Do not reintroduce interactive customer quality checkboxes or fabricated quality success.
 Guidance is requirement-specific; derive the next incomplete photo/section from configuration.

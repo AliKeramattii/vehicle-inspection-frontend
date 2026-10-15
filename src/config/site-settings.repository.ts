@@ -1,3 +1,4 @@
+import { defaultThemeColors, isLegacyFactoryTheme } from "./theme-colors";
 import { openSiteSettingsDb } from "./site-settings-db";
 import { allowed, type AdminActor } from "@/features/admin/model";
 import { defaultSiteSettings } from "./site-settings.defaults";
@@ -34,6 +35,12 @@ export class SiteSettingsRepository {
   private seed=():SettingsWorkspace=>({revision:1,published:structuredClone(this.initial),draft:structuredClone(this.initial),history:[structuredClone(this.initial)],audit:[]});
   read(actor?: AdminActor) { if (actor) this.authorize(actor); return this.storage.transact(this.key,this.seed,state=>{
     const result = structuredClone(state);
+    // Only an untouched seeded workspace adopts the new factory default in its view.
+    // Published/edited tenant choices and immutable history remain byte-for-byte intact.
+    if (this.bootstrap.settingsSource === "mock" && this.bootstrap.tenantId === "demo" && state.revision === 1 && state.audit.length === 0 && state.history.length === 1 && state.published.version === 1 &&
+      JSON.stringify(state.draft) === JSON.stringify(state.published) && isLegacyFactoryTheme(state.published.theme)) {
+      result.published.theme = { ...defaultThemeColors }; result.draft.theme = { ...defaultThemeColors };
+    }
     for (const settings of [result.published, result.draft]) settings.application.locationMap ??= defaultLocationMap();
     return result;
   }); }

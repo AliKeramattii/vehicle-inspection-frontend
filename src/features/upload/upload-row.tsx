@@ -8,7 +8,7 @@ import { UploadPreview } from "./upload-preview";
 
 export function UploadRow({ job, retry }: { job: UploadJob; retry: () => void }) {
   const percentage = Math.floor(job.bytesUploaded / job.byteSize * 100), label = uploadLabel(job);
-  const tone = job.verification === "retake-requested" ? "attention" : job.upload === "failed" ? "failed" : job.verification === "verified" || job.upload === "uploaded" && job.verification !== "processing" ? "success" : job.upload === "uploading" || job.verification === "processing" ? "active" : "queued";
+  const tone = job.verification === "retake-requested" ? "attention" : job.upload === "failed" ? "failed" : job.verification === "verified" ? "success" : job.upload === "uploaded" && job.verification !== "processing" ? "uploaded" : job.upload === "uploading" || job.verification === "processing" ? "active" : "queued";
   const icon = tone === "success" ? "check" : tone === "failed" ? "error" : tone === "attention" ? "warning" : tone === "queued" ? "clock" : "cloud";
   const reviewHref = job.requirementId ? inspectionRoutes.photo(job.inspectionId, job.requirementId, "review") : inspectionRoutes.video(job.inspectionId, "review");
   return <li className="upload-row" data-job={job.id} data-kind={job.evidenceKind} data-upload={job.upload} data-verification={job.verification}>

@@ -3,9 +3,9 @@
 .customer-viewport > .location-screen { overflow: hidden; min-height: 0; }
 .neshan-picker-form { min-height: 0; overflow: hidden; }
 .location-picker-content { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
-.location-instruction { padding: 8px 18px 10px; background: #fff; }
+.location-instruction { padding: 8px 18px 10px; background: var(--color-surface); }
 .location-instruction h1 { font: var(--customer-section-title); }
-.location-instruction p { margin-top: 4px; font: var(--customer-body-secondary); color: #6b7280; }
+.location-instruction p { margin-top: 4px; font: var(--customer-body-secondary); color: var(--color-muted); }
 .neshan-picker-form .neshan-location-map { height: clamp(300px, 43dvh, 450px); min-height: 300px; flex: none; }
 .neshan-picker-form .neshan-map-message { height: 100%; min-height: 0; padding: 20px 28px 80px; }
 .neshan-picker-form .neshan-map-message p { max-width: 330px; }
@@ -20,18 +20,18 @@
 .neshan-picker-form .address-heading h2 { font-size: 16px; }
 .neshan-picker-form .address-panel label[for^="_"], .neshan-picker-form .address-panel > .space-y-2 > label { font-size: 13px; }
 .neshan-picker-form textarea { min-height: 72px; resize: vertical; font-size: 14px; line-height: 23px; }
-#location-address-status { min-height: 20px; font-size: 12px; line-height: 20px; color: #64748b; }
+#location-address-status { min-height: 20px; font-size: 12px; line-height: 20px; color: var(--color-muted); }
 .location-coordinate-values { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .location-coordinate-values div { min-width: 0; }
-.location-coordinate-values dt { font-size: 12px; color: #64748b; }
+.location-coordinate-values dt { font-size: 12px; color: var(--color-muted); }
 .location-coordinate-values dd { font-size: 13px; margin-top: 3px; text-align: start; }
-.location-source-status { font-size: 12px; line-height: 20px; color: #64748b; }
+.location-source-status { font-size: 12px; line-height: 20px; color: var(--color-muted); }
 .location-address-use { min-height: 44px; font-size: 12px; }
-.location-manual-coordinates summary { min-height: 44px; padding-block: 10px; color: var(--color-primary); cursor: pointer; font-size: 13px; }
-.location-manual-coordinates > p { font-size: 12px; line-height: 21px; margin-bottom: 8px; color: #64748b; }
+.location-manual-coordinates summary { min-height: 44px; padding-block: 10px; color: var(--color-primary-ink); cursor: pointer; font-size: 13px; }
+.location-manual-coordinates > p { font-size: 12px; line-height: 21px; margin-bottom: 8px; color: var(--color-muted); }
 .location-manual-coordinates > div { margin-bottom: 8px; }
 .location-picker-actions { flex: none; padding: 10px 18px max(12px,env(safe-area-inset-bottom)) !important; }
-.location-picker-actions > p { font-size: 12px; line-height: 20px; margin-bottom: 6px; color: #64748b; }
+.location-picker-actions > p { font-size: 12px; line-height: 20px; margin-bottom: 6px; color: var(--color-muted); }
 @media (min-width: 800px) { .neshan-picker-form .neshan-location-map { height: 420px; } }
 @media (prefers-reduced-motion: reduce) { .neshan-picker-form * { scroll-behavior: auto; transition: none; } }
 
@@ -39,5 +39,9 @@
 
 /* Recoverable provider tile failures keep the initialized map and center pin usable. */
 .neshan-picker-form .neshan-tile-warning { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 2px 8px; }
-.neshan-tile-warning button { min-width: 44px; min-height: 44px; color: var(--color-primary); font-weight: 700; }
-.neshan-tile-warning button:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.neshan-tile-warning button { min-width: 44px; min-height: 44px; color: var(--color-primary-ink); font-weight: 700; }
+.neshan-tile-warning button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* Approved color roles; geometry and workflow remain unchanged. */
+.neshan-locate,.location-manual-coordinates summary,.location-address-use,.neshan-tile-warning button { color:var(--color-map-ink); }
+.neshan-locate:focus-visible,.neshan-tile-warning button:focus-visible { outline-color:var(--color-focus); }

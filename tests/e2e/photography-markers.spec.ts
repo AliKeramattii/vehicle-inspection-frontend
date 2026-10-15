@@ -1,3 +1,4 @@
+import { semanticColor } from "./color-helpers";
 import { expect, test, type Page } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { photoDatabase } from "../../src/lib/media/photo-store";
@@ -49,7 +50,7 @@ for (const viewport of viewports) test(`pending marker is keyboard/touch accessi
   await expect(marker).toHaveAccessibleName(/^عکاسی جلو/);
   await marker.focus(); await page.keyboard.press("Tab"); await page.keyboard.press("Shift+Tab");
   await expect(marker).toBeFocused();
-  expect(await marker.evaluate((node) => ({ visible: node.matches(":focus-visible"), width: getComputedStyle(node).outlineWidth, color: getComputedStyle(node).outlineColor }))).toEqual({ visible: true, width: "3px", color: "rgb(37, 99, 235)" });
+  expect(await marker.evaluate((node) => ({ visible: node.matches(":focus-visible"), width: getComputedStyle(node).outlineWidth, color: getComputedStyle(node).outlineColor }))).toEqual({ visible: true, width: "3px", color: await semanticColor(page, "--color-focus") });
   await page.screenshot({ path: `${renders}/focus-${viewport.width}.png` });
   await page.keyboard.press("Enter"); await expect(page).toHaveURL(/front-45-right\/guide$/);
   await expect(page.getByRole("heading", { name: "راهنمای عکاسی" })).toBeVisible();
