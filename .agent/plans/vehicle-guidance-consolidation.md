@@ -33,7 +33,7 @@ Lint, typecheck, unit suite, focused browser navigation/media/viewport tests, pr
 - [x] Still-camera ghosts match views and remain outside saved evidence.
 - [x] Recorder uses no photo ghosts; preview limitation resolved or explicitly documented.
 - [x] Tests/process exits and mobile visual review recorded.
-- [ ] Protected hashes unchanged; focused commit/push verified.
+- [x] Protected hashes unchanged; focused implementation commit/push independently verified.
 
 ## Progress
 - [x] Audit, canonical Git recovery and reference inspection.
@@ -41,10 +41,12 @@ Lint, typecheck, unit suite, focused browser navigation/media/viewport tests, pr
 - [x] Video ghost removal and safe static guidance implemented.
 - [ ] Matching cleared 4–5-second 3D orbit clip: blocked by missing asset/clearance.
 - [x] Validation and visual review: lint/typecheck/build exit 0, 400 unit tests, 21 focused and 69 regression browser passes. Four new baselines only.
-- [ ] Documentation and Git.
+- [x] Documentation and Git: implementation 893af1e0aa0a2c99517bd814c357f3395a5984a4 pushed; validation follow-up records actual results.
 
 ## Discovery
 Only available GLB is the unchanged, noncommercial Sportage model; no matching sedan orbit clip/model supplied. User clarification requested while unrelated approved work proceeds.
 
 ## Final review
 All 662 protected hashes match. Unrelated eight tracked edits remain unstaged. No model, historical automotive image or old baseline was changed. The task remains partially complete because the requested animated sedan orbit clip is unavailable; do not label the static path as that deliverable.
+
+Implementation remote verification: origin/feat/unified-ui-admin-3d returned 893af1e0aa0a2c99517bd814c357f3395a5984a4. Final overall status remains PARTIAL solely for the missing cleared animated orbit preview.
