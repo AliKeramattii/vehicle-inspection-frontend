@@ -127,3 +127,7 @@ The map flag selects local mock configuration for this visual preview only; no e
 Recreate deterministic review artifacts with the server running: npm.cmd run test:e2e -- --config playwright.redesign.config.ts . This uses existing test fixtures, real UI navigation and isolated browser storage. Production smoke preview: npm.cmd run build followed by npm.cmd run start -- --hostname 127.0.0.1 --port 3140. These are local review servers, not a deployment/static-export claim.
 
 **Checkpoint 1 is ready for user visual review. No later checkpoint has started.**
+
+## Git delivery
+
+Implementation: 53dbbbc3435d60c8d68bf60bc77d8dc3a3b85ab2, `feat: redesign representative inspection screens`. Normal push to origin/feat/unified-ui-admin-3d succeeded and the remote hash was verified. This documentation follow-up records validation/delivery only; visual approval and later checkpoints remain pending. All initial local user modifications and historical baselines remain outside the commits.

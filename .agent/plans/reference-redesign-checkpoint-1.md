@@ -36,10 +36,13 @@ Four visibly restructured screens, controls below vehicle, accessible honest sta
 - [x] Four representative screen implementations
 - [x] AFTER captures, inspection and corrections
 - [x] Validation and preservation audit
-- [ ] Focused commit/push; stop for visual approval
+- [x] Focused commit/push; stop for visual approval
 
 ## Validation discoveries
 Final lint/typecheck/400 unit tests/build each exit 0. Functional browser run:66 pass; final production photo regression:13 pass; final operations regression:3 pass; candidate review:4 pass per development/production mode; optional licensed local viewer:1 pass; deep settings workflow:1 pass. Legacy snapshot debt and obsolete receipt-wrapper test documented, not concealed or overwritten. No baseline updates. All799 protected paths match except the earlier-authorized schema import suffix; schema remains unstaged.
 
 ## Visual corrections
 Removed extra photo-heading height and unused scene padding, preserving actual artwork scale/marker coordinates. Reviewer facts moved into the scrollable decision rail so evidence gains both width and height; decisions remain pinned. Settings preview is shared with its existing dialog and handles failed draft assets. User visual approval is still pending; later checkpoints stay deferred.
+
+## Git delivery
+Implementation commit 53dbbbc3435d60c8d68bf60bc77d8dc3a3b85ab2 (feat: redesign representative inspection screens) pushed normally to origin/feat/unified-ui-admin-3d and verified with ls-remote. Only 21 allowlisted files were included; all 19 initial local modifications remain outside the commit. User visual approval is pending. No later checkpoint started.
