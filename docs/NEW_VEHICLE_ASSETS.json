@@ -1,7 +1,7 @@
 {
   "description": "Derived inventory, not a supplied manifest. No image pixels changed.",
-  "sourceCount": 40,
-  "runtimeCount": 27,
+  "sourceCount": 47,
+  "runtimeCount": 31,
   "assets": [
     {
       "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-front-45-left.webp",
@@ -488,6 +488,83 @@
       "sha256": "165e451cfeba6c2a8530610d1fd5bc7b3a980e5c1aeea8f90c789c2833f9c4ec",
       "runtimeUrls": [],
       "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/chassis-number.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 159532,
+      "sha256": "f6777118b58a3223536a533c7432f7fbeeabf5687b8a21bb860dde0a333a6318",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/chassis-number.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/Pearl-white sedan windshield VIN inspection.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 201558,
+      "sha256": "dff2d75efb01045ed45e27d12f23dbd475d7894d2bf188831166442f8e1883fa",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/windshield-vin.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/readiness-clean-vehicle.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 92974,
+      "sha256": "d1cf4a1fd35b2b0800d646de5b640ab1457da01b3533c877baaca4888d4dd64b",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/readiness/readiness-clean-vehicle.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/readiness-open-space.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1448,
+      "height": 1086,
+      "byteSize": 78364,
+      "sha256": "9a2b93c68b28df1d777aabe47027fc7a1308d73c60c63f0de5a0f66f7776fed2",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/readiness/readiness-open-space.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/spec-plate-2.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 455842,
+      "sha256": "deb65162ccc90cf10c95fc50608ff864b2e713714a10fbdf5f35f57bc89cef93",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/spec-plate-2.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/spec-plate.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 137992,
+      "sha256": "c098e6b93257e0d9ae1f7210974cf4076ba3bee14d7a490b7b0389797048da84",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/spec-plate.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/source/Pearl-white sedan windshield VIN inspection.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 201558,
+      "sha256": "dff2d75efb01045ed45e27d12f23dbd475d7894d2bf188831166442f8e1883fa",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/windshield-vin.webp"
+      ]
     }
   ]
 }

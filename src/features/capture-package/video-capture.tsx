@@ -1,10 +1,8 @@
 "use client";
-import { vehicleGhostAssets } from "@/config/vehicle-assets";
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Pause, Play, Square, Camera, ChevronLeft, ChevronRight, SwitchCamera, CircleHelp, X } from "lucide-react";
+import { Pause, Play, Square, Camera, SwitchCamera, CircleHelp, X } from "lucide-react";
 import { WalkaroundGuidance } from "./walkaround-guidance";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import { InlineAlert } from "@/components/ui/status";
@@ -13,15 +11,15 @@ import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import { toPersianDigits as fa } from "@/lib/utils/persian";
 import type { RecordedVideo, VideoRecorderService } from "@/lib/media/video-recorder";
 import { useVideoRecording } from "./use-video-recording";
-import { defaultRecordingTargetSeconds, recordingGuides, recordingProgress } from "./recording-guides";
+import { defaultRecordingTargetSeconds, recordingProgress } from "./recording-guides";
 import "./recorder-v2.css";
 export function videoTimer(seconds: number) { return fa(`${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`); }
 export function VideoCapture({ inspectionId, onRecorded, service, reason, backHref, backLabel, targetDurationSeconds = defaultRecordingTargetSeconds }: { inspectionId: string; onRecorded: (video: RecordedVideo, signal: AbortSignal) => Promise<void>; service?: VideoRecorderService; reason?: string; backHref?: string; backLabel?: string; targetDurationSeconds?: number }) {
   const recording = useVideoRecording(onRecorded, service), router = useRouter();
   const { preview, state, elapsed, error, canRetrySave, retrySave, stop, start, activate, canPause, canSwitch, switchCamera, pauseResume } = recording;
-  const [guide, setGuide] = useState(false), [showGhost, setShowGhost] = useState(true), [angle, setAngle] = useState(0), [leaving, setLeaving] = useState(false);
+  const [guide, setGuide] = useState(false), [leaving, setLeaving] = useState(false);
   const active = state === "recording", paused = state === "paused", inProgress = active || paused, busy = state === "opening" || state === "saving";
-  const progress = recordingProgress(elapsed, targetDurationSeconds), current = recordingGuides[angle];
+  const progress = recordingProgress(elapsed, targetDurationSeconds);
   const href = backHref ?? inspectionRoutes.photographyReview(inspectionId);
   const status = active ? progress >= 100 ? "زمان پیشنهادی کامل شد؛ می‌توانید ادامه دهید" : "در حال ضبط ویدیو" : paused ? "ضبط موقتاً متوقف است" : state === "armed" ? "دوربین آماده ضبط است" : state === "saving" ? "در حال ذخیره روی دستگاه…" : state === "opening" ? "در حال باز کردن دوربین…" : error ? "ضبط انجام نشد" : "آماده ضبط ویدیو";
   return <div className="photo-route camera-screen video-capture video-capture-v2" data-recording-state={state}>
@@ -31,19 +29,16 @@ export function VideoCapture({ inspectionId, onRecorded, service, reason, backHr
       <button type="button" aria-label="راهنمای ضبط ویدیو" onClick={() => setGuide(true)}><CircleHelp size={23}/></button>
     </header>
     <div className="photo-scroll recorder-content">
-      <div className="recorder-intro"><p>ثبت تصویر بدنه خودرو</p><h3>یک دور کامل اطراف خودرو حرکت کنید</h3><span>خودرو را در محدوده راهنما نگه دارید.</span></div>
+      <div className="recorder-intro"><p>ثبت تصویر بدنه خودرو</p><h3>یک دور کامل اطراف خودرو حرکت کنید</h3><span>خودرو را در کادر نگه دارید.</span></div>
       <section className="recorder-stage" aria-label="پیش‌نمایش زنده و راهنمای قاب‌بندی">
         <div className="recorder-stage-toolbar"><span className="recorder-state-chip" data-active={active}>{active && <span aria-hidden="true"/>}{active ? "در حال ضبط" : paused ? "مکث" : state === "armed" ? "دوربین روشن" : "پیش‌نمایش دوربین"}</span>
-          <button type="button" aria-label="نمایش راهنمای خودرو" aria-pressed={showGhost} onClick={() => setShowGhost(value => !value)}>{showGhost ? <Eye size={20}/> : <EyeOff size={20}/>}راهنما {showGhost ? "روشن" : "خاموش"}</button>
           {state === "armed" && canSwitch && <button type="button" aria-label="تعویض دوربین" onClick={() => void switchCamera()}><SwitchCamera size={22}/></button>}
         </div>
         <div className="recorder-live">
           <video ref={preview} playsInline autoPlay muted aria-label="تصویر زنده ضبط ویدیو" />
           {["ready","error"].includes(state) && <div className="recorder-camera-placeholder"><Camera size={30}/><p>{error ? "دوربین در دسترس نیست" : "دوربین پس از انتخاب شما فعال می‌شود"}</p></div>}
-          {showGhost && <div className="recorder-ghost" data-guide={current.id}><Image src={vehicleGhostAssets[current.id]} alt={"راهنمای قاب‌بندی: نمای " + current.title} fill sizes="(max-width: 480px) 90vw, 430px" unoptimized /></div>}
           <div className="recorder-corners" aria-hidden="true"/>
         </div>
-        <div className="recorder-angle"><button type="button" aria-label="نمای راهنمای قبلی" onClick={() => setAngle(index => (index + 7) % 8)}><ChevronRight size={22}/></button><div><small>زاویه راهنمای فعلی: {fa(angle + 1)} از {fa(recordingGuides.length)}</small><strong>نمای {current.title}</strong></div><button type="button" aria-label="نمای راهنمای بعدی" onClick={() => setAngle(index => (index + 1) % 8)}><ChevronLeft size={22}/></button></div>
       </section>
       <section className="recorder-time-row">
         <div className="recorder-status"><h3 role="status" aria-live="polite">{status}</h3><p>پیشرفت زمانی ضبط</p><small>تأیید پوشش کامل خودرو انجام نشده است.</small></div>
@@ -54,7 +49,7 @@ export function VideoCapture({ inspectionId, onRecorded, service, reason, backHr
       </section>
       {error && <InlineAlert tone="warning" role="alert">{error}</InlineAlert>}
       {reason && <InlineAlert tone="warning">نیاز به ضبط مجدد: {reason}</InlineAlert>}
-      <div className="recorder-tips"><h3>نکات تصویربرداری</h3><p>حرکت آهسته، نور کافی و فاصله ثابت با خودرو</p><span>راهنما دستی است و روی ویدیوی ذخیره‌شده قرار نمی‌گیرد.</span></div>
+      <div className="recorder-tips"><h3>نکات تصویربرداری</h3><p>حرکت آهسته، نور کافی و فاصله ثابت با خودرو</p><span>راهنمای حرکت را پیش از شروع ببینید؛ راهنما روی ویدیوی شما قرار نمی‌گیرد.</span></div>
     </div>
     <div className="recorder-actions">
       {canRetrySave ? <PrimaryButton onClick={() => void retrySave()}>تلاش دوباره برای ذخیره</PrimaryButton> : inProgress ? <>

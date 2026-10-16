@@ -50,5 +50,18 @@ export function resolveVehicleGuide(src: string): string {
 }
 /** Narrow public allowlist for Site Settings; no traversal, query or arbitrary assets. */
 export function isVehicleAssetUrl(src: string): boolean {
-  return [...Object.values(vehicleGuideAssets).map(asset=>asset.src), ...Object.values(vehicleHeroAssets), ...Object.values(vehicleViewAssets), ...Object.values(vehicleGhostAssets)].some(value => value === src);
+  return [...Object.values(vehicleGuideAssets).map(asset=>asset.src), ...Object.values(vehicleHeroAssets), ...Object.values(vehicleViewAssets), ...Object.values(vehicleGhostAssets), ...Object.values(vehicleReadinessAssets), ...Object.values(vehicleIdentificationAssets)].some(value => value === src);
 }
+
+/** Supplied readiness illustrations; intentionally distinct from the studio hero. */
+export const vehicleReadinessAssets = {
+  clean: "/assets/inspection-vehicle/readiness/readiness-clean-vehicle.webp",
+  space: "/assets/inspection-vehicle/readiness/readiness-open-space.webp",
+} as const;
+/** Additional locations are guidance variants, never additional photo requirements. */
+export const vehicleIdentificationAssets = {
+  pillar: vehicleGuideAssets["spec-plate"].src,
+  engine: vehicleGuideAssets["chassis-number"].src,
+  seat: "/assets/inspection-vehicle/photo-guides/spec-plate-2.webp",
+  windshield: "/assets/inspection-vehicle/photo-guides/windshield-vin.webp",
+} as const;

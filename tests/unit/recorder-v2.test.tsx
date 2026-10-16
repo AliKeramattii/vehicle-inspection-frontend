@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { act, renderHook } from "@testing-library/react";
 import { createVideoRecorderService, type VideoRecorderService } from "@/lib/media/video-recorder";
 import { useVideoRecording } from "@/features/capture-package/use-video-recording";
-import { recordingGuides, recordingProgress } from "@/features/capture-package/recording-guides";
+import { recordingProgress } from "@/features/capture-package/recording-guides";
 class Recorder {
   static current: Recorder;
   static isTypeSupported = (mime: string) => mime === "video/mp4";
@@ -16,8 +16,7 @@ class Recorder {
 }
 afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); });
 describe("recorder V2 adaptation", () => {
-  it("uses exactly the eight supplied guides and a configurable time-only target", () => {
-    expect(recordingGuides).toHaveLength(8); expect(new Set(recordingGuides.map(item => item.file)).size).toBe(8);
+  it("uses a configurable time-only target independently from vehicle position", () => {
     expect(recordingProgress(39)).toBe(65); expect(recordingProgress(100)).toBe(100); expect(recordingProgress(15, 30)).toBe(50); expect(recordingProgress(0, 0)).toBe(0);
   });
   it("excludes all paused time from Blob duration and releases tracks once", async () => {

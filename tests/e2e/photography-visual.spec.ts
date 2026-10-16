@@ -24,6 +24,7 @@ test("reference composition, seven sections, custom guides, camera and real phot
   for (const [sectionId, photoId] of [["cabin", "odometer-on"], ["engine-details", "chassis-number"]]) {
     await selectSection(page, sectionId);
     await page.locator(`.photo-requirement-card a[href$="/${photoId}/guide"]`).click();
+    if(photoId === "chassis-number") await page.locator('[data-guide-option="engine"]').click();
     await expect(page.getByRole("heading", { name: "راهنمای عکاسی" })).toBeVisible();
     await snapshotReady(page); await expect.soft(page).toHaveScreenshot(`guide-${photoId}.png`);
     await page.locator(".photo-back").click(); await page.getByRole("link", { name: "بازگشت به نمای کلی" }).click();

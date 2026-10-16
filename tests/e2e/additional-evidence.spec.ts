@@ -147,6 +147,7 @@ test("requested camera/review confirms and continues directly to the next reques
     .getByRole("button", { name: "تأیید و ادامه", exact: true })
     .click();
   await expect(page).toHaveURL(/\/photo\/chassis-number\/guide$/);
+  await page.locator('[data-guide-option="engine"]').click();
   await expect(
     page.getByText("نیاز به عکاسی مجدد: لطفاً نزدیک‌تر و واضح‌تر عکاسی کنید."),
   ).toBeVisible();

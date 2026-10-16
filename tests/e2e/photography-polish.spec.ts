@@ -153,6 +153,7 @@ test("new draft has orange attention with zero credit and technical guidance rem
   await page.locator(".photography-categories button").nth(2).click();
   await page.getByRole("link", { name: "مشاهده بخش" }).click();
   await page.locator('.photo-requirement-card a[href$="/spec-plate/guide"]').click();
+  await page.locator('[data-guide-option="pillar"]').click();
   await expect(page.getByRole("heading", { name: "راهنمای عکاسی" })).toBeVisible();
   await snapshotReady(page);
   await expect(page.locator('.photo-guide-image')).toHaveAttribute("data-frame", "technical-closeup");

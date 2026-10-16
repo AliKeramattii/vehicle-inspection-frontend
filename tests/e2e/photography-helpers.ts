@@ -50,19 +50,19 @@ export async function snapshotReady(page: Page) {
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => Promise.all([...document.images].map((image) => { image.loading = "eager"; return image.decode(); })));
 }
-export async function mockCamera(page: Page) {
-  await page.addInitScript(() => {
+export async function mockCamera(page: Page, sampleImage?: string) {
+  await page.addInitScript((sampleImage?: string) => {
     const target = window as Window & { photographyCameraCalls?: number; stoppedPhotoTracks?: number };
     target.photographyCameraCalls = 0; target.stoppedPhotoTracks = 0;
     Object.defineProperty(navigator, "mediaDevices", { configurable: true, value: { getUserMedia: async () => {
       target.photographyCameraCalls!++;
       const id = location.pathname.split("/").at(-2) ?? "front-45-right";
-      const blob = await (await fetch(`/assets/inspection-vehicle/photo-guides/${id}.webp`)).blob();
+      const blob = await (await fetch(sampleImage ?? `/assets/inspection-vehicle/photo-guides/${id}.webp`)).blob();
       const bitmap = await createImageBitmap(blob), canvas = document.createElement("canvas"); canvas.width = bitmap.width; canvas.height = bitmap.height;
       canvas.getContext("2d")!.drawImage(bitmap, 0, 0); bitmap.close();
       const stream = canvas.captureStream(5);
       for (const track of stream.getTracks()) { const stop = track.stop.bind(track); track.stop = () => { target.stoppedPhotoTracks!++; stop(); }; }
       return stream;
     } } });
-  });
+  }, sampleImage);
 }

@@ -13,7 +13,7 @@ test.beforeEach(async ({ page }, info) => {
 });
 test.afterEach(({ page }) => expect(errors.get(page) ?? [], "Console/page/resource errors").toEqual([]));
 async function visual(page: Page, name: string) {
-  if (name.startsWith("video-ready") || name === "video-recording" || name === "video-fallback") await expect(page.locator(".recorder-ghost img")).toBeVisible();
+  if (name.startsWith("video-ready") || name === "video-recording" || name === "video-fallback") await expect(page.locator(".recorder-ghost img")).toHaveCount(0);
   if (name.startsWith("video-review") || name === "video-replacement") {
     await expect(page.locator(".walkaround-review")).toBeVisible();
     await expect.poll(() => page.locator(".walkaround-review").evaluate((video: HTMLVideoElement) => video.readyState)).toBeGreaterThanOrEqual(2);

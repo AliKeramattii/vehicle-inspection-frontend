@@ -85,3 +85,7 @@ Existing semantic runtime tokens and scoped Admin/Reviewer light/dark/system the
 Tenant brand customization remains supported; evidence statuses are independent. See
 `docs/COLOR_SYSTEM.md` for mapping and measured contrast. Historical screenshot baselines are
 not overwritten by this refinement.
+
+## Supplied VIN/spec and readiness guidance
+
+The six files in new-vehicle/guides supplement the approved sedan set. Readiness explicitly uses readiness-clean-vehicle.webp and readiness-open-space.webp. VIN/spec offers pillar/spec-plate, engine-wall/chassis-number, under-seat/spec-plate-2 and windshield/Pearl-white sedan windshield VIN inspection.webp as alternative guidance for an existing requirement, never extra photos. Public windshield spelling is photo-guides/windshield-vin.webp; all original names/bytes are preserved. Transparent generated/ghost-guides assets are photo-only alignment overlays, not 360 guidance. No cleared sedan orbit clip was supplied. See docs/VEHICLE_GUIDANCE_CONSOLIDATION.md.

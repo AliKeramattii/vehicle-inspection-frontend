@@ -1,4 +1,5 @@
 "use client";
+import { useIdentificationGuide } from "./use-identification-guide";
 
 import { useRef, useState } from "react";
 import Link from "next/link";
@@ -16,12 +17,13 @@ import { requirementRetakeReason } from "./photography-model";
 import { OdometerField } from "@/features/capture-package/odometer-field";
 import type { OdometerReading } from "@/features/capture-package/capture-package-model";
 
-export function PhotoReview({ photo, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote }: {
+export function PhotoReview({ photo: originalPhoto, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote, guideScope }: {
   photo: PhotoRequirement; section: InspectionSection; record?: LocalPhoto; inspectionId: string;
   onConfirm: () => void; onRetake: () => void; pending?: boolean; error?: string;
   odometer?: { reading?: OdometerReading; onSave: (kilometers: number) => void };
-  navigation?: { backHref: string; backLabel: string; guideHref: string; returnLabel?: string }; preservationNote?: string;
+  guideScope?: string; navigation?: { backHref: string; backLabel: string; guideHref: string; returnLabel?: string }; preservationNote?: string;
 }) {
+  const { photo } = useIdentificationGuide(originalPhoto, inspectionId, guideScope);
   const [expanded, setExpanded] = useState<"sample" | "user">();
   const trigger = useRef<HTMLButtonElement | null>(null);
   const blob = record?.draft?.blob ?? record?.blob, draft = Boolean(record?.draft);

@@ -15,10 +15,10 @@ const digest=(file:string)=>createHash("sha256").update(readFileSync(file)).dige
 const boot:SiteBootstrap={schemaVersion:1,tenantId:"demo",apiBaseUrl:"/api",siteSettingsEndpoint:"/api/public/site-settings",settingsSource:"mock"};
 afterEach(()=>vi.restoreAllMocks());
 describe("supplied sedan image boundaries",()=>{
- it("keeps nineteen supplied sources and twelve exact required guides",()=>{
+ it("keeps twenty supplied sources and twelve exact required guides",()=>{
   const approved = JSON.parse(readFileSync("docs/NEW_VEHICLE_ASSETS.json", "utf8")) as { assets: { source: string }[] };
   const names = approved.assets.filter(asset => asset.source.includes("/source/")).map(asset => asset.source.split("/").at(-1));
-  expect(names).toHaveLength(19);
+  expect(names).toHaveLength(20);
   expect(readdirSync("references/assets/new-vehicle/source")).toEqual(expect.arrayContaining(names));
   const photos=template.sections.flatMap(section=>section.photoRequirements);expect(template.sections).toHaveLength(7);expect(photos).toHaveLength(12);
   for(const photo of photos)expect(digest("public"+photo.sampleImage)).toBe(digest("references/assets/new-vehicle/source/"+photo.id+".webp"));

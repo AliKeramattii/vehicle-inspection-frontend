@@ -183,3 +183,7 @@ Production remains2D. Optional3D pins derive accepted local capture separately f
 ## Supplied sedan reference consolidation
 
 Active reference artwork now comes from `src/config/vehicle-assets.ts`: twelve exact guides, eight explicit physical/category view roles and eight transparent recording ghosts. Known old built-in guide URLs resolve at presentation time for pinned template history; actual captured Blobs and tenant custom images do not pass through a replacement migration. Marker/image layers share the source aspect ratio. See `NEW_VEHICLE_ASSET_AUDIT.md` and `NEW_VEHICLE_ASSET_MIGRATION.md`; the earlier asset-continuity candidate list is historical and has been superseded for active 2D defaults. The optional Sportage 3D subsystem is unchanged.
+
+## Sedan location choices and photo-only alignment
+
+See VEHICLE_GUIDANCE_CONSOLIDATION.md. Four VIN/spec location variants retain the same configured requirement identity. Faint supplied ghosts now belong to still-photo camera alignment only, outside the saved Blob. Walk-around recording uses separate instructional guidance; no photo ghosts or gallery import. The matching cleared 4–5s orbit clip remains an explicit asset blocker.

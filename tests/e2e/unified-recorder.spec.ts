@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { mockRecorder, packageWorkflow, recordedState, captureData, openPackageReview } from "./capture-package-helpers";
 const folder = ".agent/reference-review/unified";
-test("V2 live camera, eight manual ghosts, pause-aware target, durable review and replacement", async ({ page }) => {
+test("V2 live camera, separate movement guidance, pause-aware target, durable review and replacement", async ({ page }) => {
   const errors: string[] = []; page.on("pageerror", error => errors.push(error.message));
   await mkdir(folder, { recursive: true }); await mockRecorder(page); await packageWorkflow(page, { kilometers: 48320, video: "accepted" });
   await openPackageReview(page);
@@ -13,12 +13,10 @@ test("V2 live camera, eight manual ghosts, pause-aware target, durable review an
   expect(await page.evaluate(() => (window as Window & { photographyCameraCalls?: number }).photographyCameraCalls ?? 0)).toBe(0);
   await expect(page.locator('input[type="file"]')).toHaveCount(0);
   await page.screenshot({ path: folder + "/recorder-v2-ready-390.png" });
-  for (let index = 0; index < 8; index++) {
-    await expect(page.locator(".recorder-ghost")).toHaveAttribute("data-guide", ["front","front-45-right","right","rear-45-left","rear","rear-45-right","left","front-45-left"][index]);
-    await page.getByRole("button", { name: "نمای راهنمای بعدی" }).click();
-  }
-  await page.getByRole("button", { name: "نمایش راهنمای خودرو" }).click(); await expect(page.locator(".recorder-ghost")).toHaveCount(0);
-  await page.getByRole("button", { name: "نمایش راهنمای خودرو" }).click();
+  await expect(page.locator(".recorder-ghost")).toHaveCount(0);
+  await page.getByRole("button", { name: "راهنمای ضبط ویدیو", exact: true }).click();
+  await expect(page.getByRole("dialog").locator(".walkaround-instruction-preview")).toBeVisible();
+  await page.getByRole("button", { name: "بستن" }).click();
   await recordedState(page); await page.clock.fastForward(11000);
   await expect(page.getByLabel("مدت ضبط")).toHaveText("۰۰:۳۹");
   await expect(page.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "65");
