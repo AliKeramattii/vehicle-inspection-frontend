@@ -1,0 +1,32 @@
+/* Checkpoint 1: editorial welcome + a distinct start task. Other entry screens are untouched. */
+.landing-screen{--landing-gutter:24px;display:flex;flex-direction:column;background:var(--color-background)}
+.landing-screen>.entry-branding{justify-content:space-between;padding:20px var(--landing-gutter) 4px;min-height:64px}
+.landing-welcome{flex:none;min-width:0}
+.landing-welcome .landing-intro{text-align:start;margin:22px 0 0;padding-inline:var(--landing-gutter)}
+.landing-intro .landing-eyebrow{font-size:12px;font-weight:650;color:var(--color-muted);margin:0 0 8px;line-height:1.8}
+.landing-welcome h1{font-size:32px;line-height:1.45;letter-spacing:-.6px;font-weight:850}
+.landing-welcome .landing-intro>p:last-child{font-size:13px;line-height:1.9;margin-top:10px;color:var(--color-muted)}
+.landing-welcome .landing-intro>p:last-child br{display:none}
+.landing-welcome .landing-art{margin:6px 0 0;max-block-size:none;aspect-ratio:1.95;width:100%}
+.landing-start{background:var(--color-surface);border-radius:28px 28px 0 0;padding:22px var(--landing-gutter) 4px;flex:1;border-top:1px solid var(--color-border)}
+.landing-start .referral-panel{margin:0;padding:0;border:0;background:none;box-shadow:none;border-radius:0}
+.landing-start .referral-label{align-items:flex-start;margin-bottom:16px;gap:10px}
+.landing-start .referral-icon{width:36px;height:36px;border-radius:10px;background:var(--color-primary-soft)}
+.landing-start .referral-label h2{font-size:17px;font-weight:750;line-height:1.7}
+.landing-start .referral-label p{font-size:12px;line-height:1.8;margin-top:2px}
+.landing-start .code-control{height:52px}.landing-start .code-cells{gap:8px}
+.landing-start .code-cell{background:var(--color-background);border-color:var(--color-border-strong);font-size:22px}
+.landing-start .entry-primary-button{margin-top:14px;font-size:16px;height:50px;box-shadow:none;border-radius:12px;justify-content:space-between;padding-inline:18px}
+.landing-start .cta-arrow{background:none;color:inherit;margin:0}
+.landing-start .landing-benefits{margin:20px 0 0;gap:8px;padding-top:18px;border-top:1px solid var(--color-border)}
+.landing-start .landing-benefit+.landing-benefit{border:0}
+.landing-start .benefit-icon{width:30px;height:30px;background:none}.landing-start .benefit-icon svg{width:22px;height:22px}
+.landing-start .landing-benefit h2{font-size:11px;font-weight:700;line-height:1.8;white-space:normal;margin:2px 0}
+.landing-start .landing-benefit p{font-size:11px;line-height:1.7;white-space:normal}
+.landing-start .entry-trust-footer{margin:16px 0 0}.landing-start .trust-divider{display:none}
+.landing-start .entry-trust-footer>p{font-size:10px;line-height:1.8}.landing-start .entry-support summary{font-size:12px}
+@media(min-height:900px){.landing-welcome .landing-intro{margin-top:30px}.landing-welcome .landing-art{aspect-ratio:1.8}.landing-start{padding-top:28px}}
+@media(max-height:810px){.landing-welcome .landing-intro{margin-top:14px}.landing-welcome h1{font-size:29px}.landing-start{padding-top:18px}.landing-start .landing-benefits{margin-top:16px;padding-top:12px}.landing-start .entry-trust-footer{margin-top:10px}}
+@media(max-width:359px){.landing-screen{--landing-gutter:18px}.landing-welcome h1{font-size:27px}.landing-start .referral-label p{font-size:12px}.landing-start .landing-benefit h2{font-size:11px}}
+
+@media(max-height:600px){.landing-screen>.entry-branding{min-height:48px;padding-top:10px}.landing-welcome .landing-intro{margin-top:8px}.landing-intro .landing-eyebrow{display:none}.landing-welcome h1{font-size:24px;line-height:1.4}.landing-welcome .landing-intro>p:last-child{font-size:12px;margin-top:6px}.landing-welcome .landing-art{max-block-size:70px;aspect-ratio:5}.landing-start{padding-top:12px}.landing-start .referral-label{margin-bottom:10px}.landing-start .entry-primary-button{margin-top:10px}}

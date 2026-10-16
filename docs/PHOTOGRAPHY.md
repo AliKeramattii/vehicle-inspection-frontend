@@ -1,9 +1,6 @@
 # Phase 04 — reference-led 2D photography
 
-Reference `07-inspection-3d-home.png` defines the composition: compact branding/journey, circular
-and segmented progress, dominant studio vehicle, image markers, restrained view controls,
-categories, two rows of image cards and bottom action. Production uses canonical static 2D
-photography, seven sections and twelve requirements. Experimental Three/R3F remains isolated.
+Checkpoint 1 of the user-approved reference-driven redesign uses Fleetr for vehicle-first hierarchy, Automotive Inspection for grouped progress, and EGO for spatial/task separation. The legacy reference 07 remains historical comparison material, rather than the new pixel target. Production still uses the canonical 2D sedan, seven sections and twelve configured requirements. The optional licensed Three/R3F preview remains isolated.
 
 ## Configuration and state ownership
 
@@ -58,16 +55,15 @@ The twelve supplied sedan WebPs remain byte-identical under `public/assets/inspe
 with the original filenames documented in INDEX. Next Image optimizes static guidance/artwork;
 local Blob URLs bypass HTTP optimization and are revoked on change/unmount.
 
-The main vehicle artwork fits a 300–360px studio region without clipping the useful silhouette.
+The overview uses a 240–290px responsive studio region, removing unused surrounding canvas height while retaining full-width contained artwork without clipping the useful silhouette.
 The source-ratio artwork layer contains both image and percentage markers, so crop coordinates
 remain stable. Small markers alone overlay the image. The 58px direction-control row always
 follows the scene with an 8px gap; no breakpoint restores an overlay. Controls are at least 44px
-wide and 52px tall with 20–22px icons and 11px labels. Local horizontal scrolling is available.
-The native RTL two-row carousel uses 108×110px cards, 52px contained thumbnails, 12px titles
-and 11px status. Selection scrolls only this rail, never the vertical content region. Primary
+wide and 50px tall with 20–22px icons and 11px labels. Local horizontal scrolling is available.
+The native RTL single-row filmstrip uses 120×142px cards, 70px contained thumbnails, 12px titles and 11px status. Selection scrolls only this rail, never the vertical content region. Primary
 selection is markers/cards, progression is the sticky CTA; directions/categories are secondary
 and section detail is contextual. At short heights the existing single internal content region
-scrolls to the second card row while the header/actions stay visible.
+scrolls to the filmstrip while the header/actions stay visible.
 
 Presentation palette:
 - Gray: no photo, numbered marker / `ثبت نشده`.

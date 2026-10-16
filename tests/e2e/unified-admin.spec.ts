@@ -83,7 +83,7 @@ test("dark theme covers Admin routes, dialogs, tables and assigned reviewer work
   await page.goto("/admin/assignments"); await page.getByRole("combobox",{name:"ارجاع BDI-8F31K2"}).selectOption("reviewer-demo");
   await page.goto("/reviewer/cases/insp_demo"); await expect(page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true})).toBeVisible();
   await expect(page.locator(".reviewer-root")).toHaveCSS("background-color",await semanticColor(page,"--color-slate-900"));
-  await expect(page.locator(".review-facts>section").first()).toHaveCSS("background-color",await semanticColor(page,"--color-slate-800"));
+  await expect(page.locator(".review-case-context")).toHaveCSS("background-color",await semanticColor(page,"--color-slate-800"));
   await page.getByRole("textbox",{name:"دلیل درخواست ثبت مجدد"}).fill("پلاک خوانا نیست.");
   await page.screenshot({path:folder+"/reviewer-workspace-dark-1440.png"});
   await page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true}).click(); await expect(page.getByText("نیاز به مدرک تکمیلی",{exact:true})).toBeVisible();

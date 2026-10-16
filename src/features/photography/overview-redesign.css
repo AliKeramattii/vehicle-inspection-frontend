@@ -1,0 +1,38 @@
+/* Vehicle stage, secondary view controls, then one clear evidence filmstrip. */
+.photography-overview-content{padding-bottom:16px}
+.photography-overview .photography-progress{padding:12px 20px;gap:12px;flex-direction:row}
+.photography-overview .photography-progress-ring{width:50px;height:50px;padding:3px}
+.photography-overview .photography-progress-ring strong{font-size:20px;line-height:23px}
+.photography-overview .photography-progress-ring small{font-size:9px}
+.photography-overview .photography-progress-segments{height:5px;margin-bottom:7px;gap:4px}
+.photography-overview .photography-progress-detail p{font-size:12px;line-height:1.7}
+.photography-overview .photography-progress-detail>small{font-size:11px;line-height:1.7}
+.photography-overview .vehicle-photo-scene{height:clamp(240px,30dvh,290px);background:var(--color-surface)}
+.photography-overview .vehicle-photo-artwork>.photography-image{background:var(--color-surface)}
+.photography-overview .vehicle-photo-controls{position:static;margin:8px 16px 0;min-height:58px;border:0;border-radius:0;background:none;border-bottom:1px solid var(--color-border);padding:0 0 8px;gap:4px}
+.photography-overview .vehicle-photo-controls button{border:1px solid transparent;border-radius:10px;min-width:44px;height:50px;font-size:11px}
+.photography-overview .vehicle-photo-controls button[aria-pressed=true]{background:var(--color-selected-soft);border-color:var(--color-selected);color:var(--color-selected)}
+.photography-overview .photography-shot-panel{padding:12px 16px 0;background:none;border:0}
+.photography-overview .photography-categories{gap:4px;padding:3px;background:var(--color-surface-soft);border-radius:12px;border:0}
+.photography-overview .photography-categories button{min-height:48px;border:0;border-radius:9px;padding:5px 6px;gap:5px}
+.photography-overview .photography-categories button[aria-pressed=true]{background:var(--color-surface);box-shadow:0 1px 3px color-mix(in srgb,var(--color-slate-900) 8%,transparent);color:var(--color-ink)}
+.photography-overview .photography-categories button>img{width:28px;height:24px}
+.photography-overview .photography-categories strong{font-size:12px;line-height:1.5}
+.photography-overview .photography-categories small{font-size:10px;line-height:1.7}
+.photography-overview .photography-selected-heading{padding-block:14px 10px;align-items:center;gap:10px}
+.photography-overview .photography-selected-heading>div{min-width:0}
+.photography-overview .photography-selected-heading span{font-size:11px;color:var(--color-muted)}
+.photography-overview .photography-selected-heading h2{font-size:15px;line-height:1.8;font-weight:750}
+.photography-overview .photography-selected-heading>a{flex:none;font-size:11px;min-height:44px;padding:4px 8px;border:0;background:none}
+.photography-overview .photography-shot-carousel{grid-template-rows:142px;grid-auto-columns:120px;gap:10px;scroll-padding-inline:2px}
+.photography-overview .photography-shot-card{border-radius:12px;text-align:start}
+.photography-overview .photography-shot-card .photography-image{height:70px}
+.photography-overview .photography-shot-card strong{font-size:12px;line-height:1.6;padding:6px 8px 0;place-items:start}
+.photography-overview .photography-shot-card small{font-size:11px;line-height:1.8;padding:0 8px 6px}
+.photography-overview .photography-shot-card[aria-pressed=true]{border-color:var(--color-selected);background:var(--color-selected-soft)}
+.photography-overview .photography-actions{border-top:1px solid var(--color-border);background:var(--color-surface)}
+.photography-overview .photography-primary{font-size:15px;line-height:1.6;min-height:52px;padding:10px 14px;gap:8px;border-radius:12px}
+@media(min-height:900px){.photography-overview .vehicle-photo-scene{height:290px}}
+@media(max-width:359px){.photography-overview .photography-categories button>img{display:none}}
+.photography-overview .photography-progress-detail h2{font-size:17px;font-weight:800;line-height:1.8;margin-bottom:6px}
+.photography-overview .capture-requirements-link{display:flex;justify-content:space-between;align-items:center;min-height:44px;font-size:12px;color:var(--color-primary-ink);margin-top:10px}

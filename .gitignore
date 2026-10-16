@@ -49,3 +49,8 @@ next-env.d.ts
 # Local public map settings; tooling stays outside public/build output
 /tools/dev-neshan-proxy/site-settings.local.json
 !/tools/dev-neshan-proxy/.env.example
+
+# Downloaded design inspiration: local comparison only, never production artwork
+/references/design/inspiration/**/*.png
+/references/design/inspiration/**/*.jpg
+/references/design/inspiration/**/*.webp

@@ -114,8 +114,8 @@ Use:
 ## Phase 04 photography
 
 Seven reopenable sections and twelve requirements in the current configurable template. Reference
-07 remains the composition source: compact circular/segmented progress, dominant studio vehicle,
-image markers, physical-direction controls, compact categories, two-row shot cards and bottom CTA.
+07 is the historical composition source; the approved Checkpoint-1 redesign supersedes its layout: compact circular/segmented progress, dominant studio vehicle,
+image markers, physical-direction controls, compact categories, image shot cards and bottom CTA.
 The vehicle uses canonical 2D photography in a contained artwork layer with matching percentage
 marker coordinates. Direction controls sit below the image in normal flow at every breakpoint.
 Guidance/review retain full-frame contain images for evidence inspection.
@@ -189,3 +189,14 @@ Admin/reviewer theme uses scoped semantic surface/ink/border/status variables an
 PRESERVE retains RTL, Vazirmatn, configured primary and the existing Lucide/custom icon family. Additive app spacing roles in product-tokens.css are 4/8/12/16/20/24/32; controls 10, inputs 12, cards 16, sheets 24; target 44/action 48. Operations retain scoped light/dark surfaces and status colors.
 ApplicationLogo renders the approved unchanged multicolor SVG, proportionally cropping only transparent viewBox margins. RuntimeLogo remains brokerage identity. The sun/moon control uses a 0.22s CSS state transition, disabled by reduced-motion, with a separate system action. Customer remains light and camera remains intentionally dark.
 Readiness has four quiet icon/title/explanation items and no repeated ready badge. Genuine failures, unsupported features and storage uncertainty retain text/recovery; no automatic camera/GPS permission. Reviewer uses current-revision counts, visible-only durable thumbnails and full contain evidence. Upload completion and reviewer approval remain separate. Admin navigation groups existing routes and settings exposes local draft/publication/history. No new framework, production server dependency, fake quality result or customer review checklist.
+
+
+## Reference-driven redesign: Checkpoint 1 (awaiting visual approval)
+
+Only landing, photography overview, Site Settings and the reviewer evidence workspace receive the new presentation. The user explicitly superseded legacy PNG composition for these representative screens. See REFERENCE_DRIVEN_REDESIGN_PLAN.md for inspected references, route matrix and approval boundary.
+
+Reuse the existing customer typography roles and LAB palette: entry display about 29–32px, photo page heading 17px, selected task 15px, shot title 12px and status 11px. Operations headings are 24–27px, section headings 15–20px, field labels 13px and captions 11–12px. Smaller text is limited to the miniature noninteractive settings preview and compact numerals. Controls stay at least 44px; primary customer actions remain 50–52px. No global token or font changes.
+
+Landing separates the welcome/contained sedan from the start task. Photography removes excess scene padding while retaining the image/marker aspect coordinate system, below-image view controls and one 120×142px native RTL filmstrip with 70px previews. Long content uses the existing internal scroller. Site Settings has one horizontal category bar, a form work surface, a validated live draft preview (also in the preview dialog) and a stable save/publish boundary. Reviewer facts live in its scrollable decision rail/full facts dialog; evidence owns the main region and decision buttons remain pinned. Existing light/dark/system, tenant colors, semantic evidence states and AppViewport remain.
+
+No new animation, framework, model, business state, API or asset replacement. No approved baseline changes before visual approval.

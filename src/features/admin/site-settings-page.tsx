@@ -3,10 +3,9 @@ import { useEffect,useMemo,useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useForm,useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { useBrandingAsset } from "./assets/use-branding-asset";
 import { useRuntimeSite } from "@/config/site-settings.provider";
-import { siteSettingsSchema,validateContext,contrast,type SiteSettings } from "@/config/site-settings.schema";
+import { siteSettingsSchema,validateContext,type SiteSettings } from "@/config/site-settings.schema";
 import { SiteSettingsRepository,IndexedDbSettingsPersistence,type SettingsWorkspace } from "@/config/site-settings.repository";
 import { useAdmin } from "./admin-context";
 import { AdminPageHeading,WorkspaceState,persian } from "./admin-common";
@@ -16,8 +15,9 @@ import { InlineAlert } from "@/components/ui/status";
 import { NativeDialog } from "@/components/ui/native-dialog";
 import { SiteSettingsFields,settingTabs } from "./site-settings-fields";
 import { SettingsNavigation, settingsDescriptions } from "./settings-navigation";
-import { ApplicationLogo } from "@/components/layout/application-logo";
 import "./site-settings.css";
+import { SettingsBrandPreview } from "./settings-brand-preview";
+import "./settings-redesign.css";
 export function SiteSettingsPage() {
   const site=useRuntimeSite(),admin=useAdmin();
   const repository=useMemo(()=>new SiteSettingsRepository(new IndexedDbSettingsPersistence(),site.contextKey,site.bootstrap,site.origin,site.settings,undefined,admin.workspace?.templates.flatMap(t=>t.versions.filter(v=>v.state==="published").map(v=>({id:t.id,version:v.version})))),[site.contextKey,site.bootstrap,site.origin,site.settings,admin.workspace]);
@@ -49,18 +49,19 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
     catch {setDirty(form.formState.isDirty);setError("خواندن نسخه تازه ممکن نشد. تغییرات شما محفوظ است؛ دوباره تلاش کنید.");}
     finally {setBusy(false);}
   }
-  let previewLogo:string|null=null;
+  let previewLogo:string|null=null,previewHero:string|null=null;
   try {
-    const checked=siteSettingsSchema.parse({...site.settings,identity:{...site.settings.identity,logo:values.identity.logo}});
-    validateContext(site.bootstrap,checked,site.origin);previewLogo=checked.identity.logo;
+    const checked=siteSettingsSchema.parse({...site.settings,identity:{...site.settings.identity,logo:values.identity.logo},images:{...site.settings.images,landing:values.images.landing}});
+    validateContext(site.bootstrap,checked,site.origin);previewLogo=checked.identity.logo;previewHero=checked.images.landing;
   } catch { /* Never request an unvalidated asset entered in the editor. */ }
   const resolvedLogo=useBrandingAsset(previewLogo,{contextKey:site.contextKey,tenantId:site.bootstrap.tenantId});
+  const resolvedHero=useBrandingAsset(previewHero,{contextKey:site.contextKey,tenantId:site.bootstrap.tenantId});
   const savedDraft=JSON.stringify(state.draft)!==JSON.stringify(state.published);
   const lifecycle=busy?"در حال ذخیره…":dirty?"تغییرات ذخیره نشده":savedDraft?"پیش‌نویس ذخیره‌شده؛ منتشر نشده":"هماهنگ با نسخه منتشرشده";
   const errors=Object.values(form.formState.errors);
   const candidates=workspace?.templates.flatMap(t=>t.versions.filter(v=>v.state==="published").map(v=>({id:t.id,version:v.version,title:t.title})))??[];
   return <div className="site-settings-workspace">
-    <div className="site-settings-heading"><AdminPageHeading title="تنظیمات سایت" description="شخصی‌سازی نصب کارگزاری؛ انتشار در این محیط فقط محلی و آزمایشی است."/><span>نسخه منتشرشده {persian(state.published.version)}</span></div>
+    <div className="site-settings-heading"><AdminPageHeading title="تنظیمات سایت" description="شخصی‌سازی نصب کارگزاری؛ انتشار در این محیط فقط محلی و آزمایشی است."/><div className="settings-workspace-context"><span>نسخه منتشرشده <bdi>{persian(state.published.version)}</bdi></span><strong data-attention={dirty||savedDraft}>{dirty?"پیش‌نویس در حال ویرایش":savedDraft?"پیش‌نویس آماده انتشار":"تنظیمات منتشرشده"}</strong></div></div>
     <div className="site-settings-body"><SettingsNavigation tab={tab} onChange={setTab}/>
     <form className="site-settings-form" onSubmit={form.handleSubmit(async value=> {
       try {validateContext(site.bootstrap,value,site.origin);}catch(e){setError((e as Error).message);return;}
@@ -75,11 +76,7 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
             const [id,version]=JSON.parse(event.target.value) as [string,number];form.setValue("application.template",{id,version},{shouldDirty:true});
           }}>{candidates.map(c=><option key={c.id+":"+c.version} value={JSON.stringify([c.id,c.version])}>{c.title} / نسخه {persian(c.version)}</option>)}</select></label>}
         </fieldset>
-        <aside className="site-settings-preview" style={{background:values.theme.background,color:values.theme.onBackground}}>
-          <div className="settings-preview-label"><ApplicationLogo width={36}/><p>پیش‌نمایش برند کارگزاری</p></div>{resolvedLogo.url&&<Image src={resolvedLogo.url!} alt="لوگوی پیش‌نمایش" width={48} height={48} unoptimized/>}<h2>{values.identity.brokerageName}</h2><p>{values.identity.appTitle}</p>
-          <span className="site-settings-preview-action" style={{background:values.theme.primary,color:values.theme.onPrimary}}>شروع بازدید</span>
-          <p>کنتراست: <bdi>{contrast(values.theme.primary,values.theme.onPrimary).toFixed(2)}</bdi></p><p>تنها پیش‌نمایش؛ قالب و مدارک موجود تغییر نمی‌کنند.</p>
-        </aside>
+        <SettingsBrandPreview values={values} logo={resolvedLogo.url} hero={resolvedHero.url}/>
         {(errors.length>0)&&<InlineAlert tone="destructive"><p>تنظیمات معتبر نیست. عنوان، رنگ‌ها و نشانی تصاویر را بررسی کنید.</p>{Object.entries(form.formState.errors.theme??{}).map(([key,value])=><p key={key}>{typeof value==="object"&&value&&"message" in value?String(value.message):""}</p>)}</InlineAlert>}
         {error&&<InlineAlert tone="destructive">{error}<button type="button" className="admin-text-action" disabled={busy} onClick={()=>confirmAction(()=>void reloadLatest())}>بارگذاری نسخه تازه</button></InlineAlert>}
         {message&&<InlineAlert tone="success">{message}</InlineAlert>}
@@ -93,6 +90,6 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
     </form></div>
     <details className="settings-history"><summary>تاریخچه انتشار و تغییرات محلی</summary><div>{state.audit.length ? <ol>{state.audit.slice().reverse().slice(0,10).map((event,index)=><li key={index}><strong>{event.action}</strong><span>{event.actor}</span><time>{new Date(event.at).toLocaleString("fa-IR")}</time></li>)}</ol> : <p>هنوز تغییری در این مرورگر ثبت نشده است.</p>}<p>{persian(state.history.length)} نسخه تنظیمات در تاریخچه محلی</p></div></details>
     {publishing&&<NativeDialog title="انتشار تنظیمات محلی" onDismiss={()=>setPublishing(false)}><p>تنظیمات فقط برای همین مرورگر و نصب نمونه منتشر می‌شود. این تغییر انتشار واقعی در سرور نیست.</p>{error&&<InlineAlert tone="destructive">{error}</InlineAlert>}<div className="admin-dialog-actions"><SecondaryButton onClick={()=>setPublishing(false)}>بازگشت</SecondaryButton><PrimaryButton loading={busy} onClick={async()=>{const success=await apply(()=>repository.publish(actor,revision),"تنظیمات نمونه منتشر شد.");if(success){setPublishing(false);await site.refresh();}}}>تأیید انتشار</PrimaryButton></div></NativeDialog>}
-    {preview&&<NativeDialog title="پیش‌نمایش تنظیمات سایت" onDismiss={()=>setPreview(false)}><div className="site-settings-dialog-preview" style={{background:values.theme.background,color:values.theme.onBackground}}><h2>{values.identity.brokerageName}</h2><p>{values.identity.appTitle}</p><span className="site-settings-preview-action" style={{background:values.theme.primary,color:values.theme.onPrimary}}>شروع بازدید</span><p>۱۲ تصویر + کیلومتر + ویدیوی ۳۶۰ درجه؛ مستقل از تنظیمات برند</p></div><SecondaryButton onClick={()=>setPreview(false)}>بستن پیش‌نمایش</SecondaryButton></NativeDialog>}
+    {preview&&<NativeDialog title="پیش‌نمایش تنظیمات سایت" onDismiss={()=>setPreview(false)}><div className="site-settings-dialog-preview"><SettingsBrandPreview values={values} logo={resolvedLogo.url} hero={resolvedHero.url}/><p>۱۲ تصویر + کیلومتر + ویدیوی ۳۶۰ درجه؛ مستقل از تنظیمات برند</p></div><SecondaryButton onClick={()=>setPreview(false)}>بستن پیش‌نمایش</SecondaryButton></NativeDialog>}
   </div>;
 }

@@ -1,5 +1,4 @@
 "use client";
-import { useSyncExternalStore } from "react";
 import { Building2, Palette, Images, ListChecks, MapPinned, HardDrive } from "lucide-react";
 import { settingTabs } from "./site-settings-fields";
 export const settingsDescriptions: Record<typeof settingTabs[number], string> = {
@@ -11,11 +10,8 @@ export const settingsDescriptions: Record<typeof settingTabs[number], string> = 
   "فضای ذخیره‌سازی":"مرز ذخیره‌سازی سرور آینده؛ این محیط به سرور تولید متصل نیست.",
 };
 const icons=[Building2,Palette,Images,ListChecks,MapPinned,HardDrive];
-const query="(max-width: 700px)";
-function subscribeLayout(callback:()=>void){const media=window.matchMedia(query);media.addEventListener("change",callback);return()=>media.removeEventListener("change",callback);}
 export function SettingsNavigation({tab,onChange}:{tab:typeof settingTabs[number];onChange:(tab:typeof settingTabs[number])=>void}) {
- const horizontal=useSyncExternalStore(subscribeLayout,()=>window.matchMedia(query).matches,()=>false);
- return <div aria-orientation={horizontal?"horizontal":"vertical"} className="admin-tabs site-settings-tabs" role="tablist" aria-label="بخش تنظیمات">{settingTabs.map((label,index)=>{const Glyph=icons[index];return <button type="button" key={label} role="tab" id={"settings-tab-"+index} aria-controls="settings-panel" aria-selected={tab===label} tabIndex={tab===label?0:-1} onClick={()=>onChange(label)} onKeyDown={event=>{
+ return <div aria-orientation="horizontal" className="admin-tabs site-settings-tabs" role="tablist" aria-label="بخش تنظیمات">{settingTabs.map((label,index)=>{const Glyph=icons[index];return <button type="button" key={label} role="tab" id={"settings-tab-"+index} aria-controls="settings-panel" aria-selected={tab===label} tabIndex={tab===label?0:-1} onClick={()=>onChange(label)} onKeyDown={event=>{
    const step=event.key==="ArrowDown"||event.key==="ArrowLeft"?1:event.key==="ArrowUp"||event.key==="ArrowRight"?-1:0;
    const next=event.key==="Home"?0:event.key==="End"?settingTabs.length-1:step?(index+step+settingTabs.length)%settingTabs.length:undefined;
    if(next===undefined)return;event.preventDefault();onChange(settingTabs[next]);document.getElementById("settings-tab-"+next)?.focus();
