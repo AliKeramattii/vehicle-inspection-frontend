@@ -3,7 +3,7 @@
 ## Delivery status
 Implementation commit: 893af1e0aa0a2c99517bd814c357f3395a5984a4 (feat: add sedan VIN guidance and photo alignment), pushed and independently verified on origin/feat/unified-ui-admin-3d. Work performed only in C:/Projects/vehicle-inspection-integrated.
 
-**Partially complete:** all asset/VIN/photo-alignment work is implemented; a matching cleared 4–5-second 3D orbit clip is still missing. The static sedan path illustration is explicitly not that deliverable. The only available restricted Sportage GLB was not modified or published. See VEHICLE_GUIDANCE_CONSOLIDATION.md.
+**Approved preparation scope complete:** the user selected the prepared guide-slot approach and requires a matching, cleared sedan orbit clip before motion is enabled. The clip itself is not available, generated or configured. Static sedan path guidance remains the current fallback; existing Sportage 3D restrictions remain unchanged. See VEHICLE_GUIDANCE_CONSOLIDATION.md. This approval follow-up changes documentation only; the implementation validation results below are retained from the preceding delivery and were not rerun for this documentation-only update.
 
 ## Actual command results
 - npm run lint: PASS, exit 0.

@@ -39,14 +39,14 @@ Lint, typecheck, unit suite, focused browser navigation/media/viewport tests, pr
 - [x] Audit, canonical Git recovery and reference inspection.
 - [x] Asset wiring, four VIN choices and photo overlays implemented.
 - [x] Video ghost removal and safe static guidance implemented.
-- [ ] Matching cleared 4–5-second 3D orbit clip: blocked by missing asset/clearance.
+- [x] Approved preview boundary: guide slot prepared; require a matching, cleared 4–5-second sedan clip before enabling motion. No clip generated or configured.
 - [x] Validation and visual review: lint/typecheck/build exit 0, 400 unit tests, 21 focused and 69 regression browser passes. Four new baselines only.
 - [x] Documentation and Git: implementation 893af1e0aa0a2c99517bd814c357f3395a5984a4 pushed; validation follow-up records actual results.
 
 ## Discovery
-Only available GLB is the unchanged, noncommercial Sportage model; no matching sedan orbit clip/model supplied. User clarification requested while unrelated approved work proceeds.
+Only available GLB is the unchanged, noncommercial Sportage model; no matching sedan orbit clip/model supplied. The user approved preparing the guide slot and requiring a matching, cleared sedan clip while keeping existing 3D restrictions. The clip is a future asset prerequisite, outside this approved preparation scope.
 
 ## Final review
-All 662 protected hashes match. Unrelated eight tracked edits remain unstaged. No model, historical automotive image or old baseline was changed. The task remains partially complete because the requested animated sedan orbit clip is unavailable; do not label the static path as that deliverable.
+All 662 protected hashes match. Unrelated eight tracked edits remain unstaged. No model, historical automotive image or old baseline was changed. The approved preparation scope is complete. The actual animated sedan orbit clip remains unavailable; do not label the static path as that deliverable.
 
-Implementation remote verification: origin/feat/unified-ui-admin-3d returned 893af1e0aa0a2c99517bd814c357f3395a5984a4. Final overall status remains PARTIAL solely for the missing cleared animated orbit preview.
+Implementation remote verification: origin/feat/unified-ui-admin-3d returned 893af1e0aa0a2c99517bd814c357f3395a5984a4. Final status after user clarification: APPROVED PREPARATION COMPLETE; actual clip integration remains pending a matching cleared asset and separate authorization.
