@@ -1,4 +1,4 @@
-import { BrandingBackground } from "@/config/branding-assets";
+import { CustomerHeroArtwork } from "@/components/layout/customer-hero-artwork";
 import { Icon } from "@/components/ui/icon";
 import { PreparationBack } from "@/features/preparation/preparation-header";
 import { ReadinessRequirements } from "./readiness-requirements";
@@ -12,9 +12,10 @@ export function ReadinessScreen() {
       <p>با انجام چند بررسی ساده، فرآیند بازدید به‌خوبی<br />و با موفقیت انجام خواهد شد.</p>
       <div className="readiness-estimate"><Icon name="clock" size={20} /><span>زمان تقریبی: ۱۲ دقیقه</span></div>
     </div>
-    <BrandingBackground role="readiness" className="readiness-hero" label="آماده‌سازی خودرو">
+    <section className="readiness-hero" aria-label="آماده‌سازی خودرو">
       <div className="readiness-hero-copy"><h2>خودروی شما <span>آماده<br />بازدید است</span>؟</h2><p>با رعایت موارد زیر، می‌توانید بازدید را سریع‌تر و بدون مشکل انجام دهید.</p></div>
-    </BrandingBackground>
+      <CustomerHeroArtwork role="readiness" />
+    </section>
     <ReadinessRequirements />
     <DeviceReadiness />
   </main>;

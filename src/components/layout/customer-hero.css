@@ -1,0 +1,12 @@
+.customer-hero-artwork{position:relative;isolation:isolate;flex:none;min-width:0;width:100%;aspect-ratio:1672/941;max-block-size:270px;overflow:hidden}
+.customer-hero-artwork>img{object-fit:contain;object-position:center;transform:none}
+.customer-hero-artwork[data-customer-hero=otp]{aspect-ratio:3/2;max-block-size:190px}
+.customer-hero-artwork[data-customer-hero=readiness]{aspect-ratio:1672/941;max-block-size:150px}
+.customer-hero-artwork[data-customer-hero=consent]{aspect-ratio:1672/941;max-block-size:150px}
+.customer-hero-artwork[data-customer-hero=referral]{aspect-ratio:1672/941;max-block-size:165px}
+.customer-hero-artwork[data-customer-hero=submission]{aspect-ratio:4/3;inline-size:min(100%,220px);max-block-size:165px;align-self:center}
+@media(max-height:650px){.customer-hero-artwork[data-customer-hero=landing]{max-block-size:150px}.customer-hero-artwork[data-customer-hero=otp]{max-block-size:130px}.customer-hero-artwork[data-customer-hero=consent]{max-block-size:120px}.customer-hero-artwork[data-customer-hero=readiness]{max-block-size:125px}.customer-hero-artwork[data-customer-hero=submission]{inline-size:min(100%,200px);max-block-size:150px}}
+
+@media(max-height:550px){.customer-hero-artwork[data-customer-hero=landing],.customer-hero-artwork[data-customer-hero=otp]{max-block-size:80px}}
+
+@media(min-height:651px) and (max-height:900px){.customer-hero-artwork[data-customer-hero=landing]{max-block-size:200px}}

@@ -71,16 +71,9 @@ test("reference-led readiness and collapsed consent screenshots", async ({ page 
   await page.evaluate(() => document.fonts.ready);
   expect(page.viewportSize()).toEqual({ width: 390, height: 844 });
   const hero = page.locator(".readiness-hero");
-  await expect(hero.locator("img")).toHaveCount(0);
-  await expect(hero).toHaveCSS("background-image", /vehicle-inspection/);
-  await hero.evaluate(async (element) => {
-    const sources = [...getComputedStyle(element).backgroundImage.matchAll(/url\("([^"]+)"\)/g)];
-    await Promise.all(sources.map(async ([, source]) => {
-      const image = new Image();
-      image.src = source;
-      await image.decode();
-    }));
-  });
+  await expect(hero.locator("img")).toHaveCount(1);
+  await expect(hero.locator("img")).toHaveCSS("object-fit", "contain");
+  await expect(hero.locator("h2")).toHaveCSS("position", "static");
   await page.evaluate(() => Promise.all([...document.images].map((image) => image.decode())));
   await expect.soft(page).toHaveScreenshot("readiness.png");
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();

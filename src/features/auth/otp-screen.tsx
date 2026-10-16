@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrandingImage } from "@/config/branding-assets";
+import { CustomerHeroArtwork } from "@/components/layout/customer-hero-artwork";
 import { EntryBranding } from "@/components/layout/entry-branding";
 import { Icon } from "@/components/ui/icon";
 import { OtpVerificationCard } from "./otp-verification-card";
@@ -11,7 +11,7 @@ export function OtpScreen() {
     <div className="otp-intro"><h1>تأیید شماره موبایل</h1>
       <p>کد پنج‌رقمی به شماره موبایل زیر ارسال شد.<br />لطفاً کد را وارد کنید تا فرآیند ادامه یابد.</p>
     </div>
-    <div className="otp-art"><BrandingImage role="otp" alt="تلفن همراه و نشان تأیید امن" width={1536} height={1024} sizes="(max-width: 480px) 100vw, 480px" preload /></div>
+    <CustomerHeroArtwork role="otp" className="otp-art" />
     <OtpVerificationCard />
   </main>;
 }

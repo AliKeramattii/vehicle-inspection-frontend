@@ -29,9 +29,9 @@
 .summary-map { width: 90px; height: 86px; flex: none; border-radius: 10px; position: relative; overflow: hidden; background: var(--color-surface-soft); }
 .summary-map img:first-child { width: 100%; height: 100%; object-fit: cover; }
 .summary-map img:last-child { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -70%); }
-.summary-vehicle .vehicle-summary { margin: 0; padding: 0; display: flex; align-items: center; min-height: 116px; background: transparent; border: 0; box-shadow: none; }
-.summary-vehicle .vehicle-summary-render { width: 44%; height: 115px; object-fit: contain; position: static; }
-.summary-vehicle .vehicle-summary-details { flex: 1; padding: 0; margin: 0; min-width: 0; }
+.summary-vehicle .vehicle-summary { margin: 0; padding: 0; display: flex; flex-direction:column; gap:8px; min-height: 0; background: transparent; border: 0; box-shadow: none; }
+.summary-vehicle .vehicle-summary-art { max-block-size:110px; }
+.summary-vehicle .vehicle-summary-details { padding: 0; margin: 0; min-width: 0; width:100%; }
 .summary-vehicle .vehicle-summary-details > p:first-child, .summary-vehicle .vehicle-color > span, .summary-vehicle .vehicle-vin > span { display: none; }
 .summary-vehicle .vehicle-summary-details h2 { font-size: 15px; line-height: 1.7; }
 .summary-vehicle .vehicle-year, .summary-vehicle .vehicle-color, .summary-vehicle .vehicle-vin { font-size: 12px; margin: 3px 0; line-height: 1.6; }
@@ -64,9 +64,8 @@
 .receipt-header > span { font: var(--customer-metadata); color: var(--color-muted); margin-inline-start: auto; }
 .receipt-header a { min-width: 44px; min-height: 44px; display: grid; place-items: center; color: var(--color-muted); }
 .receipt-content { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 12px 20px; display: flex; flex-direction: column; gap: 12px; }
-.receipt-hero { flex: none; align-self: center; width: 240px; height: 165px; object-fit: contain; }
-.receipt-content > h2 { font-size: 24px; line-height: 1.5; text-align: center; font-weight: 800; }
-.receipt-intro { font: var(--customer-body); text-align: center; color: var(--color-muted); margin-bottom: 4px; }
+.receipt-content > h2 { flex:none; font-size: 24px; line-height: 1.5; text-align: center; font-weight: 800; }
+.receipt-intro { flex:none; font: var(--customer-body); text-align: center; color: var(--color-muted); margin-bottom: 4px; }
 .receipt-reference { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; background: var(--color-surface); border-radius: 20px; }
 .receipt-reference > div { display: flex; flex-direction: column; gap: 4px; }
 .receipt-reference span { font: var(--customer-body-secondary); color: var(--color-muted); }
@@ -87,6 +86,6 @@
 .receipt-notice { display: flex; gap: 8px; align-items: center; background: var(--color-surface-soft); padding: 12px; border-radius: 16px; color: var(--color-muted); font: var(--customer-body-secondary); }
 .receipt-notice > span { color: var(--color-primary-ink); }
 .receipt-actions { border-top: 0; background: var(--color-background); padding-top: 6px; }
-@media (max-height: 820px) { .receipt-hero { height: 145px; width: 215px; } .receipt-content { gap: 8px; padding-top: 10px; } .receipt-content > h2 { font-size: 22px; } }
-@media (min-height: 900px) { .receipt-content { justify-content: center; gap: 16px; } .receipt-hero { height: 220px; width: 285px; } }
+@media (max-height: 820px) { .receipt-content { gap: 8px; padding-top: 10px; } .receipt-content > h2 { font-size: 22px; } }
+@media (min-height: 900px) { .receipt-content { justify-content: center; gap: 16px; } }
 @media (prefers-reduced-motion: reduce) { .submission-screen *, .submission-screen *::before, .submission-screen *::after { animation: none !important; transition: none !important; } }

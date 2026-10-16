@@ -6,12 +6,13 @@
 .readiness-intro > p { margin-top: 7px; font-size: 14px; line-height: 19px; color: var(--color-muted); }
 .readiness-estimate { display: flex; width: fit-content; align-items: center; justify-content: center; gap: 9px; margin: 8px auto 0; min-height: 27px; padding: 3px 13px; border-radius: 24px; background: var(--color-surface-soft); font-size: 13px; font-weight: 700; }
 .readiness-estimate > span:first-child { color: var(--color-primary-ink); }
-.readiness-hero { margin: 10px 14px 0; height: 176px; border: 1px solid var(--color-surface); border-radius: 14px; overflow: hidden; position: relative; background-color: var(--color-surface-soft); background-size: cover; background-position: center; }
-.readiness-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--color-surface) 97%, transparent) 0%, color-mix(in srgb, var(--color-surface) 95%, transparent) 38%, color-mix(in srgb, var(--color-surface) 82%, transparent) 46%, transparent 62%); }
-.readiness-hero-copy { position: absolute; z-index: 1; inset-inline-end: 18px; top: 27px; width: 43%; text-align: right; }
-.readiness-hero-copy h2 { font-size: 20px; font-weight: 900; line-height: 27px; letter-spacing: -.4px; }
+.readiness-hero { margin: 12px 14px 0; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.readiness-hero-copy { padding: 12px 14px 0; text-align: start; }
+.readiness-hero-copy h2 { font-size: 20px; font-weight: 900; line-height: 1.5; }
+.readiness-hero-copy h2 br { display:none; }
 .readiness-hero-copy h2 span { color: var(--color-primary-ink); }
-.readiness-hero-copy p { margin-top: 13px; margin-inline-start: auto; max-width: 91%; font-size: 11.5px; line-height: 18px; color: var(--color-muted); }
+.readiness-hero-copy p { margin-top: 6px; font-size: 12px; line-height: 1.8; color: var(--color-muted); }
+.readiness-hero > .customer-hero-artwork { margin-top: 8px; border-radius: 0 0 14px 14px; }
 .readiness-requirements { display: grid; gap: 5px; margin: 10px 14px 0; }
 .readiness-requirements li { display: flex; align-items: center; gap: 8px; min-height: 64px; padding: 6px 10px; background: var(--color-surface); border-radius: 12px; }
 .requirement-number { width: 25px; height: 25px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--color-primary-ink); background: var(--color-surface-soft); }
@@ -41,9 +42,8 @@
 .consent-intro { text-align: center; padding-inline: 12px; margin-top: 4px; }
 .consent-intro h1 { font-size: 26px; font-weight: 900; letter-spacing: -.7px; line-height: 35px; }
 .consent-intro p { font-size: 13.5px; line-height: 24px; margin-top: 4px; color: var(--color-muted); }
-.consent-hero { height: 196px; overflow: hidden; margin-top: 7px; }
-.consent-hero > img { width: 100%; height: 100%; object-fit: cover; }
-.consent-surface { margin: 0 9px 8px; border-radius: 16px; background: var(--color-surface); padding: 14px 13px 0; flex: 1; display: flex; flex-direction: column; }
+.consent-hero { margin-block: 10px 12px; }
+.consent-surface { margin: 0 9px 8px; border-radius: 16px; background: var(--color-surface); padding: 14px 13px 0; flex: none; display: flex; flex-direction: column; }
 .collection-summary > h2 { font-size: 18px; line-height: 26px; font-weight: 800; }
 .collection-summary ul { margin-top: 5px; }
 .collection-summary li { display: flex; align-items: center; gap: 10px; min-height: 60px; border-bottom: 1px solid var(--color-border); padding: 8px 0; }
@@ -74,7 +74,6 @@
 .consent-complete a { color: var(--color-primary-ink); min-height: 44px; display: flex; align-items: center; }
 @media (max-width: 359px) {
   .readiness-intro h1, .consent-intro h1 { font-size: 23px; }
-  .readiness-hero-copy { width: 47%; inset-inline-end: 11px; }
   .readiness-hero-copy h2 { font-size: 18px; }
   .readiness-hero-copy p { font-size: 11px; line-height: 17px; margin-top: 8px; }
   .requirement-art { width: 47px; height: 47px; }
@@ -117,14 +116,15 @@
 
 /* The existing main scroller owns long preparation content; never flex-collapse the hero. */
 .customer-viewport>.readiness-screen{display:block}
-.readiness-screen .readiness-hero{height:176px;min-height:176px}
+.readiness-screen .readiness-hero{height:auto;min-height:0;}
 
 .customer-viewport>.readiness-screen{scroll-padding-block-end:88px}
 
-/* Supplied sedan hero: preserve the existing text region and tenant override framing. */
-.readiness-hero[data-default-asset=true] { background-position: calc(50% + 100px) center; background-repeat: no-repeat; }
 
 /* Approved color roles; geometry and workflow remain unchanged. */
 .readiness-estimate { background:var(--color-accent-soft); color:var(--color-accent-ink); }
 .requirement-number { background:var(--color-surface-soft); color:var(--color-muted); }
 .consent-actions > button:disabled { background:var(--color-pending); color:var(--color-on-status); }
+
+/* Copy and art have independent flow boxes; long pages use the existing main scroller. */
+.preparation-screen > .consent-branding,.preparation-screen > .consent-intro,.preparation-screen > .readiness-intro{flex:none}

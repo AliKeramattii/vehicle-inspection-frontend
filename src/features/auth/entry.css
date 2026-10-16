@@ -6,18 +6,17 @@
 .entry-brand span { font-size: 10px; color: var(--color-muted); white-space: nowrap; line-height: 17px; }
 .entry-brand > span { color: var(--color-primary-ink); }
 .entry-brand-divider { height: 26px; width: 1px; background: var(--color-border-strong); flex-shrink: 0; }
-.landing-intro { margin-top: 27px; text-align: center; padding-inline: 20px; }
+.landing-intro { margin-top: 20px; text-align: center; padding-inline: 20px; }
 .landing-intro h1, .otp-intro h1 { font-size: 30px; font-weight: 900; line-height: 1.28; letter-spacing: -.8px; }
 .landing-intro h1 span { color: var(--color-primary-ink); }
 .landing-intro p, .otp-intro p { margin-top: 15px; font-size: 14px; line-height: 22px; color: var(--color-ink); font-weight: 500; }
 .landing-intro p { margin-top: 11px; font-size: 14.5px; }
-.landing-art { height: 215px; overflow: hidden; }
-.landing-art img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.referral-panel { position: relative; margin: -2px 11px 0; padding: 18px 18px 14px; border-radius: var(--radius-sheet); background: var(--color-surface); box-shadow: 0 6px 24px color-mix(in srgb, var(--color-slate-900) 3%, transparent); }
+.landing-art { margin-block: 12px 8px; }
+.referral-panel { position: relative; margin: 0 11px; padding: 18px 18px 14px; border-radius: var(--radius-sheet); background: var(--color-surface); box-shadow: 0 6px 24px color-mix(in srgb, var(--color-slate-900) 3%, transparent); }
 .referral-label { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
 .referral-icon { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: var(--color-surface-soft); color: var(--color-primary-ink); flex-shrink: 0; }
 .referral-label h2 { font-size: 16px; line-height: 25px; font-weight: 800; }
-.referral-label p { font-size: 11px; line-height: 19px; color: var(--color-muted); white-space: nowrap; }
+.referral-label p { font-size: 11px; line-height: 19px; color: var(--color-muted); white-space: normal; }
 .code-control { position: relative; height: 56px; }
 .code-cells { display: flex; gap: 9px; height: 100%; }
 .code-cell { min-width: 0; flex: 1; display: flex; justify-content: center; align-items: center; border: 1px solid var(--color-control-border); border-radius: 9px; background: var(--color-surface-soft); font-size: 22px; line-height: 1; color: var(--color-ink); }
@@ -50,8 +49,7 @@
 .otp-intro { margin-top: 38px; text-align: center; padding-inline: 14px; }
 .otp-intro h1 { font-size: 29px; line-height: 41px; }
 .otp-intro p { margin-top: 13px; }
-.otp-art { height: 210px; overflow: hidden; }
-.otp-art img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.otp-art { margin-block: 12px 8px; }
 .otp-panel { margin: 0 12px; padding: 20px 21px 12px; border-radius: var(--radius-sheet); background: var(--color-surface); text-align: center; }
 .otp-number-label { font-size: 14px; line-height: 22px; color: var(--color-muted); }
 .otp-masked-number { margin-top: 8px; font-size: 23px; font-weight: 800; line-height: 33px; }
@@ -90,3 +88,12 @@
 .code-cell[data-active=true] { border-color:var(--color-selected); background:var(--color-selected-soft); }
 .referral-submit { background:var(--color-primary); color:var(--color-on-primary); }
 .referral-submit:hover:not(:disabled) { background:var(--color-primary-hover); }
+
+/* At short heights, keep the referral action after its input in the main scroller. */
+.customer-viewport > .landing-screen .entry-primary-button { position: static; }
+.entry-brand { min-width:0; }
+.entry-brand p,.entry-brand span { white-space:normal; overflow-wrap:anywhere; }
+.entry-branding { height:auto; min-height:60px; }
+.otp-screen .entry-branding { height:auto; min-height:42px; }
+
+@media(max-height:550px){.landing-intro{margin-top:12px}}

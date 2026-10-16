@@ -1,7 +1,5 @@
-import { BrandingImage } from "@/config/branding-assets";
+import { CustomerHeroArtwork } from "@/components/layout/customer-hero-artwork";
 
 export function PrivacyArtwork() {
-  return <div className="consent-hero">
-    <BrandingImage role="consent" alt="خودروی سدان سفید در استودیوی روشن" width={1672} height={941} sizes="(max-width: 480px) 100vw, 480px" preload />
-  </div>;
+  return <CustomerHeroArtwork role="consent" className="consent-hero" />;
 }

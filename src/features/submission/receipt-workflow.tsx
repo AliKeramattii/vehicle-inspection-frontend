@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { RuntimeSupport } from "@/config/runtime-support";
-import { BrandingImage } from "@/config/branding-assets";
+import { CustomerHeroArtwork } from "@/components/layout/customer-hero-artwork";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/ui/icon";
@@ -31,8 +31,8 @@ export function ReceiptWorkflow({ inspectionId }: { inspectionId: string }) {
   if (!receipt) return <SubmissionLoading />;
   return <div className="receipt-route">
     <div className="receipt-content">
-      <BrandingImage role="submission" className="receipt-hero" alt="خودروی سدان سفید در استودیوی روشن" width={240} height={180} unoptimized preload />
       <h2>بازدید با موفقیت ارسال شد</h2><p className="receipt-intro">کارشناسان نتیجه بازدید را بررسی خواهند کرد.</p>
+      <CustomerHeroArtwork role="submission" className="receipt-hero" />
       {requests.error && <InlineAlert tone="warning">خواندن درخواست‌های کارشناس ممکن نشد.<SecondaryButton onClick={() => void requests.refetch()}>تلاش مجدد</SecondaryButton></InlineAlert>}
       {latest && <section className="additional-receipt-notice"><h3>{requestActive(latest) ? "مدارک تکمیلی مورد نیاز است" : "مدارک تکمیلی ارسال شدند"}</h3><p>{requestActive(latest) ? "کارشناس برای ادامه بررسی، تصاویر جدیدی درخواست کرده است." : "مدارک جدید برای بررسی مجدد ارسال شدند."}</p><Link href={additionalRoutes.list(inspectionId, latest.id)}>{requestActive(latest) ? "مشاهده درخواست" : "مشاهده رسید مدارک تکمیلی"}<Icon name="chevronForward" size={20} /></Link></section>}
       <section className="receipt-reference" aria-label="کد پیگیری"><div><span>کد پیگیری</span><bdi dir="ltr">{receipt.reference}</bdi></div><SecondaryButton onClick={() => { setCopied(false); setCopyError(false); if (navigator.clipboard) void navigator.clipboard.writeText(receipt.reference).then(() => setCopied(true)).catch(() => setCopyError(true)); else setCopyError(true); }} aria-label="کپی کد پیگیری"><Icon name="copy" size={21} />{copied ? "کپی شد" : "کپی"}</SecondaryButton></section>

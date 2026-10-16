@@ -10,6 +10,14 @@ const developmentOrigins = Object.values(networkInterfaces()).flatMap((addresses
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  images: {
+    localPatterns: [
+      { pathname: "/**", search: "" },
+      // Only built-in hero artwork may use this explicit framing/cache revision.
+      { pathname: "/assets/inspection-vehicle/hero/*.webp", search: "?v=hero-flow-20261017" },
+      { pathname: "/images/auth/otp-phone-shield.png", search: "?v=hero-flow-20261017" },
+    ],
+  },
   outputFileTracingExcludes: { "/*": ["./.agent/vehicle-3d/**/*", "./references/assets/3d/**/*", "./tools/dev-neshan-proxy/**/*"] },
   ...(process.env.NODE_ENV !== "production" ? { allowedDevOrigins: developmentOrigins } : {}),
 };

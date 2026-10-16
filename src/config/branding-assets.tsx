@@ -5,10 +5,10 @@ import { useState, useEffect, type ReactNode } from "react";
 import { useOptionalRuntimeSite } from "./site-settings.provider";
 import { useBrandingAsset } from "@/features/admin/assets/use-branding-asset";
 export const brandingAssets = {
-  landing: { src: vehicleHeroAssets.landing, fit: "cover" },
-  referral: { src: vehicleHeroAssets.introduction, fit: "cover" },
-  otp: { src: "/images/auth/otp-phone-shield.png", fit: "cover" },
-  readiness: { src: vehicleHeroAssets.readiness, fit: "cover" },
+  landing: { src: vehicleHeroAssets.landing, fit: "contain" },
+  referral: { src: vehicleHeroAssets.introduction, fit: "contain" },
+  otp: { src: "/images/auth/otp-phone-shield.png", fit: "contain" },
+  readiness: { src: vehicleHeroAssets.readiness, fit: "contain" },
   consent: { src: vehicleHeroAssets.consent, fit: "contain" },
   submission: { src: vehicleHeroAssets.receipt, fit: "contain" },
 } as const;
@@ -21,7 +21,10 @@ function useOverride(role: BrandingAssetRole) {
 export function BrandingImage({ role, alt, ...props }: { role: BrandingAssetRole } & Omit<ImageProps, "src">) {
   const override = useOverride(role), [failed, setFailed] = useState<string>();
   const src = override && failed !== override ? override : brandingAssets[role].src;
-  return <Image {...props} alt={alt} src={src} unoptimized={Boolean(override && src === override) || props.unoptimized}
+  // Public default files were replaced in place. Version only built-in artwork so Next's
+  // cached size variants cannot keep serving the previous framing. Never rewrite tenant URLs.
+  const source = !override || failed === override ? src + "?v=hero-flow-20261017" : src;
+  return <Image {...props} data-branding-role={role} alt={alt} src={source} unoptimized={Boolean(override && src === override) || props.unoptimized}
     onError={() => { if (override) setFailed(override); }} />;
 }
 function useBrandingBackgroundState(role: BrandingAssetRole) {
