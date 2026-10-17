@@ -35,7 +35,7 @@ All three issues demonstrably resolved together under stated browser conditions;
 - [x] Implement targeted fixes and tests.
 - [x] Verify joint real-provider workflow and screenshots.
 - [x] Complete all validation and provide the before-push checkpoint.
-- [ ] Complete focused Git commit/push and remote verification.
+- [x] Complete focused Git commit/push and remote verification.
 
 ## Results and delivery gate
 Approved demo palette restored in the ignored local runtime file and tracked setup example; exact six theme fields only. Existing untouched demo theme reconciliation extended to opt-in live development API seed, preserving custom/published records and history. Recheck is now tied to actual blockers, with distinct denied permission and specific recovery. No required camera/video capability bypass or native fallback claim.
@@ -49,3 +49,6 @@ User explicitly approved restoring only the corrupted Persian contrast error. Re
 
 ## Final verification
 All 24 selected browser regressions now pass after the approved contrast correction and updating a stale Viewer test to the existing denied-read policy. All 453 unit tests, lint, typecheck, build and two joint real-provider tests pass (exit 0). The schema correction already matches HEAD and its unrelated local changes will not be staged. Existing real-provider suite also passed three tests. No new map/permission bypass, redesign or baseline change. Personal Chrome verification remains explicitly separate.
+
+## Git delivery
+Implementation commit 31c7e838d817fa0f1cee7683dc31b35cf316460f (fix: restore Emerald theme and readiness recovery) was pushed normally to origin/feat/unified-ui-admin-3d. Remote ls-remote matched the implementation HEAD. No protected manual schema formatting/other error strings, environment files, local runtime JSON, user assets, logo, CSS, optional model route or pre-existing Playwright configs were included. Final documentation records the completed verification.
