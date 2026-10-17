@@ -39,7 +39,7 @@ Native Node subprocess schema/runtime imports without a custom resolver; TypeScr
 - [x] Implement and test targeted corrections.
 - [x] Verify cold startup and actual map functionality with sanitized browser evidence.
 - [x] Complete lint, typecheck, all 441 unit tests, five deterministic browser tests, three real-provider browser tests and production build (all exit 0).
-- [ ] Complete focused commit, push and remote verification.
+- [x] Complete focused commit, push and remote verification.
 
 ## Discoveries and decisions
 - The original personal Chrome session was unavailable. A fresh isolated browser already worked, but a persisted partial null-key Admin publication reproduced the same unconfigured message with zero Leaflet containers despite valid runtime settings. The factory-only fallback was too narrow and incorrectly coupled published/draft maps. Resolve missing profiles independently in development read views, preserving original durable records/history and explicit keys/disabled maps.
@@ -54,3 +54,6 @@ Native Node subprocess schema/runtime imports without a custom resolver; TypeScr
 - Before/after screenshots and sanitized diagnostics are ignored under .agent/reference-review/neshan-root-cause; no visual regression baselines updated.
 - Protected manifest: 20 unrelated files byte-identical; schema differs only in the intended import suffix, with all other existing manual edits preserved. Stage only that import hunk. No asset/CSS/3D/readiness changes.
 - Production browser/public text scan: zero private service-key matches and zero authorized local Web Map key matches; no development listener rewrites in production routes manifest. Existing static-export blockers remain outside this task; no production Node proxy dependency introduced.
+
+## Git delivery
+Implementation c0db1f457bd2c50eebf461b77ab31572076d188c (fix: make Neshan runtime configuration reliable) was pushed normally to origin/feat/unified-ui-admin-3d. git ls-remote confirmed that exact remote commit. Only the schema import was staged from the pre-existing modified schema; all unrelated working-tree edits remain local. No secrets, environment files, assets or baselines were committed. This final plan entry records completed validation and delivery.
