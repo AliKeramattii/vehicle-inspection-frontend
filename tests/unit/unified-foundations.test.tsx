@@ -29,7 +29,7 @@ describe("unified readiness and operations foundations", () => {
   });
   it("denied GPS keeps manual map selection available", async () => {
     browser(true); const result = await createBrowserCapabilityService().check(new AbortController().signal);
-    expect(result.find(r => r.id === "location")?.status).toBe("unavailable");
+    expect(result.find(r => r.id === "location")?.status).toBe("permission-denied");
     expect(canContinueReadiness(result)).toBe(true);
   });
   it("unsupported recorder is truthful and blocks required recording readiness", async () => {

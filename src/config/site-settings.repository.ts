@@ -35,9 +35,12 @@ export class SiteSettingsRepository {
   private seed=():SettingsWorkspace=>({revision:1,published:structuredClone(this.initial),draft:structuredClone(this.initial),history:[structuredClone(this.initial)],audit:[]});
   read(actor?: AdminActor) { if (actor) this.authorize(actor); return this.storage.transact(this.key,this.seed,state=>{
     const result = structuredClone(state);
+    const liveDevelopment = process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW === "1" &&
+      this.bootstrap.settingsSource === "api" && this.initial.tenantId === this.bootstrap.tenantId;
+    const approvedSeedTheme = Object.entries(defaultThemeColors).every(([key, value]) => this.initial.theme[key as keyof SiteSettings["theme"]].toLowerCase() === value);
     // Only an untouched seeded workspace adopts the new factory default in its view.
     // Published/edited tenant choices and immutable history remain byte-for-byte intact.
-    if (this.bootstrap.settingsSource === "mock" && this.bootstrap.tenantId === "demo" && state.revision === 1 && state.audit.length === 0 && state.history.length === 1 && state.published.version === 1 &&
+    if ((this.bootstrap.settingsSource === "mock" || (liveDevelopment && approvedSeedTheme)) && this.bootstrap.tenantId === "demo" && state.revision === 1 && state.audit.length === 0 && state.history.length === 1 && state.published.version === 1 &&
       JSON.stringify(state.draft) === JSON.stringify(state.published) && isLegacyFactoryTheme(state.published.theme)) {
       result.published.theme = { ...defaultThemeColors }; result.draft.theme = { ...defaultThemeColors };
     }
@@ -45,8 +48,7 @@ export class SiteSettingsRepository {
     // Resolve published and draft independently: a draft must never hide the live map.
     // Existing keys, explicit disablement, viewport/style choices and stored history survive.
     const runtimeMap = this.initial.application.locationMap;
-    if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW === "1" &&
-      this.bootstrap.settingsSource === "api" && this.initial.tenantId === this.bootstrap.tenantId && runtimeMap?.enabled && runtimeMap.webMapKey) {
+    if (liveDevelopment && runtimeMap?.enabled && runtimeMap.webMapKey) {
       for (const settings of [result.published, result.draft]) {
         const map = settings.application.locationMap;
         if (!map) settings.application.locationMap = structuredClone(runtimeMap);

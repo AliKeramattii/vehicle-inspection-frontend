@@ -90,7 +90,10 @@ test("Site Settings validation, role checks and unverified storage status",async
   await expect(page.getByText("کنتراست متن باید حداقل ۴٫۵ باشد.",{exact:true}).first()).toBeVisible();
   await page.getByRole("tab",{name:"فضای ذخیره‌سازی",exact:true}).click();await expect(page.getByText("بررسی نشده؛ اطلاعات سلامت از ASP.NET دریافت نشده است.")).toBeVisible();
   await page.getByLabel("هویت آزمایشی").selectOption("viewer");await page.getByRole("button",{name:"ادامه بدون ذخیره"}).click();
-  await page.getByRole("tab",{name:"هویت کارگزاری",exact:true}).click();await expect(page.getByLabel("نام کارگزاری",{exact:true})).toBeDisabled();
+  // Existing Site Admin policy denies reading this form, rather than exposing a disabled draft.
+  await expect(page.getByText("تنظیمات سایت فقط برای مدیر سایت در دسترس است.",{exact:true})).toBeVisible();
+  await expect(page.getByLabel("نام کارگزاری",{exact:true})).toHaveCount(0);
+  await expect(page.getByRole("button",{name:"ذخیره پیش‌نویس",exact:true})).toHaveCount(0);
 });
 for(const viewport of [{width:1440,height:960},{width:1280,height:800},{width:1024,height:768}])test("Site Settings desktop viewport "+viewport.width,async({page},info)=>{
   test.skip(info.project.name!=="desktop");await page.setViewportSize(viewport);await page.goto("/admin/site-settings");await expect(page.getByLabel("نام کارگزاری",{exact:true})).toBeVisible();await overflow(page);await expect(page.getByRole("button",{name:"پیش‌نمایش",exact:true})).toBeInViewport();if(viewport.width===1440){await page.evaluate(()=>document.fonts.ready);await expect(page).toHaveScreenshot("admin-site-settings.png");}

@@ -32,26 +32,28 @@ vehicle orientation is never mirrored. Existing copy, controls and screen geomet
 
 ## Capability architecture
 
-`capabilities.ts` defines IDs `camera | location | webgl | storage`, results with statuses
-`checking | ready | unavailable | permission-required | unsupported`, normalization and the
-continuation policy. `CapabilityService.check(AbortSignal)` is the replacement boundary;
-`createMockCapabilityService` returns deterministic ready fixtures with optional test overrides.
-It does not access raw browser APIs or grant permissions. `useCapabilities` owns results locally,
-aborts on unmount, ignores stale results and exposes retry. Initial rows reserve the same space.
+Current IDs are camera, location, storage, video and isolated optional webgl. Four customer
+rows retain the approved icons/layout. Results distinguish checking, ready, permission-required,
+permission-denied, unsupported, unavailable and unknown. CapabilityService.check(AbortSignal)
+remains the adapter boundary; useCapabilities owns abortable local results and an explicit retry.
+The browser adapter queries support/permission/storage estimates only: no camera stream, GPS
+prompt or WebGL context is opened on initial rendering or recheck.
 
-Checking core capabilities blocks continuation. Missing/unavailable/unsupported core camera/location/storage
-blocks it and shows explanatory text plus retry. Permission-required allows proceeding to
-consent; permission requests belong in capture/location features. Production photography is 2D:
-only camera, location and storage appear in customer diagnostics. WebGL remains an isolated
-internal optional capability for future experiments; checking/unsupported/missing WebGL never
-blocks the customer journey. No customer-visible three-dimensional readiness wording remains.
-States have icons and accessible words, not color alone. A future browser adapter can perform
-availability/Permissions API/WebGL/storage checks without rewriting the UI and must not request
-camera or location access on initial load. Actual hardware readiness is not verified in this phase.
-The GPS diagnostic uses the existing location icon family. This does not overwrite the unrelated
-locally edited readiness GPS asset. Approved CTA role/safe-area normalisation does not change
-consent terms, field names, mock behavior or route flow. Unrelated readiness hero styling remains
-outside the modernisation commit and must not be absorbed into an approved snapshot.
+readinessBlockingResults is the shared continuation/recovery rule. Camera/recording support,
+known sufficient storage and completed checks are required. Unrequested permission permits
+continuation but is never labelled granted. Denied or unsupported GPS does not block manual map
+selection and does not create a pointless Recheck prompt. Unknown storage capacity is deferred
+to actual durable evidence writes; known capacity below the existing 100 MiB threshold blocks.
+Unknown camera/video checks do not falsely count as ready. WebGL never blocks production 2D.
+
+Denied camera permission is distinct from unavailable hardware and explains how to allow the
+camera in the browser's site settings, then explicitly recheck. Unsupported recording, insecure
+camera context and insufficient storage have specific recovery copy. Recheck runs the adapter
+again, clears stale failures and removes the recovery prompt once required conditions pass.
+The disabled CTA references its recovery explanation. No required capability is bypassed; the
+current live camera/Recorder V2 have no native-file fallback, so none is falsely advertised.
+The four quiet rows still avoid repetitive ready badges. Actual hardware opening remains owned
+by the user-initiated camera/recorder screens. Existing imagery, consent copy and routes remain.
 
 ## Consent state and repository boundary
 
