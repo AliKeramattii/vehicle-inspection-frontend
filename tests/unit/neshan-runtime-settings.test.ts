@@ -20,7 +20,7 @@ async function config(value: unknown) {
   const path=join(folder,"settings.json"); await writeFile(path,JSON.stringify(value)); return path;
 }
 describe("local public runtime configuration host", () => {
-  it("starts under native Node, resolving the shared extensionless schema dependency without frontend compiler changes", async () => {
+  it("starts under native Node with standard explicit TypeScript imports and no custom resolver", async () => {
     const settings = defaultSiteSettings("demo"); settings.application.locationMap!.webMapKey = "web.unit-fixture";
     const path = await config(settings);
     const runtimeUrl = new URL("../../tools/dev-neshan-proxy/runtime-settings.mjs", import.meta.url).href;
@@ -44,6 +44,13 @@ describe("local public runtime configuration host", () => {
       env: { ...process.env, NODE_ENV: "development", NESHAN_SERVICE_KEY: "service.fixture-private" },
     });
     expect(result.stdout.trim()).toBe("native-runtime-ok");
+    expect(result.stderr).toBe("");
+  });
+  it("loads the shared schema directly in a fresh native process without registering resolution hooks", async () => {
+    const url = new URL("../../src/config/site-settings.schema.ts", import.meta.url).href;
+    const script = `const schema = await import(${JSON.stringify(url)}); if (typeof schema.siteSettingsSchema.parse !== "function") throw Error("Missing schema"); console.log("native-schema-ok");`;
+    const result = await promisify(execFile)(process.execPath, ["--input-type=module", "--eval", script], {timeout: 10000});
+    expect(result.stdout.trim()).toBe("native-schema-ok");
     expect(result.stderr).toBe("");
   });
   it("reports only safe startup configuration and identifies a missing public key", async () => {

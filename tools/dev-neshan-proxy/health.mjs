@@ -9,7 +9,7 @@ export async function developmentIdentity({ origins, reversePort, settingsPort }
   const root = await realpath(fileURLToPath(new URL("../..", import.meta.url)));
   const digest = value => createHash("sha256").update(value).digest("hex");
   // File metadata detects stale local configuration/code without hashing or exposing key values.
-  const files = [".env.local", "site-settings.local.json", "run.mjs", "lifecycle.mjs", "health.mjs", "server.mjs", "runtime-settings.mjs", "development-config.mjs", "load-settings-schema.mjs"];
+  const files = [".env.local", "site-settings.local.json", "run.mjs", "lifecycle.mjs", "health.mjs", "server.mjs", "runtime-settings.mjs", "development-config.mjs", "../../src/config/site-settings.schema.ts", "../../src/config/vehicle-assets.ts", "../../src/config/package.json", "../../tsconfig.json"];
   const revisions = await Promise.all(files.map(async file => { const value = await stat(new URL(file, import.meta.url)); return [file, value.mtimeMs, value.size]; }));
   return { instanceId: randomUUID(), workspaceId: digest(process.platform === "win32" ? root.toLowerCase() : root),
     revision: digest(JSON.stringify({revisions, origins, reversePort, settingsPort})), origins };

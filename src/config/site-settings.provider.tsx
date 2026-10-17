@@ -43,9 +43,10 @@ function AppliedSite({site,children}:{site:RuntimeSite;children:ReactNode}) {
 export function SiteSettingsProvider({children}:{children:ReactNode}) {
   const pendingFocus=useRef(false);
   const client=useQueryClient(),origin=typeof window==="undefined"?"":window.location.origin;
-  const bootstrap=useQuery({queryKey:["site-bootstrap",origin],queryFn:({signal})=>loadBootstrap(origin,signal),enabled:Boolean(origin),staleTime:0,refetchOnWindowFocus:false,retry:false});
+  const bootstrap=useQuery({queryKey:["site-bootstrap",origin],queryFn:({signal})=>loadBootstrap(origin,signal),enabled:Boolean(origin),staleTime:0,refetchOnWindowFocus:process.env.NODE_ENV === "development",retry:false});
   const contextKey=bootstrap.data?configurationKey(bootstrap.data,origin):"";
-  const settings=useQuery({queryKey:["site-settings",contextKey],queryFn:({signal})=>loadSettings(bootstrap.data!,origin,signal),enabled:Boolean(contextKey),staleTime:0,refetchOnWindowFocus:true,retry:false});
+  // Keep one durable settings identity; only the query cache distinguishes mock from API.
+  const settings=useQuery({queryKey:["site-settings",contextKey,bootstrap.data?.settingsSource],queryFn:({signal})=>loadSettings(bootstrap.data!,origin,signal),enabled:Boolean(contextKey),staleTime:0,refetchOnWindowFocus:true,retry:false});
   useLayoutEffect(()=>{if(bootstrap.data&&settings.data&&pendingFocus.current){document.getElementById("main-content")?.focus();pendingFocus.current=false;}},[bootstrap.data,settings.data]);
   if(bootstrap.error||settings.error) return <AppViewport><main id="main-content" tabIndex={-1} onFocus={()=>{pendingFocus.current=true;}} onBlur={()=>{pendingFocus.current=false;}} className="site-config-state"><h1>تنظیمات سایت بارگذاری نشد</h1><InlineAlert tone="destructive">{settings.error instanceof SiteConfigurationError?settings.error.message:"پیکربندی نصب معتبر یا در دسترس نیست."}</InlineAlert><PrimaryButton onClick={()=>{void bootstrap.refetch();if(contextKey)void settings.refetch();}}>تلاش مجدد</PrimaryButton><p>فایل‌های محلی حذف نشده‌اند.</p></main></AppViewport>;
   if(!bootstrap.data||!settings.data)return <AppViewport><main id="main-content" tabIndex={-1} onFocus={()=>{pendingFocus.current=true;}} onBlur={()=>{pendingFocus.current=false;}} className="site-config-state" aria-busy="true"><h1>در حال آماده‌سازی سایت</h1><div className="site-config-placeholder" aria-hidden="true"/><p role="status">بارگذاری تنظیمات نصب</p></main></AppViewport>;

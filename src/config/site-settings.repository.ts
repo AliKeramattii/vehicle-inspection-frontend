@@ -41,22 +41,19 @@ export class SiteSettingsRepository {
       JSON.stringify(state.draft) === JSON.stringify(state.published) && isLegacyFactoryTheme(state.published.theme)) {
       result.published.theme = { ...defaultThemeColors }; result.draft.theme = { ...defaultThemeColors };
     }
-    // A development runtime seed can configure a previously untouched factory map.
-    // Do not overwrite explicit Admin map choices, saved map drafts or history.
+    // The opt-in live development seed supplies a missing key/geocoder profile.
+    // Resolve published and draft independently: a draft must never hide the live map.
+    // Existing keys, explicit disablement, viewport/style choices and stored history survive.
     const runtimeMap = this.initial.application.locationMap;
-    const factoryMap = defaultLocationMap();
-    const isFactoryMap = (settings: SiteSettings) => {
-      const map = settings.application.locationMap ?? factoryMap;
-      return map.enabled === factoryMap.enabled && map.webMapKey === null && map.mapType === factoryMap.mapType &&
-        map.reverseGeocoding === factoryMap.reverseGeocoding &&
-        map.initialViewport.latitude === factoryMap.initialViewport.latitude &&
-        map.initialViewport.longitude === factoryMap.initialViewport.longitude && map.initialViewport.zoom === factoryMap.initialViewport.zoom;
-    };
     if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW === "1" &&
-      this.bootstrap.settingsSource === "api" && this.initial.tenantId === this.bootstrap.tenantId && runtimeMap?.webMapKey &&
-      isFactoryMap(state.published) && isFactoryMap(state.draft)) {
-      result.published.application.locationMap = structuredClone(runtimeMap);
-      result.draft.application.locationMap = structuredClone(runtimeMap);
+      this.bootstrap.settingsSource === "api" && this.initial.tenantId === this.bootstrap.tenantId && runtimeMap?.enabled && runtimeMap.webMapKey) {
+      for (const settings of [result.published, result.draft]) {
+        const map = settings.application.locationMap;
+        if (!map) settings.application.locationMap = structuredClone(runtimeMap);
+        else if (map.enabled && map.webMapKey === null) settings.application.locationMap = {
+          ...map, webMapKey: runtimeMap.webMapKey, reverseGeocoding: runtimeMap.reverseGeocoding,
+        };
+      }
     }
     for (const settings of [result.published, result.draft]) settings.application.locationMap ??= defaultLocationMap();
     return result;

@@ -119,14 +119,14 @@ test("real provider tiles, real address, manual edit and durable confirmation", 
 });
 
 
-test("persisted unconfigured map inherits the live seed in both customer and Admin without rewriting history", async ({ page }) => {
+for (const mode of ["factory", "partial"] as const) test("persisted " + mode + " map inherits the live seed in both customer and Admin without rewriting history", async ({ page }) => {
   await mkdir(".agent/reference-review/neshan-config-fix", { recursive: true });
   const { defaultLocationMap } = await import("../../src/config/site-settings.schema");
   const runtime = await (await page.request.get("/api/public/site-settings")).json();
   expect(!!runtime.application.locationMap.webMapKey).toBe(true);
   await page.goto("/");
   await expect(page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" })).toBeVisible();
-  const before = await page.evaluate(async factoryMap => {
+  const before = await page.evaluate(async ({ factoryMap, mode }) => {
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open("inspection-site-settings", 2);
       request.onsuccess = () => resolve(request.result); request.onerror = () => reject(new Error("Settings database unavailable"));
@@ -139,6 +139,10 @@ test("persisted unconfigured map inherits the live seed in both customer and Adm
         if (!String(cursor.key).startsWith("deployment-binding:")) {
           const state = cursor.value;
           for (const settings of [state.published, state.draft, ...state.history]) settings.application.locationMap = structuredClone(factoryMap);
+          if (mode === "partial") {
+            for (const settings of [state.published, state.draft]) { settings.application.locationMap.reverseGeocoding = "api"; settings.application.locationMap.initialViewport.zoom = 14; }
+            state.draft.application.locationMap.mapType = "standard-night";
+          }
           state.draft.identity.appTitle = "پیش‌نویس کارگزاری محفوظ";
           snapshot = JSON.stringify(state); cursor.update(state); count++;
         }
@@ -146,7 +150,7 @@ test("persisted unconfigured map inherits the live seed in both customer and Adm
       };
       tx.oncomplete = () => resolve(); tx.onabort = () => reject(new Error("Settings transaction failed"));
     }); db.close(); return { snapshot, count };
-  }, defaultLocationMap());
+  }, {factoryMap: defaultLocationMap(), mode});
   expect(before.count).toBe(1);
   await page.reload();
   await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
@@ -157,7 +161,22 @@ test("persisted unconfigured map inherits the live seed in both customer and Adm
   await page.getByRole("button", { name: "تأیید و ادامه" }).click();
   await expect(page.locator(".leaflet-container")).toBeVisible();
   await expectBaseCoverage(page);
-  await page.screenshot({ path: ".agent/reference-review/neshan-config-fix/after-runtime-map.png" });
+  await expect(page.locator(".neshan-location-map")).toHaveAttribute("data-map-state", "ready");
+  const geometry = await page.locator(".leaflet-container").evaluate(element => { const box = element.getBoundingClientRect(), style = getComputedStyle(element); return {width: box.width, height: box.height, display: style.display, visibility: style.visibility}; });
+  expect(geometry.width).toBeGreaterThan(300); expect(geometry.height).toBeGreaterThan(250); expect(geometry.display).not.toBe("none"); expect(geometry.visibility).toBe("visible");
+  let reverseHTTPStatus: number | undefined;
+  if (mode === "partial") {
+    const response = page.waitForResponse(value => new URL(value.url()).pathname === "/api/maps/reverse");
+    await page.locator(".leaflet-container").click({position: {x: 160, y: 170}});
+    const reverse = await response; reverseHTTPStatus = reverse.status();
+    expect(reverseHTTPStatus).toBe(200);
+    const body = await reverse.json(); expect(typeof body.formatted_address === "string" && /[\u0600-\u06ff]/.test(body.formatted_address)).toBe(true);
+    await expect(page.getByRole("textbox", {name: "آدرس موقعیت خودرو"})).not.toHaveValue("");
+    await expect(page.getByRole("button", {name: "تأیید این موقعیت"})).toBeEnabled();
+  }
+  await mkdir(".agent/reference-review/neshan-root-cause", {recursive: true});
+  await writeFile(".agent/reference-review/neshan-root-cause/" + mode + "-diagnostics.json", JSON.stringify({tenantId: runtime.tenantId, runtimeKeyPresent: !!runtime.application.locationMap.webMapKey, sdk: "ready", geometry, visibleBaseCoverage: "complete", reverseHTTPStatus, interception: false}, null, 2));
+  await page.screenshot({ path: ".agent/reference-review/neshan-root-cause/after-" + mode + "-map.png" });
   await page.setViewportSize({ width: 1440, height: 960 });
   await page.goto("/admin/site-settings");
   await page.getByRole("tab", { name: "اتصال API", exact: true }).click();

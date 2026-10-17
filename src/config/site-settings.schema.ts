@@ -1,4 +1,4 @@
-import { isVehicleAssetUrl } from "./vehicle-assets";
+import { isVehicleAssetUrl } from "./vehicle-assets.ts";
 import { z } from "zod";
 
 export const tenantIdSchema = z.string().regex(/^[a-z][a-z0-9-]{1,47}$/);

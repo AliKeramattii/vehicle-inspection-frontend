@@ -54,7 +54,7 @@ export function InspectionLocationMap({ point, onSelect, config = defaultLocatio
       if (!request.signal.aborted) setError(cause instanceof Error ? cause.message : "دریافت موقعیت ممکن نشد.");
     } finally { if (!request.signal.aborted) setLocating(false); }
   }
-  return <section className="neshan-location-map" aria-label="انتخاب موقعیت بازدید">
+  return <section className="neshan-location-map" data-map-state={configured ? status : "unconfigured"} aria-label="انتخاب موقعیت بازدید">
     <div ref={host} className="neshan-map-canvas" tabIndex={configured && !disabled ? 0 : -1} data-disabled={disabled} aria-disabled={disabled} aria-label="نقشه تعاملی نشان" />
     {configured && status !== "error" && <span className="neshan-center-pin" aria-hidden="true"><Icon name="mapPin" size={42} /></span>}
     {(!configured || status !== "ready") && <div className="neshan-map-message" role="status">
