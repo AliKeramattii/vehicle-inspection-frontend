@@ -72,3 +72,36 @@ Local files already present in the canonical worktree are sufficient: root .env.
 
 ## Canonical fix validation (2026-10-17)
 Verified on Node 24.18.0 in the canonical integrated worktree: native Node startup without a package-module warning; 409 unit tests; two opt-in live-provider browser tests; five deterministic Neshan location browser tests; lint/typecheck/build successful. Live visible base imagery covered the tested map before/after pan/zoom/refresh, and real reverse lookup returned Persian addresses. Screenshots reviewed at 360x800, 390x844, 430x932 and 1440x960. A simulated old IndexedDB map with a null key recovered through the same customer/Admin repository, while its stored draft/history stayed unchanged. Production public/browser artifact scan found no private service key, no baked-in authorized local web key and no development loopback rewrites. No visual baseline, canonical automotive asset or unrelated readiness edit was included.
+
+## Paired startup, reuse and shutdown
+The launcher owns both listeners in one Node process. It prints listening URLs only after both bind successfully. Errors retain a safe service name, loopback port and code (for example EADDRINUSE or EACCES); raw error objects, environment contents and credentials are never printed. Failure of either bind rolls back all listeners started by that attempt. Runtime listener failure stops its sibling. Ctrl+C/SIGTERM close both acceptors, close their active connections and abort active reverse requests; shutdown is awaited and idempotent.
+
+An already-running current-version pair is reusable only when both bounded loopback health checks agree on PID, instance, canonical-worktree identity and source/configuration revision. A second identical npm run dev:neshan-proxy prints the owner PID and reuse instructions, exits successfully and creates no additional listener. Health means the local listeners match; real Neshan authorization still requires the browser/provider check. The private key is not sent to the health endpoint or hashed into its response. Revisions use local file metadata and non-secret ports/origins. Restart after changing a parent-process credential override.
+
+A partial, stale, legacy (no health endpoint), foreign-worktree or unrelated service is not automatically killed or falsely treated as reusable. The launcher reports the specific bind failure and any recognized service PID. A matching health response is diagnostic metadata, not an authentication boundary. The health path is /__development/neshan/health on each loopback service and is not added to the application's production routes or Next rewrites.
+
+To inspect owners in PowerShell before stopping anything:
+
+    Get-NetTCPConnection -State Listen -LocalPort 8787,8788 | Select-Object LocalAddress,LocalPort,OwningProcess
+    Get-CimInstance Win32_Process -Filter "ProcessId = <verified-owner-PID>" | Select-Object ProcessId,ParentProcessId,ExecutablePath,CommandLine
+
+Prefer Ctrl+C in that verified owning application's original npm terminal. Confirm BOTH ports are released with the first command, then restart once. If the terminal is lost, recheck the exact executable/command/worktree before manually using Stop-Process -Id <verified-owner-PID>. This last resort is abrupt on Windows. Never kill every node.exe process or stop an unknown listener. No command in this tool kills an existing process.
+
+## Alternative frontend port
+The default allowed origins remain http://localhost:3114 and http://127.0.0.1:3114. Next rewrites forward the original frontend Host, including on same-origin GET requests that have no Origin header. The development servers now check that forwarded host against the explicit origin list; an unlisted port returns 403 frontend-origin-denied with configuration instructions. This prevents unnoticed alternate-port misconfiguration without widening the loopback boundary.
+
+For an intentional frontend on 3115, stop the verified existing proxy terminal, then use:
+
+    cd C:\Projects\vehicle-inspection-integrated
+    npm run dev:neshan-proxy -- --frontend-port 3115
+
+In the frontend terminal:
+
+    cd C:\Projects\vehicle-inspection-integrated
+    Remove-Item Env:DEV_NESHAN_ENABLED -ErrorAction SilentlyContinue
+    npm run dev -- --port 3115
+
+The explicit flag adds only localhost:3115 and 127.0.0.1:3115 to the configured list and prints the effective allowed origins. An equivalent persistent local choice is adding those exact origins to DEV_NESHAN_ALLOWED_ORIGIN in the ignored tool .env.local, then restarting. Do not use wildcards or spoof the provider's domain restrictions. Changing ports/origins while an older pair runs requires stopping/restarting it; the tool does not silently reuse mismatched configuration. Ports 8787/8788 (or explicitly configured replacements) must still match root development rewrites. Services bind 127.0.0.1 only. No production Node runtime is introduced.
+
+## Lifecycle fix validation (2026-10-17)
+The reported failure reproduced as EADDRINUSE on both 8787 and 8788, owned by the healthy prior canonical Node process (PID 27568 at diagnosis). It was stopped only through its verified managed terminal. The updated tool was started, launched again to verify successful matching-pair reuse, stopped/restarted for explicit alternative-port checks, then restored to normal 3114 origins. No unrelated processes were killed. All 436 unit tests (including 27 new lifecycle/health/origin cases), lint, typecheck and production build passed. The same two opt-in real-provider browser scenarios passed on both 3114 and 3115: complete visible base imagery, real Persian reverse geocoding, fixed pin, GPS fixture, persistence/refresh and matching customer/Admin configuration. An unlisted 3115 request first returned actionable 403 frontend-origin-denied; --frontend-port 3115 then enabled the actual browser flow. No UI, canonical assets, visual baselines or local credential files were changed.

@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { respondHealth } from "./health.mjs";
 
 export function assertDevelopment() {
   if (process.env.NODE_ENV === "production") throw new Error("Development Neshan tools cannot run in production.");
@@ -9,10 +10,15 @@ export function localAccess(request, response, port, origins) {
     response.writeHead(403, { "Content-Type": "application/json", "Cache-Control": "no-store" });
     response.end(JSON.stringify({ error: { code: "host-denied", message: "Only loopback hosts are allowed." } })); return false;
   }
+  const forwardedHost = request.headers["x-forwarded-host"];
+  if (forwardedHost && (typeof forwardedHost !== "string" || !origins.includes("http://" + forwardedHost))) {
+    response.writeHead(403, { "Content-Type": "application/json", "Cache-Control": "no-store" });
+    response.end(JSON.stringify({ error: { code: "frontend-origin-denied", message: "Add the exact frontend origin to DEV_NESHAN_ALLOWED_ORIGIN or restart with --frontend-port PORT." } })); return false;
+  }
   const origin = request.headers.origin;
   if ((origin && !origins.includes(origin)) || (!origin && request.headers["sec-fetch-site"] === "cross-site")) {
     response.writeHead(403, { "Content-Type": "application/json", "Cache-Control": "no-store" });
-    response.end(JSON.stringify({ error: { code: "origin-denied", message: "Development origin is not allowed." } })); return false;
+    response.end(JSON.stringify({ error: { code: "origin-denied", message: "Development origin is not allowed. Configure DEV_NESHAN_ALLOWED_ORIGIN or --frontend-port PORT and restart." } })); return false;
   }
   if (origin) {
     response.setHeader("Access-Control-Allow-Origin", origin);
@@ -21,12 +27,14 @@ export function localAccess(request, response, port, origins) {
   }
   return true;
 }
-export function createReverseServer({ key, port = 8787, origins = ["http://localhost:3114"], fetcher = fetch, timeoutMs = 8000, limit = 30, now = Date.now, report = () => {} }) {
+export function createReverseServer({ key, port = 8787, origins = ["http://localhost:3114"], fetcher = fetch, timeoutMs = 8000, limit = 30, now = Date.now, report = () => {}, developmentIdentity }) {
   assertDevelopment();
   if (!key || /[\r\n]/.test(key)) throw new Error("Configure NESHAN_SERVICE_KEY in the ignored local environment file.");
   let windowStart = now(), count = 0, active = 0;
+  const controllers = new Set();
   const server = createServer(async (request, response) => {
     if (!localAccess(request, response, server.address()?.port ?? port, origins)) return;
+    if (respondHealth(request, response, "reverse-geocoding", developmentIdentity)) return;
     const json = (status, body, headers = {}) => {
       if (response.destroyed) return;
       response.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", ...headers });
@@ -51,7 +59,7 @@ export function createReverseServer({ key, port = 8787, origins = ["http://local
     if (now() - windowStart >= 60000) { windowStart = now(); count = 0; }
     if (++count > limit || active >= 2) return fail(429, "rate-limited", "کمی صبر کنید و دوباره تلاش کنید.", { "Retry-After": "60" });
     active++;
-    const controller = new AbortController();
+    const controller = new AbortController(); controllers.add(controller);
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     const abandoned = () => { if (!response.writableEnded) controller.abort(); };
     response.once("close", abandoned);
@@ -81,7 +89,8 @@ export function createReverseServer({ key, port = 8787, origins = ["http://local
       json(200, { formatted_address: address });
     } catch {
       fail(controller.signal.aborted ? 504 : 502, controller.signal.aborted ? "timeout" : "provider-unavailable", "دریافت آدرس انجام نشد. دوباره تلاش کنید یا آدرس را دستی وارد کنید.");
-    } finally { clearTimeout(timer); response.removeListener("close", abandoned); active--; }
+    } finally { clearTimeout(timer); response.removeListener("close", abandoned); active--; controllers.delete(controller); }
   });
+  server.once("close", () => { for (const controller of controllers) controller.abort(); });
   return server;
 }
