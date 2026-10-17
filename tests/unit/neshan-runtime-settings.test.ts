@@ -2,6 +2,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { mkdtemp, writeFile, rm } from "node:fs/promises";
 import { join } from "node:path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import type { Server } from "node:http";
 import { createRuntimeSettingsServer } from "../../tools/dev-neshan-proxy/runtime-settings.mjs";
@@ -17,6 +20,37 @@ async function config(value: unknown) {
   const path=join(folder,"settings.json"); await writeFile(path,JSON.stringify(value)); return path;
 }
 describe("local public runtime configuration host", () => {
+  it("starts under native Node, resolving the shared extensionless schema dependency without frontend compiler changes", async () => {
+    const settings = defaultSiteSettings("demo"); settings.application.locationMap!.webMapKey = "web.unit-fixture";
+    const path = await config(settings);
+    const runtimeUrl = new URL("../../tools/dev-neshan-proxy/runtime-settings.mjs", import.meta.url).href;
+    const script = `
+      import assert from "node:assert/strict";
+      const { createRuntimeSettingsServer } = await import(${JSON.stringify(runtimeUrl)});
+      const server = await createRuntimeSettingsServer({path: ${JSON.stringify(path)}, port: 0});
+      try {
+        await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
+        const base = "http://127.0.0.1:" + server.address().port;
+        const bootstrap = await (await fetch(base + "/site-bootstrap.json")).json();
+        const settings = await (await fetch(base + "/api/public/site-settings")).json();
+        assert.equal(bootstrap.settingsSource, "api");
+        assert.equal(settings.application.locationMap.webMapKey, "web.unit-fixture");
+        assert.equal(JSON.stringify(settings).includes("service.fixture-private"), false);
+        console.log("native-runtime-ok");
+      } finally { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }
+    `;
+    const result = await promisify(execFile)(process.execPath, ["--input-type=module", "--eval", script], {
+      cwd: fileURLToPath(new URL("../..", import.meta.url)), timeout: 10000,
+      env: { ...process.env, NODE_ENV: "development", NESHAN_SERVICE_KEY: "service.fixture-private" },
+    });
+    expect(result.stdout.trim()).toBe("native-runtime-ok");
+    expect(result.stderr).toBe("");
+  });
+  it("reports only safe startup configuration and identifies a missing public key", async () => {
+    const report = vi.fn();
+    const server = await createRuntimeSettingsServer({path: await config(defaultSiteSettings("demo")), report}); servers.push(server);
+    expect(report).toHaveBeenCalledWith({tenantId: "demo", mapEnabled: true, webMapConfigured: false, reverseGeocoding: "unavailable"});
+  });
   it("uses the same strict Site Settings schema and contracts without private configuration", async () => {
     const settings=defaultSiteSettings("demo"); settings.application.locationMap!.webMapKey="web.unit-fixture";
     const server=await createRuntimeSettingsServer({path:await config(settings),port:0}); servers.push(server);

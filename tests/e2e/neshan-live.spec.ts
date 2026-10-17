@@ -117,3 +117,63 @@ test("real provider tiles, real address, manual edit and durable confirmation", 
   expect(provider.filter(r => ![200,204].includes(r.status))).toEqual([]);
   await writeFile(folder+"/live-result.json", JSON.stringify({ locationUrl, tileResponses:provider, errors, lookupWarnings, gps:"browser deterministic permission fixture; reverse/tiles real", persistence:"manual address and GPS metadata survive refresh in canonical inspection facts; summary separately covered by authenticated workflow" },null,2));
 });
+
+
+test("persisted unconfigured map inherits the live seed in both customer and Admin without rewriting history", async ({ page }) => {
+  await mkdir(".agent/reference-review/neshan-config-fix", { recursive: true });
+  const { defaultLocationMap } = await import("../../src/config/site-settings.schema");
+  const runtime = await (await page.request.get("/api/public/site-settings")).json();
+  expect(!!runtime.application.locationMap.webMapKey).toBe(true);
+  await page.goto("/");
+  await expect(page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" })).toBeVisible();
+  const before = await page.evaluate(async factoryMap => {
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = indexedDB.open("inspection-site-settings", 2);
+      request.onsuccess = () => resolve(request.result); request.onerror = () => reject(new Error("Settings database unavailable"));
+    });
+    let snapshot = "", count = 0;
+    await new Promise<void>((resolve, reject) => {
+      const tx = db.transaction("settings", "readwrite"), request = tx.objectStore("settings").openCursor();
+      request.onsuccess = () => {
+        const cursor = request.result; if (!cursor) return;
+        if (!String(cursor.key).startsWith("deployment-binding:")) {
+          const state = cursor.value;
+          for (const settings of [state.published, state.draft, ...state.history]) settings.application.locationMap = structuredClone(factoryMap);
+          state.draft.identity.appTitle = "پیش‌نویس کارگزاری محفوظ";
+          snapshot = JSON.stringify(state); cursor.update(state); count++;
+        }
+        cursor.continue();
+      };
+      tx.oncomplete = () => resolve(); tx.onabort = () => reject(new Error("Settings transaction failed"));
+    }); db.close(); return { snapshot, count };
+  }, defaultLocationMap());
+  expect(before.count).toBe(1);
+  await page.reload();
+  await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
+  await page.getByRole("button", { name: "شروع بازدید" }).click();
+  await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
+  await page.getByRole("button", { name: "همه چیز آماده است" }).click();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "تأیید و ادامه" }).click();
+  await expect(page.locator(".leaflet-container")).toBeVisible();
+  await expectBaseCoverage(page);
+  await page.screenshot({ path: ".agent/reference-review/neshan-config-fix/after-runtime-map.png" });
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.goto("/admin/site-settings");
+  await page.getByRole("tab", { name: "اتصال API", exact: true }).click();
+  // Compare in memory; never put credential-bearing expected/actual values in reporter output.
+  const keyField = page.getByLabel("کلید عمومی وب نقشه نشان", { exact: true });
+  await keyField.evaluate(input => { (input as HTMLInputElement).type = "password"; }); // redact failure-context snapshots in this test only
+  expect(await keyField.inputValue() === runtime.application.locationMap.webMapKey).toBe(true);
+  await expect(page.locator('select[name="application.locationMap.reverseGeocoding"]')).toHaveValue("api");
+  await page.getByRole("tab", { name: "هویت کارگزاری", exact: true }).click();
+  await expect(page.getByLabel("عنوان اپلیکیشن", { exact: true })).toHaveValue("پیش‌نویس کارگزاری محفوظ");
+  expect(await page.evaluate(async snapshot => {
+    const db = await new Promise<IDBDatabase>(resolve => { const r = indexedDB.open("inspection-site-settings", 2); r.onsuccess = () => resolve(r.result); });
+    const unchanged = await new Promise<boolean>((resolve, reject) => {
+      const tx = db.transaction("settings"), request = tx.objectStore("settings").getAll();
+      tx.oncomplete = () => resolve(request.result.some(state => JSON.stringify(state) === snapshot));
+      tx.onerror = () => reject(new Error("Settings read failed"));
+    }); db.close(); return unchanged;
+  }, before.snapshot)).toBe(true);
+});

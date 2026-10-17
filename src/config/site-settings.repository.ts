@@ -41,6 +41,23 @@ export class SiteSettingsRepository {
       JSON.stringify(state.draft) === JSON.stringify(state.published) && isLegacyFactoryTheme(state.published.theme)) {
       result.published.theme = { ...defaultThemeColors }; result.draft.theme = { ...defaultThemeColors };
     }
+    // A development runtime seed can configure a previously untouched factory map.
+    // Do not overwrite explicit Admin map choices, saved map drafts or history.
+    const runtimeMap = this.initial.application.locationMap;
+    const factoryMap = defaultLocationMap();
+    const isFactoryMap = (settings: SiteSettings) => {
+      const map = settings.application.locationMap ?? factoryMap;
+      return map.enabled === factoryMap.enabled && map.webMapKey === null && map.mapType === factoryMap.mapType &&
+        map.reverseGeocoding === factoryMap.reverseGeocoding &&
+        map.initialViewport.latitude === factoryMap.initialViewport.latitude &&
+        map.initialViewport.longitude === factoryMap.initialViewport.longitude && map.initialViewport.zoom === factoryMap.initialViewport.zoom;
+    };
+    if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW === "1" &&
+      this.bootstrap.settingsSource === "api" && this.initial.tenantId === this.bootstrap.tenantId && runtimeMap?.webMapKey &&
+      isFactoryMap(state.published) && isFactoryMap(state.draft)) {
+      result.published.application.locationMap = structuredClone(runtimeMap);
+      result.draft.application.locationMap = structuredClone(runtimeMap);
+    }
     for (const settings of [result.published, result.draft]) settings.application.locationMap ??= defaultLocationMap();
     return result;
   }); }

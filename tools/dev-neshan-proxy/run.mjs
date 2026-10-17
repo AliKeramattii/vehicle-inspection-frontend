@@ -17,7 +17,10 @@ const reversePort = port(process.env.DEV_NESHAN_PROXY_PORT, 8787);
 const settingsPort = port(process.env.DEV_NESHAN_SETTINGS_PORT, 8788);
 if (reversePort === settingsPort) throw new Error("Development service ports must differ.");
 const reverse = createReverseServer({ key: process.env.NESHAN_SERVICE_KEY, port: reversePort, origins, report: ({ upstreamStatus }) => console.info("Neshan reverse upstream HTTP", upstreamStatus) });
-const settings = await createRuntimeSettingsServer({ path: fileURLToPath(new URL("./site-settings.local.json", import.meta.url)), port: settingsPort, origins });
+const settings = await createRuntimeSettingsServer({ path: fileURLToPath(new URL("./site-settings.local.json", import.meta.url)), port: settingsPort, origins, report: configuration => {
+  console.info("Public runtime configuration:", JSON.stringify(configuration));
+  if (!configuration.webMapConfigured) console.warn("Set application.locationMap.webMapKey in tools/dev-neshan-proxy/site-settings.local.json to the authorized public Web Map key.");
+} });
 const listen = (server, number) => new Promise((resolve,reject) => { server.once("error", reject); server.listen(number, "127.0.0.1", resolve); });
 try { await listen(reverse, reversePort); await listen(settings, settingsPort); }
 catch { reverse.close(); settings.close(); throw new Error("Development service port unavailable."); }
