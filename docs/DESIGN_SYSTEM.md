@@ -200,3 +200,22 @@ Reuse the existing customer typography roles and LAB palette: entry display abou
 Landing separates the welcome/contained sedan from the start task. Photography removes excess scene padding while retaining the image/marker aspect coordinate system, below-image view controls and one 120×142px native RTL filmstrip with 70px previews. Long content uses the existing internal scroller. Site Settings has one horizontal category bar, a form work surface, a validated live draft preview (also in the preview dialog) and a stable save/publish boundary. Reviewer facts live in its scrollable decision rail/full facts dialog; evidence owns the main region and decision buttons remain pinned. Existing light/dark/system, tenant colors, semantic evidence states and AppViewport remain.
 
 No new animation, framework, model, business state, API or asset replacement. No approved baseline changes before visual approval.
+
+## Admin blue/cyan application identity (2026-10-18)
+
+Admin has a separately scoped interface palette in `features/admin/admin-brand.css`, imported only by AdminShell. This supersedes the earlier Emerald/Slate mapping for Admin chrome only. The shared AdminThemeScope and its light/dark/system persistence are unchanged; Reviewer and customer continue using their existing tenant-aware paint. No published or draft settings are rewritten.
+
+| Primitive | Exact value | Role |
+|---|---|---|
+| admin-navy-950 | #001D4A | Sidebar and dark foundation; light headings |
+| admin-blue-900 | #013B7C | Navigation hover and secondary navy surfaces |
+| admin-blue-700 | #025EAF | Primary buttons and active navigation, white foreground |
+| admin-blue-500 | #059CF0 | Restrained selected borders/detail |
+| admin-cyan-400 | #0EDDF8 | Active navigation marker, dark focus and progress |
+| admin-cyan-300 | #4DEDF9 | Dark text accents and softly mixed light selection surfaces |
+
+Light mode keeps white cards and Slate neutral boundaries. Dark panels mix the two navy primitives, with readable light text and existing independent green/amber/red/neutral statuses. Deep blue focus is used on light surfaces; cyan focus on dark surfaces. Meaningful input boundaries retain accessible contrast. Bright cyan is not a white-text button fill.
+
+Aliases are rebound on `.admin-root`, including the primary foreground, so neither tenant color variables nor the shared Reviewer provider can accidentally repaint Admin actions. Drawer navigation uses the same navy navigation surface with its own readable text/control aliases. No additional theme provider or dependency is introduced.
+
+Site Settings retains its existing category/work surface/publication layout, fields, validation and local draft lifecycle. A compact identity note distinguishes the fixed application WebP from the editable brokerage logo/colors. The live customer preview retains the actual draft background, heading and action paint in both Admin themes. Its publication remains local-only; an API-configured deployment remains authoritative through the existing loader.

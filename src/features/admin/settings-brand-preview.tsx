@@ -48,6 +48,6 @@ export function SettingsBrandPreview({ values, logo, hero }: {
     <p className="settings-preview-contrast">
       کنتراست متن <bdi>{contrast(values.theme.primary, values.theme.onPrimary).toFixed(2)}:1</bdi>
     </p>
-    <p>تنها پیش‌نمایش؛ قالب و مدارک موجود تغییر نمی‌کنند.</p>
+    <p>نشان برنامه ثابت است؛ نام، لوگو و رنگ‌های کارگزاری از پیش‌نویس می‌آیند. قالب و مدارک موجود تغییر نمی‌کنند.</p>
   </aside>;
 }

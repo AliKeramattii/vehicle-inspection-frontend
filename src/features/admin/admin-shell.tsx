@@ -12,6 +12,7 @@ import { Icon } from "@/components/ui/icon";
 import { AdminProvider, AdminLink, useAdmin } from "./admin-context";
 import { AdminThemeScope, AdminThemeControl } from "./admin-theme";
 import "./admin-theme.css";
+import "./admin-brand.css";
 import { LayoutDashboard, Palette, FileCheck, ListChecks, Webhook, Users, ShieldCheck, Settings } from "lucide-react";
 import { allowed, roles, roleLabels, type AdminRole } from "./model";
 export const adminNavigation = [

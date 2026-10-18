@@ -80,6 +80,7 @@ test("exact public logo loads across the customer journey and mobile sizes", asy
   await logo(page);
   await chooseDemoLocation(page);
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
+  await expect(page.getByRole("button", { name: "تأیید مشخصات و ادامه" })).toBeVisible();
   await logo(page);
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
   await expect(page).toHaveURL(/capture$/);

@@ -121,3 +121,7 @@ Applicable TasteSkill pre-flight: brief/mode/dials recorded; existing design sys
 CTA/form/status/focus paint checked; scoped dark mode and customer isolation checked; no new motion,
 fonts, copy em dashes, layout patterns, dependencies or decorative surfaces introduced. Generic
 marketing layout/icon/image rules do not override this product's explicit UI and asset requirements.
+
+## Admin-only blue/cyan exception
+
+The approved logo-derived Admin palette now supersedes the Emerald/Slate chrome described above for Admin only. See DESIGN_SYSTEM.md, “Admin blue/cyan application identity”, for all six exact primitives and roles. `src/features/admin/admin-brand.css` owns this scope; shared primitives, customer/Reviewer paint, tenant theme defaults and durable published/draft settings are unchanged. Semantic success/attention/error/pending colors remain green/amber/red/neutral.

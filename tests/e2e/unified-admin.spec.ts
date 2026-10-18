@@ -3,6 +3,7 @@ import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 const folder = ".agent/reference-review/unified";
 test("eight local image slots publish and recover after refresh; theme and authorization persist", async ({ page }) => {
+  await page.setViewportSize({width:390,height:844});
   const errors: string[] = []; page.on("pageerror", e => errors.push(e.message));
   await mkdir(folder, { recursive: true }); await page.goto("/admin/site-settings");
   await expect(page.getByRole("heading", { name: "تنظیمات سایت", exact: true })).toBeVisible();
@@ -64,26 +65,26 @@ test("published local receipt illustration survives submission and refresh", asy
   await submissionWorkflow(page);
   await expect(page.locator(".inspection-journey-header")).not.toContainText("BDI-8F31K2");
   await page.getByRole("button", { name: "ارسال برای بررسی", exact: true }).click(); await expect(page).toHaveURL(/submitted$/);
-  await expect(page.locator(".receipt-hero")).toHaveAttribute("src", /^blob:/); await expect(page.getByText("BDI-8F31K2", { exact: true })).toBeVisible();
+  await expect(page.locator(".receipt-hero img")).toHaveAttribute("src", /^blob:/); await expect(page.getByText("BDI-8F31K2", { exact: true })).toBeVisible();
   for (const [width,height] of [[360,800],[390,844],[430,932]]) {
     await page.setViewportSize({width,height}); await page.screenshot({path:folder+"/receipt-custom-"+width+".png"});
     expect(await page.evaluate(() => [document.documentElement.scrollWidth,document.documentElement.scrollHeight])).toEqual([width,height]);
   }
-  await page.reload(); await expect(page.locator(".receipt-hero")).toHaveAttribute("src", /^blob:/);
+  await page.reload(); await expect(page.locator(".receipt-hero img")).toHaveAttribute("src", /^blob:/);
   await expect(page.getByRole("heading", { name: "بازدید با موفقیت ارسال شد" })).toBeVisible();
 });
 test("dark theme covers Admin routes, dialogs, tables and assigned reviewer workspace", async ({ page }) => {
   await page.setViewportSize({width:1440,height:960}); await page.goto("/admin"); await page.getByRole("switch", { name: "پوسته تیره" }).check();
   for (const route of ["/admin","/admin/templates","/admin/templates/body-image-guided","/admin/branding","/admin/policies","/admin/webhooks","/admin/assignments","/admin/users","/admin/permissions"]) {
     await page.goto(route); await expect(page.locator("html")).toHaveAttribute("data-admin-theme","dark");
-    await expect(page.locator(".admin-root")).toHaveCSS("background-color",await semanticColor(page,"--color-slate-900"));
-    const panel = page.locator(".admin-panel").first(); if (await panel.isVisible()) await expect(panel).toHaveCSS("background-color",await semanticColor(page,"--color-slate-800"));
+    await expect(page.locator(".admin-root")).toHaveCSS("background-color",await semanticColor(page,"--admin-background",".admin-root"));
+    const panel = page.locator(".admin-panel").first(); if (await panel.isVisible()) await expect(panel).toHaveCSS("background-color",await semanticColor(page,"--admin-surface",".admin-root"));
   }
   await submissionWorkflow(page); await page.getByRole("button",{name:"ارسال برای بررسی",exact:true}).click(); await expect(page).toHaveURL(/submitted$/);
   await page.goto("/admin/assignments"); await page.getByRole("combobox",{name:"ارجاع BDI-8F31K2"}).selectOption("reviewer-demo");
   await page.goto("/reviewer/cases/insp_demo"); await expect(page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true})).toBeVisible();
   await expect(page.locator(".reviewer-root")).toHaveCSS("background-color",await semanticColor(page,"--color-slate-900"));
-  await expect(page.locator(".review-case-context")).toHaveCSS("background-color",await semanticColor(page,"--color-slate-800"));
+  await expect(page.locator(".review-decisions")).toHaveCSS("background-color",await semanticColor(page,"--color-slate-800"));
   await page.getByRole("textbox",{name:"دلیل درخواست ثبت مجدد"}).fill("پلاک خوانا نیست.");
   await page.screenshot({path:folder+"/reviewer-workspace-dark-1440.png"});
   await page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true}).click(); await expect(page.getByText("نیاز به مدرک تکمیلی",{exact:true})).toBeVisible();
