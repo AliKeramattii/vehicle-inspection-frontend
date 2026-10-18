@@ -54,3 +54,7 @@
 
 /* Binary upload is not reviewer approval. */
 .review-decisions .review-evidence-state[data-state=uploaded] { background:var(--color-information-soft); color:var(--color-information); }
+
+.reviewer-root .review-queue-evidence-progress{width:110px;height:5px;margin-block:7px;background:var(--admin-border);border-radius:4px;overflow:hidden}
+.reviewer-root .review-queue-evidence-progress>span{display:block;height:100%;background:var(--admin-accent)}
+.reviewer-root .reviewer-table-scroll th{position:sticky;top:0;z-index:1}.reviewer-root .reviewer-table-scroll tr:focus-within{background:var(--admin-selected)}

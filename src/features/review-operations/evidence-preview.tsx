@@ -24,7 +24,7 @@ export function EvidencePreview({job,compact=false}:{job:UploadJob;compact?:bool
  return()=>{active=false;if(owned)URL.revokeObjectURL(owned);};
  },[job,compact,attempt]);
  if(error)return compact?<ImageOff size={22} aria-hidden="true"/>:<InlineAlert tone="warning">این نسخه مدرک روی این دستگاه در دسترس نیست. داده‌های پرونده حفظ شده‌اند؛ دریافت از سرور به سرویس آینده نیاز دارد.<SecondaryButton onClick={()=>{setUrl(undefined);setError(false);setAttempt(value=>value+1);}}>تلاش دوباره برای نمایش مدرک</SecondaryButton></InlineAlert>;
- if(!url)return <div className="review-evidence-loading" role={compact?undefined:"status"}>{compact?<Camera size={22} aria-hidden="true"/>:"در حال خواندن مدرک…"}</div>;
+ if(!url)return <div className="review-evidence-loading" role={compact?undefined:"status"}>{compact?<Camera size={22} aria-hidden="true"/>:<><Camera size={36} aria-hidden="true"/><p>در حال خواندن مدرک…</p><small>نسخه ثبت‌شده روی دستگاه</small></>}</div>;
  return job.evidenceKind==="video-360"?<video className="review-evidence-media" src={url} controls playsInline preload="metadata" aria-label="ویدیوی ثبت‌شده بازدید"/>:compact?<Image unoptimized width={140} height={84} src={url} alt="" className="review-thumbnail-image" onError={()=>setError(true)}/>:<Image unoptimized fill sizes="(max-width: 1100px) 90vw, 60vw" className="review-evidence-media" src={url} alt={"مدرک ثبت‌شده: "+job.title} onError={()=>setError(true)}/>;
 }
 /** Only visible thumbnails decode their own current revision; video bytes are never loaded for a thumbnail. */
