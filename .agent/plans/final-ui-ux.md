@@ -40,7 +40,7 @@ Working live map where configured and truthful readiness recovery; actual meanin
 - [x] Checkpoint 4: Admin UI.
 - [x] Checkpoint 5: Reviewer UI.
 - [x] Checkpoint 6: cross-application quality.
-- [ ] Checkpoint 7: final QA/report/Git delivery.
+- [x] Checkpoint 7: final QA executed and report written; historical visual approval and physical-device/export gates remain open. Final Git delivery is recorded in the completion response.
 
 ## Discoveries
 Live functional verification passed five tests (exit 0) with actual decoded Neshan base tiles and Persian addresses; no speculative recovery patch needed. Baseline units 454/37 passed. BEFORE capture helper now eagerly decodes otherwise-lazy images and isolates submitted/retake scenarios. Production code remains unchanged at this checkpoint.
@@ -54,3 +54,9 @@ Admin checkpoint: six native color pickers pair with original registered HEX fie
 Reviewer checkpoint: selected evidence shows media kind and actual upload/processing/verification label, separately from human decision. Larger filmstrip type, queue review progress derived from exact current revisions, stable evidence/workspace loading. Keyboard details/next-item check passed; evidence-first screenshots inspected. No assignment/revision/decision service changes.
 
 Cross-app checkpoint: bounded controls/markers verified at 320/360/390/430/768 and landscape. Corrected the development-only optional wrapper height without touching model/GLB. Full twelve camera captures → odometer → actual mock recorder → durable video → upload → submit → receipt refresh/edit lock passed. Reauthentication recovery now explains expired mock workflow without blaming persisted facts, with evidence-preservation test. Unit suite 457/40, lint/typecheck exit 0; full historical browser suite in progress. No document overflow in 107 BEFORE and 107 reviewed intermediate captures.
+
+## Urgent scope override: protected Neshan
+User correction freezes Location/Neshan, including surrounding layout. Pre-task restore point e36054d; no task-introduced SDK/map/proxy/provider/rewrite changes exist. Restored missing locked dependencies after frontend 500; current live browser five cases passed. Shared textarea focus rule is scoped away from Location. See docs/NESHAN_PRESERVATION.md. Future work on this task is other UI plus Neshan regression verification only. Preserve external ded3696 documentation commit, existing manual schema edits and unrelated nested checkout.
+
+## Final QA outcome
+Post-recovery lint/typecheck/build exited 0; 457 units in 40 files passed. Built-app review/quality: 10 passed, 10 role-project skips, exit 0. Real authorized Neshan/recovery: 5 passed, exit 0. Existing Admin contrast/focus: 1 passed, 1 skip, exit 0. Final complete historical suite: 226 passed, 169 skipped, 45 failed, exit 1; 42 visual/missing-baseline cases and three outdated header/reference expectations. No approved baseline was updated. Five auto-emitted missing snapshot candidates were moved into ignored QA evidence. Full report and eight portable QA images are in docs. Receipt fit and landing geometry are corrected; physical devices/static export and visual-baseline reconciliation remain explicitly unverified. Preserved all unrelated user work and independent README commit.

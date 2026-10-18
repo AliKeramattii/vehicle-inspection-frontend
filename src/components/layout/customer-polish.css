@@ -16,7 +16,15 @@
 .photo-review-capture figcaption>span{flex-basis:100%;font-size:var(--type-meta)}
 .photo-review .photo-review-reference{min-height:90px}
 .photo-review .photo-review-reference .photography-image{width:100px;min-width:100px;height:70px;object-fit:contain}
-.receipt-next-step{font-size:var(--type-meta);line-height:1.9;color:var(--color-muted);max-width:360px;margin:8px auto;text-align:center}
 .summary-section-heading h3{font-size:var(--type-card)}
 .summary-route .summary-section{border-radius:var(--radius-panel)}
 @media(max-height:600px){.landing-welcome .landing-art{max-block-size:none;aspect-ratio:1.95}.landing-welcome .landing-intro{margin-top:12px}}
+
+/* Spend the viewport budget on the vehicle, readable fields and reachable support. */
+.landing-screen .landing-welcome .landing-intro{margin-block-start:12px}
+.landing-screen .landing-welcome .landing-art{margin-block-start:8px}
+.landing-screen .landing-start{padding-top:18px}
+.landing-screen .landing-start .referral-label{margin-bottom:12px}
+.landing-screen .landing-start .landing-benefits{margin-top:12px;padding-top:10px;gap:6px}
+.landing-screen .landing-start .benefit-icon{width:24px;height:24px}
+.landing-screen .landing-start .entry-trust-footer{margin-top:6px}

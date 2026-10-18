@@ -183,3 +183,6 @@ Active reference artwork now comes from `src/config/vehicle-assets.ts`: twelve e
 ## Sedan location choices and photo-only alignment
 
 See VEHICLE_GUIDANCE_CONSOLIDATION.md. Four VIN/spec location variants retain the same configured requirement identity. Faint supplied ghosts now belong to still-photo camera alignment only, outside the saved Blob. Walk-around recording uses separate instructional guidance; no photo ghosts or gallery import. The matching cleared 4–5s orbit clip remains an explicit asset blocker.
+
+## Final presentation refinement
+The overview retains image → physical-direction controls → category/context → shot cards → sticky action. Its selected context uses existing evidence helpers plus requirement-owned distance/height; the next-required shortcut changes the same selection used by cards, markers and CTA. The studio has a 300px minimum and short screens use the existing internal scroll region. Authorized development preview wrappers reserve the same height as their contained image; no geometry/GLB change. Review labels distinguish an unaccepted draft from durable accepted evidence. Refresh can require mock reauthentication; the recovery action preserves saved media rather than asking users to discard/reconfirm it.

@@ -74,7 +74,7 @@ test("reference-led readiness and collapsed consent screenshots", async ({ page 
   await expect(hero.locator("img")).toHaveCount(1);
   await expect(hero.locator("img")).toHaveCSS("object-fit", "contain");
   await expect(hero.locator("h2")).toHaveCSS("position", "static");
-  await page.evaluate(() => Promise.all([...document.images].map((image) => image.decode())));
+  await page.evaluate(() => Promise.all([...document.images].map((image) => { image.loading = "eager"; return image.decode(); })));
   await expect.soft(page).toHaveScreenshot("readiness.png");
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await expect(page.getByRole("checkbox")).not.toBeChecked();

@@ -10,6 +10,8 @@ const eslintConfig = defineConfig([
     // Default ignores of eslint-config-next:
     ".next/**",
     "references/**",
+    // A separate local checkout is unrelated to this application.
+    "vehicle-inspection-frontend/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
