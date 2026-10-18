@@ -1,50 +1,70 @@
+
 "use client";
 
-import Image from "next/image";
-import { useRef, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { IconButton } from "@/components/ui/button";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/ui/icon";
-import { toPersianDigits } from "@/lib/utils/persian";
-import { developmentLocationAdapter, LocationServiceError, type InspectionLocationAdapter, type MapOffset } from "@/lib/map/location-adapter";
-import type { InspectionLocation } from "@/types/domain";
+import { SecondaryButton } from "@/components/ui/button";
+import { defaultLocationMap, type LocationMapConfiguration } from "@/config/site-settings.schema";
+import { browserLocationService, createNeshan, type MapFactory, type NeshanMap, type DeviceLocationService } from "@/lib/map/neshan-adapter";
+import { selectionSchema, type LocationSelection } from "@/lib/map/location-selection";
+import "@neshan-maps-platform/leaflet/dist/leaflet.css";
 
-const failureText = { denied: "دسترسی به موقعیت داده نشده است", unavailable: "موقعیت در دسترس نیست", unsupported: "موقعیت در این دستگاه پشتیبانی نمی‌شود" } as const;
-export function InspectionLocationMap({ location, onChange, adapter = developmentLocationAdapter }: {
-  location: InspectionLocation; onChange: (location: InspectionLocation) => void; adapter?: InspectionLocationAdapter;
+export function InspectionLocationMap({ point, onSelect, config = defaultLocationMap(), service = browserLocationService, factory = createNeshan, disabled = false }: {
+  point: LocationSelection | null; onSelect: (point: LocationSelection) => void;
+  config?: LocationMapConfiguration; service?: DeviceLocationService; factory?: MapFactory; disabled?: boolean;
 }) {
-  const [offset, setOffset] = useState<MapOffset>(() => adapter.coordinatesOffset(adapter.initialLocation, location));
-  const drag = useRef<{ pointerId: number; x: number; y: number; offset: MapOffset } | null>(null);
-  const locate = useMutation({ mutationFn: () => adapter.locate(), onSuccess: (fix) => {
-    setOffset({ x: 0, y: 0 });
-    onChange({ ...location, ...fix });
-  } });
-  const move = (next: MapOffset) => {
-    const bounded = { x: Math.max(-140, Math.min(140, next.x)), y: Math.max(-140, Math.min(140, next.y)) };
-    setOffset(bounded);
-    onChange({ ...location, ...adapter.offsetCoordinates(locate.data ?? adapter.initialLocation, bounded) });
-  };
-  const error = locate.isError ? failureText[locate.error instanceof LocationServiceError ? locate.error.code : "unavailable"] : null;
-  const radius = Math.min(90, Math.max(20, location.accuracyMeters / adapter.metersPerPixel));
-  return <section className="inspection-location-map" aria-label="انتخاب موقعیت بازدید روی نقشه">
-    <div className="map-pan-surface" role="group" tabIndex={0} aria-label="جابجایی نقشه" aria-describedby="map-keyboard-help"
-      onKeyDown={(event) => {
-        const delta = { ArrowLeft: { x: 20, y: 0 }, ArrowRight: { x: -20, y: 0 }, ArrowUp: { x: 0, y: 20 }, ArrowDown: { x: 0, y: -20 } }[event.key];
-        if (delta) { event.preventDefault(); move({ x: offset.x + delta.x, y: offset.y + delta.y }); }
-      }}
-      onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); drag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, offset }; }}
-      onPointerMove={(event) => { const start = drag.current; if (start?.pointerId === event.pointerId) move({ x: start.offset.x + event.clientX - start.x, y: start.offset.y + event.clientY - start.y }); }}
-      onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }}>
-      <div className="development-map-scene" style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }} aria-hidden="true">
-        <Image src={adapter.artwork} alt="" width={800} height={800} unoptimized preload draggable={false} />
-        <span className="map-street map-street-highway">بزرگراه کردستان</span><span className="map-street map-street-main">خیابان سهروردی شمالی</span>
-        <span className="map-street map-street-side">خیابان خرمشهر</span><span className="map-park">پارک ساعی</span>
-      </div>
-    </div>
-    <p id="map-keyboard-help" className="sr-only">نقشه نمونه است. برای انتخاب نقطه، نقشه را بکشید یا از کلیدهای جهت استفاده کنید. نشانگر انتخاب ثابت می‌ماند.</p>
-    {!error && <div className="gps-accuracy-circle" aria-hidden="true" style={{ width: radius * 2, height: radius * 2, marginLeft: offset.x, marginTop: offset.y }}><span /></div>}
-    <div className="inspection-selection-pin" aria-label="نشانگر ثابت موقعیت انتخابی" role="img"><Image src="/icons/location/inspection-pin.svg" alt="" width={36} height={46} unoptimized /></div>
-    <div className="map-accuracy-badge" role="status"><Icon name="locate" size={23} /><span>{locate.isPending ? "در حال یافتن موقعیت…" : error ?? `دقت موقعیت ± ${toPersianDigits(location.accuracyMeters)} متر`}</span></div>
-    <IconButton className="map-locate-button" aria-label="بازگشت به موقعیت من" loading={locate.isPending} onClick={() => locate.mutate()}>{!locate.isPending && <Icon name="locate" size={27} />}</IconButton>
+  const host = useRef<HTMLDivElement>(null), map = useRef<NeshanMap | undefined>(undefined);
+  const latest = useRef({ point, onSelect, disabled });
+  useEffect(() => { latest.current = { point, onSelect, disabled }; }, [point, onSelect, disabled]);
+  const activeGps = useRef<AbortController | undefined>(undefined);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [locating, setLocating] = useState(false), [error, setError] = useState<string>();
+  const [generation, setGeneration] = useState(0);
+  const [tileError, setTileError] = useState(false);
+  const retryMap = () => { setTileError(false); setError(undefined); setStatus("loading"); setGeneration(value => value + 1); };
+  const configured = Boolean(config.enabled && config.webMapKey);
+  useEffect(() => {
+    if (!configured || !host.current) return;
+    let active = true, owned: NeshanMap | undefined;
+    const initialization = new AbortController();
+    const callbacks = {
+      selected(next: LocationSelection) { if (active && !latest.current.disabled) latest.current.onSelect(next); },
+      // A missing/empty tile is recoverable; do not hide the fixed pin or cover an initialized map.
+      error() { if (active) setTileError(true); },
+    };
+    const observer = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(() => owned?.resize());
+    observer?.observe(host.current);
+    void factory(host.current, config, latest.current.point, callbacks, initialization.signal).then(instance => {
+      owned = instance;
+      if (!active) { instance.remove(); return; }
+      map.current = instance; instance.resize(); setStatus("ready");
+      const selected = latest.current.point; if (selected?.selectionSource === "gps") instance.showGps(selected);
+    }).catch(() => { if (active) { setStatus("error"); setError("نقشه در دسترس نیست؛ تنظیمات و اتصال اینترنت را بررسی کنید."); } });
+    return () => { active = false; initialization.abort(); observer?.disconnect(); owned?.remove(); map.current = undefined; };
+  }, [configured, config, factory, generation]);
+  useEffect(() => () => activeGps.current?.abort(), []);
+  async function locate() {
+    if (locating || disabled) return;
+    const request = new AbortController(); activeGps.current = request; setLocating(true); setError(undefined);
+    try {
+      const fix = selectionSchema.parse(await service.locate(request.signal));
+      if (request.signal.aborted) return;
+      latest.current.onSelect(fix); map.current?.showGps(fix);
+    } catch (cause) {
+      if (!request.signal.aborted) setError(cause instanceof Error ? cause.message : "دریافت موقعیت ممکن نشد.");
+    } finally { if (!request.signal.aborted) setLocating(false); }
+  }
+  return <section className="neshan-location-map" data-map-state={configured ? status : "unconfigured"} aria-label="انتخاب موقعیت بازدید">
+    <div ref={host} className="neshan-map-canvas" tabIndex={configured && !disabled ? 0 : -1} data-disabled={disabled} aria-disabled={disabled} aria-label="نقشه تعاملی نشان" />
+    {configured && status !== "error" && <span className="neshan-center-pin" aria-hidden="true"><Icon name="mapPin" size={42} /></span>}
+    {(!configured || status !== "ready") && <div className="neshan-map-message" role="status">
+      <Icon name="mapPin" size={32} />
+      <strong>{!configured ? "نقشه هنوز پیکربندی نشده است" : status === "loading" ? "در حال بارگذاری نقشه…" : "نقشه در دسترس نیست"}</strong>
+      <p>{!configured ? "کلید عمومی وب نقشه نشان را در تنظیمات این کارگزاری ثبت کنید. موقعیت ذخیره‌شده تغییر نکرده است." : error}</p>
+      {status === "error" && <SecondaryButton onClick={retryMap}>تلاش دوباره</SecondaryButton>}
+    </div>}
+    <button type="button" className="neshan-locate" aria-label="بازگشت به موقعیت من" disabled={locating || disabled} onClick={() => void locate()}><Icon name="locate" size={21} /><span>{locating ? "در حال یافتن موقعیت…" : "موقعیت من"}</span></button>
+    {tileError && status === "ready" && !error && <div className="neshan-location-error neshan-tile-warning" role="status"><span>بارگذاری نقشه کامل نشد.</span><button type="button" onClick={retryMap} aria-label="تلاش دوباره برای بارگذاری نقشه">تلاش دوباره</button></div>}
+    {error && status !== "error" && <p className="neshan-location-error" role="alert">{error}</p>}
   </section>;
 }

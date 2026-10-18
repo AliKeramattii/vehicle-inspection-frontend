@@ -33,7 +33,10 @@ test("Phase 01 flows through readiness and consent, without permissions or backe
   await verifyReferral(page);
   await expect(page.getByRole("heading", { name: "قبل از شروع، آماده‌اید؟" })).toBeVisible();
   await expect(page.locator(".readiness-requirements li")).toHaveCount(4);
-  await expect(page.locator('.device-diagnostics li[data-status="ready"]')).toHaveCount(3);
+  await expect(page.locator(".device-diagnostics li")).toHaveCount(4);
+  await expect(page.locator('.device-diagnostics li[data-status="checking"]')).toHaveCount(0);
+  await expect(page.locator(".device-diagnostics")).toContainText("ضبط ویدیوی ۳۶۰ درجه");
+  await expect(page.locator(".device-diagnostics li").filter({hasText:"موقعیت مکانی"})).not.toHaveAttribute("data-status","ready");
   await noOverflow(page);
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await expect(page).toHaveURL(/\/consent$/);
@@ -55,7 +58,7 @@ test("Phase 01 flows through readiness and consent, without permissions or backe
   await noOverflow(page);
   await button.click();
   await expect(page).toHaveURL(/\/inspection\/insp_demo\/location$/);
-  await expect(page.getByRole("heading", { name: "آدرس شناسایی‌شده" })).toBeVisible();
+  await expect(page.getByLabel("آدرس موقعیت خودرو", { exact: true })).toBeVisible();
   await expect(page.locator("a[href*='/capture']")).toHaveCount(0);
   expect(await page.evaluate(() => (window as Window & { permissionCalls?: string[] }).permissionCalls)).toEqual([]);
   expect(errors).toEqual([]);
@@ -68,16 +71,9 @@ test("reference-led readiness and collapsed consent screenshots", async ({ page 
   await page.evaluate(() => document.fonts.ready);
   expect(page.viewportSize()).toEqual({ width: 390, height: 844 });
   const hero = page.locator(".readiness-hero");
-  await expect(hero.locator("img")).toHaveCount(0);
-  await expect(hero).toHaveCSS("background-image", /vehicle-inspection/);
-  await hero.evaluate(async (element) => {
-    const sources = [...getComputedStyle(element).backgroundImage.matchAll(/url\("([^"]+)"\)/g)];
-    await Promise.all(sources.map(async ([, source]) => {
-      const image = new Image();
-      image.src = source;
-      await image.decode();
-    }));
-  });
+  await expect(hero.locator("img")).toHaveCount(1);
+  await expect(hero.locator("img")).toHaveCSS("object-fit", "contain");
+  await expect(hero.locator("h2")).toHaveCSS("position", "static");
   await page.evaluate(() => Promise.all([...document.images].map((image) => image.decode())));
   await expect.soft(page).toHaveScreenshot("readiness.png");
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
@@ -102,7 +98,7 @@ test("preparation remains usable at 320, 390 and 480px without horizontal overfl
     await noOverflow(page);
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "تأیید و ادامه" }).click();
-    await expect(page.getByRole("heading", { name: "آدرس شناسایی‌شده" })).toBeVisible();
+    await expect(page.getByLabel("آدرس موقعیت خودرو", { exact: true })).toBeVisible();
     await page.goto("/readiness");
     await noOverflow(page);
     await expect(page.getByRole("button", { name: "همه چیز آماده است" })).toBeEnabled();

@@ -1,0 +1,144 @@
+/* Application identity for Admin only. Tenant/customer and Reviewer paint stays separate. */
+.admin-root {
+  --admin-navy-950: #001D4A;
+  --admin-blue-900: #013B7C;
+  --admin-blue-700: #025EAF;
+  --admin-blue-500: #059CF0;
+  --admin-cyan-400: #0EDDF8;
+  --admin-cyan-300: #4DEDF9;
+
+  --admin-background: var(--color-slate-50);
+  --admin-surface: #ffffff;
+  --admin-soft: color-mix(in srgb, var(--admin-blue-500) 5%, white);
+  --admin-hover: color-mix(in srgb, var(--admin-blue-500) 8%, white);
+  --admin-selected: color-mix(in srgb, var(--admin-cyan-300) 16%, white);
+  --admin-border: var(--color-slate-200);
+  --admin-ink: var(--color-slate-900);
+  --admin-heading: var(--admin-navy-950);
+  --admin-muted: var(--color-slate-600);
+  --admin-accent: var(--admin-blue-700);
+  --admin-primary: var(--admin-blue-700);
+  --admin-primary-hover: var(--admin-blue-900);
+  --admin-on-primary: #ffffff;
+  --admin-focus: var(--admin-blue-700);
+  --admin-control-border: var(--color-slate-500);
+  --admin-sidebar: var(--admin-navy-950);
+  --admin-sidebar-hover: var(--admin-blue-900);
+  --admin-sidebar-active: var(--admin-blue-700);
+  --admin-highlight: var(--admin-blue-500);
+  --admin-progress: var(--admin-blue-700);
+
+  /* Rebind aliases here: inherited aliases have already resolved in the shared theme scope. */
+  --color-background: var(--admin-background);
+  --color-surface: var(--admin-surface);
+  --color-surface-soft: var(--admin-soft);
+  --color-ink: var(--admin-ink);
+  --color-muted: var(--admin-muted);
+  --color-border: var(--admin-border);
+  --color-control-border: var(--admin-control-border);
+  --color-primary: var(--admin-primary);
+  --color-primary-hover: var(--admin-primary-hover);
+  --color-on-primary: var(--admin-on-primary);
+  --color-primary-ink: var(--admin-accent);
+  --color-primary-soft: var(--admin-selected);
+  --color-selected: var(--admin-accent);
+  --color-selected-soft: var(--admin-selected);
+  --color-information: var(--admin-accent);
+  --color-information-soft: var(--admin-selected);
+  --color-focus: var(--admin-focus);
+  --color-success-soft: var(--admin-success-bg);
+  --color-warning-soft: var(--admin-warning-bg);
+  --color-destructive-soft: var(--admin-error-bg);
+}
+html[data-admin-theme="dark"] .admin-root {
+  --admin-background: var(--admin-navy-950);
+  --admin-surface: color-mix(in srgb, var(--admin-navy-950) 80%, var(--admin-blue-900));
+  --admin-soft: color-mix(in srgb, var(--admin-navy-950) 50%, var(--admin-blue-900));
+  --admin-hover: var(--admin-blue-900);
+  --admin-selected: var(--admin-blue-900);
+  --admin-border: color-mix(in srgb, var(--admin-cyan-300) 20%, var(--admin-navy-950));
+  --admin-ink: var(--color-slate-50);
+  --admin-heading: #ffffff;
+  --admin-muted: var(--color-slate-300);
+  --admin-accent: var(--admin-cyan-300);
+  --admin-primary-hover: color-mix(in srgb, var(--admin-blue-700) 88%, var(--admin-blue-900));
+  --admin-focus: var(--admin-cyan-400);
+  --admin-control-border: var(--color-slate-400);
+  --admin-highlight: var(--admin-cyan-400);
+  --admin-progress: var(--admin-cyan-400);
+  --admin-success-bg: color-mix(in srgb, var(--color-emerald-400) 10%, var(--admin-surface));
+  --admin-warning-bg: color-mix(in srgb, var(--color-amber-400) 10%, var(--admin-surface));
+  --admin-error-bg: color-mix(in srgb, var(--color-rose-400) 10%, var(--admin-surface));
+}
+
+/* Keep navigation recognizable in expanded, collapsed and drawer forms. */
+.admin-root .admin-sidebar {
+  --admin-heading: #ffffff;
+  --admin-ink: var(--color-slate-50);
+  --admin-muted: var(--color-slate-300);
+  --admin-accent: var(--admin-cyan-300);
+  --admin-soft: var(--admin-sidebar-hover);
+  background: var(--admin-sidebar);
+  border-color: var(--admin-sidebar-hover);
+}
+.admin-root .admin-sidebar .admin-brand { border-color: var(--admin-sidebar-hover); }
+.admin-theme-scope .admin-root .admin-sidebar nav a[aria-current="page"] {
+  background: var(--admin-sidebar-active);
+  color: #ffffff;
+}
+.admin-theme-scope .admin-root .admin-sidebar nav a:not([aria-current="page"]):hover {
+  background: var(--admin-sidebar-hover);
+  color: #ffffff;
+}
+.admin-root .admin-sidebar nav a[aria-current="page"]::before { background: var(--admin-cyan-400); }
+.admin-root .admin-sidebar nav a[aria-current="page"] .admin-icon { color: var(--admin-cyan-300); }
+.admin-root .admin-sidebar :is(a,button):focus-visible { outline-color: var(--admin-cyan-400); }
+.admin-root .admin-navigation-dialog {
+  --admin-surface: var(--admin-sidebar); --admin-soft: var(--admin-sidebar-hover);
+  --admin-ink: var(--color-slate-50); --admin-heading: #ffffff; --admin-muted: var(--color-slate-300);
+  --color-surface: var(--admin-surface); --color-surface-soft: var(--admin-soft);
+  --color-ink: var(--admin-ink); --color-muted: var(--admin-muted);
+  background: var(--admin-surface); color: var(--admin-ink);
+}
+.admin-root .admin-navigation-dialog nav a[aria-current="page"] { background: var(--admin-sidebar-active); color: #ffffff; }
+.admin-root .admin-navigation-dialog nav a:hover { background: var(--admin-sidebar-hover); }
+.admin-root .admin-navigation-dialog :is(a,button):focus-visible { outline-color: var(--admin-cyan-400); }
+
+/* Brand controls never inherit the tenant's on-primary paint. Status colors remain semantic. */
+.admin-theme-scope .admin-root :is(button[data-variant="primary"],.admin-primary-link) { color: var(--admin-on-primary); background: var(--admin-primary); }
+.admin-root :is([data-variant="primary"],.admin-primary-link):not(:disabled):hover { background: var(--admin-primary-hover); }
+.admin-root :is([data-variant="secondary"],.admin-nav-toggle):not(:disabled):hover { background: var(--admin-hover); border-color: var(--admin-accent); }
+.admin-root :is(input,select,textarea,button,a,summary):focus-visible { outline: 2px solid var(--admin-focus); outline-offset: 3px; }
+.admin-root :is(h1,h2,h3) { color: var(--admin-heading); }
+.admin-root .admin-topbar { background: var(--admin-surface); }
+.admin-root :is(input,textarea,select) { accent-color: var(--admin-primary); }
+.admin-root :is(input,textarea)[aria-invalid="true"] { border-color: var(--admin-error-ink); }
+.admin-root :is(.admin-tabs,.site-settings-tabs) [aria-selected="true"] { color: var(--admin-accent); border-color: var(--admin-highlight); background: var(--admin-selected); }
+.admin-root .admin-tabs [aria-selected="true"] svg { color: var(--admin-accent); }
+.admin-root .admin-text-action:hover { color: var(--admin-heading); }
+.admin-root .operations-metrics strong { color: var(--admin-heading); }
+.admin-root .operations-workload meter { accent-color: var(--admin-progress); }
+.admin-root .operations-workload meter::-webkit-meter-optimum-value { background: var(--admin-progress); }
+.admin-root .operations-workload meter::-moz-meter-bar { background: var(--admin-progress); }
+
+/* Settings: one category bar, clear form boundaries and an independent tenant preview. */
+.admin-root .site-settings-body { border-color: var(--admin-border); }
+.admin-root .site-settings-body .site-settings-tabs { background: var(--admin-soft); padding-block: 8px; }
+.admin-root .site-settings-tabs button { border: 1px solid transparent; }
+.admin-root .site-settings-tabs button[aria-selected="true"] { border-color: var(--admin-highlight); }
+.admin-root .settings-section-intro h2 { color: var(--admin-heading); }
+.admin-root .site-settings-fields :is(input:not([type="checkbox"]),select,textarea) { border-color: var(--admin-control-border); }
+.admin-root .site-settings-fields .admin-image-asset-field { border-color: var(--admin-border); background: var(--admin-background); }
+.admin-root .site-settings-fields .admin-asset-preview { border: 1px solid var(--admin-border); }
+.admin-root .settings-platform-identity {
+  grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  border-inline-start: 3px solid var(--admin-highlight); border-radius: 10px; background: var(--admin-soft);
+}
+.admin-root .settings-platform-identity strong { display: block; font-size: 13px; color: var(--admin-heading); }
+.admin-root .settings-platform-identity p,.admin-root .settings-color-scope { font-size: 12px; line-height: 1.9; color: var(--admin-muted); }
+.admin-root .settings-color-scope { grid-column: 1 / -1; padding-bottom: 12px; border-bottom: 1px solid var(--admin-border); }
+.admin-root .settings-preview-caption strong { color: var(--admin-heading); }
+.admin-root .settings-preview-caption>span { color: var(--admin-accent); }
+.admin-root .settings-publication-bar { background: var(--admin-soft); }
+/* The customer preview keeps its draft paint, including headings, in either Admin theme. */
+.admin-root .settings-preview-phone :is(h2,h3) { color: inherit; }

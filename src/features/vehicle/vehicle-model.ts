@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { vehicleColors } from "./vehicle-colors";
 import { iranianPlateSchema } from "@/schemas/domain";
 
 export const vehicleDiscrepancySchema = z.object({
@@ -7,6 +8,7 @@ export const vehicleDiscrepancySchema = z.object({
 });
 export const vehicleConfirmationSchema = z.object({
   plate: iranianPlateSchema,
+  colorId: z.enum(vehicleColors.map(c=>c.id)).optional(),
   discrepancy: vehicleDiscrepancySchema.optional(),
 });
 export type VehicleDiscrepancy = z.infer<typeof vehicleDiscrepancySchema>;

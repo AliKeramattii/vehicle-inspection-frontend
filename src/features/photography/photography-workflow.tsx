@@ -33,12 +33,13 @@ export function PhotographyWorkflow({ inspectionId, view }: { inspectionId: stri
   if (inspection.isPending || plan.isPending) return <PhotographyLoading message="در حال آماده‌سازی عکاسی…" />;
   const error = inspection.error ?? plan.error;
   if (error) return <div className="photography-recovery"><InlineAlert tone="destructive">{error.message}</InlineAlert><SecondaryButton onClick={() => { void inspection.refetch(); void plan.refetch(); }}>تلاش دوباره</SecondaryButton></div>;
-  if (!authorized || !inspection.data?.location || !inspection.data.vehicle) return <div className="photography-recovery"><InlineAlert>برای شروع عکاسی، موقعیت و مشخصات خودرو را تأیید کنید.</InlineAlert><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
+  if (!authorized) return <div className="photography-recovery"><InlineAlert tone="warning">برای ادامه بازدید، دوباره وارد شوید. عکس‌ها و ویدیوی ذخیره‌شده روی دستگاه حذف نشده‌اند.</InlineAlert><Link href="/">ورود دوباره و ادامه بازدید</Link></div>;
+  if (!inspection.data?.location || !inspection.data.vehicle) return <div className="photography-recovery"><InlineAlert>برای شروع عکاسی، موقعیت و مشخصات خودرو را تأیید کنید.</InlineAlert><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
   const parsed = photographyTemplateSchema.safeParse(plan.data);
   if (!parsed.success) return <div className="photography-recovery"><InlineAlert>قالب عکاسی در دسترس نیست.</InlineAlert><SecondaryButton onClick={() => void plan.refetch()}>تلاش دوباره</SecondaryButton><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
-  return <PhotographySession inspectionId={inspectionId} template={parsed.data} view={view} />;
+  return <PhotographySession inspectionId={inspectionId} template={parsed.data} view={view} bodyColor={inspection.data.vehicle.colorHex} />;
 }
-function PhotographySession({ inspectionId, template, view }: { inspectionId: string; template: PhotographyTemplate; view: PhotographyView }) {
+function PhotographySession({ inspectionId, template, view, bodyColor }: { inspectionId: string; template: PhotographyTemplate; view: PhotographyView; bodyColor?: string }) {
   const router = useRouter(), photos = usePhotoRecords(inspectionId, template);
   const namespace = photoNamespace(inspectionId, template.templateId, template.templateVersion), capture = useCaptureData(namespace);
   if (photos.query.isPending || capture.query.isPending) return <PhotographyLoading message="در حال خواندن عکس‌های ذخیره‌شده…" />;
@@ -46,7 +47,7 @@ function PhotographySession({ inspectionId, template, view }: { inspectionId: st
   if (photos.query.error) return <div className="photography-recovery"><InlineAlert tone="destructive">{photos.query.error.message}</InlineAlert><SecondaryButton onClick={() => void photos.query.refetch()}>تلاش دوباره</SecondaryButton></div>;
   const shared = { inspectionId, records: photos.records, data: capture.data };
   const focus = (children: React.ReactNode) => <PhotographyRouteFocus routeKey={JSON.stringify(view)}>{children}</PhotographyRouteFocus>;
-  if (view.kind === "overview") return focus(<PhotographyOverview {...shared} template={template} />);
+  if (view.kind === "overview") return focus(<PhotographyOverview {...shared} template={template} bodyColor={bodyColor} />);
   if (view.kind === "completion") return focus(<PhotographyCompletion {...shared} template={template} />);
   if (view.kind === "video-record") return focus(<VideoCapture inspectionId={inspectionId} reason={capture.data?.video360?.reviewerReason} onRecorded={async ({ blob, durationSeconds }, signal) => {
     await capture.draft.mutateAsync({ blob, durationSeconds, metadata: { kind: "video-360", mimeType: blob.type, sizeBytes: blob.size, localBlobKey: videoBlobKey(namespace), capturedAt: new Date().toISOString() } });

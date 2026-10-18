@@ -1,0 +1,1 @@
+import {AssignmentPage} from "@/features/review-operations/assignment-page";export const metadata={title:"تنظیمات ارجاع پرونده‌ها"};export default function Page(){return <AssignmentPage/>;}

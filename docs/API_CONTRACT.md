@@ -33,7 +33,7 @@ Mock development values:
 - Inspection: `insp_demo`; a draft with sample vehicle, no location, and no evidence.
 - Capture plan: production mock uses the configurable seven-section/twelve-photo template. The exported two-slot bootstrap fixture remains only for foundation tests.
 
-Mock OTP challenges expire after two minutes, allow three incorrect attempts, and are consumed
+Mock OTP challenges expire after two minutes, allow five incorrect attempts, and are consumed
 on successful verification. The factory defaults to a 60-second resend window; phase 01's customer
 provider configures 120 seconds to match the reference countdown. The mock enforces this window.
 SMS delivery, durable sessions, and production authentication remain backend responsibilities.
@@ -59,7 +59,7 @@ Repository errors expose stable codes; Zod rejects malformed input or fixture da
 Frontend-required challenge metadata (a requested future API shape, not a finalized response):
 
 ```json
-{ "expiresAt": "2026-10-04T00:02:00Z", "retryAfterSeconds": 120, "remainingAttempts": 3 }
+{ "expiresAt": "2026-10-04T00:02:00Z", "retryAfterSeconds": 120, "remainingAttempts": 5 }
 ```
 
 Failed verification must expose `remainingAttempts`; early resend must expose `retryAfterSeconds`.
@@ -164,36 +164,51 @@ and explicit permission requests in the relevant feature, not a new API endpoint
 
 ## Location
 
-### PUT `/api/inspections/{inspectionId}/location`
-Planned contract, not a confirmed ASP.NET implementation. Phase 03 calls the typed in-memory
-`InspectionRepository.saveLocation`. Its frontend model is flat; a future transport adapter maps
-`formattedAddress`, building, unit/floor and parking into the nested `address` payload below.
-Coordinates/accuracy are numbers; unit/floor and parking may be empty or omitted. Building numbers
-are strings (the form normalizes Persian/Arabic numeric glyphs to ASCII). The server should return
-the authoritative saved coordinates, accuracy and address in the same shape, adapted back to
-`InspectionLocation`. It must authorize the inspection owner and require accepted consent.
+### PUT /api/inspections/{inspectionId}/location
+Planned ASP.NET contract. Runtime calls InspectionRepository.saveLocation with existing durable
+inspection-facts storage, not real HTTP. A future adapter maps flat formattedAddress/building/
+unit/parking to nested address. Require inspection ownership, consent and submitted-edit rules.
 
-```json
-{
-  "latitude": 35.721,
-  "longitude": 51.334,
-  "accuracyMeters": 8,
-  "address": {
-    "formatted": "تهران، ...",
-    "buildingNumber": "123",
-    "unitFloor": "طبقه ۳، واحد ۱۲",
-    "parkingDescription": "پارکینگ ورودی ساختمان، سمت راست"
-  }
-}
-```
+    {
+      "latitude": 35.721,
+      "longitude": 51.334,
+      "accuracyMeters": null,
+      "selectionSource": "manual",
+      "recordedAt": "2026-10-13T09:00:00.000Z",
+      "address": {
+        "formatted": "تهران، ...",
+        "buildingNumber": "123",
+        "unitFloor": "طبقه ۳، واحد ۱۲",
+        "parkingDescription": "پارکینگ ورودی ساختمان، سمت راست"
+      }
+    }
 
-The development map/GPS adapter returns one deterministic suggested location with 8m accuracy.
-Dragging or keyboard panning changes coordinates; the pin remains anchored and the GPS marker
-moves with the map. There is no production tile/geocoding provider, browser GPS prompt, external
-map URL or API key. A real provider must implement the stable map/location boundary and perform
-permission requests only after explicit locate interaction. This does not require a new endpoint.
-Distinguish 400/422 field validation, 401/403, 404, 409 missing consent/stale inspection, 429 and
-server/network/timeout errors. The mock enforces consent and validates coordinate bounds.
+Coordinates are finite WGS84 numbers (-90..90, -180..180). selectionSource is gps/manual;
+manual accuracy is null; GPS accuracy is nonnegative meters or null. recordedAt is the actual
+client confirmation time, not server-authoritative evidence. Return saved facts and server
+audit timestamps. Address is required/current, 1–300 trimmed characters. Optional details
+may be empty; building numbers stay strings with numeric glyph normalization.
+Legacy records lacking source/time remain compatible, without claiming GPS provenance.
+
+The official Neshan Leaflet picker initializes only a viewport. Deliberate manual selection
+or explicit My Location supplies the point; zoom/resize alone never select. No fixed 8m
+accuracy or fabricated match. Distinguish 400/422 validation, 401/403, 404, 409 consent/
+submission/stale data, 429, server/network/timeout failures.
+
+### GET /api/maps/reverse?lat={latitude}&lng={longitude}
+Planned first-party ASP.NET boundary, not a Next.js route and not implemented here.
+Resolved from validated deployment apiBaseUrl. Authentication follows deployment cookie/
+session policy. Authorize tenant/user, validate coordinates, rate-limit and hide upstream
+internals. Separate API origins need allowlisted CORS and credential policy.
+Response: {"formatted_address":"آدرس پیشنهادی"}, 1–300 characters. Editable suggestion, not
+location verification. Errors: 400/422 invalid input, 401/403, 429, 502/503 upstream failure,
+504 timeout.
+
+Server upstream: GET https://api.neshan.org/v5/reverse?lat=...&lng=... with private Api-Key
+from server secret storage. Never expose it in browser/public settings/NEXT_PUBLIC.
+Public domain-restricted Web Map key is separate client configuration. Browser debounces,
+aborts, times out and guards request/edit identity; failure preserves the point and manual
+entry. Default lookup unavailable; explicit mock mode is visibly labelled.
 
 ## Vehicle
 
@@ -222,7 +237,7 @@ Backend agreement on this atomic request remains pending; no extra endpoint is a
 
 The mock requires previously saved location, validates semantic plate values, returns cloned
 receipts and keeps per-instance confirmation/plate state. Query owns reads and save results;
-local forms own only editing drafts. Refresh resets auth/consent/location/confirmation. Authentication,
+local forms own only editing drafts. Refresh resets transient auth/consent; confirmed location and vehicle facts persist in IndexedDB. Authentication,
 owner authorization and durable records remain production backend responsibilities. Distinguish
 400/422 plate/discrepancy errors, 401/403, 404 missing vehicle, 409 missing location/stale data,
 429, server/network/timeout failures. No real ASP.NET requests are enabled.
@@ -600,3 +615,78 @@ Use one predictable shape:
   "traceId": "..."
 }
 ```
+
+## Phase 10 Admin contract clarification (planned / mock-only)
+
+The existing `/api/admin/capture-templates` namespace is retained. All operations below need authenticated server-derived actor/role and tenant/partner scope. The local identity chooser is NOT authentication. No runtime ASP.NET requests are implemented.
+
+- GET `/api/admin/capture-templates`: search/status filters, stable ID, title, partner, latest/current-publication metadata, photo count and update time. Counts come from template configuration; numeric odometer/video remain separate.
+- GET `/api/admin/capture-templates/{id}`: supported PhotographyTemplate snapshots plus version metadata/history and currentPublishedVersionId.
+- POST `/api/admin/capture-templates`: create a draft definition from an authorized existing published template; preserve configured photo identities.
+- POST `/api/admin/capture-templates/{id}/versions`: {sourceVersionId}; returns the existing open draft or a new stable version ID/number/revision.
+- PUT `/api/admin/capture-templates/{id}`: {versionId, expectedRevision, snapshot}; draft-only save. Snapshot reuses the frontend photography schema, including independent captureRequirements. Published snapshots cannot be mutated. The backend may use ETag/If-Match instead of expectedRevision once confirmed.
+- PUT `/api/admin/capture-templates/{id}/slots/{captureCode}`: optional granular compatibility operation; captureCode means the existing stable requirement ID, not invented CAP IDs. Same draft-only/revision validation.
+- POST `/api/admin/capture-templates/{id}/publish`: {versionId, expectedRevision, idempotencyKey}; validate/save prerequisites, immutable publication and current-pointer update transactionally; same key/version replays the acknowledgement, conflicting payload returns 409. Earlier versions remain available.
+- GET `/api/admin/capture-templates/{id}/versions`: immutable publication/history and draft/archive metadata.
+- PUT `/api/admin/capture-templates/{id}/versions/{versionId}/status`: draft to archived only in current UI; requires expectedRevision, cannot delete/alter published snapshots.
+
+Expected metadata: templateId, versionId, templateVersion, revision, publicationState (draft/published/archived), updatedAt, updatedBy and publishedAt. Admin extension metadata does not change the customer capture schema.
+Asset references must resolve to approved canonical assets; server must validate existence/ownership and prevent arbitrary external sources. Unsupported capture attributes are rejected. Existing inspections must pin a published template snapshot/version at creation. Admin publication must never rewrite evidence, submissions or additional-evidence IDs; automatic future-inspection template selection is not enabled in the mock.
+
+Secondary planned operations:
+- GET/PUT `/api/admin/branding`: tenant display settings; asset uploads/validation require a separate confirmed contract. Current mock only saves display name and retains approved logo/primary.
+- GET `/api/admin/policies`: supported/read-only policy descriptions in current phase; write/enforcement contract is pending.
+- GET/PUT `/api/admin/webhooks`: typed event/endpoint/enabled configuration. Delivery and signing secrets are server-owned; current mock only toggles enabled state, sends no requests.
+- GET `/api/admin/users`, PUT `/api/admin/users/{userId}/role`: authorized role assignment; retain at least one active administrator in the mock.
+- GET `/api/admin/permissions`: supported role/capability matrix; arbitrary capability editing is not currently supported.
+- GET `/api/admin/audit`: actor/action/resource/time history; production security retention guarantees remain a backend responsibility.
+
+Errors: 400/422 structured field validation, 401 unauthenticated, 403 operation/tenant permission, 404 template/version/asset not found, 409 stale revision or idempotency conflict, 429 Retry-After, 5xx/network. Frontend retains unsaved edits on failure and offers conflict reload without silent overwrite. All API shapes remain proposed, not a claim of implemented server behavior.
+
+## White-Label Phase 1: planned public settings and private storage
+
+See WHITE_LABEL_ARCHITECTURE.md, TENANT_CONFIGURATION_SPEC.md and BACKEND_TEAM_REQUIREMENTS.md. No ASP.NET endpoint is verified/implemented by this phase; current inspection/auth/upload services remain mocks. Runtime settings source api only adds the validated public configuration fetch boundary.
+
+| Planned endpoint | Contract |
+|---|---|
+| GET /api/public/site-settings | Server-resolved brokerage; strict schema 1 SiteSettings, no-store, version/publishedAt/identity/theme/branding images/public API and template reference only. No query-selected tenant authority or private fields. |
+| GET /api/admin/site-settings | Authenticated tenant-scoped settings permission; published/draft/revision/history and audit metadata. |
+| PUT /api/admin/site-settings/draft | Strict public settings + expectedRevision; validate assets/contrast/published template; 409 stale edit. |
+| POST /api/admin/site-settings/publish | Authorized publication, expectedRevision + durable idempotency key; immutable version; never mutate pinned inspections. |
+| POST /api/admin/branding-assets | Authorized binary asset upload, MIME/signature/size/dimension/sanitization; return immutable public asset reference. No Next filesystem writes. |
+| GET /api/admin/system/health | Authorized safe diagnostic codes/API/storage status/checkedAt/approved retention summary; never credentials or physical paths. |
+
+Future HTTP adapters resolve endpoint suffixes through validated runtime API context rather than build-time localhost/environment constants. Prefer same-origin /api; separate HTTPS origins need exact CORS, secure session and CSRF/Origin policy. Bootstrap is public configuration, not an authenticated tenant selection mechanism.
+
+### Evidence storage clarification (authoritative)
+Reuse POST /api/inspections/{inspectionId}/evidence, registration-provided binary transfer, POST /api/evidence/{evidenceId}/complete and GET /api/inspections/{inspectionId}/evidence. Retrieval is authorized GET /api/inspections/{inspectionId}/evidence/{evidenceId}/file with server-resolved revision/range support. Stable job/revision idempotency, signed URLs if negotiated, processing-vs-verified distinction and existing Additional Evidence linkage remain intact.
+Every brokerage uses a private server root and INSPECTION_{InspectionId} directly beneath it. No CustomerId in filesystem folder naming. MSSQL stores RelativeFilePath and metadata only; no image/video binary, VARBINARY(MAX) or FILESTREAM media storage. Odometer remains integer data via PUT /api/inspections/{inspectionId}/odometer, outside media denominator.
+Server validates authenticated ownership, canonical safe IDs, content signatures/limits, exclusive revision filenames and path containment. Staged file publication and SQL transactions need explicit compensation/reconciliation, not an assumed cross-resource atomic transaction. Retakes use independent revision files and preserve originals. Retention/cleanup is backend-owned, disabled until policy approval and never deletes active/referenced media. No publicly browsable upload directory or frontend storage root.
+
+All mutations require real backend tenant authorization, rate limits/audit and structured 400/422/401/403/404/409/413/415/429/5xx handling. Browser mock roles/IndexedDB binding do not provide these guarantees. Installation/static-export/PWA gates and detailed endpoint requests/responses/idempotency/storage duties are in the backend handoff.
+
+
+## UI refinement and reviewer mock clarification (planned, not integrated)
+Existing reviewer cases/evidence/decision/Additional Evidence endpoint boundaries remain. Decision payloads must identify requirementId (or video-360), evidence revision and evidenceId; stable decision identity makes retries idempotent. Backend must authorize the assigned reviewer and reject stale/conflicting revisions. Rejections create immutable scoped requests only for affected items, preserving original submission and historical evidence. Assignment/capacity require server-side atomic concurrency later; the current serialized IndexedDB workspace is a local mock and makes no such guarantee.
+Public Neshan web-map configuration is separate from private reverse-geocoding credentials. No private Neshan/API token is sent by this frontend. Live-only capture removes gallery import without changing generic evidence registration, upload, completion or private INSPECTION_{InspectionId} storage intent.
+The legacy nativeCaptureFallback configuration field is retained for schema compatibility; it no longer grants file-selection UX. A future versioned settings migration may remove it. No new backend endpoint is treated as implemented.
+
+## Temporary authorized Neshan development adapter
+Local development implements only the already-planned GET /api/maps/reverse contract in
+tools/dev-neshan-proxy/server.mjs; it is not a production Next endpoint or a brokerage API.
+Coordinates are strict finite WGS84; successful JSON contains only formatted_address.
+The v5 provider request uses a private server-side Api-Key. Authorization rejection maps to
+safe 502, provider/local rate limiting to 429 with Retry-After, timeout to 504.
+Existing client cancellation/edit-version protections and manual address recovery are unchanged.
+
+A separate loopback public settings host supplies validated Site Settings for local preview.
+Business API_MODE remains mock: settingsSource api here means only a public configuration fetch;
+it does not enable real inspection/auth/upload/submission repositories.
+Both local services and their ignored configurations are excluded from production.
+Production ASP.NET owns the identical reverse endpoint, authorization, private key and CORS.
+Development-only rewrites are absent from build/production-server phases.
+
+## Planned Admin branding asset upload (unified local mock)
+Not implemented server behavior. Proposed authenticated POST /api/admin/branding-assets takes one multipart web image and slot metadata, Site Admin authorization only. ASP.NET must validate content/type/size/dimensions, bind tenant and return an assetId, appropriately public authorized URL, MIME, dimensions and byte size. Route/shape require backend agreement. No frontend runtime request is made. MSSQL stores paths/metadata, not image bytes.
+Current mock uses existing inspection-site-settings IndexedDB v2 (settings preserved, branding-assets added). Immutable /__local-branding/{tenantId}/{uuid}.{ext} references are context-bound browser-local identifiers, never cross-device server URLs. Blobs remain separate from JSON and customer evidence queue.
+Additive optional images.submission keeps schemaVersion1/legacy settings compatible. Existing generic photo/video evidence contract remains. Future evidence storage: INSPECTION_{InspectionId}; no CustomerId folders or filesystem APIs added.

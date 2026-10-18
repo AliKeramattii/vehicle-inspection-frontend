@@ -1,0 +1,90 @@
+[
+  {
+    "index": 1,
+    "id": "front",
+    "labelFa": "جلو",
+    "file": "ghost-front.webp",
+    "sourceImage": "neon_x_ray_suv_hologram.png",
+    "size": [
+      1024,
+      680
+    ]
+  },
+  {
+    "index": 2,
+    "id": "front-45-right",
+    "labelFa": "جلو ۴۵ درجه راست",
+    "file": "ghost-front-45-right.webp",
+    "sourceImage": "neon_blue_holographic_suv.png",
+    "size": [
+      1024,
+      680
+    ]
+  },
+  {
+    "index": 3,
+    "id": "right",
+    "labelFa": "راست",
+    "file": "ghost-right.webp",
+    "sourceImage": "icy_cyan_x_ray_suv_hologram.png",
+    "size": [
+      1024,
+      680
+    ]
+  },
+  {
+    "index": 4,
+    "id": "rear-45-left",
+    "labelFa": "عقب ۴۵ درجه چپ",
+    "file": "ghost-rear-45-left.webp",
+    "sourceImage": "glowing_cyan_x_ray_suv_cutout.png",
+    "size": [
+      1024,
+      680
+    ]
+  },
+  {
+    "index": 5,
+    "id": "rear",
+    "labelFa": "عقب",
+    "file": "ghost-rear.webp",
+    "sourceImage": "neon_x_ray_holographic_suv_rear_view.png",
+    "size": [
+      1024,
+      680
+    ]
+  },
+  {
+    "index": 6,
+    "id": "rear-45-right",
+    "labelFa": "عقب ۴۵ درجه راست",
+    "file": "ghost-rear-45-right.webp",
+    "sourceImage": "holographic_x_ray_suv_blueprint.png",
+    "size": [
+      1024,
+      680
+    ]
+  },
+  {
+    "index": 7,
+    "id": "left",
+    "labelFa": "چپ",
+    "file": "ghost-left.webp",
+    "sourceImage": "neon_holographic_suv_profile.png",
+    "size": [
+      1024,
+      680
+    ]
+  },
+  {
+    "index": 8,
+    "id": "front-45-left",
+    "labelFa": "جلو ۴۵ درجه چپ",
+    "file": "ghost-front-45-left.webp",
+    "sourceImage": "cyan_holographic_suv_x_ray.png",
+    "size": [
+      1024,
+      680
+    ]
+  }
+]

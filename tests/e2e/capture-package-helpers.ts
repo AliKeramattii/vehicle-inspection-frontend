@@ -11,22 +11,24 @@ export async function mockRecorder(page: Page, unsupported = false) {
     class TestRecorder {
       static isTypeSupported(mime: string) { return mime === "video/webm"; }
       state = "inactive"; mimeType = "video/webm";
-      onstart?: () => void; onstop?: () => void; onerror?: () => void; ondataavailable?: (event: { data: Blob }) => void;
+      onpause?: () => void; onresume?: () => void; onstart?: () => void; onstop?: () => void; onerror?: () => void; ondataavailable?: (event: { data: Blob }) => void;
       start() { this.state = "recording"; counters.recorderStarts = (counters.recorderStarts ?? 0) + 1; queueMicrotask(() => this.onstart?.()); }
+      pause() { this.state = "paused"; queueMicrotask(() => this.onpause?.()); }
+      resume() { this.state = "recording"; queueMicrotask(() => this.onresume?.()); }
       stop() { this.state = "inactive"; counters.recorderStops = (counters.recorderStops ?? 0) + 1; queueMicrotask(() => { this.ondataavailable?.({ data: new Blob([new Uint8Array(bytes)], { type: this.mimeType }) }); this.onstop?.(); }); }
     }
     Object.defineProperty(window, "MediaRecorder", { configurable: true, value: unsupported ? undefined : TestRecorder });
     Object.defineProperty(navigator, "mediaDevices", { configurable: true, value: { async getUserMedia() {
       const counters = window as Window & { photographyCameraCalls?: number; stoppedPhotoTracks?: number };
       counters.photographyCameraCalls = (counters.photographyCameraCalls ?? 0) + 1;
-      const image = new Image(); image.src = location.pathname.includes("/photo/odometer-on/") ? "/assets/inspection/photo-guides/odometer-on.webp" : "/assets/inspection/photo-guides/front-45-right.webp"; await image.decode();
+      const image = new Image(); image.src = location.pathname.includes("/photo/odometer-on/") ? "/assets/inspection-vehicle/photo-guides/odometer-on.webp" : "/assets/inspection-vehicle/photo-guides/front-45-right.webp"; await image.decode();
       const canvas = document.createElement("canvas"); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight; canvas.getContext("2d")!.drawImage(image, 0, 0);
       const stream = canvas.captureStream(5); for (const track of stream.getTracks()) { const stop = track.stop.bind(track); track.stop = () => { counters.stoppedPhotoTracks = (counters.stoppedPhotoTracks ?? 0) + 1; stop(); }; } return stream;
     } } });
   }, { bytes: [...readFileSync("tests/e2e/fixtures/walkaround.webm")], unsupported });
 }
 export async function packageWorkflow(page: Page, options: { photos?: number; kilometers?: number; video?: "accepted" | "draft" | "replacement" | "retake" } = {}) {
-  await page.goto("/"); await seedPhotos(page, options.photos ?? 12);
+  await page.goto("/"); await expect(page.getByRole("textbox",{name:"کد معرفی / کد ارجاع"})).toBeVisible(); await seedPhotos(page, options.photos ?? 12);
   const namespace = photoNamespace("insp_demo", template.templateId, template.templateVersion);
   await page.evaluate(async ({ config, namespace, options, bytes }) => {
     const database = await new Promise<IDBDatabase>((resolve, reject) => {
@@ -47,6 +49,10 @@ export async function packageWorkflow(page: Page, options: { photos?: number; ki
 }
 export async function openPackageReview(page: Page) { await page.getByRole("link", { name: "بررسی نیازمندی‌های بازدید" }).click(); await expect(page.getByRole("heading", { name: "بررسی و ارسال", exact: true })).toBeVisible(); }
 export async function recordedState(page: Page) {
+  // Arm the live preview before freezing the recording clock; avoid route/readiness races.
+  await expect(page.locator(".video-capture")).toHaveAttribute("data-recording-state", "ready");
+  await page.getByRole("button", { name: "فعال کردن دوربین", exact: true }).click();
+  await expect(page.locator(".video-capture")).toHaveAttribute("data-recording-state", "armed");
   await page.clock.install(); await page.clock.pauseAt(new Date(Date.now() + 1000));
   await page.getByRole("button", { name: "شروع ضبط", exact: true }).click();
   await expect(page.locator(".video-capture")).toHaveAttribute("data-recording-state", "recording");

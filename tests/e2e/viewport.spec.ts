@@ -1,3 +1,4 @@
+import { chooseDemoLocation } from "./location-helpers";
 import { expect, test, type Page, type Locator } from "@playwright/test";
 import { mockCamera, snapshotReady } from "./photography-helpers";
 async function bounded(page: Page) {
@@ -18,9 +19,9 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 390, height: 844 }
     const consent = page.getByRole("button", { name: "تأیید و ادامه" }); await bounded(page); await reachable(consent, page);
     await page.getByRole("button", { name: "مشاهده متن کامل شرایط" }).click(); await bounded(page); await reachable(consent, page);
     await page.getByRole("checkbox").check(); await reachable(consent, page); await consent.click();
-    const location = page.getByRole("button", { name: "تأیید این موقعیت" }); await expect(location).toBeEnabled(); await bounded(page); await reachable(location, page);
-    await page.getByRole("button", { name: "ویرایش", exact: true }).click(); await expect(page.getByLabel("آدرس بازدید")).toBeFocused(); await bounded(page); await reachable(location, page);
-    await page.getByRole("button", { name: "پایان ویرایش آدرس" }).click(); await location.click();
+    const location = page.getByRole("button", { name: "تأیید این موقعیت" }); await expect(location).toBeDisabled(); await chooseDemoLocation(page); await bounded(page); await reachable(location, page);
+    await page.getByRole("textbox", { name: "آدرس موقعیت خودرو" }).focus(); await expect(page.getByRole("textbox", { name: "آدرس موقعیت خودرو" })).toBeFocused(); await bounded(page); await reachable(location, page);
+    await location.click();
     const vehicle = page.getByRole("button", { name: "تأیید مشخصات و ادامه" }); await expect(vehicle).toBeEnabled(); await bounded(page); await reachable(vehicle, page);
     await page.getByRole("button", { name: /پلاک اشتباه/ }).click(); await page.getByRole("button", { name: "پلاک من فرمت متفاوتی دارد" }).click(); await bounded(page); await reachable(vehicle, page);
     await page.getByRole("button", { name: "پلاک من فرمت متفاوتی دارد" }).click(); await vehicle.click();

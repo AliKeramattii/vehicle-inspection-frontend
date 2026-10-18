@@ -72,11 +72,11 @@ test("OTP rejects wrong digits, counts attempts, then resends when the countdown
   await page.clock.install({ time: new Date("2026-10-04T00:00:00Z") });
   await enterOtp(page);
   const input = page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" });
-  await expect(page.getByText("۳ بار فرصت باقی مانده است.")).toBeVisible();
-  for (const attempts of [2, 1, 0]) {
+  await expect(page.getByText("۵ بار فرصت باقی مانده است.")).toBeVisible();
+  for (const attempts of [4, 3, 2, 1, 0]) {
     await input.fill("99999");
     await expect(input).toHaveValue("");
-    await expect(page.locator(".otp-attempts")).toContainText(`${["۰", "۱", "۲"][attempts]} بار`);
+    await expect(page.locator(".otp-attempts")).toContainText(`${["۰", "۱", "۲", "۳", "۴"][attempts]} بار`);
   }
   await expect(input).toBeDisabled();
   await expect(page.getByRole("button", { name: "ارسال مجدد کد" })).toHaveCount(0);
@@ -84,7 +84,7 @@ test("OTP rejects wrong digits, counts attempts, then resends when the countdown
   await page.getByRole("button", { name: "ارسال مجدد کد" }).click();
   await expect(input).toBeEnabled();
   await expect(input).toBeFocused();
-  await expect(page.locator(".otp-attempts")).toContainText("۳ بار");
+  await expect(page.locator(".otp-attempts")).toContainText("۵ بار");
   await expect(page.locator(".otp-countdown")).toContainText("۲:۰۰");
 });
 

@@ -1,10 +1,11 @@
+import { vehicleGuideAssets } from "@/config/vehicle-assets";
 import { z } from "zod";
 
 export const sectionIdSchema = z.enum(["right", "left", "front", "rear", "cabin", "engine-details", "roof"]);
 export const photoStatusSchema = z.enum(["pending", "captured", "uploading", "uploaded", "verified", "retake-requested"]);
 export const photoRequirementSchema = z.object({
   id: z.string().min(1), title: z.string().min(1), description: z.string().min(1),
-  sampleImage: z.string().startsWith("/assets/inspection/photo-guides/"), instructions: z.array(z.string().min(1)).min(1),
+  sampleImage: z.string().refine(src => src.startsWith("/assets/inspection/photo-guides/") || Object.values(vehicleGuideAssets).some(asset => asset.src === src), "Use an approved vehicle guide."), instructions: z.array(z.string().min(1)).min(1),
   distance: z.string().optional(), height: z.string().optional(), orientation: z.enum(["portrait", "landscape"]).optional(),
   required: z.boolean(), status: photoStatusSchema, reviewerReason: z.string().optional(),
   checks: z.array(z.string().min(1)).min(1), semanticNodes: z.array(z.string()).optional(),

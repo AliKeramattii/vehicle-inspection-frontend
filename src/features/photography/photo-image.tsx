@@ -1,4 +1,5 @@
 "use client";
+import { resolveVehicleGuide } from "@/config/vehicle-assets";
 
 import Image from "next/image";
 import { useEffect, useState, type CSSProperties } from "react";
@@ -18,7 +19,7 @@ export function useBlobUrl(blob: Blob | undefined) {
   return value?.blob === blob ? value?.url : undefined;
 }
 export function PhotoImage({ src, blob, alt, className = "", eager = false, sizes = "(max-width: 480px) 100vw, 480px", frame = "exterior-guide", retry = true }: { src?: string; blob?: Blob; alt: string; className?: string; eager?: boolean; sizes?: string; frame?: PhotoFrame; retry?: boolean }) {
-  const url = useBlobUrl(blob), image = blob ? url : src;
+  const url = useBlobUrl(blob), image = blob ? url : src ? resolveVehicleGuide(src) : undefined;
   return <ImageFrame key={image ?? "loading"} image={image} alt={alt} className={className} eager={eager} sizes={sizes} frame={frame} retry={retry} local={Boolean(blob)} />;
 }
 

@@ -1,0 +1,7 @@
+{
+  "name":"vehicle-360-camera-only-recorder",
+  "private":true,
+  "type":"module",
+  "scripts":{"test":"node --test tests/*.test.mjs"},
+  "description":"Framework-free Persian RTL camera-only 360 vehicle recording UI demo"
+}

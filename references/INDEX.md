@@ -46,7 +46,7 @@ Production flow: 2D overview → section → required photo → sample/guidance 
 Reference 07 defines the primary composition, using static 2D photography instead of WebGL.
 Its historical fourteen-photo counts do not override the template. Markers on the vehicle, compact
 side controls, circular/segmented progress, categories and two rows of shot images are required.
-Gray = uncaptured, blue = complete, orange = attention/retake; selection adds an outline.
+Gray = uncaptured, Emerald = locally accepted, Amber = attention/retake; selection adds a Sky outline.
 PNGs 08–11 support guidance/camera/review ergonomics. Review prioritizes the actual captured image
 with a compact expandable sample, simple confirmation and retake; no customer quality checklist.
 
@@ -54,19 +54,38 @@ These are canonical photography guidance/reference assets, not decorative images
 
 | Canonical path | Section |
 |---|---|
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/front-45-right.webp` | نمای راست |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/back-45-right.webp` | نمای راست |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/front-45-left.webp` | نمای چپ |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/back-45-left.webp` | نمای چپ |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/front-plate.webp` | جلو |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/rear-plate.webp` | عقب |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/odometer-on.webp` | کابین |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/driver-interior.webp` | کابین |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/engine-bay.webp` | موتور و مشخصات |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/spec-plate.webp` | موتور و مشخصات |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/chassis-number.webp` | موتور و مشخصات |
-| `references/assets/vehicle-inspection-ui-assets/photo-guides/car-roof.webp` | سقف |
+| `references/assets/new-vehicle/source/front-45-right.webp` | نمای راست |
+| `references/assets/new-vehicle/source/back-45-right.webp` | نمای راست |
+| `references/assets/new-vehicle/source/front-45-left.webp` | نمای چپ |
+| `references/assets/new-vehicle/source/back-45-left.webp` | نمای چپ |
+| `references/assets/new-vehicle/source/front-plate.webp` | جلو |
+| `references/assets/new-vehicle/source/rear-plate.webp` | عقب |
+| `references/assets/new-vehicle/source/odometer-on.webp` | کابین |
+| `references/assets/new-vehicle/source/driver-interior.webp` | کابین |
+| `references/assets/new-vehicle/source/engine-bay.webp` | موتور و مشخصات |
+| `references/assets/new-vehicle/source/spec-plate.webp` | موتور و مشخصات |
+| `references/assets/new-vehicle/source/chassis-number.webp` | موتور و مشخصات |
+| `references/assets/new-vehicle/source/car-roof.webp` | سقف |
 
-The single documented runtime copy is `public/assets/inspection/photo-guides/`, served as
-`/assets/inspection/photo-guides/<exact-filename>`. Preserve bytes/names and full framing. Never
+The single documented runtime copy is `public/assets/inspection-vehicle/photo-guides/`, served as
+`/assets/inspection-vehicle/photo-guides/<exact-filename>`. Preserve bytes/names and full framing. Never
 mirror physical vehicle directions. Configuration, rather than old PNG counts, defines totals.
+
+## Approved white sedan asset migration
+
+The latest supplied `references/assets/new-vehicle/` photographs supersede the older SUV imagery for active 2D defaults and guidance, while PNGs still define layout. The old guide source folder and screenshot baselines remain historical evidence. Twelve guide IDs/seven sections are unchanged. See `docs/NEW_VEHICLE_ASSET_AUDIT.md` for all 40 supplied assets, eight navigation roles and genuine-alpha Recorder V2 ghosts. Optional Sportage 3D remains intentionally unchanged.
+
+## Approved Emerald, Amber and Slate palette (2026-10-16)
+
+`design/vehicle-inspection-color-system/vehicle-palette.css` contains the 69 exact approved LAB
+primitives. Its Persian guide and offline palette-preview.html explain color combinations, not
+replacement layouts. The approved color refinement supersedes historical PNG brand blue while
+preserving PNG composition, current sedan/guide/ghost assets and optional 3D implementation.
+Existing semantic runtime tokens and scoped Admin/Reviewer light/dark/system themes consume it.
+Tenant brand customization remains supported; evidence statuses are independent. See
+`docs/COLOR_SYSTEM.md` for mapping and measured contrast. Historical screenshot baselines are
+not overwritten by this refinement.
+
+## Supplied VIN/spec and readiness guidance
+
+The six files in new-vehicle/guides supplement the approved sedan set. Readiness explicitly uses readiness-clean-vehicle.webp and readiness-open-space.webp. VIN/spec offers pillar/spec-plate, engine-wall/chassis-number, under-seat/spec-plate-2 and windshield/Pearl-white sedan windshield VIN inspection.webp as alternative guidance for an existing requirement, never extra photos. Public windshield spelling is photo-guides/windshield-vin.webp; all original names/bytes are preserved. Transparent generated/ghost-guides assets are photo-only alignment overlays, not 360 guidance. No cleared sedan orbit clip was supplied. See docs/VEHICLE_GUIDANCE_CONSOLIDATION.md.

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "tenantId": "broker-a",
+  "apiBaseUrl": "/api",
+  "siteSettingsEndpoint": "/api/public/site-settings",
+  "settingsSource": "api"
+}

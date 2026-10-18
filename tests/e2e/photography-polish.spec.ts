@@ -1,3 +1,4 @@
+import { vehicleGuideAssets } from "../../src/config/vehicle-assets";
 import { expect, test } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { enterPhotography, mockCamera, photography, seedPhotos, snapshotReady } from "./photography-helpers";
@@ -55,7 +56,10 @@ for (const viewport of [{ width: 360, height: 800 }, { width: 390, height: 844 }
     await snapshotReady(page);
     const evidence = page.locator('.photo-review-capture [data-frame="captured-evidence"]');
     const evidenceBox = (await evidence.boundingBox())!;
-    expect(evidenceBox.width / evidenceBox.height).toBeCloseTo(1.5, 1);
+    const intrinsicRatio = await evidence.locator("img").evaluate(image => (image as HTMLImageElement).naturalWidth / (image as HTMLImageElement).naturalHeight);
+    const source = vehicleGuideAssets["front-45-right"];
+    expect(intrinsicRatio).toBeCloseTo(source.width / source.height, 3);
+    expect(evidenceBox.width / evidenceBox.height).toBeCloseTo(intrinsicRatio, 2);
     expect(await evidence.locator("img").evaluate((image) => getComputedStyle(image).objectFit)).toBe("contain");
     await expect(page.getByRole("checkbox")).toHaveCount(0);
     await page.screenshot({ path: `${directory}/review-landscape-${viewport.width}.png` });
@@ -149,6 +153,7 @@ test("new draft has orange attention with zero credit and technical guidance rem
   await page.locator(".photography-categories button").nth(2).click();
   await page.getByRole("link", { name: "مشاهده بخش" }).click();
   await page.locator('.photo-requirement-card a[href$="/spec-plate/guide"]').click();
+  await page.locator('[data-guide-option="pillar"]').click();
   await expect(page.getByRole("heading", { name: "راهنمای عکاسی" })).toBeVisible();
   await snapshotReady(page);
   await expect(page.locator('.photo-guide-image')).toHaveAttribute("data-frame", "technical-closeup");

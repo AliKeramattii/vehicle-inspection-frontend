@@ -1,0 +1,1 @@
+import {ReviewerQueue} from "@/features/review-operations/reviewer-queue";export const metadata={title:"صف بررسی"};export default function Page(){return <ReviewerQueue/>;}

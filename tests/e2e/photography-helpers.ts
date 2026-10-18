@@ -1,3 +1,4 @@
+import { chooseDemoLocation } from "./location-helpers";
 import { expect, type Page } from "@playwright/test";
 import { inspectionPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
 import { photoDatabase, photoKey, photoNamespace } from "../../src/lib/media/photo-store";
@@ -7,7 +8,7 @@ export async function seedPhotos(page: Page, count: number, retakeId?: string, d
   const namespace = photoNamespace("insp_demo", template.templateId, template.templateVersion);
   const photos = requirements.slice(0, count).map((photo) => ({ key: photoKey(namespace, photo.id), namespace, requirementId: photo.id, image: photo.sampleImage,
     status: photo.id === retakeId ? "retake-requested" : "captured" }));
-  if (draftId && !photos.some((photo) => photo.requirementId === draftId)) photos.push({ key: photoKey(namespace, draftId), namespace, requirementId: draftId, image: `/assets/inspection/photo-guides/${draftId}.webp`, status: "pending" });
+  if (draftId && !photos.some((photo) => photo.requirementId === draftId)) photos.push({ key: photoKey(namespace, draftId), namespace, requirementId: draftId, image: `/assets/inspection-vehicle/photo-guides/${draftId}.webp`, status: "pending" });
   await page.evaluate(async ({ photos, databaseConfig, draftId }) => {
     // Test-only deterministic evidence. Runtime never treats sample images as customer captures.
     const records = await Promise.all(photos.map(async ({ image, ...record }) => {
@@ -38,6 +39,8 @@ export async function enterPhotography(page: Page) {
   await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await page.getByRole("checkbox").check(); await page.getByRole("button", { name: "تأیید و ادامه" }).click();
+  await expect(page).toHaveURL(/\/location$/);await expect(page.getByRole("button",{name:"تأیید این موقعیت"})).toBeVisible();
+  await chooseDemoLocation(page);
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
   await expect(page).toHaveURL(/\/inspection\/insp_demo\/capture$/);
@@ -47,19 +50,19 @@ export async function snapshotReady(page: Page) {
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(() => Promise.all([...document.images].map((image) => { image.loading = "eager"; return image.decode(); })));
 }
-export async function mockCamera(page: Page) {
-  await page.addInitScript(() => {
+export async function mockCamera(page: Page, sampleImage?: string) {
+  await page.addInitScript((sampleImage?: string) => {
     const target = window as Window & { photographyCameraCalls?: number; stoppedPhotoTracks?: number };
     target.photographyCameraCalls = 0; target.stoppedPhotoTracks = 0;
     Object.defineProperty(navigator, "mediaDevices", { configurable: true, value: { getUserMedia: async () => {
       target.photographyCameraCalls!++;
       const id = location.pathname.split("/").at(-2) ?? "front-45-right";
-      const blob = await (await fetch(`/assets/inspection/photo-guides/${id}.webp`)).blob();
+      const blob = await (await fetch(sampleImage ?? `/assets/inspection-vehicle/photo-guides/${id}.webp`)).blob();
       const bitmap = await createImageBitmap(blob), canvas = document.createElement("canvas"); canvas.width = bitmap.width; canvas.height = bitmap.height;
       canvas.getContext("2d")!.drawImage(bitmap, 0, 0); bitmap.close();
       const stream = canvas.captureStream(5);
       for (const track of stream.getTracks()) { const stop = track.stop.bind(track); track.stop = () => { target.stoppedPhotoTracks!++; stop(); }; }
       return stream;
     } } });
-  });
+  }, sampleImage);
 }

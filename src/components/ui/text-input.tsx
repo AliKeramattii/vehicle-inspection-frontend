@@ -13,7 +13,7 @@ export function TextInput({ label, hint, error, id, className, "aria-describedby
     <label htmlFor={inputId} className="block text-sm font-medium">{label}</label>
     <input {...props} id={inputId} aria-invalid={error ? true : props["aria-invalid"]}
       aria-describedby={[describedBy, description ? descriptionId : undefined].filter(Boolean).join(" ") || undefined}
-      className={cn("min-h-12 w-full rounded-input border border-border bg-surface px-3 py-2 text-base placeholder:text-muted disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-muted", error && "border-destructive", className)} />
-    {description && <p id={descriptionId} className={cn("text-xs leading-5", error ? "text-destructive" : "text-muted")}>{description}</p>}
+      className={cn("min-h-12 w-full rounded-input border border-control-border bg-surface px-3 py-2 text-base placeholder:text-muted disabled:cursor-not-allowed disabled:bg-surface-soft disabled:text-muted", error && "border-destructive", className)} />
+    {description && <p id={descriptionId} className={cn("text-xs leading-5", error ? "text-destructive-ink" : "text-muted")}>{description}</p>}
   </div>;
 }

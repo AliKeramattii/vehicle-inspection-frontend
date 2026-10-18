@@ -1,5 +1,7 @@
 @import "tailwindcss";
+@import "../components/ui/color-palette.css";
 @import "../components/ui/customer-roles.css";
+@import "../components/ui/product-tokens.css";
 
 @theme inline {
   --font-sans: var(--font-vazirmatn), Tahoma, Arial, sans-serif;
@@ -7,16 +9,47 @@
 }
 
 @theme {
-  --color-background: #f8fafc;
+  --color-background: var(--color-slate-50);
   --color-surface: #ffffff;
-  --color-primary: #2563eb;
-  --color-ink: #111827;
-  --color-muted: #6b7280;
-  --color-border: #e2e8f0;
-  --color-success: #059669;
-  --color-warning: #d97706;
-  --color-destructive: #dc2626;
-  --color-information: #0284c7;
+  --color-primary: var(--color-emerald-700);
+  --color-ink: var(--color-slate-900);
+  --color-muted: var(--color-slate-600);
+  --color-border: var(--color-slate-200);
+  --color-success: var(--color-emerald-600);
+  --color-warning: var(--color-amber-700);
+  --color-destructive: var(--color-red-600);
+  --color-information: var(--color-sky-800);
+  --color-on-primary: #ffffff;
+  --color-primary-hover: var(--color-emerald-800);
+  --color-primary-soft: var(--color-emerald-50);
+  --color-primary-ink: var(--color-emerald-700);
+  --color-surface-soft: var(--color-slate-100);
+  --color-border-strong: var(--color-slate-300);
+  --color-control-border: var(--color-slate-500);
+  --color-accent: var(--color-amber-500);
+  --color-accent-soft: var(--color-amber-50);
+  --color-accent-ink: var(--color-amber-800);
+  --color-on-accent: var(--color-slate-900);
+  --color-success-soft: var(--color-emerald-50);
+  --color-success-ink: var(--color-emerald-800);
+  --color-warning-soft: var(--color-amber-50);
+  --color-warning-ink: var(--color-amber-800);
+  --color-destructive-soft: var(--color-red-50);
+  --color-destructive-ink: var(--color-rose-700);
+  --color-information-soft: var(--color-sky-50);
+  --color-selected: var(--color-sky-800);
+  --color-selected-soft: var(--color-sky-50);
+  --color-map: var(--color-teal-600);
+  --color-map-ink: var(--color-teal-700);
+  --color-map-soft: var(--color-teal-50);
+  --color-focus: var(--color-teal-700);
+  --color-pending: var(--color-slate-600);
+  --color-on-status: #ffffff;
+  --color-media-canvas: var(--color-slate-900);
+  --color-media-surface: var(--color-slate-800);
+  --color-media-ink: var(--color-slate-50);
+  --color-media-muted: var(--color-slate-300);
+  --color-media-error: var(--color-rose-300);
   --radius-control: 10px;
   --radius-input: 12px;
   --radius-card: 16px;
@@ -29,13 +62,13 @@
   body { @apply bg-background font-sans text-ink; margin: 0; }
   button, input { font: inherit; }
   button:not(:disabled), label:has(input:not(:disabled)) { cursor: pointer; }
-  :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
-  ::selection { background: #dbeafe; }
+  :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+  ::selection { background: var(--color-selected-soft); }
 }
 
 @layer components {
   .skip-link {
-    @apply fixed start-4 top-4 z-50 rounded-control bg-surface p-3 text-primary shadow-soft;
+    @apply fixed start-4 top-4 z-50 rounded-control bg-surface p-3 text-primary-ink shadow-soft;
     transform: translateY(-160%);
   }
   .skip-link:focus { transform: translateY(0); }

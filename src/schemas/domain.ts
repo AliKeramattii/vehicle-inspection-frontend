@@ -51,7 +51,8 @@ export const evidenceSchema = z.discriminatedUnion("mediaType", [
 ]);
 export const inspectionLocationSchema = z.object({
   latitude: z.number().min(-90).max(90), longitude: z.number().min(-180).max(180),
-  accuracyMeters: z.number().nonnegative(), formattedAddress: z.string().min(1),
+  accuracyMeters: z.number().finite().nonnegative().nullable(), formattedAddress: z.string().trim().min(1),
+  selectionSource: z.enum(["gps", "manual"]).optional(), recordedAt: z.iso.datetime().optional(),
   buildingNumber: z.string().optional(), unitFloor: z.string().optional(), parkingDescription: z.string().optional(),
 });
 export const inspectionSchema = z.object({

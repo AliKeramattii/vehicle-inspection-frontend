@@ -31,14 +31,14 @@ describe("mock auth boundary", () => {
   it("expires the challenge after two minutes", async () => {
     let time = Date.parse("2026-10-04T00:00:00Z");
     const auth = createMockAuthRepository(() => time);
-    expect(await auth.requestOtp(otpRequest)).toEqual({ expiresAt: "2026-10-04T00:02:00.000Z", retryAfterSeconds: 60, remainingAttempts: 3 });
+    expect(await auth.requestOtp(otpRequest)).toEqual({ expiresAt: "2026-10-04T00:02:00.000Z", retryAfterSeconds: 60, remainingAttempts: 5 });
     time += 120_000;
     await expect(auth.verifyOtp({ mobile: otpRequest.mobile, code: "12345" })).rejects.toMatchObject({ code: "OTP_EXPIRED" });
   });
-  it("rejects incorrect codes and locks after three failures", async () => {
+  it("rejects incorrect codes and locks after five failures", async () => {
     const auth = createMockAuthRepository();
     await auth.requestOtp(otpRequest);
-    for (let i = 0; i < 3; i++) await expect(auth.verifyOtp({ mobile: otpRequest.mobile, code: "99999" })).rejects.toMatchObject({ code: "OTP_INVALID" });
+    for (let i = 0; i < 5; i++) await expect(auth.verifyOtp({ mobile: otpRequest.mobile, code: "99999" })).rejects.toMatchObject({ code: "OTP_INVALID" });
     await expect(auth.verifyOtp({ mobile: otpRequest.mobile, code: "12345" })).rejects.toMatchObject({ code: "OTP_LOCKED" });
   });
 });
@@ -48,7 +48,7 @@ describe("inspection contracts", () => {
     const inspection = await repository.getInspection(mockInspectionId);
     expect(inspection).not.toHaveProperty("vehicleDetails");
     if (inspection.vehicle) inspection.vehicle.model = "changed";
-    expect((await repository.getInspection(mockInspectionId)).vehicle?.model).toBe("اسپورتیج");
+    expect((await repository.getInspection(mockInspectionId)).vehicle?.model).toBe("سدان نمونه");
     const plan = await repository.getCapturePlan(mockInspectionId);
     plan.shots[0].highlightNodes.push("changed");
     expect((await repository.getCapturePlan(mockInspectionId)).shots[0].highlightNodes).not.toContain("changed");

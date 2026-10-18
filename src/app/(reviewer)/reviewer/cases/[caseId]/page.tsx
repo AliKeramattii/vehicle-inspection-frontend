@@ -1,0 +1,1 @@
+import {ReviewerWorkspace} from "@/features/review-operations/reviewer-workspace";export const metadata={title:"بررسی پرونده"};export default async function Page({params}:{params:Promise<{caseId:string}>}){const {caseId}=await params;return <ReviewerWorkspace caseId={caseId}/>;}

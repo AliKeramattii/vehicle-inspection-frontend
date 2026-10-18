@@ -1,0 +1,12 @@
+{
+  "WARNING": "SERVER-SIDE TEMPLATE ONLY. Never copy this into frontend/public or Site Settings.",
+  "ConnectionStrings": {
+    "BrokerDb": "[INJECT PRIVATE CONNECTION STRING FROM SERVER SECRET STORE]"
+  },
+  "Storage": {
+    "RootPath": "[PRIVATE ROOT OUTSIDE WEBROOT]",
+    "InspectionFolderPattern": "INSPECTION_{InspectionId}",
+    "CleanupEnabled": false,
+    "RetentionDaysAfterClosure": null
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "tenantId": "demo",
+  "apiBaseUrl": "/api",
+  "siteSettingsEndpoint": "/api/public/site-settings",
+  "settingsSource": "mock"
+}

@@ -33,7 +33,7 @@ Use `prompts/00-bootstrap.md`.
 
 For each phase:
 
-1. Start from a clean working tree.
+1. Work in `C:/Projects/vehicle-inspection-integrated` on `feat/unified-ui-admin-3d`. Inspect Git status and preserve existing local work; do not create a new worktree for each phase.
 2. Give Codex one phase prompt.
 3. Ask it to inspect the matching local PNGs first.
 4. Let it implement.

@@ -67,6 +67,6 @@ export function SegmentedCodeInput({ value, onChange, onBlur, label, error, desc
           setSelection(index);
         }} />
     </div>
-    {error && <p id={`${id}-error`} role="alert" className="mt-2 text-xs leading-5 text-destructive">{error}</p>}
+    {error && <p id={`${id}-error`} role="alert" className="mt-2 text-xs leading-5 text-destructive-ink">{error}</p>}
   </div>;
 }

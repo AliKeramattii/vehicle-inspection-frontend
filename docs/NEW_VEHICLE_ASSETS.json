@@ -1,0 +1,570 @@
+{
+  "description": "Derived inventory, not a supplied manifest. No image pixels changed.",
+  "sourceCount": 47,
+  "runtimeCount": 31,
+  "assets": [
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-front-45-left.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 349364,
+      "sha256": "3a34c01391f9ef7b12a9dd3eadcdfe11af2121cfa2d1b04df6794b3cf2e84402",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-front-45-left.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 942559,
+      "translucentPixels": 629913
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-front-45-right.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 313156,
+      "sha256": "a3c1aa26be2c1bf2ffde0d633a61572fcff9d581280007ee511a028863ef9afc",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-front-45-right.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 847181,
+      "translucentPixels": 725013
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-front.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 483656,
+      "sha256": "e308ef6f7747f4ef00e6b74a1a3cd4a4c0a0a2a14af48758fa29621c4ff68b91",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-front.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 546067,
+      "translucentPixels": 1026420
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-left.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1774,
+      "height": 887,
+      "byteSize": 317942,
+      "sha256": "301075697485d8f9021b594d5e3a64cfd8bbcfa0daba20df40249c623cd21a8b",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-left.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 782973,
+      "translucentPixels": 790455
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-rear-45-left.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 193142,
+      "sha256": "e5fa5628eb333e8680a5ec7593ad230078e500d41781575e5788b3770902de41",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-rear-45-left.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 978403,
+      "translucentPixels": 593879
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-rear-45-right.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 332002,
+      "sha256": "62ecb95d7d573a62f2f795f1944440328fee71643252643d76ed26a94e42738a",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-rear-45-right.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 973679,
+      "translucentPixels": 598800
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-rear.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 254400,
+      "sha256": "aa71d6146cfde2109b74161b8f5b9f2f187e3b9f17fc5ea02efb23e08559c79e",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-rear.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 679813,
+      "translucentPixels": 892687
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/ghost-guides/ghost-right.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 277980,
+      "sha256": "4f827cb72234235590c4112c6d963ff327a300d47325c581328d2adb4cd732da",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/ghost-guides/ghost-right.webp"
+      ],
+      "hasAlpha": true,
+      "transparentPixels": 1093444,
+      "translucentPixels": 479053
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/hero/consent-vehicle.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 88928,
+      "sha256": "73e894843405b235862cfcfb9279cfcd9ce22de750ca1dfe71e0d2b51547c476",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/hero/consent-vehicle.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/hero/introduction-vehicle.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 88570,
+      "sha256": "ec3cf91b9e67354b491294d77be1243ac23f59934d9433beb675a778117204fb",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/hero/introduction-vehicle.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/hero/landing-vehicle.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 106130,
+      "sha256": "f9a099845f653cab5e86f3722239e5d3b3232667e79c53b1f7cccd2e78eb49f9",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/hero/landing-vehicle.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/hero/readiness-vehicle.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 88068,
+      "sha256": "d8f93190d9d4fc66f0fe4d979be693b066d76e3e17d02ba145227decbec1cdd7",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/hero/readiness-vehicle.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/generated/hero/receipt-vehicle.webp",
+      "origin": "user-supplied generated artwork",
+      "width": 1448,
+      "height": 1086,
+      "byteSize": 108092,
+      "sha256": "21c7986beed52a4e11b217fa931d63146651305d3030ec2f30cd146961e43639",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/hero/receipt-vehicle.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/back-45-left.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 54740,
+      "sha256": "da82b12cc9baad1b324797acc1651a614189afeef451af2d26c05d83070af09c",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/back-45-left.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/back-45-right.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 56562,
+      "sha256": "08c06809a06aecefefcd4f4a23697fe4663a5aecda9d46a781248327b321e806",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/back-45-right.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/front-45-left.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 105116,
+      "sha256": "686a0d0acbd39278c97ac8254199e53e938a1b0897dc1988a07cb92d127e2204",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/front-45-left.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/front-45-right.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 115306,
+      "sha256": "f7ea7bde065dbe2920e61111d7cb03291b2a7e2445577ba67fdca1e1616e5ce1",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/front-45-right.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/front-plate.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 73514,
+      "sha256": "791734004be721c880bc73c165dac5c8896f17a5c495bfe71a992cf91b42f9d7",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/front-plate.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/left.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 43734,
+      "sha256": "5a358dcfad17e34e8c50ed7c2ad40049803f08b4781e13a5a3a18b28b59f28a3",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/left.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/rear-plate.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 26760,
+      "sha256": "067df7abaf970eabdec2bd75cedad1c1439d06966fa4aa4a22fe5d9e284b49e8",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/rear-plate.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/navigation/right.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 90278,
+      "sha256": "1761eba0f5d609ffe4e7a8ff8c80aac4db3f4ed9983bd9466e5c36bbebc4face",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/right.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/back-45-left.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 54740,
+      "sha256": "da82b12cc9baad1b324797acc1651a614189afeef451af2d26c05d83070af09c",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/back-45-left.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/back-45-right.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 56562,
+      "sha256": "08c06809a06aecefefcd4f4a23697fe4663a5aecda9d46a781248327b321e806",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/back-45-right.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/car-roof.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 39282,
+      "sha256": "2a976ebf48b50fd4d0fb713994d6782ca33d80a38e345f09438124751e152692",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/car-roof.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/chassis-number.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 159532,
+      "sha256": "f6777118b58a3223536a533c7432f7fbeeabf5687b8a21bb860dde0a333a6318",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/chassis-number.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/driver-interior.webp",
+      "origin": "user-supplied photograph",
+      "width": 1698,
+      "height": 926,
+      "byteSize": 109352,
+      "sha256": "fe9614eed8acf9c7f9b3df9f936132a7a219647eadb6c34632a1cc90dfc71d98",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/driver-interior.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/engine-bay.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 72296,
+      "sha256": "452ca66b64a1349e59e1c0d86e995bdf15c085a2b683c7695f7d09b900a112d3",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/engine-bay.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/front-45-left.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 105116,
+      "sha256": "686a0d0acbd39278c97ac8254199e53e938a1b0897dc1988a07cb92d127e2204",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/front-45-left.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/front-45-right.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 115306,
+      "sha256": "f7ea7bde065dbe2920e61111d7cb03291b2a7e2445577ba67fdca1e1616e5ce1",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/front-45-right.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/front-plate.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 73514,
+      "sha256": "791734004be721c880bc73c165dac5c8896f17a5c495bfe71a992cf91b42f9d7",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/front-plate.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/interior.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 91694,
+      "sha256": "0231ff391a5d986e900ea0c73e7aece222c2b4cd55c0ddb973ccccc8ad024f19",
+      "runtimeUrls": [],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/left.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 43734,
+      "sha256": "5a358dcfad17e34e8c50ed7c2ad40049803f08b4781e13a5a3a18b28b59f28a3",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/left.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/odometer-on.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 136872,
+      "sha256": "58b020924d18964399cdbeebfc476e7db5ebd9d90934b9e26f6b5cb431225d46",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/odometer-on.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/passenger-interior.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 98080,
+      "sha256": "99900d9cbf1c3f498435d3e54ace343b6123551f9a5f61439d87ced2adf63a70",
+      "runtimeUrls": [],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/rear-open.webp",
+      "origin": "user-supplied photograph",
+      "width": 1536,
+      "height": 1024,
+      "byteSize": 42022,
+      "sha256": "6e6e8d2edbada9be117c34ced0bda8ceb4f47e18eb5138cfb51d0967873f78c4",
+      "runtimeUrls": [],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/rear-plate.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 26760,
+      "sha256": "067df7abaf970eabdec2bd75cedad1c1439d06966fa4aa4a22fe5d9e284b49e8",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/rear-plate.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/right.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 90278,
+      "sha256": "1761eba0f5d609ffe4e7a8ff8c80aac4db3f4ed9983bd9466e5c36bbebc4face",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/right.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/spec-plate-2.webp",
+      "origin": "user-supplied photograph",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 455842,
+      "sha256": "deb65162ccc90cf10c95fc50608ff864b2e713714a10fbdf5f35f57bc89cef93",
+      "runtimeUrls": [],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/spec-plate.webp",
+      "origin": "user-supplied photograph",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 137992,
+      "sha256": "c098e6b93257e0d9ae1f7210974cf4076ba3bee14d7a490b7b0389797048da84",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/spec-plate.webp"
+      ],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/source/underbody.webp",
+      "origin": "user-supplied photograph",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 105410,
+      "sha256": "165e451cfeba6c2a8530610d1fd5bc7b3a980e5c1aeea8f90c789c2833f9c4ec",
+      "runtimeUrls": [],
+      "hasAlpha": false
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/chassis-number.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1697,
+      "height": 927,
+      "byteSize": 159532,
+      "sha256": "f6777118b58a3223536a533c7432f7fbeeabf5687b8a21bb860dde0a333a6318",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/chassis-number.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/Pearl-white sedan windshield VIN inspection.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 201558,
+      "sha256": "dff2d75efb01045ed45e27d12f23dbd475d7894d2bf188831166442f8e1883fa",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/windshield-vin.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/readiness-clean-vehicle.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1254,
+      "height": 1254,
+      "byteSize": 92974,
+      "sha256": "d1cf4a1fd35b2b0800d646de5b640ab1457da01b3533c877baaca4888d4dd64b",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/readiness/readiness-clean-vehicle.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/readiness-open-space.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1448,
+      "height": 1086,
+      "byteSize": 78364,
+      "sha256": "9a2b93c68b28df1d777aabe47027fc7a1308d73c60c63f0de5a0f66f7776fed2",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/readiness/readiness-open-space.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/spec-plate-2.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 455842,
+      "sha256": "deb65162ccc90cf10c95fc50608ff864b2e713714a10fbdf5f35f57bc89cef93",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/spec-plate-2.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/guides/spec-plate.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 137992,
+      "sha256": "c098e6b93257e0d9ae1f7210974cf4076ba3bee14d7a490b7b0389797048da84",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/spec-plate.webp"
+      ]
+    },
+    {
+      "source": "references/assets/new-vehicle/source/Pearl-white sedan windshield VIN inspection.webp",
+      "origin": "user-supplied guidance artwork",
+      "width": 1672,
+      "height": 941,
+      "byteSize": 201558,
+      "sha256": "dff2d75efb01045ed45e27d12f23dbd475d7894d2bf188831166442f8e1883fa",
+      "runtimeUrls": [
+        "/assets/inspection-vehicle/photo-guides/windshield-vin.webp"
+      ]
+    }
+  ]
+}

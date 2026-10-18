@@ -1,4 +1,5 @@
 "use client";
+import { useIdentificationGuide } from "./use-identification-guide";
 
 import { useRef, useState } from "react";
 import Link from "next/link";
@@ -16,12 +17,13 @@ import { requirementRetakeReason } from "./photography-model";
 import { OdometerField } from "@/features/capture-package/odometer-field";
 import type { OdometerReading } from "@/features/capture-package/capture-package-model";
 
-export function PhotoReview({ photo, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote }: {
+export function PhotoReview({ photo: originalPhoto, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote, guideScope }: {
   photo: PhotoRequirement; section: InspectionSection; record?: LocalPhoto; inspectionId: string;
   onConfirm: () => void; onRetake: () => void; pending?: boolean; error?: string;
   odometer?: { reading?: OdometerReading; onSave: (kilometers: number) => void };
-  navigation?: { backHref: string; backLabel: string; guideHref: string; returnLabel?: string }; preservationNote?: string;
+  guideScope?: string; navigation?: { backHref: string; backLabel: string; guideHref: string; returnLabel?: string }; preservationNote?: string;
 }) {
+  const { photo } = useIdentificationGuide(originalPhoto, inspectionId, guideScope);
   const [expanded, setExpanded] = useState<"sample" | "user">();
   const trigger = useRef<HTMLButtonElement | null>(null);
   const blob = record?.draft?.blob ?? record?.blob, draft = Boolean(record?.draft);
@@ -31,12 +33,13 @@ export function PhotoReview({ photo, section, record, inspectionId, onConfirm, o
     <div className="photography-title"><h2>بررسی عکس</h2><span>{photo.title}</span></div>
     {reason && <p className="photo-retake-reason" role="status">نیاز به عکاسی مجدد: {reason}</p>}
     {!blob ? <div className="photo-empty" role="status"><p>هنوز عکسی برای این نما ثبت نشده است.</p><Link className="photography-primary" href={navigation?.guideHref ?? inspectionRoutes.photo(inspectionId, photo.id, "guide")}>شروع عکاسی</Link></div> : <>
-      <figure className="photo-review-capture"><figcaption>عکس شما <span>برای بزرگ‌نمایی، روی تصویر بزنید</span></figcaption>
+      <figure className="photo-review-capture"><figcaption>عکس شما <strong className="photo-local-state">{draft ? "در انتظار تأیید شما" : "ذخیره‌شده روی دستگاه"}</strong><span>برای بزرگ‌نمایی، روی تصویر بزنید</span></figcaption>
         <button aria-label="بزرگ‌نمایی عکس شما" onClick={(event) => { trigger.current = event.currentTarget; setExpanded("user"); }}><PhotoImage blob={blob} alt={`عکس شما: ${photo.title}`} eager frame="captured-evidence" retry={false} /></button>
       </figure>
       <button className="photo-review-reference" aria-label="بزرگ‌نمایی نمونه" onClick={(event) => { trigger.current = event.currentTarget; setExpanded("sample"); }}><PhotoImage src={photo.sampleImage} alt={`نمونه صحیح: ${photo.title}`} eager frame="comparison" retry={false} /><span><strong>نمونه</strong><small>قاب‌بندی عکس را با نمونه مقایسه کنید.</small></span><Icon name="enlarge" size={20} /></button>
       {odometer && <OdometerField value={odometer.reading} onSave={odometer.onSave} pending={pending} />}
       <p className="photo-review-note">{draft ? "برای نگه‌داشتن این عکس، تأیید و ادامه را بزنید." : "عکس ثبت‌شده روی این دستگاه ذخیره شده است."}</p>
+      {draft && record?.blob && <p className="photo-local-note">عکس قبلی تا تأیید و ذخیره موفق این جایگزین محفوظ می‌ماند.</p>}
       {preservationNote && <p className="photo-local-note">{preservationNote}</p>}
       {error && <InlineAlert tone="destructive" className="photo-error">{error}</InlineAlert>}
     </>}

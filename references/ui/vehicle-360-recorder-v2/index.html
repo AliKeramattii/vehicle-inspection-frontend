@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0B1525" />
+  <meta name="description" content="ضبط مستقیم ویدیوی ۳۶۰ درجه بازدید خودرو" />
+  <title>ضبط ویدیوی ۳۶۰ درجه خودرو</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell" id="app">
+    <header class="app-header">
+      <button type="button" id="helpButton" class="icon-button" aria-label="راهنما">
+        <img src="./assets/360-recording/icons/help.svg" alt="" />
+      </button>
+      <div class="header-copy"><div class="header-eyebrow">بازدید خودرو</div><h1>ویدیوی ۳۶۰ درجه</h1></div>
+      <button type="button" id="closeButton" class="icon-button" aria-label="خروج از صفحه ضبط">
+        <img src="./assets/360-recording/icons/close.svg" alt="" />
+      </button>
+    </header>
+
+    <section class="intro" aria-label="دستورالعمل ضبط">
+      <div class="eyebrow"><span class="eyebrow-line"></span> مستندسازی وضعیت بدنه</div>
+      <h2>یک دور کامل اطراف خودرو حرکت کنید</h2>
+      <p>دوربین را ثابت نگه دارید و خودرو را داخل کادر راهنما قرار دهید.</p>
+    </section>
+
+    <main class="capture-layout">
+      <section class="camera-stage" aria-label="پیش‌نمایش دوربین">
+        <div id="previewRoot" class="preview-root"></div>
+        <div id="ghostRoot" class="ghost-root"></div>
+        <div class="camera-gradient" aria-hidden="true"></div>
+        <div id="previewTop" class="preview-top"></div>
+        <div id="previewBottom" class="preview-bottom"></div>
+        <div class="orientation-notice">برای قاب‌بندی بهتر، گوشی را عمودی نگه دارید.</div>
+      </section>
+
+      <section class="meter-section" aria-label="زمان ضبط">
+        <div id="progressRoot" class="progress-root"></div>
+        <div class="meter-copy">
+          <div id="statusRoot" class="status-root" role="status" aria-live="polite"></div>
+          <p id="progressExplanation">حلقه فقط پیشرفت زمانی ضبط را نشان می‌دهد؛ نه تأیید پوشش تمام زوایا.</p>
+        </div>
+      </section>
+
+      <section id="guidanceRoot" class="guidance-root" aria-label="راهنمای کیفیت"></section>
+      <section id="controlsRoot" class="controls-root" aria-label="کنترل‌های ضبط"></section>
+    </main>
+
+    <div class="safe-bottom"></div>
+  </div>
+
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">راهنمای ضبط</h2>
+    <p>ویدیوی جدید را مستقیماً در همین صفحه ضبط کنید. در فاصله مناسب، با سرعت یکنواخت اطراف خودرو حرکت کنید و قسمت‌های مختلف را در کادر نگه دارید. برای تعویض دستی میان ۸ زاویه از فلش‌ها استفاده کنید.</p>
+    <p>حلقه پیشرفت بر اساس زمان ضبط فعال است و بررسی واقعی پوشش ۳۶۰ درجه انجام نمی‌دهد. راهنمای شفاف در ویدیوی ضبط‌شده دیده نمی‌شود.</p>
+    <p>انتخاب ویدیوی آماده از گالری یا فایل‌ها امکان‌پذیر نیست. دوربین فقط در HTTPS یا localhost قابل دسترسی است.</p>
+    <form method="dialog"><button class="primary-button">متوجه شدم</button></form>
+  </dialog>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

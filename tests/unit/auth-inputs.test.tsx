@@ -86,12 +86,12 @@ describe("auth presentation and mock timing", () => {
     let time = Date.parse("2026-10-04T00:00:00Z");
     const auth = createMockAuthRepository(() => time, 120);
     const input = { mobile: "09120004567", referralCode: "A4K9P2" };
-    expect(await auth.requestOtp(input)).toMatchObject({ remainingAttempts: 3, retryAfterSeconds: 120 });
+    expect(await auth.requestOtp(input)).toMatchObject({ remainingAttempts: 5, retryAfterSeconds: 120 });
     time += 18_000;
     await expect(auth.requestOtp(input)).rejects.toMatchObject({ code: "OTP_RESEND_TOO_SOON", details: { retryAfterSeconds: 102 } });
-    await expect(auth.verifyOtp({ mobile: input.mobile, code: "99999" })).rejects.toMatchObject({ details: { remainingAttempts: 2 } });
+    await expect(auth.verifyOtp({ mobile: input.mobile, code: "99999" })).rejects.toMatchObject({ details: { remainingAttempts: 4 } });
     time += 102_000;
-    expect(await auth.requestOtp(input)).toMatchObject({ remainingAttempts: 3 });
+    expect(await auth.requestOtp(input)).toMatchObject({ remainingAttempts: 5 });
     expect(await auth.verifyOtp({ mobile: input.mobile, code: "12345" })).toMatchObject({ verified: true });
   });
 });

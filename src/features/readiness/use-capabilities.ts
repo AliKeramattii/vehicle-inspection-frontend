@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createMockCapabilityService, initialCapabilities, normalizeCapabilities, type CapabilityService } from "./capabilities";
+import { initialCapabilities, normalizeCapabilities, type CapabilityService } from "./capabilities";
 
-const mockService = createMockCapabilityService();
-export function useCapabilities(service: CapabilityService = mockService) {
+import { browserCapabilityService } from "./browser-capabilities";
+export function useCapabilities(service: CapabilityService = browserCapabilityService) {
   const [results, setResults] = useState(initialCapabilities);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {

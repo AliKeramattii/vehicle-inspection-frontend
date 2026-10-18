@@ -1,9 +1,6 @@
 # Phase 04 — reference-led 2D photography
 
-Reference `07-inspection-3d-home.png` defines the composition: compact branding/journey, circular
-and segmented progress, dominant studio vehicle, image markers, restrained view controls,
-categories, two rows of image cards and bottom action. Production uses canonical static 2D
-photography, seven sections and twelve requirements. Experimental Three/R3F remains isolated.
+Checkpoint 1 of the user-approved reference-driven redesign uses Fleetr for vehicle-first hierarchy, Automotive Inspection for grouped progress, and EGO for spatial/task separation. The legacy reference 07 remains historical comparison material, rather than the new pixel target. Production still uses the canonical 2D sedan, seven sections and twelve configured requirements. The optional licensed Three/R3F preview remains isolated.
 
 ## Configuration and state ownership
 
@@ -30,7 +27,7 @@ uncaptured/retake photos (including reviewer reasons), review for accepted photo
 `photoRequirementEntry` derives this destination and action label from existing records; no
 marker-specific evidence state or route map exists. Review keeps replacement optional and accepted
 evidence untouched. Enter/Space use native button behavior; focus and selection rings remain
-independent of gray/blue/orange status. Direction controls remain below the scene at every width.
+independent of gray/Emerald/Amber status. Direction controls remain below the scene at every width.
 Retake drafts reopen review with the same reviewer reason as guidance; the original remains stored.
 
 ## Components and routes
@@ -54,39 +51,38 @@ scroll. Loading/missing/unauthorized/storage failure/retry states remain explici
 
 ## Artwork, status and reference decisions
 
-The twelve canonical WebPs remain byte-identical under `public/assets/inspection/photo-guides/`,
+The twelve supplied sedan WebPs remain byte-identical under `public/assets/inspection-vehicle/photo-guides/`,
 with the original filenames documented in INDEX. Next Image optimizes static guidance/artwork;
 local Blob URLs bypass HTTP optimization and are revoked on change/unmount.
 
-The main vehicle artwork fits a 300–360px studio region without clipping the useful silhouette.
+The overview uses a 240–290px responsive studio region, removing unused surrounding canvas height while retaining full-width contained artwork without clipping the useful silhouette.
 The source-ratio artwork layer contains both image and percentage markers, so crop coordinates
 remain stable. Small markers alone overlay the image. The 58px direction-control row always
 follows the scene with an 8px gap; no breakpoint restores an overlay. Controls are at least 44px
-wide and 52px tall with 20–22px icons and 11px labels. Local horizontal scrolling is available.
-The native RTL two-row carousel uses 108×110px cards, 52px contained thumbnails, 12px titles
-and 11px status. Selection scrolls only this rail, never the vertical content region. Primary
+wide and 50px tall with 20–22px icons and 11px labels. Local horizontal scrolling is available.
+The native RTL single-row filmstrip uses 120×142px cards, 70px contained thumbnails, 12px titles and 11px status. Selection scrolls only this rail, never the vertical content region. Primary
 selection is markers/cards, progression is the sticky CTA; directions/categories are secondary
 and section detail is contextual. At short heights the existing single internal content region
-scrolls to the second card row while the header/actions stay visible.
+scrolls to the filmstrip while the header/actions stay visible.
 
 Presentation palette:
 - Gray: no photo, numbered marker / `ثبت نشده`.
-- Blue #2563EB: complete, checkmark / `ثبت شد`.
-- Orange #D97706: draft/retake or partially completed section, retake symbol / explicit attention text.
-- Selected: extra blue outline independent of completion state.
+- Emerald success role: locally accepted, checkmark / `ثبت شد`; not an upload or reviewer approval claim.
+- Amber warning role: draft/retake or partially completed section, retake symbol / explicit attention text.
+- Selected: extra Sky outline independent of completion state and tenant brand.
 
 A replacement draft adds attention while preserving the accepted original and its progress credit.
 `requirementProgress` derives section/category totals and attention from the same records;
 `photographyProgress` aggregates it. No duplicate section state is persisted. Completed sections
-with replacement drafts keep their count and expose attention, rather than a misleading blue-only
+with replacement drafts keep their count and expose attention, rather than a misleading completion-only
 state. Progress segments also show attention independently from the circular accepted count.
-A reviewer retake removes progress credit until replacement. Completed journey steps also use blue
+A reviewer retake removes progress credit until replacement. Completed journey steps use the independent Emerald success role
 on capture surfaces. The circular count and segments derive from real local evidence (fresh 0/12);
 `تصویر ذخیره‌شده روی دستگاه` is truthful local status, not fake uploaded/synchronized progress.
 No manual standing-position certification, arbitrary 2D toggle or remote upload implementation.
 
 Reference differences are intentional: current template/counts, canonical photographed vehicle,
-blue completion palette, no fake sync copy and compact sample beside a dominant actual review image.
+semantic Emerald completion/Sky selection palette, no fake sync copy and compact sample beside a dominant actual review image.
 No reference PNG is rendered as UI. Vazirmatn, RTL, safe areas and technical LTR identifiers remain.
 
 ## Guidance and continuation
@@ -171,3 +167,19 @@ No canonical automotive asset was replaced by this modernisation. Suggested prio
 3. Interior/engine/odometer/spec/VIN/roof: check cabin generation and technical realism after
    exterior continuity. Readable characters and complete evidence framing take priority over
    matching decorative studio temperature. No image generation or replacement occurred here.
+
+
+## Approved UI refinement
+Production remains 2D and template-driven. Optional explicit loopback development may load one mobile Sportage model with twelve fixed screen-space requirement markers, sharing selection and downstream guarded routes. It never ships the restricted GLB or duplicates capture state. Successful checks are green; optional 3D upload checks require the current accepted revision's binary acknowledgement.
+Capture and retakes are live-only: no arbitrary gallery or File Manager import. Unsupported devices show recovery. Existing durable evidence, accepted replacement safety and automatic continuation remain. See UI_REFINEMENT.md.
+
+## Unified optional-viewer interaction
+Production remains2D. Optional3D pins derive accepted local capture separately from matching-current-revision upload status. Parent selection synchronizes cards/CTA. Pin shows reference/guidance before shared capture/review action. Completed evidence remains replaceable atomically. Controls stay below image. See UNIFIED_APPLICATION.md.
+
+## Supplied sedan reference consolidation
+
+Active reference artwork now comes from `src/config/vehicle-assets.ts`: twelve exact guides, eight explicit physical/category view roles and eight transparent recording ghosts. Known old built-in guide URLs resolve at presentation time for pinned template history; actual captured Blobs and tenant custom images do not pass through a replacement migration. Marker/image layers share the source aspect ratio. See `NEW_VEHICLE_ASSET_AUDIT.md` and `NEW_VEHICLE_ASSET_MIGRATION.md`; the earlier asset-continuity candidate list is historical and has been superseded for active 2D defaults. The optional Sportage 3D subsystem is unchanged.
+
+## Sedan location choices and photo-only alignment
+
+See VEHICLE_GUIDANCE_CONSOLIDATION.md. Four VIN/spec location variants retain the same configured requirement identity. Faint supplied ghosts now belong to still-photo camera alignment only, outside the saved Blob. Walk-around recording uses separate instructional guidance; no photo ghosts or gallery import. The matching cleared 4–5s orbit clip remains an explicit asset blocker.

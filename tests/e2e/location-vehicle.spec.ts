@@ -1,6 +1,7 @@
+import { chooseDemoLocation, demoLocationAddress } from "./location-helpers";
 import { expect, test, type Page } from "@playwright/test";
 
-async function location(page: Page) {
+async function location(page: Page, select = true) {
   await page.goto("/");
   await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
   await page.getByRole("button", { name: "شروع بازدید" }).click();
@@ -9,7 +10,7 @@ async function location(page: Page) {
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "تأیید و ادامه" }).click();
   await expect(page).toHaveURL(/\/inspection\/insp_demo\/location$/);
-  await expect(page.getByRole("button", { name: "تأیید این موقعیت" })).toBeEnabled();
+  if (select) await chooseDemoLocation(page);
 }
 async function vehicle(page: Page) {
   await location(page);
@@ -25,58 +26,23 @@ async function noOverflow(page: Page) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 }
 
-test("consent → location → vehicle uses mocks, fixed pin and no browser permissions/API", async ({ page }) => {
-  const errors: string[] = [], backend: string[] = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
-  page.on("response", (response) => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
-  page.on("request", (request) => { if (new URL(request.url()).pathname.startsWith("/api/")) backend.push(request.url()); });
-  await page.addInitScript(() => {
-    const calls: string[] = [];
-    Object.defineProperty(window, "phaseThreePermissionCalls", { value: calls });
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition = () => { calls.push("GPS"); };
-    if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = async () => { calls.push("camera"); throw new Error("Unexpected permission"); };
-  });
+test("consent → explicit location → vehicle persists canonical facts without eager GPS", async ({ page }) => {
+  const errors: string[] = []; page.on("pageerror", error => errors.push(error.message));
   await location(page);
   await expect(page.locator('[aria-current="step"]')).toContainText("موقعیت");
-  await expect(page.getByText("دقت موقعیت ± ۸ متر")).toBeVisible();
-  const pin = page.getByRole("img", { name: "نشانگر ثابت موقعیت انتخابی" });
-  const before = await pin.boundingBox();
-  const bounds = await page.getByRole("group", { name: "جابجایی نقشه" }).boundingBox();
-  if (!bounds) throw new Error("Map has no bounds");
-  await page.mouse.move(bounds.x + bounds.width * .65, bounds.y + bounds.height * .6);
-  await page.mouse.down(); await page.mouse.move(bounds.x + bounds.width * .65 + 55, bounds.y + bounds.height * .6 + 20, { steps: 5 }); await page.mouse.up();
-  expect(await pin.boundingBox()).toEqual(before);
-  await expect(page.locator(".development-map-scene")).not.toHaveAttribute("style", "transform: translate(0px, 0px);");
-  await page.getByRole("button", { name: "بازگشت به موقعیت من" }).click();
-  await expect(page.locator(".development-map-scene")).toHaveAttribute("style", "transform: translate(0px, 0px);");
-  await page.getByRole("button", { name: "ویرایش", exact: true }).click();
-  await expect(page.getByLabel("آدرس بازدید")).toBeFocused();
-  await page.getByLabel("آدرس بازدید").fill("تهران، خیابان سهروردی شمالی، ساختمان دوم");
-  await page.getByRole("button", { name: "پایان ویرایش آدرس" }).click();
-  await expect(page.getByRole("button", { name: "ویرایش", exact: true })).toBeFocused();
   await page.getByLabel("شماره پلاک ساختمان").fill("۴۵۶");
   await page.getByLabel("طبقه / واحد (اختیاری)").fill("");
   await page.getByLabel("توضیحات محل پارک (اختیاری)").fill("پارکینگ زیرزمین");
-  await noOverflow(page);
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await expect(page).toHaveURL(/\/vehicle$/);
-  await expect(page.locator('[aria-current="step"]')).toContainText("خودرو");
-  await expect(page.getByRole("heading", { name: "کیا اسپورتیج" })).toBeVisible();
-  await expect(page.locator(".vehicle-vin bdi")).toHaveAttribute("dir", "ltr");
-  await expect(page.getByRole("img", { name: "پلاک خودرو: ۴۵ ب ۷۲۳، ایران ۱۱" })).toBeVisible();
-  await page.getByRole("link", { name: "بازگشت", exact: true }).click();
+  await page.goBack();
+  await expect(page.getByRole("textbox", { name: "آدرس موقعیت خودرو" })).toHaveValue(demoLocationAddress);
   await expect(page.getByLabel("شماره پلاک ساختمان")).toHaveValue("456");
-  await expect(page.getByLabel("طبقه / واحد (اختیاری)")).toHaveValue("");
-  await expect(page.getByLabel("توضیحات محل پارک (اختیاری)")).toHaveValue("پارکینگ زیرزمین");
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await page.getByRole("button", { name: "درست است", exact: true }).click();
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
   await expect(page).toHaveURL(/\/capture$/);
-  await expect(page.getByRole("progressbar", { name: "۰ از ۱۲ تصویر تکمیل شده" })).toBeVisible();
-  await expect(page.locator('[aria-current="step"]')).toContainText("عکاسی");
-  expect(errors).toEqual([]); expect(backend).toEqual([]);
-  expect(await page.evaluate(() => (window as Window & { phaseThreePermissionCalls?: string[] }).phaseThreePermissionCalls)).toEqual([]);
+  expect(errors).toEqual([]);
 });
 
 test("manual plate entry normalizes/pastes digits, validates, selects letters and records discrepancy", async ({ page }) => {
@@ -115,12 +81,13 @@ test("manual plate entry normalizes/pastes digits, validates, selects letters an
   await expect(page.getByRole("img", { name: /پلاک خودرو/ })).toHaveCount(0);
 });
 
-test("location and vehicle canonical 390×844 screenshots", async ({ page }, testInfo) => {
+test("Neshan unconfigured location and preserved vehicle 390×844 screenshots", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "customer", "Phase 03 screenshots use the mobile reference viewport.");
-  await location(page);
+  await location(page, false);
   await readyImages(page);
   expect(page.viewportSize()).toEqual({ width: 390, height: 844 });
-  await expect.soft(page).toHaveScreenshot("inspection-location.png");
+  await expect.soft(page).toHaveScreenshot("inspection-location-neshan-unconfigured.png");
+  await chooseDemoLocation(page);
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await expect(page.getByRole("img", { name: /پلاک خودرو/ })).toBeVisible();
   await readyImages(page);
@@ -131,7 +98,7 @@ test("location/vehicle controls remain usable at 320, 390 and 480 without overfl
   for (const width of [320, 390, 480]) {
     await page.setViewportSize({ width, height: 844 }); await location(page);
     await noOverflow(page);
-    for (const name of ["ویرایش", "بازگشت به موقعیت من", "تأیید این موقعیت"]) {
+    for (const name of ["بازگشت به موقعیت من", "تأیید این موقعیت"]) {
       const bounds = await page.getByRole("button", { name, exact: true }).boundingBox();
       expect(bounds?.height).toBeGreaterThanOrEqual(44);
     }

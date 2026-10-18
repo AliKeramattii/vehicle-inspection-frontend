@@ -2,7 +2,7 @@ import type { InspectionLocation } from "@/types/domain";
 
 export type Coordinates = Pick<InspectionLocation, "latitude" | "longitude">;
 export type MapOffset = { x: number; y: number };
-export type LocationFix = Coordinates & { accuracyMeters: number };
+export type LocationFix = Coordinates & { accuracyMeters: number | null };
 export type LocationFailure = "denied" | "unavailable" | "unsupported";
 export class LocationServiceError extends Error {
   constructor(public readonly code: LocationFailure) { super(code); }
@@ -43,6 +43,7 @@ export const developmentLocationAdapter: InspectionLocationAdapter = {
   },
 };
 export function isGpsMatched(location: Coordinates, fix: LocationFix) {
+  if (fix.accuracyMeters === null) return false;
   const north = (location.latitude - fix.latitude) * 111320;
   const east = (location.longitude - fix.longitude) * 111320 * Math.cos(fix.latitude * Math.PI / 180);
   return Math.hypot(north, east) <= fix.accuracyMeters;

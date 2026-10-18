@@ -18,10 +18,18 @@ describe("readiness requirements", () => {
   });
 });
 describe("capability boundary", () => {
+  it("keeps four quiet preparation items without repeated ready badges",async()=>{
+    const {container}=render(<DeviceReadiness service={createMockCapabilityService()}/>);
+    await waitFor(()=>expect(screen.getByRole("button",{name:"همه چیز آماده است"})).toBeEnabled());
+    expect(container.querySelectorAll(".device-diagnostics li")).toHaveLength(4);
+    expect(container.querySelector(".capability-status")).toBeNull();
+    expect(screen.queryByText("آماده",{exact:true})).not.toBeInTheDocument();
+    expect(screen.getByRole("heading",{name:"ضبط ویدیوی ۳۶۰ درجه"})).toBeVisible();
+  });
   it.each<CapabilityStatus>(["checking", "ready", "unavailable", "permission-required", "unsupported"])("handles %s without losing required diagnostic rows", async (status) => {
     const service = createMockCapabilityService({ camera: status });
     const results = await service.check(new AbortController().signal);
-    expect(normalizeCapabilities(results)).toHaveLength(4);
+    expect(normalizeCapabilities(results)).toHaveLength(capabilityIds.length);
     expect(canContinueReadiness(results)).toBe(status === "ready" || status === "permission-required");
   });
   it("blocks missing core results and permits the planned WebGL fallback", async () => {
@@ -39,11 +47,11 @@ describe("capability boundary", () => {
     const button = screen.getByRole("button", { name: "همه چیز آماده است" });
     expect(button).toBeDisabled();
     expect(screen.getByRole("list")).toHaveAttribute("aria-busy", "true");
-    expect(container.querySelectorAll('.device-diagnostics li[data-status="checking"]')).toHaveLength(3);
+    expect(container.querySelectorAll('.device-diagnostics li[data-status="checking"]')).toHaveLength(4);
     await act(async () => resolve(capabilityIds.map((id) => ({ id, status: "ready" }))));
     await waitFor(() => expect(button).toBeEnabled());
     expect(screen.getByRole("list")).toHaveAttribute("aria-busy", "false");
-    expect(container.querySelectorAll('.device-diagnostics li[data-status="ready"]')).toHaveLength(3);
+    expect(container.querySelectorAll('.device-diagnostics li[data-status="ready"]')).toHaveLength(4);
     await userEvent.click(button);
     expect(push).toHaveBeenCalledWith("/consent");
   });
@@ -51,7 +59,7 @@ describe("capability boundary", () => {
     const service = createMockCapabilityService({ camera: "unavailable", location: "permission-required", webgl: "unsupported" });
     render(<DeviceReadiness service={service} />);
     expect(await screen.findByText("در دسترس نیست")).toBeVisible();
-    expect(screen.getByText("نیاز به اجازه")).toBeVisible();
+    expect(screen.getByRole("heading",{name:"موقعیت مکانی"}).closest("li")).toHaveAttribute("data-status","permission-required");
     expect(screen.queryByText("نمایش سه‌بعدی")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "همه چیز آماده است" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "بررسی دوباره" })).toBeEnabled();
