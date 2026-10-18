@@ -29,7 +29,7 @@ export function VideoCapture({ inspectionId, onRecorded, service, reason, backHr
       <button type="button" aria-label="راهنمای ضبط ویدیو" onClick={() => setGuide(true)}><CircleHelp size={23}/></button>
     </header>
     <div className="photo-scroll recorder-content">
-      <div className="recorder-intro"><p>ثبت تصویر بدنه خودرو</p><h3>یک دور کامل اطراف خودرو حرکت کنید</h3><span>خودرو را در کادر نگه دارید.</span></div>
+      <div className="recorder-intro"><p>ثبت تصویر بدنه خودرو</p><h3>یک دور کامل اطراف خودرو حرکت کنید</h3><span>خودرو را در کادر نگه دارید؛ چرخاندن گوشی درجا کافی نیست.</span></div>
       <section className="recorder-stage" aria-label="پیش‌نمایش زنده و راهنمای قاب‌بندی">
         <div className="recorder-stage-toolbar"><span className="recorder-state-chip" data-active={active}>{active && <span aria-hidden="true"/>}{active ? "در حال ضبط" : paused ? "مکث" : state === "armed" ? "دوربین روشن" : "پیش‌نمایش دوربین"}</span>
           {state === "armed" && canSwitch && <button type="button" aria-label="تعویض دوربین" onClick={() => void switchCamera()}><SwitchCamera size={22}/></button>}

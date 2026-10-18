@@ -11,7 +11,7 @@ import { toPersianDigits as fa } from "@/lib/utils/persian";
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import type { PhotographyTemplate, InspectionSectionId } from "@/schemas/photography";
 import type { LocalPhoto } from "@/lib/media/photo-store";
-import { findRequirement, nextIncompleteRequirement, nextRequirement, photoRequirementEntry, photographyProgress, photoSatisfied, requirementStatus, requirementProgress } from "./photography-model";
+import { findRequirement, nextIncompleteRequirement, nextRequirement, photoRequirementEntry, photographyProgress, photoSatisfied, requirementStatus, requirementProgress, photographyVisualState, photographyStateLabels } from "./photography-model";
 import { PhotographyProgress } from "./photography-progress";
 import { categoryRequirements, photographyCategories, sectionCategory, type PhotographyCategory } from "./vehicle-photo-config";
 import { OptionalVehicleNavigator } from "@/features/vehicle-3d/optional-vehicle-navigator";
@@ -42,6 +42,7 @@ export function PhotographyOverview({ template, records, inspectionId, data, bod
     router.push(inspectionRoutes.photo(inspectionId, target.id, photoRequirementEntry(target, records).view), { scroll: false });
   };
   const entry = photoRequirementEntry(photo, records), review = entry.view === "review";
+  const visualState = photographyVisualState(photo, records);
   const task = nextCaptureTask(inspectionId, template, records, data);
   const href = progress.complete ? task.href : inspectionRoutes.photo(inspectionId, photo.id, entry.view);
   const label = progress.complete ? task.label : record?.draft ? `ادامه بررسی: ${photo.title}` : complete ? `مشاهده عکس: ${photo.title}` : `عکاسی نمای بعدی: ${photo.title}`;
@@ -57,6 +58,7 @@ export function PhotographyOverview({ template, records, inspectionId, data, bod
         return <button key={item.id} type="button" data-state={state} aria-pressed={category === item.id} onClick={() => chooseCategory(item.id)}><Image src={vehicleViewAssets[item.id === "details" ? "engine-specs" : item.id]} alt="" width={35} height={28}/><span><strong>{item.title}</strong><small>{fa(completed)} از {fa(photos.length)} تصویر{attention && <span className="category-attention"><Icon name="retake" size={12} /><span className="sr-only">نیاز به بررسی / عکاسی مجدد</span></span>}</small></span></button>;
       })}</nav>
       <div className="photography-selected-heading"><div><span>{section.title}</span><h2>{photo.title}</h2></div><Link href={inspectionRoutes.section(inspectionId, section.id)}>مشاهده بخش<Icon name="chevronBack" size={15} /></Link></div>
+      <section className="photography-selection-context" aria-label="وضعیت و قاب‌بندی عکس انتخاب‌شده"><span data-state={visualState}><Icon name={visualState === "complete" ? "check" : visualState === "attention" ? "warning" : "camera"} size={16}/>{photographyStateLabels[visualState]}</span><p>{photo.distance && <>فاصله: {photo.distance}</>}{photo.height && <> · ارتفاع: {photo.height}</>}</p>{next && next.photo.id !== photo.id && <button type="button" onClick={() => select(next.photo.id)}>عکس باقی‌مانده بعدی<Icon name="chevronBack" size={16}/></button>}</section>
       <PhotographyShotCarousel photos={categoryRequirements(template, category)} records={records} selectedId={photo.id} onSelect={select} />
       <Link className="capture-requirements-link" href={inspectionRoutes.photographyReview(inspectionId)}>بررسی نیازمندی‌های بازدید<Icon name="chevronBack" size={16}/></Link>
 

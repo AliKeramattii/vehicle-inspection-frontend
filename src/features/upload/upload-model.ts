@@ -39,6 +39,9 @@ export function uploadProgress(jobs: readonly UploadJob[], expected: number) {
   return { total: expected, uploaded, percentage: expected ? Math.min(100, uploaded / expected * 100) : 0,
     complete: expected > 0 && uploaded === expected && current.length === expected && !current.some((job) => job.verification === "retake-requested"),
     queued: current.filter((job) => ["local", "queued"].includes(job.upload)).length,
+    processing: current.filter((job) => job.upload === "uploaded" && job.verification === "processing").length,
+    verified: current.filter((job) => job.upload === "uploaded" && job.verification === "verified").length,
+    retryScheduled: current.filter((job) => job.upload === "queued" && Boolean(job.nextRetryAt)).length,
     uploading: current.filter((job) => job.upload === "uploading").length,
     failed: current.filter((job) => job.upload === "failed").length };
 }

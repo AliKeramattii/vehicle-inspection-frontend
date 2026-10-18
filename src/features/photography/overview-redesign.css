@@ -36,3 +36,18 @@
 @media(max-width:359px){.photography-overview .photography-categories button>img{display:none}}
 .photography-overview .photography-progress-detail h2{font-size:17px;font-weight:800;line-height:1.8;margin-bottom:6px}
 .photography-overview .capture-requirements-link{display:flex;justify-content:space-between;align-items:center;min-height:44px;font-size:12px;color:var(--color-primary-ink);margin-top:10px}
+
+/* Vehicle stays dominant; selected task context is distinct from navigation. */
+.photography-screen .photography-overview .vehicle-photo-scene{height:clamp(300px,37dvh,380px)}
+.photography-overview .photography-progress-ring small{font-size:10px}
+.photography-overview .photography-categories small{font-size:11px}
+.photography-overview .photography-selected-heading{padding-block:14px 4px}
+.photography-selection-context{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding-block:0 12px;font-size:var(--type-meta);line-height:1.8}
+.photography-selection-context>span{display:inline-flex;gap:5px;align-items:center;color:var(--color-muted);font-weight:650}
+.photography-selection-context>span[data-state=complete]{color:var(--color-success-ink)}
+.photography-selection-context>span[data-state=attention]{color:var(--color-warning-ink)}
+.photography-selection-context>p{width:100%;color:var(--color-muted)}
+.photography-selection-context>button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 10px;border:1px solid var(--color-border);border-radius:var(--radius-control);color:var(--color-primary-ink);background:var(--color-surface)}
+.photography-overview .photography-shot-carousel{grid-template-rows:150px;grid-auto-columns:124px}
+.photography-overview .photography-shot-card strong{font-size:13px}
+@media(min-width:600px){.photography-screen .photography-overview .vehicle-photo-scene{height:400px}}
