@@ -51,3 +51,7 @@
 .photography-overview .photography-shot-carousel{grid-template-rows:150px;grid-auto-columns:124px}
 .photography-overview .photography-shot-card strong{font-size:13px}
 @media(min-width:600px){.photography-screen .photography-overview .vehicle-photo-scene{height:400px}}
+
+/* The authorized optional wrapper must reserve the same space as its 2D child. */
+.photography-overview .optional-vehicle-display{height:clamp(300px,37dvh,380px);min-height:300px}
+@media(min-width:600px){.photography-overview .optional-vehicle-display{height:400px}}

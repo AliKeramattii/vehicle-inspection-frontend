@@ -33,7 +33,8 @@ export function PhotographyWorkflow({ inspectionId, view }: { inspectionId: stri
   if (inspection.isPending || plan.isPending) return <PhotographyLoading message="در حال آماده‌سازی عکاسی…" />;
   const error = inspection.error ?? plan.error;
   if (error) return <div className="photography-recovery"><InlineAlert tone="destructive">{error.message}</InlineAlert><SecondaryButton onClick={() => { void inspection.refetch(); void plan.refetch(); }}>تلاش دوباره</SecondaryButton></div>;
-  if (!authorized || !inspection.data?.location || !inspection.data.vehicle) return <div className="photography-recovery"><InlineAlert>برای شروع عکاسی، موقعیت و مشخصات خودرو را تأیید کنید.</InlineAlert><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
+  if (!authorized) return <div className="photography-recovery"><InlineAlert tone="warning">برای ادامه بازدید، دوباره وارد شوید. عکس‌ها و ویدیوی ذخیره‌شده روی دستگاه حذف نشده‌اند.</InlineAlert><Link href="/">ورود دوباره و ادامه بازدید</Link></div>;
+  if (!inspection.data?.location || !inspection.data.vehicle) return <div className="photography-recovery"><InlineAlert>برای شروع عکاسی، موقعیت و مشخصات خودرو را تأیید کنید.</InlineAlert><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
   const parsed = photographyTemplateSchema.safeParse(plan.data);
   if (!parsed.success) return <div className="photography-recovery"><InlineAlert>قالب عکاسی در دسترس نیست.</InlineAlert><SecondaryButton onClick={() => void plan.refetch()}>تلاش دوباره</SecondaryButton><Link href={inspectionRoutes.vehicle(inspectionId)}>بازگشت به مشخصات خودرو</Link></div>;
   return <PhotographySession inspectionId={inspectionId} template={parsed.data} view={view} bodyColor={inspection.data.vehicle.colorHex} />;

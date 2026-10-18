@@ -39,7 +39,7 @@ Working live map where configured and truthful readiness recovery; actual meanin
 - [x] Checkpoint 3: customer UI and evidence experience.
 - [x] Checkpoint 4: Admin UI.
 - [x] Checkpoint 5: Reviewer UI.
-- [ ] Checkpoint 6: cross-application quality.
+- [x] Checkpoint 6: cross-application quality.
 - [ ] Checkpoint 7: final QA/report/Git delivery.
 
 ## Discoveries
@@ -52,3 +52,5 @@ Customer checkpoint: vehicle scene keeps a 300px minimum and all controls below;
 Admin checkpoint: six native color pickers pair with original registered HEX fields and per-role hints, unchanged draft/publish/contrast rules. Sticky table headings and keyboard row context. Color field regression and 31 related unit tests passed; Admin keyboard/preview/focus browser test passed; light/dark and four operations sizes captured and inspected.
 
 Reviewer checkpoint: selected evidence shows media kind and actual upload/processing/verification label, separately from human decision. Larger filmstrip type, queue review progress derived from exact current revisions, stable evidence/workspace loading. Keyboard details/next-item check passed; evidence-first screenshots inspected. No assignment/revision/decision service changes.
+
+Cross-app checkpoint: bounded controls/markers verified at 320/360/390/430/768 and landscape. Corrected the development-only optional wrapper height without touching model/GLB. Full twelve camera captures → odometer → actual mock recorder → durable video → upload → submit → receipt refresh/edit lock passed. Reauthentication recovery now explains expired mock workflow without blaming persisted facts, with evidence-preservation test. Unit suite 457/40, lint/typecheck exit 0; full historical browser suite in progress. No document overflow in 107 BEFORE and 107 reviewed intermediate captures.
