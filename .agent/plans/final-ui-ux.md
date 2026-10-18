@@ -37,7 +37,7 @@ Working live map where configured and truthful readiness recovery; actual meanin
 - [x] Checkpoint 1: live functional recovery and customer progression.
 - [x] Checkpoint 2: shared design/accessibility presentation.
 - [x] Checkpoint 3: customer UI and evidence experience.
-- [ ] Checkpoint 4: Admin UI.
+- [x] Checkpoint 4: Admin UI.
 - [ ] Checkpoint 5: Reviewer UI.
 - [ ] Checkpoint 6: cross-application quality.
 - [ ] Checkpoint 7: final QA/report/Git delivery.
@@ -48,3 +48,5 @@ Live functional verification passed five tests (exit 0) with actual decoded Nesh
 Shared checkpoint: semantic size roles added without color/font replacement. Native dialog skips hidden form controls, uses existing SVG close icon and restores connected trigger focus without scrolling. Focus regression passed; lint/typecheck passed. jsdom lacks native dialog methods, so its test supplies explicit methods; browser checks retain real native dialogs.
 
 Customer checkpoint: vehicle scene keeps a 300px minimum and all controls below; selected requirement has derived status/distance/height and next-required selection. Cards use 13px titles. Upload status breakdown separates processing/verification/failure/scheduled retries. Review preserves original evidence and labels pending acceptance. Setup type and receipt/recording explanations refined. Production screenshots inspected at 390px; short viewports use the existing internal scroll to reach shot cards. Four capture groups passed (exit 0); 455 units passed, new presentation group 29/29, build/lint/typecheck passed.
+
+Admin checkpoint: six native color pickers pair with original registered HEX fields and per-role hints, unchanged draft/publish/contrast rules. Sticky table headings and keyboard row context. Color field regression and 31 related unit tests passed; Admin keyboard/preview/focus browser test passed; light/dark and four operations sizes captured and inspected.

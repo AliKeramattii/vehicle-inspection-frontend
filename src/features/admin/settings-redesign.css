@@ -39,3 +39,17 @@
 .site-settings-dialog-preview .settings-brand-preview{grid-area:auto;display:grid;position:static;border:0;padding:0;max-width:320px;margin-inline:auto;width:100%}
 .site-settings-dialog-preview>p{font-size:12px;line-height:1.9;color:var(--admin-muted)}
 .site-settings-fields .admin-asset-preview{background:repeating-conic-gradient(var(--color-slate-100) 0% 25%,var(--color-slate-200) 0% 50%) 50%/16px 16px}
+
+/* Both controls edit the same existing form field. */
+.admin-root .settings-color-field{border:1px solid var(--admin-border);border-radius:12px;padding:16px;background:var(--admin-background);min-width:0}
+.admin-root .settings-color-controls{display:flex;gap:12px;align-items:center;min-width:0}
+.admin-root .settings-color-controls>div{min-width:0;flex:1}
+.admin-root .settings-color-controls>input[type=color]{width:52px;height:52px;min-height:52px;flex:none;padding:4px;border:1px solid var(--admin-border);border-radius:10px;background:var(--admin-surface);cursor:pointer}
+.admin-root .settings-color-field p{font-size:12px;line-height:1.9;color:var(--admin-muted);margin-top:10px}
+.admin-root .settings-color-controls input[type=color]:disabled{cursor:not-allowed;opacity:.45}
+.admin-root .settings-color-controls input[type=color]:focus-visible{outline:2px solid var(--admin-focus);outline-offset:3px}
+.admin-root .settings-color-scope{grid-column:1/-1;padding:12px 14px;border-inline-start:3px solid var(--admin-accent);background:var(--admin-selected);font-size:13px;line-height:1.9}
+.admin-root .site-settings-tabs{scroll-padding-inline:12px}
+.admin-root .settings-section-intro p{max-width:65ch}
+.admin-root .admin-table-wrap th{position:sticky;top:0;z-index:1}
+.admin-root .admin-table-wrap tr:focus-within{background:var(--admin-selected)}
