@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { ViewportResize } from "@/components/layout/viewport-resize";
 import "./globals.css";
+import "@/components/ui/type-roles.css";
 import "@/components/layout/refinement.css";
 import "@/components/layout/viewport.css";
 

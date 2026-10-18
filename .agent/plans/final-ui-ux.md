@@ -35,7 +35,7 @@ Working live map where configured and truthful readiness recovery; actual meanin
 ## Progress
 - [x] Checkpoint 0: audit, references, baseline captures/tests.
 - [x] Checkpoint 1: live functional recovery and customer progression.
-- [ ] Checkpoint 2: shared design/accessibility presentation.
+- [x] Checkpoint 2: shared design/accessibility presentation.
 - [ ] Checkpoint 3: customer UI and evidence experience.
 - [ ] Checkpoint 4: Admin UI.
 - [ ] Checkpoint 5: Reviewer UI.
@@ -44,3 +44,5 @@ Working live map where configured and truthful readiness recovery; actual meanin
 
 ## Discoveries
 Live functional verification passed five tests (exit 0) with actual decoded Neshan base tiles and Persian addresses; no speculative recovery patch needed. Baseline units 454/37 passed. BEFORE capture helper now eagerly decodes otherwise-lazy images and isolates submitted/retake scenarios. Production code remains unchanged at this checkpoint.
+
+Shared checkpoint: semantic size roles added without color/font replacement. Native dialog skips hidden form controls, uses existing SVG close icon and restores connected trigger focus without scrolling. Focus regression passed; lint/typecheck passed. jsdom lacks native dialog methods, so its test supplies explicit methods; browser checks retain real native dialogs.

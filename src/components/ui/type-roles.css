@@ -1,0 +1,5 @@
+/* Shared size roles only: colors and font family remain owned by each surface. */
+:root{--type-display:clamp(28px,7vw,34px);--type-page:24px;--type-section:18px;--type-card:15px;--type-body:14px;--type-secondary:13px;--type-meta:12px;--type-caption:11px;--type-action:16px;--space-gutter:16px;--space-section:20px;--radius-control:10px;--radius-input:12px;--radius-panel:16px}
+:where(textarea,summary):focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}
+.entry-dialog>div:first-child>button{flex:none;min-width:44px;min-height:44px}
+.entry-dialog>div:first-child>button svg{display:block;stroke:currentColor}
