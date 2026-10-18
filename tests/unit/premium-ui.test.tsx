@@ -1,7 +1,6 @@
 import {afterEach,describe,it,expect,vi} from "vitest";
 import {act,render,screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import {readFileSync} from "node:fs";
 import {AdminThemeScope,AdminThemeControl,setAdminTheme,readAdminTheme} from "@/features/admin/admin-theme";
 import {ApplicationLogo} from "@/components/layout/application-logo";
 import {filterReviewCases,reviewCounts,evidenceDecision} from "@/features/review-operations/review-presentation";
@@ -11,10 +10,10 @@ import {inspectionPhotographyTemplate as template} from "@/features/photography/
 const makeCase=():ReviewCase=>({template,id:"case",reference:"BDI-8F31K2",submittedAt:"2026-10-15T00:00:00Z",status:"in-review",decisions:[],summary:{inspection:{vehicle:{make:"کیا",model:"اسپورتیج",plate:{firstTwoDigits:"45",letter:"ب",threeDigits:"723",regionDigits:"11"}}},jobs:[{id:"photo",current:true,requirementId:"front-plate",evidenceKind:"photo",revision:"r2"},{id:"video",current:true,evidenceKind:"video-360",revision:"v1"}]} as ReviewCase["summary"]} as ReviewCase);
 afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();localStorage.clear();});
 describe("premium operations presentation",()=>{
- it("retains the approved logo bytes, colors and accessible identity",()=>{
-  expect(readFileSync("public/brand/application-logo.svg")).toEqual(readFileSync("references/ui/ui-ux-refinement/vehicle-inspection-logo.svg"));
-  const {container}=render(<ApplicationLogo/>);expect(screen.getByRole("img",{name:"سامانه بازدید خودرو"})).toBeVisible();expect(container.querySelector("img")).toHaveAttribute("src","/brand/application-logo.svg");expect(container.querySelector("img")).toHaveAttribute("alt","");
+ it("renders the approved square WebP with an accessible application identity",()=>{
+  const {container}=render(<ApplicationLogo/>);expect(screen.getByRole("img",{name:"سامانه بازدید خودرو"})).toBeVisible();expect(container.querySelector("img")).toHaveAttribute("src","/branding/logo.webp");expect(container.querySelector("img")).toHaveAttribute("alt","");expect(container.querySelector("img")).toHaveAttribute("width","1254");expect(container.querySelector("img")).toHaveAttribute("height","1254");expect(container.querySelector(".application-logo")).toHaveStyle({aspectRatio:"1 / 1"});
  });
+ it("keeps decorative sidebar identity out of the accessible name",()=>{const {container}=render(<ApplicationLogo decorative width={40}/>);expect(container.querySelector(".application-logo")).toHaveAttribute("aria-hidden","true");expect(screen.queryByRole("img",{name:"سامانه بازدید خودرو"})).not.toBeInTheDocument();});
  it("counts only current revisions and separates unreviewed, approved and rejected evidence",()=>{
   const record=makeCase();record.summary.jobs.push({id:"obsolete",current:false,requirementId:"front-plate",revision:"r1"} as UploadJob);
   record.decisions.push({id:"old",requirementId:"front-plate",revision:"r1",decision:"approved"} as ReviewCase["decisions"][number]);
