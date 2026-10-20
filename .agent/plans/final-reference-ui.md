@@ -17,17 +17,17 @@ No map/location, tenant pipeline/schema, private settings, global theme, marker 
 ## API impact
 None; presentation only.
 ## Testing
-Existing final-ui-review captures (320x568,360x800,390x844,430x932,768x1024 plus operations), full customer camera flow, actual live Neshan five-case regression, Admin/Reviewer quick checks, lint/type/unit/build. Add reference-specific framing/art/tenant/receipt assertions. Do not claim physical-device or optional restricted GLB runtime tests without hardware/authorized environment.
+Existing final-ui-review captures (320x568,360x800,390x844,430x932,768x1024 plus operations), full customer camera flow, actual live Neshan authorized live-provider regression, Admin/Reviewer quick checks, lint/type/unit/build. Add reference-specific framing/art/tenant/receipt assertions. Do not claim physical-device or optional restricted GLB runtime tests without hardware/authorized environment.
 ## Acceptance criteria
 No document overflow, images contained and natural ratio, sticky CTA reachable, clear states, runtime logos/themes preserved, map/protected files unchanged, actual commands exit recorded, reference comparison and before/after evidence, focused commits pushed.
 ## Progress
 - [x] Inspected supplied designs/assets and current architecture.
 - [x] BEFORE captures and baseline validation (107 captures; lint/typecheck and 457 units pass).
-- [x] Checkpoint 1 shell/Landing/OTP; captures, Admin isolation and five real-provider regressions passed.
-- [x] Checkpoint 2 readiness/consent/vehicle; journey capture, five live map regressions, 38 focused units and typecheck pass.
+- [x] Checkpoint 1 shell/Landing/OTP; captures, Admin isolation and live-provider regressions passed.
+- [x] Checkpoint 2 readiness/consent/vehicle; journey capture, live map regressions, 38 focused units and typecheck pass.
 - [x] Checkpoint 3 overview/guide/review; eight browser checks pass, visual captures reviewed, viewer/marker implementation untouched.
 - [x] Checkpoint 4 summary/receipt; four new reference tests plus strict existing receipt-fit test pass, 30 asset/submission units and typecheck pass, actual map still verified.
-- [ ] Checkpoint 5 remaining pages/QA/report/push.
+- [x] Checkpoint 5 remaining pages/QA/report delivered; implementation checkpoints pushed. Final docs/QA push follows, with historical failures explicitly retained.
 ## Missing package entries
 Secure Messaging Shield.png (original), assets/optional-not-default-logo/Glossy-Verified-Car-Shield-Logo.svg and CODEX_FINAL_UI_IMPLEMENTATION_PROMPT.md are not present. Required WebP and all eleven screenshots exist. green-halo-desktop.webp is also intentionally missing; reuse the supplied lightweight SVG on desktop. No source contents will be invented.
 
@@ -38,3 +38,6 @@ Checkpoint 4: retained the exact supplied receipt bitmap; default-only CSS clips
 
 Checkpoint 5: coordinated video/upload/retake surfaces. The historical run found genuine consent CTA and short-height landing regressions; moved consent presentation into one internal scroller with stable sibling action, preserving its form/terms/state. Strict customer workflow, keyboard/landscape start, 125% text and full hero-composition follow-up: eight browser tests pass. Asset contract assertions updated to the intentionally supplied icon/receipt art; lazy summary thumbnails explicitly brought into view. Final full-suite reconciliation and documentation pending.
 Design reading: PRESERVE; established Persian insurance/customer UI, variance 3-4/10, motion 2/10, photography density about 6/10. Explicit reference cards/custom icons, dark camera stage and existing tenant themes override generic marketing-page preferences.
+
+## Final validation and preserved debt
+Final lint/typecheck/unit/build exit 0; 457 unit tests / 40 files. Final full browser suite: 231 passed, 174 skipped, 45 failed, exit 1. The same 45 case identities failed before this task: 42 screenshot/missing-baseline cases and three old header/capture-reference assertions. No new failing cases. All five added reference tests pass; strict viewport/keyboard/enlarged-text and actual capture/queue/submission/retake regressions pass. Live Neshan rerun: three passed, exit 0 (earlier upstream 504 reported); actual authorized optional GLB test: one passed, exit 0. Reviewed 107 AFTER captures with no document overflow; ten portable review images and exact nine-asset mapping documented. No old baseline changes; all 82 protected file hashes and original twenty dirty files preserved. Final completion report documents missing original PNG/optional files and untested real-device/PWA/Web-Vitals checks. Implementation checkpoint c4dec69 pushed normally; final docs/QA commit is reported in delivery.

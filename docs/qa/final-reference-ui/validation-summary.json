@@ -1,0 +1,55 @@
+{
+  "baselineHead": "54dd9f31f79fc3ff36354f67ba574c317507e4a1",
+  "branch": "feat/unified-ui-admin-3d",
+  "implementationHead": "c4dec69",
+  "commands": {
+    "lint": {
+      "exitCode": 0
+    },
+    "typecheck": {
+      "exitCode": 0
+    },
+    "unit": {
+      "exitCode": 0,
+      "passed": 457,
+      "files": 40
+    },
+    "build": {
+      "exitCode": 0
+    },
+    "fullE2E": {
+      "exitCode": 1,
+      "passed": 231,
+      "skipped": 174,
+      "failed": 45,
+      "historicalScreenshotCases": 42,
+      "preExistingAssertionCases": 3,
+      "newFailingCaseIdentities": 0
+    },
+    "liveNeshan": {
+      "exitCode": 0,
+      "passed": 3,
+      "earlierProviderTimeoutReported": true
+    },
+    "optionalLocalGLB": {
+      "exitCode": 0,
+      "passed": 1
+    },
+    "productionCardDetail": {
+      "exitCode": 0,
+      "passed": 1
+    }
+  },
+  "protectedFiles": 82,
+  "protectedHashChanges": 0,
+  "originalDirtyFiles": 20,
+  "oldVisualBaselinesChanged": [],
+  "newRuntimeAssets": 9,
+  "runtimeAssetBytes": 205105,
+  "beforeCaptures": 107,
+  "afterCaptures": 107,
+  "documentOverflowMeasurements": 0,
+  "physicalDeviceTested": false,
+  "nodeFreeStaticExportCertified": false,
+  "noAssetOrCredentialPublicationForRestrictedGLB": true
+}

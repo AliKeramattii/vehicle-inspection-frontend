@@ -1,0 +1,80 @@
+[
+  {
+    "source": "references/final-ui-design/assets/backgrounds/green-halo-background.svg",
+    "runtime": "/assets/customer-reference/backgrounds/green-halo.svg",
+    "purpose": "Customer atmosphere; same real SVG on desktop",
+    "bytes": 2351,
+    "sha256": "f713b98d93bc202dcfbefb84147b369e43b6d332acf117d2a3cf808dbadd32ff"
+  },
+  {
+    "source": "references/final-ui-design/assets/illustrations/Secure Messaging Shield.webp",
+    "runtime": "/assets/customer-reference/illustrations/secure-messaging-shield.webp",
+    "purpose": "Default OTP illustration",
+    "bytes": 39678,
+    "sha256": "0db528c8f0be73c40cbb023c0f342489715ab064d82bbdb1001acfc26f3e0b1b",
+    "width": 1448,
+    "height": 1086,
+    "mode": "RGB"
+  },
+  {
+    "source": "references/final-ui-design/assets/illustrations/Luxury Sedan with Green Success Icon.webp",
+    "runtime": "/assets/customer-reference/illustrations/sedan-submission-success.webp",
+    "purpose": "Default submission receipt illustration",
+    "bytes": 53524,
+    "sha256": "26d655fb195806d0fd7822b022e03361217a87eda873b99ed258541c89c913d1",
+    "width": 1377,
+    "height": 1142,
+    "mode": "RGB"
+  },
+  {
+    "source": "references/final-ui-design/assets/illustrations/readiness-clean-vehicle.webp",
+    "runtime": "/assets/customer-reference/illustrations/readiness-clean-vehicle.webp",
+    "purpose": "Clean-car preparation icon",
+    "bytes": 10422,
+    "sha256": "ce0a88384cd1beb2e7d90661c19b6f7bcf4c245a94cc2829d26f957f9dc5a4e2",
+    "width": 145,
+    "height": 112,
+    "mode": "RGBA"
+  },
+  {
+    "source": "references/final-ui-design/assets/illustrations/readiness-open-space.webp",
+    "runtime": "/assets/customer-reference/illustrations/readiness-open-space.webp",
+    "purpose": "Open-space preparation icon",
+    "bytes": 19440,
+    "sha256": "c5f58f8ff47ae3f81c6042b95d3ffa0c2b6dd2be857470fd5f2f0a4ce6bb137c",
+    "width": 150,
+    "height": 122,
+    "mode": "RGBA"
+  },
+  {
+    "source": "references/final-ui-design/assets/icons/power-icon-green-transparent-4x.webp",
+    "runtime": "/assets/customer-reference/icons/power-green.webp",
+    "purpose": "Engine-on preparation icon",
+    "bytes": 77690,
+    "sha256": "fd786e98b4939f697d072d2c2194c50b897d80d26108a98a2ee9ee79fe288ef0",
+    "width": 480,
+    "height": 544,
+    "mode": "RGBA"
+  },
+  {
+    "source": "references/final-ui-design/assets/icons/location-pin-green.svg",
+    "runtime": "/assets/customer-reference/icons/location-green.svg",
+    "purpose": "Readiness capability only; never map pin",
+    "bytes": 868,
+    "sha256": "6a6dd1016b5b1b2993ec7ecb5c375cfda7a3b3e9a24df81e98c3cd7d59f0d793"
+  },
+  {
+    "source": "references/final-ui-design/assets/icons/video-camera-green.svg",
+    "runtime": "/assets/customer-reference/icons/video-green.svg",
+    "purpose": "Recording capability icon",
+    "bytes": 523,
+    "sha256": "105f595116fea26e6f6ab3c3178e952a645b1b201bcd44d89ccbf48df7092b99"
+  },
+  {
+    "source": "references/final-ui-design/assets/icons/palette-icon.svg",
+    "runtime": "/assets/customer-reference/icons/palette.svg",
+    "purpose": "Vehicle color label",
+    "bytes": 609,
+    "sha256": "eee19362a27908c99feb6b3d6fd54164b2aaee09fbab6f50ae862e37ccc19530"
+  }
+]
