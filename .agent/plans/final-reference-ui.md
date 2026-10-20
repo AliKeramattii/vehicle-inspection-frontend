@@ -26,10 +26,12 @@ No document overflow, images contained and natural ratio, sticky CTA reachable, 
 - [x] Checkpoint 1 shell/Landing/OTP; captures, Admin isolation and five real-provider regressions passed.
 - [x] Checkpoint 2 readiness/consent/vehicle; journey capture, five live map regressions, 38 focused units and typecheck pass.
 - [x] Checkpoint 3 overview/guide/review; eight browser checks pass, visual captures reviewed, viewer/marker implementation untouched.
-- [ ] Checkpoint 4 summary/receipt.
+- [x] Checkpoint 4 summary/receipt; four new reference tests plus strict existing receipt-fit test pass, 30 asset/submission units and typecheck pass, actual map still verified.
 - [ ] Checkpoint 5 remaining pages/QA/report/push.
 ## Missing package entries
 Secure Messaging Shield.png (original), assets/optional-not-default-logo/Glossy-Verified-Car-Shield-Logo.svg and CODEX_FINAL_UI_IMPLEMENTATION_PROMPT.md are not present. Required WebP and all eleven screenshots exist. green-halo-desktop.webp is also intentionally missing; reuse the supplied lightweight SVG on desktop. No source contents will be invented.
 
 
 Checkpoint 1 findings: new static illustrations bypass Next image optimization to preserve the protected localPatterns configuration; tenant override resolution is unchanged. Removed a UTF-8 BOM in the new CSS that Turbopack interpreted as part of its first selector. No map/global configuration changes.
+
+Checkpoint 4: retained the exact supplied receipt bitmap; default-only CSS clips its thin black canvas edges. Eight pixels of short-screen overflow were fixed through gap spacing. A clipboard-only browser permission fixture initially denied camera at readiness; permission is now deferred until receipt, with no production capability change. Tenant artwork/logo assertions respect the existing absolute-URL resolver.

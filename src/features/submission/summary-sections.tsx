@@ -17,6 +17,10 @@ export function SummarySections({ summary }: { summary: InspectionSummary }) {
   const id = summary.inspection.id, location = summary.inspection.location, vehicle = summary.inspection.vehicle;
   const photos = summary.jobs.filter((job) => job.evidenceKind === "photo"), duration = summary.videoDurationSeconds;
   return <>
+    <section className="summary-section summary-vehicle">
+      <Heading title="مشخصات خودرو" icon="car" href={inspectionRoutes.vehicle(id)} />
+      {vehicle ? <><VehicleCard vehicle={vehicle} /><IranianPlate plate={vehicle.plate} /></> : <p>مشخصات خودرو هنوز تأیید نشده است.</p>}
+    </section>
     <section className="summary-section summary-photos">
       <Heading title="تصاویر بازدید" icon="camera" href={inspectionRoutes.capture(id)} action="مشاهده" />
       <p className="summary-count">{toPersianDigits(summary.capture.images.completed)} از {toPersianDigits(summary.capture.images.total)} تصویر تکمیل شده</p>
@@ -25,10 +29,6 @@ export function SummarySections({ summary }: { summary: InspectionSummary }) {
     <section className="summary-section">
       <Heading title="موقعیت ثبت‌شده" icon="location" href={inspectionRoutes.location(id)} />
       {location ? <div className="summary-location"><div className="summary-map" role="img" aria-label="پیش‌نمایش موقعیت تأییدشده روی نقشه نمونه"><Image src={developmentLocationAdapter.artwork} alt="" width={800} height={800} unoptimized /><Image src="/icons/location/inspection-pin.svg" alt="" width={26} height={34} unoptimized /></div><div><p>{location.formattedAddress}</p><small>{[location.unitFloor, location.parkingDescription].filter(Boolean).join(" • ")}</small></div></div> : <p>موقعیت هنوز تأیید نشده است.</p>}
-    </section>
-    <section className="summary-section summary-vehicle">
-      <Heading title="مشخصات خودرو" icon="car" href={inspectionRoutes.vehicle(id)} />
-      {vehicle ? <><VehicleCard vehicle={vehicle} /><IranianPlate plate={vehicle.plate} /></> : <p>مشخصات خودرو هنوز تأیید نشده است.</p>}
     </section>
     <section className="summary-section summary-odometer">
       <Heading title="کیلومتر فعلی" icon="ignition" href={summary.odometerRequirementId ? inspectionRoutes.photo(id, summary.odometerRequirementId, "review") : inspectionRoutes.photographyReview(id)} />

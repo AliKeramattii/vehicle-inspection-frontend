@@ -11,7 +11,7 @@ export const brandingAssets = {
   otp: { src: customerReferenceAssets.otp, fit: "contain" },
   readiness: { src: vehicleHeroAssets.readiness, fit: "contain" },
   consent: { src: vehicleHeroAssets.consent, fit: "contain" },
-  submission: { src: vehicleHeroAssets.receipt, fit: "contain" },
+  submission: { src: customerReferenceAssets.submission, fit: "contain" },
 } as const;
 export type BrandingAssetRole = keyof typeof brandingAssets;
 function useOverride(role: BrandingAssetRole) {
