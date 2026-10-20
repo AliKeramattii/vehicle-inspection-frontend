@@ -35,3 +35,8 @@ Secure Messaging Shield.png (original), assets/optional-not-default-logo/Glossy-
 Checkpoint 1 findings: new static illustrations bypass Next image optimization to preserve the protected localPatterns configuration; tenant override resolution is unchanged. Removed a UTF-8 BOM in the new CSS that Turbopack interpreted as part of its first selector. No map/global configuration changes.
 
 Checkpoint 4: retained the exact supplied receipt bitmap; default-only CSS clips its thin black canvas edges. Eight pixels of short-screen overflow were fixed through gap spacing. A clipboard-only browser permission fixture initially denied camera at readiness; permission is now deferred until receipt, with no production capability change. Tenant artwork/logo assertions respect the existing absolute-URL resolver.
+
+## Final viewport discoveries
+Consent uses presentation slots in its existing client form so the same legal/capability/business logic remains; its long content has one internal scroller and its CTA is outside that scroller. Short-height Landing preserves the complete sedan in a smaller contained frame. Strict existing viewport/keyboard and enlarged-text hero tests validate these changes. Updated tests reference the deliberately replaced readiness pin and receipt art; historical image baselines remain frozen.
+
+Mode: PRESERVE. Design variance 3-4/10, motion 2/10, photography density approximately 6/10. Scope remains customer-only, with existing custom tenant precedence and protected map/3D/operations behavior.

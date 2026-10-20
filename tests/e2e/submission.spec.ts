@@ -22,7 +22,7 @@ async function visual(page: Page, name: string) {
   if (process.env.REVIEW_SUBMISSION !== "1") await expect(page).toHaveScreenshot(`${name}.png`);
 }
 test("final summary ready visual derives separate photo/odometer/video and file counts", async ({ page }) => {
-  await submissionWorkflow(page); await expect(page.locator(".summary-thumbnails img").first()).toBeVisible(); await bounds(page);
+  await submissionWorkflow(page); await page.locator(".summary-thumbnails").scrollIntoViewIfNeeded(); await expect(page.locator(".summary-thumbnails img").first()).toBeVisible(); await bounds(page);
   await expect(page.getByText("۱۲ از ۱۲ تصویر تکمیل شده", { exact: true })).toBeVisible(); await expect(page.getByText("۴۸٬۳۲۰ کیلومتر", { exact: true })).toBeVisible();
   await expect(page.getByText("۱۳ از ۱۳ فایل ارسال شده", { exact: true })).toBeVisible(); await expect(page.locator(".summary-scroll")).toHaveCount(1);
   await expect(page.getByRole("checkbox")).toHaveCount(0); await visual(page, "final-summary-ready");

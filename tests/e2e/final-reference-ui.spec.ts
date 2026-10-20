@@ -14,6 +14,7 @@ async function bounded(page:Page){expect(await page.evaluate(()=>[document.docum
 test("reference entry uses real supplied art, contained heroes and reachable responsive controls",async({page})=>{
  const errors:string[]=[];page.on("pageerror",e=>errors.push(e.message));
  await page.goto("/");await expect(page.getByLabel("کد معرفی / کد ارجاع")).toBeVisible();
+ await page.setViewportSize({width:390,height:844});await expect(page.locator(".entry-support summary")).toBeInViewport();const support=(await page.locator(".entry-support summary").boundingBox())!;expect(support.y+support.height).toBeLessThanOrEqual(844);
  for(const [width,height] of sizes){await page.setViewportSize({width,height});await expect(page.locator(".landing-art img")).toHaveCSS("object-fit","contain");await bounded(page);await page.getByRole("button",{name:"شروع بازدید",exact:true}).scrollIntoViewIfNeeded();await expect(page.getByRole("button",{name:"شروع بازدید",exact:true})).toBeInViewport();}
  await page.getByLabel("کد معرفی / کد ارجاع").fill("A4K9P2");await page.getByRole("button",{name:"شروع بازدید",exact:true}).click();
  await expect(page.locator(".otp-art img")).toHaveAttribute("src",new RegExp(assets.otp.replaceAll(".","\\.")));
@@ -50,4 +51,11 @@ test("custom brokerage theme and OTP artwork take precedence over the default mi
  await expect(page.locator(".runtime-logo")).toHaveAttribute("src",new URL(settings.identity.logo!,page.url()).href);
  await page.getByLabel("کد معرفی / کد ارجاع").fill("A4K9P2");await page.getByRole("button",{name:"شروع بازدید",exact:true}).click();
  await expect(page.locator(".otp-art img")).toHaveAttribute("src",new URL("/images/tenant-custom.webp",page.url()).href);await expect.poll(()=>page.locator(".otp-art img").evaluate((i:HTMLImageElement)=>i.complete&&i.naturalWidth>0)).toBe(true);
+});
+
+test("preparation details and consent remain readable and operable in the internal scroller",async({page})=>{
+ await page.goto("/");await page.getByLabel("کد معرفی / کد ارجاع").fill("A4K9P2");await page.getByRole("button",{name:"شروع بازدید",exact:true}).click();await page.getByLabel("کد تأیید پنج‌رقمی").fill("12345");await expect(page.getByRole("button",{name:"همه چیز آماده است"})).toBeEnabled();
+ await expect(page.locator(".device-diagnostics li")).toHaveCount(4);
+ for(const [width,height] of [[360,800],[390,844],[430,932]]){await page.setViewportSize({width,height});await page.locator(".device-readiness").scrollIntoViewIfNeeded();await bounded(page);await page.screenshot({path:qa+"/details/readiness-capabilities-"+width+".png"});}
+ await page.getByRole("button",{name:"همه چیز آماده است"}).click();await expect(page.getByRole("button",{name:"تأیید و ادامه",exact:true})).toBeInViewport();await expect(page.getByRole("checkbox")).not.toBeChecked();await page.locator(".consent-terms-toggle").click();await expect(page.locator(".consent-terms-toggle")).toHaveAttribute("aria-expanded","true");await expect(page.getByRole("button",{name:"تأیید و ادامه",exact:true})).toBeInViewport();await page.getByRole("checkbox").check();await expect(page.getByRole("button",{name:"تأیید و ادامه",exact:true})).toBeEnabled();await bounded(page);await page.screenshot({path:qa+"/details/consent-details-accepted.png"});
 });

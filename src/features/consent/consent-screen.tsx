@@ -7,8 +7,8 @@ import "@/features/preparation/preparation.css";
 export function ConsentScreen() {
   return <main id="main-content" tabIndex={-1} className="preparation-screen consent-screen">
     <ConsentBranding />
-    <div className="consent-intro"><h1>رضایت و حریم خصوصی</h1><p>برای ادامه بازدید، لطفاً با شرایط زیر موافقت کنید.</p></div>
+    <ConsentWorkflow introduction={<><div className="consent-intro"><h1>رضایت و حریم خصوصی</h1><p>برای ادامه بازدید، لطفاً با شرایط زیر موافقت کنید.</p></div>
     <PrivacyArtwork />
-    <div className="consent-surface"><CollectionSummary /><ConsentWorkflow /></div>
+    </>} summary={<CollectionSummary />} />
   </main>;
 }

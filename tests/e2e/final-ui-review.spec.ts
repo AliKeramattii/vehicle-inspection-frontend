@@ -19,6 +19,7 @@ async function capture(page:Page,name:string,sizes=customer) {
   for(const [width,height] of sizes){
     await page.setViewportSize({width,height});await page.evaluate(()=>document.fonts.ready);
     await page.locator('img').evaluateAll(images=>Promise.all(images.map(image=>{(image as HTMLImageElement).loading="eager";return (image as HTMLImageElement).decode().catch(()=>null);})));
+    await page.evaluate(()=>{for(const selector of [".customer-viewport>main",".consent-scroll",".summary-scroll",".receipt-content",".photo-scroll",".upload-list-scroll",".additional-scroll"])document.querySelectorAll(selector).forEach(node=>{node.scrollTop=0;});});
     rows.push(await page.evaluate(({width,height})=>({width,height,overflow:{x:document.documentElement.scrollWidth>innerWidth,y:document.documentElement.scrollHeight>innerHeight},actions:[...document.querySelectorAll<HTMLElement>('.bottom-sticky-cta button,.bottom-sticky-cta a,.photography-primary,.camera-shutter,.recorder-record')].filter(e=>e.getBoundingClientRect().width>0).map(e=>({text:e.textContent?.trim(),box:e.getBoundingClientRect().toJSON()}))}),{width,height}));
     await page.screenshot({path:folder+"/"+name+"-"+width+".png"});
   }

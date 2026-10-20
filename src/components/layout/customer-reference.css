@@ -13,18 +13,18 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.customer-reference-ui .landing-screen .landing-intro { margin-block-start:14px; }
-.customer-reference-ui .landing-screen .landing-art { aspect-ratio:1.85; max-block-size:none; margin-block:12px 0; }
+.customer-reference-ui .landing-screen .landing-intro { margin-block-start:8px; }
+.customer-reference-ui .landing-screen .landing-art { aspect-ratio:1.85; max-block-size:none; margin-block:8px 0; }
 .customer-reference-ui .landing-screen .landing-art>img { object-fit:contain; }
 .customer-reference-ui .landing-start {
-  margin:0 12px 12px; padding:18px 16px 6px; border:1px solid var(--customer-panel-border);
+  margin:0 12px 12px; padding:12px 16px 6px; border:1px solid var(--customer-panel-border);
   border-radius:22px; background:var(--color-surface); box-shadow:var(--customer-panel-shadow); flex:none;
 }
-.customer-reference-ui .landing-start .landing-benefits { margin-block-start:14px; padding-block-start:14px; gap:8px; }
+.customer-reference-ui .landing-start .landing-benefits { margin-block-start:10px; padding-block-start:10px; gap:8px; }
 .customer-reference-ui .landing-start .landing-benefit+.landing-benefit { border-inline-start:1px solid var(--color-border); padding-inline-start:6px; }
 .customer-reference-ui .landing-start .code-control { height:52px; }
 .customer-reference-ui .landing-start .entry-primary-button { border-radius:14px; min-height:52px; font-size:16px; }
-.customer-reference-ui .landing-start .entry-trust-footer { margin-block-start:10px; }
+.customer-reference-ui .landing-start .entry-trust-footer { margin-block-start:6px; }
 .customer-reference-ui .otp-screen .otp-back-nav { background:transparent; }
 .customer-reference-ui .otp-screen .otp-intro { margin-block-start:20px; }
 .customer-reference-ui .otp-screen .otp-intro h1 { font-size:28px; line-height:1.5; }
@@ -203,3 +203,36 @@
 @media(max-width:359px) {
   .customer-reference-ui .summary-vehicle .vehicle-summary-details { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+/* Remaining customer flows share surfaces, not evidence or upload state. */
+.customer-reference-ui .video-capture.video-capture-v2 { background:transparent; }
+.customer-reference-ui .recorder-header,
+.customer-reference-ui .recorder-actions { background:var(--color-surface); }
+.customer-reference-ui .recorder-tips { border:1px solid var(--customer-panel-border); border-radius:18px; }
+.customer-reference-ui .video-review .video-metadata { padding:14px; border:1px solid var(--customer-panel-border); border-radius:16px; background:var(--color-surface); }
+.customer-reference-ui .capture-package-summary,
+.customer-reference-ui .additional-card { border-color:var(--customer-panel-border); border-radius:18px; background:var(--color-surface); }
+.customer-reference-ui .upload-overall { background:var(--color-surface); border-color:var(--customer-panel-border); border-radius:20px; }
+.customer-reference-ui .upload-row { border-radius:16px; padding:12px 10px; }
+.customer-reference-ui .upload-row:not([data-upload="failed"]) { border-color:var(--customer-panel-border); }
+.customer-reference-ui .upload-row-content h3 { font-size:14px; line-height:1.8; }
+.customer-reference-ui .upload-stage-summary { padding-top:10px; border-top:1px solid var(--color-border); }
+.customer-reference-ui :is(.upload-actions,.additional-actions,.recorder-actions)>button { border-radius:14px; }
+
+/* Keep consent's primary action outside the single content scroller, including expanded legal text. */
+.customer-reference-ui > .consent-screen { overflow:hidden; }
+.customer-reference-ui .consent-screen .consent-form { margin-top:0; min-height:0; flex:1; }
+.customer-reference-ui .consent-scroll { min-height:0; flex:1; overflow-y:auto; overscroll-behavior:contain; }
+.customer-reference-ui .consent-screen .consent-actions { flex:none; padding-inline:16px; border-top:1px solid var(--customer-panel-border); }
+/* Keyboard and landscape heights retain the complete sedan at a smaller contained scale. */
+@media(max-height:650px) {
+  .customer-reference-ui .landing-screen .landing-intro { margin-block-start:6px; }
+  .customer-reference-ui .landing-screen .landing-eyebrow { display:none; }
+  .customer-reference-ui .landing-screen .landing-intro h1 { font-size:24px; line-height:1.4; }
+  .customer-reference-ui .landing-screen .landing-intro p { font-size:12px; line-height:1.6; margin-block-start:6px; }
+  .customer-reference-ui .landing-screen .landing-art { block-size:64px; aspect-ratio:auto; margin-block:8px 0; }
+  .customer-reference-ui .landing-start { padding-block-start:12px; }
+  .customer-reference-ui .landing-start .referral-label { margin-block-end:8px; }
+}
+
+.customer-reference-ui .landing-screen .landing-intro>p:last-child { margin-block-start:8px; }

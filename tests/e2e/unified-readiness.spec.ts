@@ -1,3 +1,4 @@
+import { customerReferenceAssets } from "../../src/config/customer-reference-assets";
 import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 test("four truthful readiness checks require no camera or GPS request on load", async ({ page }) => {
@@ -9,7 +10,7 @@ test("four truthful readiness checks require no camera or GPS request on load", 
   await page.goto("/"); await page.getByRole("textbox",{name:"کد معرفی / کد ارجاع"}).fill("A4K9P2"); await page.getByRole("button",{name:"شروع بازدید"}).click(); await page.getByRole("textbox",{name:"کد تأیید پنج‌رقمی"}).fill("12345");
   await expect(page.locator(".device-diagnostics li")).toHaveCount(4);
   await expect(page.locator(".device-diagnostics")).toContainText("ضبط ویدیوی ۳۶۰ درجه");
-  await expect(page.locator('.device-diagnostics img[src="/icons/readiness/inspection-pin.svg"]')).toBeVisible();
+  await expect(page.locator(`.device-diagnostics img[src="${customerReferenceAssets.location}"]`)).toBeVisible();
   await expect(page.locator(".device-diagnostics li").filter({hasText:"موقعیت مکانی"})).not.toHaveAttribute("data-status","ready");
   await expect(page.locator(".device-diagnostics")).not.toContainText("نمایش سه‌بعدی");
   await expect(page.getByRole("button",{name:"همه چیز آماده است"})).toBeEnabled();

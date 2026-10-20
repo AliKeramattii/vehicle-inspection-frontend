@@ -1,3 +1,4 @@
+import { customerReferenceAssets } from "../../src/config/customer-reference-assets";
 import {test,expect,type Page} from "@playwright/test";
 import {mkdir} from "node:fs/promises";
 import {vehicleGuideAssets,vehicleHeroAssets,vehicleViewAssets} from "../../src/config/vehicle-assets";
@@ -37,7 +38,7 @@ test("Recorder V2 separates movement guidance from live recording and cleanup",a
  await sizes(page,"recorder-idle");await page.setViewportSize({width:390,height:844});await recordedState(page);await shot(page,"recorder-active");await page.clock.resume();await page.getByRole("button",{name:"پایان ضبط"}).click();await expect(page).toHaveURL(/video\/review$/);await expect(page.locator(".walkaround-review")).toHaveAttribute("controls","");await shot(page,"recorder-review");await expect.poll(()=>page.evaluate(()=>(window as Window&{stoppedPhotoTracks?:number}).stoppedPhotoTracks??0)).toBeGreaterThan(0);
 });
 test("sedan summary, receipt and Admin light/dark default previews share new assets",async({page},info)=>{
- test.skip(info.project.name!=="desktop");test.setTimeout(120000);await submissionWorkflow(page);await sizes(page,"summary");await page.getByRole("button",{name:"ارسال برای بررسی",exact:true}).click();await expect(page).toHaveURL(/submitted$/);await source(page,".receipt-hero img",vehicleHeroAssets.receipt);await sizes(page,"receipt");
+ test.skip(info.project.name!=="desktop");test.setTimeout(120000);await submissionWorkflow(page);await sizes(page,"summary");await page.getByRole("button",{name:"ارسال برای بررسی",exact:true}).click();await expect(page).toHaveURL(/submitted$/);await source(page,".receipt-hero img",customerReferenceAssets.submission);await sizes(page,"receipt");
  await page.setViewportSize({width:1440,height:960});await page.goto("/admin/site-settings");await page.getByRole("tab",{name:"تصاویر",exact:true}).click();await expect(page.locator('.admin-asset-preview img')).not.toHaveCount(0);await shot(page,"admin-images-light");await page.getByRole("switch",{name:"پوسته تیره"}).check();await shot(page,"admin-images-dark");await page.goto("/admin/templates");await page.getByRole("link",{name:"مشاهده قالب",exact:true}).first().click();await expect(page.locator(".admin-guide-image").first()).toBeVisible();await source(page,".admin-guide-image",vehicleGuideAssets["front-45-right"].src);await shot(page,"admin-template-dark");
 });
 test("brokerage custom imagery survives while failed overrides recover to sedan defaults",async({page},info)=>{
