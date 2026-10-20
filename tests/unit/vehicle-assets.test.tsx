@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 import { render, screen, waitFor } from "@testing-library/react";
 import { vehicleGuideAssets, vehicleGhostAssets, vehicleHeroAssets, vehicleViewAssets, resolveVehicleGuide, isVehicleAssetUrl } from "@/config/vehicle-assets";
+import { customerReferenceAssets } from "@/config/customer-reference-assets";
 import { brandingAssets } from "@/config/branding-assets";
 import { defaultSiteSettings } from "@/config/site-settings.defaults";
 import { validateContext, type SiteBootstrap } from "@/config/site-settings.schema";
@@ -58,7 +59,7 @@ describe("supplied sedan image boundaries",()=>{
   await waitFor(()=>expect(screen.getByAltText("مدرک مشتری")).toHaveAttribute("src","blob:accepted-evidence"));expect(create).toHaveBeenCalledWith(blob);view.unmount();expect(revoke).toHaveBeenCalledWith("blob:accepted-evidence");
  });
  it("uses sedan defaults while preserving the non-vehicle OTP illustration",()=>{
-  expect(brandingAssets.landing.src).toBe(vehicleHeroAssets.landing);expect(brandingAssets.referral.src).toBe(vehicleHeroAssets.introduction);expect(brandingAssets.submission.src).toBe(vehicleHeroAssets.receipt);expect(brandingAssets.otp.src).toBe("/images/auth/otp-phone-shield.png");
+  expect(brandingAssets.landing.src).toBe(vehicleHeroAssets.landing);expect(brandingAssets.referral.src).toBe(vehicleHeroAssets.introduction);expect(brandingAssets.submission.src).toBe(vehicleHeroAssets.receipt);expect(brandingAssets.otp.src).toBe(customerReferenceAssets.otp);
  });
  it("permits only known new public assets, preserving tenant custom URLs",()=>{
   const settings=defaultSiteSettings("demo");for(const src of Object.values(vehicleHeroAssets)){settings.images.landing=src;expect(()=>validateContext(boot,settings,"https://visit.example")).not.toThrow();}

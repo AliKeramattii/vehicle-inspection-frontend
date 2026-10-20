@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Green video camera icon</title>
+  <rect x="8.5" y="12.5" width="38" height="39" rx="6.5" stroke="#008C69" stroke-width="3.8"/>
+  <path d="M46.5 25L56 18.5C57.25 17.65 59 18.45 59 20.2V43.8C59 45.55 57.25 46.35 56 45.5L46.5 39" stroke="#008C69" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="17.4" cy="21" r="2.3" fill="#00B37A"/>
+</svg>

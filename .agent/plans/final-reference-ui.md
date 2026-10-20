@@ -24,7 +24,7 @@ No document overflow, images contained and natural ratio, sticky CTA reachable, 
 - [x] Inspected supplied designs/assets and current architecture.
 - [x] BEFORE captures and baseline validation (107 captures; lint/typecheck and 457 units pass).
 - [x] Checkpoint 1 shell/Landing/OTP; captures, Admin isolation and five real-provider regressions passed.
-- [ ] Checkpoint 2 readiness/consent/vehicle.
+- [x] Checkpoint 2 readiness/consent/vehicle; journey capture, five live map regressions, 38 focused units and typecheck pass.
 - [ ] Checkpoint 3 overview/guide/review.
 - [ ] Checkpoint 4 summary/receipt.
 - [ ] Checkpoint 5 remaining pages/QA/report/push.

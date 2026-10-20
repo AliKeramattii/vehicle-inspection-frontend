@@ -1,11 +1,11 @@
-import { vehicleReadinessAssets } from "@/config/vehicle-assets";
+import { customerReferenceAssets } from "@/config/customer-reference-assets";
 import Image from "next/image";
 import { toPersianDigits } from "@/lib/utils/persian";
 
 export const readinessRequirements = [
-  { title: "خودرو تمیز باشد و پلاک‌ها خوانا باشند", description: "بدنه خودرو تمیز و پلاک‌ها به‌صورت واضح قابل مشاهده باشند.", asset: "readiness-clean-vehicle", src: vehicleReadinessAssets.clean },
-  { title: "خودرو را در فضای باز و روشن قرار دهید", description: "خودرو در فضای باز و روشن، با حدود ۲ متر فاصله اطراف قرار دهید.", asset: "readiness-open-space", src: vehicleReadinessAssets.space },
-  { title: "برای عکس کیلومتر، خودرو روشن باشد", description: "در زمان ثبت عکس کیلومتر، موتور خودرو روشن باشد.", asset: "readiness-engine-on", src: "/illustrations/readiness/readiness-engine-on.webp" },
+  { title: "خودرو تمیز باشد و پلاک‌ها خوانا باشند", description: "بدنه خودرو تمیز و پلاک‌ها به‌صورت واضح قابل مشاهده باشند.", asset: "readiness-clean-vehicle", src: customerReferenceAssets.clean },
+  { title: "خودرو را در فضای باز و روشن قرار دهید", description: "خودرو در فضای باز و روشن، با حدود ۲ متر فاصله اطراف قرار دهید.", asset: "readiness-open-space", src: customerReferenceAssets.space },
+  { title: "برای عکس کیلومتر، خودرو روشن باشد", description: "در زمان ثبت عکس کیلومتر، موتور خودرو روشن باشد.", asset: "readiness-engine-on", src: customerReferenceAssets.power },
   { title: "شارژ گوشی بالای ۲۰٪ و فضای کافی باشد", description: "شارژ گوشی بیش از ۲۰٪ و فضای ذخیره‌سازی کافی برای ثبت تصاویر داشته باشید.", asset: "readiness-phone-ready", src: "/illustrations/readiness/readiness-phone-ready.webp" },
 ] as const;
 export function ReadinessRequirements() {

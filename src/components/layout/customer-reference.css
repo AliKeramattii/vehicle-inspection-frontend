@@ -59,3 +59,53 @@
 .customer-reference-ui :is(.entry-screen,.preparation-screen,.vehicle-screen) > :is(.entry-branding,.otp-back-nav,.preparation-back,.consent-branding),
 .customer-reference-ui .photography-screen > .inspection-journey-header,
 .customer-reference-ui .vehicle-screen > .inspection-journey-header { background:var(--color-surface); }
+
+/* Preparation: the reference's distinct white cards, genuine status text, no repeated badges. */
+.customer-reference-ui .readiness-screen .readiness-hero,
+.customer-reference-ui .readiness-screen .device-readiness,
+.customer-reference-ui .consent-screen .consent-surface {
+  border:1px solid var(--customer-panel-border); border-radius:20px;
+  background:var(--color-surface); box-shadow:var(--customer-panel-shadow);
+}
+.customer-reference-ui .readiness-screen .readiness-hero { margin-inline:12px; padding-bottom:10px; }
+.customer-reference-ui .readiness-screen .readiness-hero-copy { padding:16px 16px 0; }
+.customer-reference-ui .readiness-screen .readiness-hero-copy h2 { font-size:21px; line-height:1.7; }
+.customer-reference-ui .readiness-screen .readiness-hero>.customer-hero-artwork {
+  margin:10px 10px 0; width:calc(100% - 20px); aspect-ratio:1.9; max-block-size:none; border-radius:14px;
+}
+.customer-reference-ui .readiness-screen .readiness-hero>.customer-hero-artwork>img { object-fit:contain; }
+.customer-reference-ui .readiness-screen .readiness-requirements { margin:12px; gap:8px; }
+.customer-reference-ui .readiness-screen .readiness-requirements li {
+  border:1px solid var(--customer-panel-border); border-radius:16px; min-height:88px; padding:12px 10px; gap:10px;
+}
+.customer-reference-ui .readiness-screen .requirement-number { width:28px; height:28px; background:var(--color-primary-soft); color:var(--color-primary-ink); }
+.customer-reference-ui .readiness-screen .requirement-art { width:54px; height:50px; }
+.customer-reference-ui .readiness-screen .device-readiness { margin:12px; padding:14px; }
+.customer-reference-ui .readiness-screen .device-diagnostics { gap:8px; margin-top:12px; }
+.customer-reference-ui .readiness-screen .device-diagnostics li { border:1px solid var(--color-border); border-radius:12px; padding:10px 8px; min-height:84px; }
+.customer-reference-ui .readiness-screen .capability-copy h3 { font-size:13px; }
+.customer-reference-ui .readiness-screen .readiness-location-note { padding:10px; margin-top:12px; background:var(--color-primary-soft); border-radius:10px; font-size:12px; }
+.customer-reference-ui .readiness-screen .preparation-actions { border-top:1px solid var(--customer-panel-border); }
+.customer-reference-ui .consent-screen .consent-hero { margin:12px 14px; width:calc(100% - 28px); aspect-ratio:1.85; max-block-size:none; border-radius:18px; }
+.customer-reference-ui .consent-screen .consent-hero>img { object-fit:contain; }
+.customer-reference-ui .consent-screen .consent-surface { margin:0 12px 12px; padding:16px 12px 0; }
+.customer-reference-ui .consent-screen .collection-summary>h2 { font-size:18px; padding-block-end:8px; }
+.customer-reference-ui .consent-screen .collection-summary ul { display:grid; gap:8px; }
+.customer-reference-ui .consent-screen .collection-summary li { border:1px solid var(--color-border); border-radius:14px; min-height:76px; padding:12px 10px; }
+.customer-reference-ui .consent-screen .collection-summary li:last-child { border:1px solid var(--color-border); }
+.customer-reference-ui .consent-screen .collection-purpose { padding:14px 12px; margin-top:12px; background:var(--color-primary-soft); }
+.customer-reference-ui .consent-screen .consent-terms-toggle { min-height:52px; font-size:14px; border-radius:12px; }
+.customer-reference-ui .consent-screen .consent-checkbox { padding:6px 10px; margin-top:10px; }
+.customer-reference-ui .consent-screen .consent-checkbox>label { line-height:1.9; }
+.customer-reference-ui .vehicle-screen .vehicle-summary {
+  margin:12px; padding:16px 12px 10px; border:1px solid var(--customer-panel-border);
+  border-radius:20px; background:var(--color-surface); box-shadow:var(--customer-panel-shadow);
+}
+.customer-reference-ui .vehicle-screen .vehicle-summary-details { padding:0 4px 8px; }
+.customer-reference-ui .vehicle-screen .vehicle-summary-details h2 { font-size:22px; line-height:1.7; }
+.customer-reference-ui .vehicle-color>span { display:inline-flex; align-items:center; gap:6px; }
+.customer-reference-ui .vehicle-color>span>img { width:18px; height:18px; object-fit:contain; }
+.customer-reference-ui .vehicle-screen .vehicle-summary-art { width:100%; aspect-ratio:1.8; max-block-size:none; border-radius:14px; }
+.customer-reference-ui .vehicle-screen .vehicle-summary-art>img { object-fit:contain; }
+.customer-reference-ui .vehicle-screen .vehicle-confirmation-surface { background:var(--color-surface); border:1px solid var(--customer-panel-border); border-radius:20px; margin:0 12px 12px; padding:14px 12px 0; }
+

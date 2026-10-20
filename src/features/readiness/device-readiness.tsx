@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { customerReferenceAssets } from "@/config/customer-reference-assets";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/ui/icon";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
@@ -25,7 +26,7 @@ export function DeviceReadiness({ service }: { service?: CapabilityService }) {
         {customerCapabilityDefinitions.map((definition) => {
           const result = results.find(({ id }) => id === definition.id)!;
           return <li key={definition.id} data-status={result.status}>
-            {definition.id === "location" ? <Image src="/icons/readiness/inspection-pin.svg" width={23} height={29} alt="" unoptimized /> : <Icon name={definition.icon} size={23} />}<div className="capability-copy"><h3>{definition.label}</h3><p>{definition.id !== "webgl" ? explanations[definition.id] : ""}</p>
+            {definition.id === "location" || definition.id === "video" ? <Image src={definition.id === "location" ? customerReferenceAssets.location : customerReferenceAssets.video} width={28} height={28} alt="" unoptimized /> : <Icon name={definition.icon} size={23} />}<div className="capability-copy"><h3>{definition.label}</h3><p>{definition.id !== "webgl" ? explanations[definition.id] : ""}</p>
               {["permission-denied", "unavailable", "unsupported", "unknown"].includes(result.status) && <p className="capability-feedback" data-status={result.status}>{result.message ?? capabilityStatusLabels[result.status]}</p>}
             </div>
           </li>;
