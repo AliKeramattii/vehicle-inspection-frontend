@@ -109,3 +109,52 @@
 .customer-reference-ui .vehicle-screen .vehicle-summary-art>img { object-fit:contain; }
 .customer-reference-ui .vehicle-screen .vehicle-confirmation-surface { background:var(--color-surface); border:1px solid var(--customer-panel-border); border-radius:20px; margin:0 12px 12px; padding:14px 12px 0; }
 
+
+/* Photography references: image-led stage and a quieter, distinct task surface.
+   No viewer, pin, physical orientation or image-coordinate rules are changed here. */
+.customer-reference-ui .photography-overview .photography-studio {
+  margin:10px 12px 0; border:1px solid var(--customer-panel-border); border-radius:20px; background:var(--color-surface);
+}
+.customer-reference-ui .photography-overview .photography-progress { padding:14px 12px; }
+.customer-reference-ui .photography-overview .photography-progress-ring { width:56px; height:56px; }
+.customer-reference-ui .photography-overview .photography-progress-detail h2 { font-size:19px; }
+.customer-reference-ui .photography-overview .photography-shot-panel {
+  margin:12px; padding:12px; border:1px solid var(--customer-panel-border); border-radius:20px; background:var(--color-surface);
+}
+.customer-reference-ui .photography-overview .photography-categories { gap:6px; padding:4px; border:1px solid var(--color-border); }
+.customer-reference-ui .photography-overview .photography-categories button { min-height:56px; }
+.customer-reference-ui .photography-overview .photography-selected-heading h2 { font-size:17px; }
+.customer-reference-ui .photography-selection-context { gap:8px; font-size:12px; }
+.customer-reference-ui .photography-selection-context>span { padding:5px 9px; border-radius:8px; background:var(--color-surface-soft); }
+.customer-reference-ui .photography-overview .photography-shot-carousel { grid-auto-columns:128px; grid-template-rows:152px; gap:8px; }
+.customer-reference-ui .photography-overview .photography-shot-card { background:var(--color-surface); }
+.customer-reference-ui .photography-overview .photography-shot-card[aria-pressed=true] { background:var(--color-selected-soft); }
+.customer-reference-ui :is(.photography-overview,.photography-guide,.photo-review) .photography-actions {
+  border-top:1px solid var(--customer-panel-border); background:var(--color-surface); padding:12px 16px max(16px,env(safe-area-inset-bottom,0px));
+}
+.customer-reference-ui :is(.photography-overview,.photography-guide,.photo-review) .photography-primary,
+.customer-reference-ui .photo-review-actions>button { min-height:52px; border-radius:14px; font-size:16px; }
+.customer-reference-ui :is(.photography-guide,.photo-review) .photo-back {
+  padding:8px 12px; border:1px solid var(--customer-panel-border); border-radius:14px;
+  min-height:48px; justify-content:space-between; color:var(--color-primary-ink); background:var(--color-surface); margin-bottom:12px;
+}
+.customer-reference-ui .photography-guide .photography-title { margin-bottom:12px; }
+.customer-reference-ui .photography-guide .photo-guide-image { border-radius:20px; background:var(--color-surface); border:1px solid var(--customer-panel-border); }
+.customer-reference-ui .photo-guidance-panel { margin-top:14px; padding:16px; border:1px solid var(--customer-panel-border); border-radius:20px; background:var(--color-surface); box-shadow:var(--customer-panel-shadow); }
+.customer-reference-ui .photo-guidance-panel .photo-guide-heading { margin-top:0; font-size:19px; }
+.customer-reference-ui .photo-guidance-panel .photo-instructions { gap:10px; margin-top:10px; }
+.customer-reference-ui .photo-guidance-panel .photo-instructions li { line-height:1.9; align-items:flex-start; }
+.customer-reference-ui .photo-guidance-panel .photo-instructions li>span { margin-top:2px; width:36px; height:36px; }
+.customer-reference-ui .photo-guidance-panel .photo-guide-metadata { margin-top:12px; padding:12px; border-radius:10px; background:var(--color-primary-soft); gap:8px 20px; }
+.customer-reference-ui .photo-review .photo-review-capture { padding:12px; border:1px solid var(--customer-panel-border); border-radius:20px; background:var(--color-surface); }
+.customer-reference-ui .photo-review-capture figcaption { gap:6px 12px; padding-bottom:12px; }
+.customer-reference-ui .photo-review-capture>button { display:block; border-radius:14px; }
+.customer-reference-ui .photo-review .photo-review-reference { padding:10px; border-radius:18px; min-height:104px; }
+.customer-reference-ui .photo-review .photo-review-reference .photography-image { width:116px; min-width:0; height:82px; }
+.customer-reference-ui .photo-review-reference strong { font-size:16px; }
+.customer-reference-ui .photo-review-reference small { font-size:12px; }
+.customer-reference-ui .photo-review .photo-review-note { font-size:13px; line-height:1.9; padding-block:8px; }
+@media(max-width:359px) {
+  .customer-reference-ui .photography-overview .photography-shot-panel { padding:10px; margin-inline:10px; }
+  .customer-reference-ui .photo-review .photo-review-reference .photography-image { width:92px; height:72px; }
+}
