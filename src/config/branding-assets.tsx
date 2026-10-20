@@ -1,4 +1,5 @@
 "use client";
+import { customerReferenceAssets } from "./customer-reference-assets";
 import { vehicleHeroAssets } from "./vehicle-assets";
 import Image, { getImageProps, type ImageProps } from "next/image";
 import { useState, useEffect, type ReactNode } from "react";
@@ -7,7 +8,7 @@ import { useBrandingAsset } from "@/features/admin/assets/use-branding-asset";
 export const brandingAssets = {
   landing: { src: vehicleHeroAssets.landing, fit: "contain" },
   referral: { src: vehicleHeroAssets.introduction, fit: "contain" },
-  otp: { src: "/images/auth/otp-phone-shield.png", fit: "contain" },
+  otp: { src: customerReferenceAssets.otp, fit: "contain" },
   readiness: { src: vehicleHeroAssets.readiness, fit: "contain" },
   consent: { src: vehicleHeroAssets.consent, fit: "contain" },
   submission: { src: vehicleHeroAssets.receipt, fit: "contain" },
@@ -24,7 +25,7 @@ export function BrandingImage({ role, alt, ...props }: { role: BrandingAssetRole
   // Public default files were replaced in place. Version only built-in artwork so Next's
   // cached size variants cannot keep serving the previous framing. Never rewrite tenant URLs.
   const source = !override || failed === override ? src + "?v=hero-flow-20261017" : src;
-  return <Image {...props} data-branding-role={role} alt={alt} src={source} unoptimized={Boolean(override && src === override) || props.unoptimized}
+  return <Image {...props} data-branding-role={role} alt={alt} src={source} unoptimized={Boolean(override && src === override) || src.startsWith("/assets/customer-reference/") || props.unoptimized}
     onError={() => { if (override) setFailed(override); }} />;
 }
 function useBrandingBackgroundState(role: BrandingAssetRole) {

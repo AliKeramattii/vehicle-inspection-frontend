@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" role="img" aria-label="Minimal soft green halo background">
+  <defs>
+    <radialGradient id="mintTopLeft"><stop stop-color="#70E5A2" stop-opacity=".52"/><stop offset=".54" stop-color="#BDF6D1" stop-opacity=".25"/><stop offset="1" stop-color="#DFFFF0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="mintTopRight"><stop stop-color="#88E8B9" stop-opacity=".43"/><stop offset=".6" stop-color="#BAF2D7" stop-opacity=".18"/><stop offset="1" stop-color="#EAFDF5" stop-opacity="0"/></radialGradient>
+    <radialGradient id="mintBottomLeft"><stop stop-color="#44C987" stop-opacity=".46"/><stop offset=".58" stop-color="#8DE8B6" stop-opacity=".23"/><stop offset="1" stop-color="#E5FFF1" stop-opacity="0"/></radialGradient>
+    <radialGradient id="mintBottomRight"><stop stop-color="#1DBD7C" stop-opacity=".52"/><stop offset=".5" stop-color="#73DFAB" stop-opacity=".28"/><stop offset="1" stop-color="#EDFFF5" stop-opacity="0"/></radialGradient>
+    <linearGradient id="waveTop" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6ADB9D" stop-opacity=".21"/><stop offset="1" stop-color="#C1F6D9" stop-opacity="0"/></linearGradient>
+    <linearGradient id="waveBottom" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#36C687" stop-opacity=".25"/><stop offset="1" stop-color="#C3F8D9" stop-opacity=".05"/></linearGradient>
+    <filter id="smooth" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="55"/></filter>
+  </defs>
+  <rect width="1080" height="1920" fill="#FBFFFD"/>
+  <g filter="url(#smooth)">
+    <ellipse cx="0" cy="40" rx="690" ry="650" fill="url(#mintTopLeft)"/>
+    <ellipse cx="1100" cy="150" rx="610" ry="590" fill="url(#mintTopRight)"/>
+    <ellipse cx="-80" cy="1910" rx="680" ry="740" fill="url(#mintBottomLeft)"/>
+    <ellipse cx="1120" cy="1800" rx="680" ry="790" fill="url(#mintBottomRight)"/>
+  </g>
+  <path d="M-90 0 H250 C430 165 520 400 890 474 C965 485 1040 468 1180 405 L1180 -100 H-90 Z" fill="url(#waveTop)" opacity=".67"/>
+  <path d="M-80 1570 C220 1450 420 1740 700 1700 C900 1665 1000 1470 1180 1460 L1180 2050 H-80 Z" fill="url(#waveBottom)" opacity=".53"/>
+  <path d="M-120 1670 C230 1555 445 1890 760 1800 C940 1740 1020 1635 1150 1600" fill="none" stroke="#A0EFC4" stroke-width="98" opacity=".13"/>
+</svg>

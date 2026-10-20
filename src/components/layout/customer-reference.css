@@ -1,0 +1,61 @@
+/* Supplied Green Halo direction, adapted to the existing customer shell and tenant tokens.
+   Positive screen scoping deliberately excludes the frozen Location and operations UI. */
+.customer-reference-ui {
+  --customer-atmosphere: url("/assets/customer-reference/backgrounds/green-halo.svg");
+  --customer-panel-border: color-mix(in srgb, var(--color-primary) 12%, var(--color-border));
+  --customer-panel-shadow: 0 8px 24px color-mix(in srgb, var(--color-ink) 4%, transparent);
+}
+:root[data-runtime-brand="custom"] .customer-reference-ui { --customer-atmosphere: none; }
+.customer-reference-ui > :is(.entry-screen,.preparation-screen,.vehicle-screen),
+.customer-reference-ui > .photography-screen:not(:has(.camera-screen)) {
+  background-color: var(--color-background);
+  background-image: var(--customer-atmosphere);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.customer-reference-ui .landing-screen .landing-intro { margin-block-start:14px; }
+.customer-reference-ui .landing-screen .landing-art { aspect-ratio:1.85; max-block-size:none; margin-block:12px 0; }
+.customer-reference-ui .landing-screen .landing-art>img { object-fit:contain; }
+.customer-reference-ui .landing-start {
+  margin:0 12px 12px; padding:18px 16px 6px; border:1px solid var(--customer-panel-border);
+  border-radius:22px; background:var(--color-surface); box-shadow:var(--customer-panel-shadow); flex:none;
+}
+.customer-reference-ui .landing-start .landing-benefits { margin-block-start:14px; padding-block-start:14px; gap:8px; }
+.customer-reference-ui .landing-start .landing-benefit+.landing-benefit { border-inline-start:1px solid var(--color-border); padding-inline-start:6px; }
+.customer-reference-ui .landing-start .code-control { height:52px; }
+.customer-reference-ui .landing-start .entry-primary-button { border-radius:14px; min-height:52px; font-size:16px; }
+.customer-reference-ui .landing-start .entry-trust-footer { margin-block-start:10px; }
+.customer-reference-ui .otp-screen .otp-back-nav { background:transparent; }
+.customer-reference-ui .otp-screen .otp-intro { margin-block-start:20px; }
+.customer-reference-ui .otp-screen .otp-intro h1 { font-size:28px; line-height:1.5; }
+.customer-reference-ui .otp-screen .otp-intro p { margin-block-start:8px; font-size:14px; line-height:1.9; }
+.customer-reference-ui .otp-screen .otp-art {
+  width:100%; aspect-ratio:4/3; max-block-size:240px; margin-block:12px 0;
+}
+.customer-reference-ui .otp-screen .otp-art>img { object-fit:contain; }
+.customer-reference-ui .otp-screen .otp-panel {
+  margin:0 12px 16px; padding:20px 18px 12px; border:1px solid var(--customer-panel-border);
+  border-radius:24px; box-shadow:var(--customer-panel-shadow); position:relative;
+}
+.customer-reference-ui .otp-panel .code-control-otp { height:56px; margin-block-start:12px; }
+.customer-reference-ui .otp-panel .otp-completion-hint { font-size:12px; line-height:1.8; margin-block-start:14px; }
+.customer-reference-ui .otp-panel .otp-resend-area { margin-block-start:16px; padding-block-start:10px; }
+.customer-reference-ui .otp-panel .otp-edit-number { margin-block-start:14px; }
+@media(min-width:768px) {
+  /* The supplied SVG is also the actual desktop fallback; no absent WebP URL. */
+  .customer-reference-ui .landing-screen .landing-art { aspect-ratio:1.7; }
+  .customer-reference-ui .otp-screen .otp-art { max-block-size:260px; }
+}
+@media(max-height:650px) {
+  .customer-reference-ui .landing-screen .landing-art { aspect-ratio:1.85; max-block-size:none; }
+  .customer-reference-ui .otp-screen .otp-intro { margin-block-start:10px; }
+  .customer-reference-ui .otp-screen .otp-art { max-block-size:170px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .customer-reference-ui :is(.entry-screen,.preparation-screen,.vehicle-screen) * { scroll-behavior:auto; }
+}
+
+/* Sticky headers keep a clean surface instead of repeating the page-sized halo. */
+.customer-reference-ui :is(.entry-screen,.preparation-screen,.vehicle-screen) > :is(.entry-branding,.otp-back-nav,.preparation-back,.consent-branding),
+.customer-reference-ui .photography-screen > .inspection-journey-header,
+.customer-reference-ui .vehicle-screen > .inspection-journey-header { background:var(--color-surface); }
