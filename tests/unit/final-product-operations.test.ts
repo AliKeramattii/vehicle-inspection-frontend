@@ -1,3 +1,5 @@
+import { latestSubmittedRevisions } from "@/features/review-operations/review-revisions";
+import { requestNamespace, type EvidenceRequest } from "@/features/additional-evidence/request-model";
 import { describe, it, expect, vi } from "vitest";
 import { ReviewRepository } from "@/features/review-operations/repository";
 import { MemoryReviewPersistence } from "@/features/review-operations/persistence";
@@ -27,4 +29,35 @@ describe("explicit whole-inspection decisions",()=>{
  it("archives prior evidence metadata on replacement, never duplicating blobs",async()=>{const {repo}=await fixture();const old=record().summary.jobs[0];await repo.updateResubmittedEvidence("insp_demo",[{...old,id:"replacement",revision:"r2"}]);const updated=(await repo.read(actor)).cases[0];expect(updated.evidenceHistory?.[0].revision).toBe("r1");expect(updated.summary.jobs[0].revision).toBe("r2");expect(updated.evidenceHistory?.[0]).not.toHaveProperty("blob");});
  it("requires acknowledgement and timestamp before displaying forwarded",()=>{const r=record();r.finalDecision={kind:"approved",actorId:actor.id,at:now()};r.forwarding={phase:"sending"};expect(caseLifecycle(r)).toBe("FORWARD_PENDING");r.forwarding={phase:"failed"};expect(caseLifecycle(r)).toBe("FORWARD_FAILED");r.forwarding={phase:"acknowledged",acknowledgementId:"ack"};expect(caseLifecycle(r)).not.toBe("FORWARDED");r.forwarding.acknowledgedAt=now();expect(caseLifecycle(r)).toBe("FORWARDED");});
  it("searches tracking, phone, Persian plate digits and lifecycle without granting access",()=>{const r=record();expect(filterReviewCases([r],"BDI-8F31K2","all")).toHaveLength(1);expect(filterReviewCases([r],"۰۹۱۲۰۰۰۴۵۶۷","all")).toHaveLength(1);expect(filterReviewCases([r],"","REJECTED")).toHaveLength(0);expect(filterReviewCases([r],"not-found","all")).toHaveLength(0);});
+});
+
+describe("pre-API revision reconciliation",()=>{
+ it("does not replay an archived correction revision over the current revision",async()=>{
+  const {repo}=await fixture();const old=record().summary.jobs[0], second={...old,id:"second",revision:"r2"},third={...old,id:"third",revision:"r3"};
+  await repo.updateResubmittedEvidence("insp_demo",[second]);await repo.updateResubmittedEvidence("insp_demo",[third]);await repo.updateResubmittedEvidence("insp_demo",[second]);
+  const result=(await repo.read(actor)).cases[0];expect(result.summary.jobs[0].revision).toBe("r3");expect(result.evidenceHistory?.map(j=>j.revision)).toEqual(["r1","r2"]);
+ });
+ it("never changes a finalized case's accepted evidence during synchronization",async()=>{
+  const {repo}=await fixture();await repo.finalize(actor,"insp_demo","rejected","رد نهایی");
+  await repo.updateResubmittedEvidence("insp_demo",[{...record().summary.jobs[0],id:"late",revision:"late-revision"}]);
+  expect((await repo.read(actor)).cases[0].summary.jobs[0].revision).toBe("r1");
+ });
+});
+
+describe("acknowledged request rounds",()=>{
+ function round(round:number,job:UploadJob):EvidenceRequest{return {id:`round-${round}`,inspectionId:"insp_demo",version:1,round,requestedAt:now(),template,originalNamespace:"original",items:[{id:`item-${round}`,kind:"photo",requirementId:job.requirementId!,reviewerReason:"ثبت مجدد",originalEvidenceId:"previous"}],status:"resubmitted",attemptCount:1,receipt:{reference:"BDI-8F31K2",submittedAt:now(),evidenceIds:[job.id],status:"queued-for-review"}};}
+ it("uses the latest acknowledged request round regardless of job/IndexedDB order",()=>{
+  const base=record().summary.jobs[0],old={...base,id:"r2",revision:"r2"},fresh={...base,id:"r3",revision:"r3"};const a=round(1,old),b=round(2,fresh);old.namespace=requestNamespace(a);fresh.namespace=requestNamespace(b);
+  expect(latestSubmittedRevisions(record(),[a,b],[fresh,old])).toEqual([fresh]);expect(latestSubmittedRevisions(record(),[b,a],[old,fresh])).toEqual([fresh]);
+ });
+ it("rejects unacknowledged job IDs, foreign inspection scopes and superseded requests",()=>{
+  const job={...record().summary.jobs[0],id:"replacement"},r=round(1,job);job.namespace=requestNamespace(r);
+  expect(latestSubmittedRevisions(record(),[{...r,receipt:{...r.receipt!,evidenceIds:["other"]}}],[job])).toEqual([]);
+  expect(latestSubmittedRevisions(record(),[{...r,inspectionId:"other"}],[job])).toEqual([]);
+  expect(latestSubmittedRevisions(record(),[{...r,status:"superseded"}],[job])).toEqual([]);
+ });
+ it("does not revive an older round when the new acknowledged job is unavailable",()=>{
+  const old={...record().summary.jobs[0],id:"old"},a=round(1,old),b=round(2,{...old,id:"missing"});old.namespace=requestNamespace(a);
+  expect(latestSubmittedRevisions(record(),[a,b],[old])).toEqual([]);
+ });
 });

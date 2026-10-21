@@ -1,4 +1,4 @@
-import type { CustomerSourceContext } from "@/features/identity/source-context";
+import { legacyMockSourceRequestId, type CustomerSourceContext } from "@/features/identity/source-context";
 import type { IranianPlate } from "@/types/domain";
 
 export const lifecycleStates = ["DRAFT", "UPLOAD_PENDING", "SUBMITTED", "UNDER_REVIEW", "CHANGES_REQUESTED", "REJECTED", "REVIEW_APPROVED", "FORWARD_PENDING", "FORWARDED", "FORWARD_FAILED"] as const;
@@ -26,7 +26,7 @@ export type VehicleFieldCorrection = {
 export const fieldCorrectionLabels = { plate: "پلاک خودرو", color: "رنگ بدنه", modelYear: "سال ساخت" } as const;
 /** Customer-safe projection. Internal notes and endpoint credentials are deliberately absent. */
 export type CustomerInspectionStatus = {
- inspectionId: string; tenantId: string; subjectId: string; trackingCode: string; mobile: string;
+ inspectionId: string; tenantId: string; subjectId: string; trackingCode: string; mobile: string; sourceRequestId?: string;
  status: InspectionLifecycle; updatedAt: string; source: "mock" | "backend";
  customerExplanation?: string; previousAttemptId?: string; resumeHref?: string;
  corrections: VehicleFieldCorrection[]; forwarding?: { phase: "ready" | "sending" | "retrying" | "acknowledged" | "failed"; acknowledgedAt?: string; acknowledgementId?: string };
@@ -34,7 +34,7 @@ export type CustomerInspectionStatus = {
 export type SourceInspectionIndex = { ownerKey: string; inspectionId: string };
 export type LifecycleWorkspace = { records: CustomerInspectionStatus[]; identities: SourceInspectionIndex[] };
 export const emptyLifecycleWorkspace = (): LifecycleWorkspace => ({ records: [], identities: [] });
-export function ownsInspection(scope: CustomerSourceContext, record: CustomerInspectionStatus) { return scope.tenantId === record.tenantId && scope.subjectId === record.subjectId; }
+export function ownsInspection(scope: CustomerSourceContext, record: CustomerInspectionStatus) { return scope.tenantId === record.tenantId && scope.subjectId === record.subjectId && scope.sourceRequestId === (record.sourceRequestId ?? legacyMockSourceRequestId); }
 export function safeResumeHref(id: string, href?: string) {
  if (href === "/readiness" || href === "/consent") return href;
  const prefix = `/inspection/${encodeURIComponent(id)}/`;
@@ -42,3 +42,11 @@ export function safeResumeHref(id: string, href?: string) {
 }
 
 export const forwardingPhaseLabels = {ready:"آماده ارسال به کارگزاری",sending:"در حال ارسال به کارگزاری",retrying:"در حال تلاش دوباره برای ارسال به کارگزاری",acknowledged:"دریافت توسط کارگزاری تأیید شد",failed:"ارسال به کارگزاری ناموفق بود"} as const;
+
+/** Late mock reconciliation cannot reopen a final case. Backend still needs version/CAS checks. */
+export const fieldCorrectionsLocked = (status: InspectionLifecycle) => ["REJECTED", "REVIEW_APPROVED", "FORWARD_PENDING", "FORWARD_FAILED", "FORWARDED"].includes(status);
+export function reviewProjectionAllowed(current: InspectionLifecycle, next: InspectionLifecycle) {
+ if (current === "REJECTED" || current === "FORWARDED") return next === current;
+ if (fieldCorrectionsLocked(current)) return ["REVIEW_APPROVED", "FORWARD_PENDING", "FORWARD_FAILED", "FORWARDED"].includes(next) && !(current !== "REVIEW_APPROVED" && next === "REVIEW_APPROVED");
+ return true;
+}
