@@ -13,7 +13,7 @@ export function ReadinessScreen() {
       <div className="readiness-estimate"><Icon name="clock" size={20} /><span>زمان تقریبی: ۱۲ دقیقه</span></div>
     </div>
     <section className="readiness-hero" aria-label="آماده‌سازی خودرو">
-      <div className="readiness-hero-copy"><h2>خودروی شما <span>آماده<br />بازدید است</span>؟</h2><p>با رعایت موارد زیر، می‌توانید بازدید را سریع‌تر و بدون مشکل انجام دهید.</p></div>
+      <div className="readiness-hero-copy"><h2>خودروی شما <span>آماده{" "}<br />بازدید است</span>؟</h2><p>با رعایت موارد زیر، می‌توانید بازدید را سریع‌تر و بدون مشکل انجام دهید.</p></div>
       <CustomerHeroArtwork role="readiness" />
     </section>
     <ReadinessRequirements />

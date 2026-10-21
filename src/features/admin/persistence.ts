@@ -17,6 +17,7 @@ export class MemoryAdminPersistence implements AdminPersistence {
   }
 }
 export class IndexedDbAdminPersistence implements AdminPersistence {
+  constructor(private key = "current") {}
   private open(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
       let abandoned = false;
@@ -32,12 +33,12 @@ export class IndexedDbAdminPersistence implements AdminPersistence {
     const db = await this.open();
     return new Promise((resolve, reject) => {
       const transaction = db.transaction("workspace", "readwrite");
-      const store = transaction.objectStore("workspace"); const request = store.get("current");
+      const store = transaction.objectStore("workspace"); const request = store.get(this.key);
       let result: T; let failure: unknown;
       request.onsuccess = () => {
         try {
           const workspace: AdminWorkspace = request.result ?? initialAdminWorkspace();
-          result = change(workspace); store.put(workspace, "current");
+          result = change(workspace); store.put(workspace, this.key);
         } catch (error) { failure = error; transaction.abort(); }
       };
       transaction.oncomplete = () => { db.close(); resolve(result); };

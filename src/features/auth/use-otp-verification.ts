@@ -6,9 +6,13 @@ import { useRouter } from "next/navigation";
 import { RepositoryError } from "@/lib/api/repositories";
 import { useAuthContext, useAuthWorkflow } from "./auth-workflow-provider";
 
+import { lifecycleRepository } from "@/features/inspection-status/lifecycle-repository";
+import { customerEntryDestination } from "@/features/inspection-status/status-service";
+import { saveMockVerifiedSession } from "@/features/identity/source-context";
+
 export function useOtpVerification() {
   const router = useRouter();
-  const { repository, store } = useAuthContext();
+  const { repository, store, source } = useAuthContext();
   const workflow = useAuthWorkflow();
   const [code, setCode] = useState("");
   const [now, setNow] = useState(() => Date.now());
@@ -20,11 +24,14 @@ export function useOtpVerification() {
       if (current.stage !== "challenge") throw new RepositoryError("OTP_NOT_REQUESTED", "ابتدا کد تأیید را درخواست کنید.");
       return repository.verifyOtp({ mobile: current.mobile, code: value });
     },
-    onSuccess: (session) => {
+    onSuccess: async () => {
       const current = store.getState().workflow;
       if (current.stage === "challenge") {
-        store.getState().setWorkflow({ stage: "verified", mobile: current.mobile, inspectionId: session.inspectionId });
-        router.replace("/readiness");
+        const scope = await source.resolve(), record = await lifecycleRepository.register(scope);
+        const destination = await customerEntryDestination(scope, record.inspectionId);
+        saveMockVerifiedSession(scope, record.inspectionId);
+        store.getState().setWorkflow({ stage: "verified", mobile: scope.mobile, inspectionId: record.inspectionId });
+        router.replace(destination);
       }
     },
     onError: (error) => {
@@ -37,9 +44,10 @@ export function useOtpVerification() {
     onSettled: () => { verifying.current = false; },
   });
   const request = useMutation({
-    mutationFn: async (mobile: string) => {
+    mutationFn: async () => {
       const current = store.getState().workflow;
       if (current.stage !== "challenge") throw new RepositoryError("OTP_NOT_REQUESTED", "ابتدا کد تأیید را درخواست کنید.");
+      const mobile = current.mobile;
       const challenge = await repository.requestOtp({ mobile, referralCode: current.referralCode });
       return { ...current, mobile, resendAt: Date.now() + challenge.retryAfterSeconds * 1000,
         expiresAt: Date.parse(challenge.expiresAt), remainingAttempts: challenge.remainingAttempts };

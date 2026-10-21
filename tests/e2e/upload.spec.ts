@@ -1,8 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { uploadWorkflow, queueJobs, setOnline, releaseFixtureJobs, type UploadFixture } from "./upload-helpers";
-import { enterPhotography, snapshotReady } from "./photography-helpers";
-import { openPackageReview, captureData } from "./capture-package-helpers";
+import { snapshotReady } from "./photography-helpers";
+import { captureData } from "./capture-package-helpers";
 import { photoDatabase } from "../../src/lib/media/photo-store";
 import { mockRecorder, recordedState } from "./capture-package-helpers";
 const renders = ".agent/reference-review/phase06-renders";
@@ -47,7 +47,7 @@ test("offline queue survives refresh, app start resumes and reconnect completes 
   await page.addInitScript(() => Object.defineProperty(navigator, "onLine", { configurable: true, value: false })); await page.reload();
   expect((await queueJobs(page)).map((job) => job.id)).toEqual(ids);
   await setOnline(page, true); await expect.poll(async () => (await queueJobs(page)).filter((job) => job.upload === "uploaded").length, { timeout: 15000 }).toBe(13);
-  await page.getByRole("link", { name: "بازگشت به شروع" }).click(); await enterPhotography(page); await openPackageReview(page); await page.getByRole("button", { name: "ادامه به ارسال" }).click();
+  await page.goto("/"); await expect(page).toHaveURL(/\/upload$/);
   await expect(page.getByRole("button", { name: "ادامه به بررسی نهایی" })).toBeEnabled(); expect((await queueJobs(page)).map((job) => job.id)).toEqual(ids);
 });
 test("connection loss aborts an active file and safely restarts after online", async ({ page }) => {

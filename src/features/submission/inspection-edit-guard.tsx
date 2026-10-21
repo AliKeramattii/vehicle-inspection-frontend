@@ -4,17 +4,23 @@ import { usePathname, useRouter } from "next/navigation";
 import { SecondaryButton } from "@/components/ui/button";
 import { InlineAlert } from "@/components/ui/status";
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
+import { useAuthContext, useAuthWorkflow } from "@/features/auth/auth-workflow-provider";
+import Link from "next/link";
 import { isEditLocked, isSubmitted } from "./submission-model";
 import { useSubmissionRecord } from "./use-submission-record";
 import { AdditionalRouteGuard } from "@/features/additional-evidence/additional-route-guard";
 
 /** Children never mount on a locked editable route, including camera/replacement routes. */
 export function InspectionEditGuard({ inspectionId, children }: { inspectionId: string; children: ReactNode }) {
-  const query = useSubmissionRecord(inspectionId), pathname = usePathname(), router = useRouter();
+  const {restoring} = useAuthContext(), workflow = useAuthWorkflow();
+  const authorized = workflow.stage === "verified" && workflow.inspectionId === inspectionId;
+  const query = useSubmissionRecord(inspectionId, authorized && !restoring), pathname = usePathname(), router = useRouter();
   const additional = pathname.startsWith(`/inspection/${encodeURIComponent(inspectionId)}/additional-evidence/`);
   const editable = !additional && pathname !== inspectionRoutes.summary(inspectionId) && pathname !== inspectionRoutes.receipt(inspectionId);
   const locked = editable && isEditLocked(query.data ?? undefined);
-  useEffect(() => { if (locked) router.replace(isSubmitted(query.data ?? undefined) ? inspectionRoutes.receipt(inspectionId) : inspectionRoutes.summary(inspectionId)); }, [locked, query.data, router, inspectionId]);
+  useEffect(() => { if (authorized && locked) router.replace(isSubmitted(query.data ?? undefined) ? inspectionRoutes.receipt(inspectionId) : inspectionRoutes.summary(inspectionId)); }, [authorized, locked, query.data, router, inspectionId]);
+  if (restoring) return <main className="submission-loading" role="status">در حال بررسی هویت بازدید…</main>;
+  if (!authorized) return <main id="main-content" className="submission-recovery"><InlineAlert>برای مشاهده این بازدید، هویت خود را از مسیر کارگزاری تأیید کنید.</InlineAlert><Link href="/">تأیید هویت و ادامه</Link></main>;
   if (query.error) return <main id="main-content" className="p-5"><InlineAlert tone="destructive">{query.error.message}</InlineAlert><SecondaryButton onClick={() => void query.refetch()}>تلاش مجدد</SecondaryButton></main>;
   if (query.isPending || locked) return <main id="main-content" className="p-5" role="status">در حال خواندن وضعیت بازدید…</main>;
   return additional ? <AdditionalRouteGuard inspectionId={inspectionId}>{children}</AdditionalRouteGuard> : children;

@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { inspectionPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
 import { captureDatabase } from "../../src/lib/media/capture-data-store";
 import { photoNamespace } from "../../src/lib/media/photo-store";
-import { seedPhotos, enterPhotography } from "./photography-helpers";
+import { seedPhotos, enterPhotography, fixtureInspectionId } from "./photography-helpers";
 
 export async function mockRecorder(page: Page, unsupported = false) {
   await page.addInitScript(({ bytes, unsupported }) => {
@@ -28,8 +28,8 @@ export async function mockRecorder(page: Page, unsupported = false) {
   }, { bytes: [...readFileSync("tests/e2e/fixtures/walkaround.webm")], unsupported });
 }
 export async function packageWorkflow(page: Page, options: { photos?: number; kilometers?: number; video?: "accepted" | "draft" | "replacement" | "retake" } = {}) {
-  await page.goto("/"); await expect(page.getByRole("textbox",{name:"کد معرفی / کد ارجاع"})).toBeVisible(); await seedPhotos(page, options.photos ?? 12);
-  const namespace = photoNamespace("insp_demo", template.templateId, template.templateVersion);
+  await page.goto("/"); await seedPhotos(page, options.photos ?? 12);
+  const namespace = photoNamespace(await fixtureInspectionId(page), template.templateId, template.templateVersion);
   await page.evaluate(async ({ config, namespace, options, bytes }) => {
     const database = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open(config.name, config.version);

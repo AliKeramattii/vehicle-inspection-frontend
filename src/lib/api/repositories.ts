@@ -9,6 +9,7 @@ export interface AuthRepository {
   verifyOtp(input: OtpVerification): Promise<AuthSession>;
 }
 export interface InspectionRepository {
+  getTrackingCode?(inspectionId: string): Promise<string>;
   getInspection(id: string): Promise<Inspection>;
   getCapturePlan(inspectionId: string): Promise<CapturePlan>;
   recordConsent(inspectionId: string, input: ConsentInput): Promise<ConsentReceipt>;

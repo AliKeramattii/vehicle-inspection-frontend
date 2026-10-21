@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import { ApplicationLogo } from "@/components/layout/application-logo";
 import { vehicleHeroAssets } from "@/config/vehicle-assets";
 import { contrast, type SiteSettings } from "@/config/site-settings.schema";
+
+import { customerHaloVariables, readableBrandInk } from "@/config/theme-colors";
 
 /** Validated draft assets are resolved by the editor. This preview never publishes or changes evidence. */
 export function SettingsBrandPreview({ values, logo, hero }: {
@@ -18,7 +20,7 @@ export function SettingsBrandPreview({ values, logo, hero }: {
     <div className="settings-preview-caption">
       <strong>نمای مشتری</strong><span>پیش‌نمایش زنده</span>
     </div>
-    <div className="settings-preview-phone" style={{ background: values.theme.background, color: values.theme.onBackground }}>
+    <div className="settings-preview-phone" style={{...customerHaloVariables(values.theme),backgroundColor: values.theme.background,backgroundImage:"var(--brand-halo-image)",color: values.theme.onBackground} as CSSProperties}>
       <div className="settings-preview-brand">
         <ApplicationLogo width={30} />
         <span>
@@ -28,7 +30,7 @@ export function SettingsBrandPreview({ values, logo, hero }: {
         </span>
       </div>
       <div className="settings-preview-welcome">
-        <small>{values.identity.appTitle}</small>
+        <small style={{color:readableBrandInk(values.theme.accent??values.theme.primary,false)}}>{values.identity.appTitle}</small>
         <h3>بازدید آنلاین خودرو</h3><p>با راهنمای تصویری، قدم‌به‌قدم</p>
       </div>
       <div className="settings-preview-vehicle">

@@ -1,11 +1,15 @@
+import { verifiedFixtureInspectionId } from "./photography-helpers";
 import { chooseDemoLocation, demoLocationAddress } from "./location-helpers";
 import { expect, test, type Page } from "@playwright/test";
 
 async function location(page: Page, select = true) {
-  await page.goto("/");
-  await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
-  await page.getByRole("button", { name: "شروع بازدید" }).click();
-  await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
+  if(await verifiedFixtureInspectionId(page))await page.goto("/readiness");
+  else {
+   await page.goto("/");
+   await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
+   await page.getByRole("button", { name: "شروع بازدید" }).click();
+   await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
+  }
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "تأیید و ادامه" }).click();
@@ -117,12 +121,11 @@ test("location/vehicle controls remain usable at 320, 390 and 480 without overfl
   }
 });
 
-test("unverified direct visitors and unknown inspection IDs have bounded recovery states", async ({ page }) => {
-  await page.goto("/inspection/insp_demo/location");
-  await expect(page.getByRole("button", { name: "تأیید این موقعیت" })).toBeDisabled();
-  await page.goto("/inspection/insp_demo/vehicle");
-  await expect(page.getByRole("button", { name: "تأیید مشخصات و ادامه" })).toBeDisabled();
-  await page.goto("/inspection/missing/location");
-  await expect(page.locator(".identity-load-error").getByRole("alert")).toContainText("بازدید پیدا نشد.");
-  await expect(page.getByRole("button", { name: "تلاش دوباره" })).toBeEnabled();
+test("unverified direct visitors and unknown inspection IDs have bounded identity recovery", async ({ page }) => {
+  for(const route of ["/inspection/insp_demo/location","/inspection/insp_demo/vehicle","/inspection/missing/location"]){
+   await page.goto(route);await expect(page.getByText("برای مشاهده این بازدید، هویت خود را از مسیر کارگزاری تأیید کنید.")).toBeVisible();
+   await expect(page.getByRole("link",{name:"تأیید هویت و ادامه"})).toHaveAttribute("href","/");
+   await expect(page.locator(".leaflet-container,.vehicle-summary")).toHaveCount(0);await noOverflow(page);
+  }
+  await location(page);await page.goto("/inspection/missing/location");await expect(page.getByText("برای مشاهده این بازدید، هویت خود را از مسیر کارگزاری تأیید کنید.")).toBeVisible();
 });

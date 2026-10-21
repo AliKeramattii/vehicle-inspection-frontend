@@ -88,27 +88,15 @@ test("OTP rejects wrong digits, counts attempts, then resends when the countdown
   await expect(page.locator(".otp-countdown")).toContainText("۲:۰۰");
 });
 
-test("edit-number dialog validates, changes number, and restores input focus", async ({ page }) => {
-  await enterOtp(page);
-  const edit = page.getByRole("button", { name: "ویرایش شماره موبایل" });
-  await edit.click();
-  const dialog = page.getByRole("dialog", { name: "ویرایش شماره موبایل" });
-  const mobile = dialog.getByRole("textbox", { name: "شماره موبایل", exact: true });
-  await expect(mobile).toBeFocused();
-  await mobile.fill("123");
-  await dialog.getByRole("button", { name: "ذخیره و ارسال کد" }).click();
-  await expect(mobile).toHaveAttribute("aria-invalid", "true");
-  await mobile.fill("۰۹۳۵۱۲۳۴۵۶۷");
-  await dialog.getByRole("button", { name: "ذخیره و ارسال کد" }).click();
-  await expect(dialog).toHaveCount(0);
-  await expect(page.locator(".otp-masked-number")).toHaveText("۰۹۳۵•••۴۵۶۷");
-  await expect(page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" })).toBeFocused();
-  await edit.click();
-  await page.keyboard.press("Escape");
-  await expect(dialog).toHaveCount(0);
-  await expect(edit).toBeFocused();
-  await page.getByRole("link", { name: "بازگشت", exact: true }).click();
-  await expect(page).toHaveURL(/\/$/);
+test("source-owned phone is read-only and query parameters cannot change it", async ({ page }) => {
+ await page.goto("/?mobile=09351234567&phone=09351234567");
+ await page.getByRole("textbox",{name:"کد معرفی / کد ارجاع"}).fill("A4K9P2");
+ await page.getByRole("button",{name:"شروع بازدید"}).click();
+ await expect(page.locator(".otp-masked-number")).toHaveText("۰۹۱۲•••۴۵۶۷");
+ await expect(page.getByRole("button",{name:"ویرایش شماره موبایل"})).toHaveCount(0);
+ await expect(page.getByRole("textbox",{name:"شماره موبایل",exact:true})).toHaveCount(0);
+ await page.getByRole("textbox",{name:"کد تأیید پنج‌رقمی"}).fill("12345");
+ await expect(page).toHaveURL(/\/readiness$/);
 });
 
 test("direct OTP navigation has a recoverable missing-challenge state", async ({ page }) => {

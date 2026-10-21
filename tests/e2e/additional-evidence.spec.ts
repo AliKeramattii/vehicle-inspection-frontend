@@ -500,9 +500,8 @@ test("unrequested and stale evidence routes fail closed while normal editable ro
     page.getByText("درخواست فعال و معتبری برای این بازدید پیدا نشد."),
   ).toBeVisible();
   await page.goto("/inspection/other/additional-evidence/" + request.id);
-  await expect(
-    page.getByText("درخواست فعال و معتبری برای این بازدید پیدا نشد."),
-  ).toBeVisible();
+  await expect(page.getByText("برای مشاهده این بازدید، هویت خود را از مسیر کارگزاری تأیید کنید.")).toBeVisible();
+  await expect(page.locator("video,.additional-card")).toHaveCount(0);
   await page.goto("/inspection/insp_demo/capture/photo/odometer-on/review");
   await expect(page).toHaveURL(/\/submitted$/);
 });
@@ -533,12 +532,9 @@ test("submitted receipt without eligible request safely rejects direct request n
   page,
 }) => {
   await page.goto("/inspection/insp_demo/additional-evidence/nonexistent");
-  await expect(
-    page.getByText("درخواست فعال و معتبری برای این بازدید پیدا نشد."),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "بازگشت به وضعیت بازدید" }),
-  ).toHaveAttribute("href", "/inspection/insp_demo/review");
+  await expect(page.getByText("برای مشاهده این بازدید، هویت خود را از مسیر کارگزاری تأیید کنید.")).toBeVisible();
+  await expect(page.getByRole("link", {name:"تأیید هویت و ادامه"})).toHaveAttribute("href", "/");
+  await expect(page.locator("video,.additional-card")).toHaveCount(0);
 });
 test("supplemental request viewport stays bounded at all customer sizes", async ({
   page,

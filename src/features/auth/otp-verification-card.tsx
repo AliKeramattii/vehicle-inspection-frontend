@@ -1,26 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { OTPInput } from "@/components/ui/otp-input";
 import { Icon } from "@/components/ui/icon";
 import { InlineAlert } from "@/components/ui/status";
 import { SecondaryButton } from "@/components/ui/button";
 import { maskMobile, toPersianDigits, formatCountdown } from "@/lib/utils/persian";
 import { useOtpVerification } from "./use-otp-verification";
-import { PhoneNumberDialog } from "./phone-number-dialog";
+
 
 export function OtpVerificationCard() {
   const otp = useOtpVerification();
-  const [editing, setEditing] = useState(false);
-  const editButton = useRef<HTMLButtonElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const { workflow } = otp;
   const busy = otp.verification.isPending || otp.request.isPending;
   useEffect(() => {
-    if (!editing && !busy && (otp.request.isSuccess || otp.verification.isError)) input.current?.focus();
-  }, [editing, busy, otp.request.isSuccess, otp.verification.isError]);
-  function dismiss() { setEditing(false); requestAnimationFrame(() => editButton.current?.focus()); }
+    if (!busy && (otp.request.isSuccess || otp.verification.isError)) input.current?.focus();
+  }, [busy, otp.request.isSuccess, otp.verification.isError]);
   if (workflow.stage === "idle") return <section className="otp-panel otp-missing">
     <InlineAlert>برای دریافت کد تأیید، ابتدا کد معرفی خود را وارد کنید.</InlineAlert>
     <Link href="/" className="entry-return-link">بازگشت به شروع بازدید<Icon name="back" size={18} /></Link>
@@ -48,17 +45,10 @@ export function OtpVerificationCard() {
       {otp.secondsRemaining > 0 ? <p className="otp-countdown" aria-label={`ارسال مجدد تا ${formatCountdown(otp.secondsRemaining)}`}>
         ارسال مجدد تا <bdi dir="ltr">{formatCountdown(otp.secondsRemaining)}</bdi><Icon name="clock" size={19} />
       </p> : <SecondaryButton loading={otp.request.isPending} disabled={otp.verification.isPending}
-        onClick={() => otp.request.mutate(workflow.mobile)}>ارسال مجدد کد<Icon name="clock" size={19} /></SecondaryButton>}
+        onClick={() => otp.request.mutate()}>ارسال مجدد کد<Icon name="clock" size={19} /></SecondaryButton>}
       <p className="otp-attempts"><Icon name="shield" size={16} />{toPersianDigits(workflow.remainingAttempts)} بار فرصت باقی مانده است.</p>
-      {!editing && otp.request.isError && <InlineAlert tone="destructive">{otp.request.error.message}</InlineAlert>}
+      {otp.request.isError && <InlineAlert tone="destructive">{otp.request.error.message}</InlineAlert>}
     </div>
-    <button type="button" ref={editButton} className="otp-edit-number" disabled={busy}
-      onClick={() => { otp.request.reset(); setEditing(true); }}><Icon name="edit" size={19} />ویرایش شماره موبایل</button>
-    {editing && <PhoneNumberDialog mobile={workflow.mobile} pending={otp.request.isPending}
-      error={otp.request.isError ? otp.request.error.message : undefined} onDismiss={dismiss}
-      onSave={async (mobile) => {
-        try { await otp.request.mutateAsync(mobile); setEditing(false); }
-        catch { /* Query exposes repository errors in the dialog; keep it open for correction. */ }
-      }} />}
+    <p className="otp-source-identity"><Icon name="shield" size={18} />شماره معرفی‌شده کارگزاری در این برنامه قابل تغییر نیست.</p>
   </section>;
 }

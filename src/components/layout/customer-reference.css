@@ -1,11 +1,11 @@
 /* Supplied Green Halo direction, adapted to the existing customer shell and tenant tokens.
    Positive screen scoping deliberately excludes the frozen Location and operations UI. */
 .customer-reference-ui {
-  --customer-atmosphere: url("/assets/customer-reference/backgrounds/green-halo.svg");
-  --customer-panel-border: color-mix(in srgb, var(--color-primary) 12%, var(--color-border));
+  --customer-atmosphere: var(--brand-halo-override, url("/assets/customer-reference/backgrounds/green-halo.svg"));
+  --customer-panel-border: color-mix(in srgb, var(--brand-accent,var(--color-primary)) 12%, var(--color-border));
   --customer-panel-shadow: 0 8px 24px color-mix(in srgb, var(--color-ink) 4%, transparent);
 }
-:root[data-runtime-brand="custom"] .customer-reference-ui { --customer-atmosphere: none; }
+:root[data-runtime-brand="custom"] .customer-reference-ui { --customer-atmosphere: var(--brand-halo-image,none); }
 .customer-reference-ui > :is(.entry-screen,.preparation-screen,.vehicle-screen),
 .customer-reference-ui > .photography-screen:not(:has(.camera-screen)) {
   background-color: var(--color-background);

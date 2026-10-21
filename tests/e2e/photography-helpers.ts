@@ -1,11 +1,22 @@
+import { mockInitialInspectionId } from "../../src/features/identity/source-context";
 import { chooseDemoLocation } from "./location-helpers";
 import { expect, type Page } from "@playwright/test";
 import { inspectionPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
 import { photoDatabase, photoKey, photoNamespace } from "../../src/lib/media/photo-store";
 
 export const requirements = template.sections.flatMap((section) => section.photoRequirements);
+/** Fixtures use the same tenant/attempt identity as the mock source adapter, including verified returns. */
+export async function verifiedFixtureInspectionId(page:Page):Promise<string|undefined> {
+ return page.evaluate(()=>{if(location.origin==="null")return;return Object.values(sessionStorage).flatMap(raw=>{try{const s=JSON.parse(raw);return s?.mode==="mock"&&s.expiresAt>Date.now()&&typeof s.inspectionId==="string"?[s.inspectionId]:[];}catch{return [];}})[0];});
+}
+export async function fixtureInspectionId(page:Page):Promise<string> {
+ const current=await verifiedFixtureInspectionId(page);
+ if(typeof current==="string")return current;
+ const tenant=await page.evaluate(async()=>{const bootstrap=await(await fetch("/site-bootstrap.json")).json();return String(bootstrap.tenantId);});
+ return mockInitialInspectionId(tenant);
+}
 export async function seedPhotos(page: Page, count: number, retakeId?: string, draftId?: string) {
-  const namespace = photoNamespace("insp_demo", template.templateId, template.templateVersion);
+  const namespace = photoNamespace(await fixtureInspectionId(page), template.templateId, template.templateVersion);
   const photos = requirements.slice(0, count).map((photo) => ({ key: photoKey(namespace, photo.id), namespace, requirementId: photo.id, image: photo.sampleImage,
     status: photo.id === retakeId ? "retake-requested" : "captured" }));
   if (draftId && !photos.some((photo) => photo.requirementId === draftId)) photos.push({ key: photoKey(namespace, draftId), namespace, requirementId: draftId, image: `/assets/inspection-vehicle/photo-guides/${draftId}.webp`, status: "pending" });
@@ -33,17 +44,37 @@ export async function photography(page: Page, count = 0, retakeId?: string, draf
   await page.goto("/"); await seedPhotos(page, count, retakeId, draftId);
   await enterPhotography(page);
 }
-export async function enterPhotography(page: Page) {
-  await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
-  await page.getByRole("button", { name: "شروع بازدید" }).click();
-  await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
+export async function enterPhotography(page: Page, inspectionId?:string) {
+  inspectionId ??= await fixtureInspectionId(page);
+  // A verified return now restores its existing attempt instead of repeating OTP/consent.
+  const returning = await page.evaluate(id => Object.values(sessionStorage).some(raw => {
+    try { const session=JSON.parse(raw);return session?.mode==="mock"&&session.inspectionId===id&&session.expiresAt>Date.now(); } catch { return false; }
+  }),inspectionId);
+  async function existingCaptureReady(){
+    await page.goto(`/inspection/${encodeURIComponent(inspectionId!)}/capture`);
+    const progress=page.getByRole("progressbar"),setup=page.getByText("برای شروع عکاسی، موقعیت و مشخصات خودرو را تأیید کنید.");
+    await expect(progress.or(setup)).toBeVisible();return progress.isVisible();
+  }
+  if(returning){
+    if(await existingCaptureReady())return;
+    await page.goto("/readiness");
+  }else{
+    await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
+    await page.getByRole("button", { name: "شروع بازدید" }).click();
+    await page.getByRole("textbox", { name: "کد تأیید پنج‌رقمی" }).fill("12345");
+    await expect(page).not.toHaveURL(/\/verify$/);
+    if(!page.url().endsWith("/readiness")){
+      if(await existingCaptureReady())return;
+      await page.goto("/readiness");
+    }
+  }
   await page.getByRole("button", { name: "همه چیز آماده است" }).click();
   await page.getByRole("checkbox").check(); await page.getByRole("button", { name: "تأیید و ادامه" }).click();
   await expect(page).toHaveURL(/\/location$/);await expect(page.getByRole("button",{name:"تأیید این موقعیت"})).toBeVisible();
   await chooseDemoLocation(page);
   await page.getByRole("button", { name: "تأیید این موقعیت" }).click();
   await page.getByRole("button", { name: "تأیید مشخصات و ادامه" }).click();
-  await expect(page).toHaveURL(/\/inspection\/insp_demo\/capture$/);
+  await expect(page).toHaveURL(new RegExp("/inspection/"+inspectionId+"/capture$"));
   await expect(page.getByRole("progressbar")).toBeVisible();
 }
 export async function snapshotReady(page: Page) {

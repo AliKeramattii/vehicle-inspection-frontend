@@ -12,7 +12,7 @@ const viewports = [[320, 568], [360, 800], [390, 844], [430, 932], [768, 1024], 
 const roles = { landing: "landing", otp: "otp", readiness: "readiness", consent: "consent", introduction: "referral", summary: "referral", receipt: "submission" } as const;
 type Screen = keyof typeof roles;
 const actions: Record<Screen, string> = {
- landing: ".referral-panel .entry-primary-button", otp: ".otp-edit-number", readiness: ".preparation-actions button",
+ landing: ".referral-panel .entry-primary-button", otp: ".otp-panel input[name=otp]", readiness: ".preparation-actions button",
  consent: ".consent-actions button", introduction: ".identity-actions button", summary: ".submission-actions button", receipt: ".receipt-actions button",
 };
 const errors = new WeakMap<Page, string[]>();

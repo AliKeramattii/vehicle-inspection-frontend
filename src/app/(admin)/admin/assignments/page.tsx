@@ -1,1 +1,2 @@
-import {AssignmentPage} from "@/features/review-operations/assignment-page";export const metadata={title:"تنظیمات ارجاع پرونده‌ها"};export default function Page(){return <AssignmentPage/>;}
+import { Suspense } from "react";
+import {AssignmentPage} from "@/features/review-operations/assignment-page";export const metadata={title:"تنظیمات ارجاع پرونده‌ها"};export default function Page(){return <Suspense fallback={<p role="status">در حال خواندن فیلتر پرونده‌ها…</p>}><AssignmentPage/></Suspense>;}

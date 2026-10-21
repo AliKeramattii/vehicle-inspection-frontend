@@ -1,3 +1,4 @@
+import { fixtureInspectionId } from "./photography-helpers";
 import { expect, type Page } from "@playwright/test";
 import { uploadWorkflow, seedQueue, type UploadFixture } from "./upload-helpers";
 import { submissionDatabase } from "../../src/features/submission/submission-model";
@@ -14,7 +15,7 @@ export async function configureSubmission(page: Page, settings: SubmissionMockSe
 }
 export async function submissionWorkflow(page: Page, settings: SubmissionMockSettings = {}) {
   await uploadWorkflow(page, "complete"); await configureSubmission(page, settings);
-  await page.getByRole("button", { name: "ادامه به بررسی نهایی" }).click(); await expect(page).toHaveURL(/\/insp_demo\/review$/);
+  await page.getByRole("button", { name: "ادامه به بررسی نهایی" }).click(); await expect(page).toHaveURL(new RegExp("/"+await fixtureInspectionId(page)+"/review$"));
   await expect(page.getByRole("heading", { name: "آماده ارسال", exact: true })).toBeVisible();
 }
 export async function submissionRecord(page: Page) {

@@ -63,7 +63,7 @@ test("failed brokerage image falls back while preserving its frame",async({page}
 });
 for(const viewport of [{width:360,height:800},{width:390,height:844},{width:430,height:932}])test("brokerage customer workflow and viewport "+viewport.width,async({page},info)=>{
   test.skip(info.project.name!=="customer");await page.setViewportSize(viewport);await brokerage(page,"broker-b");await page.goto("/");
-  await enterPhotography(page);await expect(page).toHaveTitle(brokerageFixture("broker-b").identity.appTitle);await expect(page.locator(".vehicle-photo-controls")).toBeVisible();
+  await enterPhotography(page,"insp_mock_broker-b");await expect(page).toHaveTitle(brokerageFixture("broker-b").identity.appTitle);await expect(page.locator(".vehicle-photo-controls")).toBeVisible();
   const image=await page.locator(".vehicle-photo-scene .photography-image").boundingBox(),controls=await page.locator(".vehicle-photo-controls").boundingBox();
   expect(controls!.y).toBeGreaterThanOrEqual(image!.y+image!.height);await overflow(page);
 });
@@ -110,7 +110,7 @@ test("runtime title and favicon survive late route metadata",async({page},info)=
   await page.evaluate(()=>{document.title="Route metadata";document.querySelector<HTMLLinkElement>('link[rel="icon"]')!.href="/favicon.ico";});
   await expect(page).toHaveTitle(settings.identity.appTitle);
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href","/icons/security/shield.svg");
-  await enterPhotography(page);
+  await enterPhotography(page,"insp_mock_broker-a");
   await expect(page).toHaveTitle(settings.identity.appTitle);
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href","/icons/security/shield.svg");
 });

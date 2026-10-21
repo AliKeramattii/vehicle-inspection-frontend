@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
+import { createContext, useContext, useMemo, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -9,6 +9,8 @@ import { actors, type AdminActor, type AdminRole, type AdminWorkspace } from "./
 import { MockAdminRepository, type AdminRepository } from "./repository";
 import { IndexedDbAdminPersistence } from "./persistence";
 import { readMockRole, persistMockRole, subscribeMockRole } from "./mock-identity";
+import { useRuntimeSite } from "@/config/site-settings.provider";
+import { tenantWorkspaceKey } from "@/features/identity/source-context";
 type AdminContextValue = {
   actor: AdminActor; identity: AdminRole; setIdentity: (role: AdminRole) => void;
   repository: AdminRepository; workspace?: AdminWorkspace; loading: boolean; error: boolean;
@@ -17,13 +19,14 @@ type AdminContextValue = {
 };
 const Context = createContext<AdminContextValue | null>(null);
 export function AdminProvider({ children }: { children: ReactNode }) {
-  const [repository] = useState(() => new MockAdminRepository(new IndexedDbAdminPersistence()));
+  const site = useRuntimeSite();
+  const repository = useMemo(() => new MockAdminRepository(new IndexedDbAdminPersistence(tenantWorkspaceKey(site.bootstrap.tenantId))), [site.bootstrap.tenantId]);
   const storedIdentity = useSyncExternalStore(subscribeMockRole, readMockRole, () => null);
   const identity = storedIdentity ?? "platform-admin";
   const [dirty, setDirty] = useState(false);
   const [pending, setPending] = useState<(() => void) | null>(null);
   const router = useRouter(); const client = useQueryClient();
-  const query = useQuery({ queryKey: ["admin-workspace", identity], enabled: storedIdentity !== null, queryFn: () => repository.read(actors[identity]), refetchOnWindowFocus: true });
+  const query = useQuery({ queryKey: ["admin-workspace", site.contextKey, identity], enabled: storedIdentity !== null, queryFn: () => repository.read(actors[identity]), refetchOnWindowFocus: true });
   const actor = { ...actors[identity], role: query.data?.users.find(u => u.id === actors[identity].id)?.role ?? identity };
   useEffect(() => {
     if (!dirty) return;

@@ -1,5 +1,7 @@
 import type {InspectionLocation,Vehicle} from "@/types/domain";
-type Facts={inspectionId:string;location?:InspectionLocation;vehicle?:Vehicle};
+import type {ConsentReceipt} from "@/features/consent/consent-model";
+
+export type Facts={inspectionId:string;location?:InspectionLocation;vehicle?:Vehicle;consent?:ConsentReceipt};
 function open():Promise<IDBDatabase>{return new Promise((resolve,reject)=>{let abandoned=false;const request=indexedDB.open("inspection-confirmed-facts",1);request.onupgradeneeded=()=>request.result.createObjectStore("facts",{keyPath:"inspectionId"});request.onsuccess=()=>{if(abandoned){request.result.close();return;}request.result.onversionchange=()=>request.result.close();resolve(request.result);};request.onerror=()=>reject(new Error("ذخیره مشخصات بازدید ممکن نشد."));request.onblocked=()=>{abandoned=true;reject(new Error("صفحه‌های دیگر را ببندید و دوباره تلاش کنید."));};});}
 export async function readFacts(id:string):Promise<Facts|undefined>{
  if(typeof indexedDB==="undefined")return undefined;

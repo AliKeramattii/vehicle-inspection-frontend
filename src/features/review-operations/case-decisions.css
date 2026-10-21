@@ -1,0 +1,28 @@
+.review-case-decisions { display:grid; gap:12px; border-block-start:1px solid var(--color-border); padding-block-start:20px; }
+.review-case-decisions p { line-height:1.9; }
+.review-case-decisions label { display:grid; gap:8px; font-size:13px; }
+.review-case-decisions :is(button,select,summary) { min-height:44px; }
+.review-case-decisions textarea { min-height:88px; }
+.review-case-decisions details { border-block-start:1px solid var(--color-border); padding-block:10px; }
+.review-case-decisions details>summary { cursor:pointer; display:list-item; line-height:44px; font-weight:700; }
+.review-case-decisions details> :not(summary) { margin-block-start:12px; }
+.review-public-reason { white-space:pre-wrap; overflow-wrap:anywhere; }
+.review-field-task { padding:12px; border:1px solid var(--color-border); border-radius:12px; }
+.review-final-status { font-weight:700; }
+.review-revisions-dialog { width:min(1080px,95vw); max-width:1080px; }
+.review-revisions-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.review-revisions-grid .review-main-frame { min-height:240px; height:40dvh; }
+.review-revisions-grid small { display:block; overflow-wrap:anywhere; }
+@media(max-width:700px) { .review-revisions-grid { grid-template-columns:1fr; } }
+.operations-filter-bar { display:flex; gap:16px; align-items:end; flex-wrap:wrap; padding:16px; }
+.operations-filter-bar label { display:grid; gap:8px; font-size:13px; }
+.operations-filter-bar input,.operations-filter-bar select { min-height:44px; padding:8px 12px; border:1px solid var(--color-border); border-radius:8px; background:var(--color-surface); }
+.operations-metrics>a { color:inherit; text-decoration:none; display:grid; grid-template-columns:24px minmax(0,1fr); align-items:center; gap:8px; padding:20px; border:0; border-inline-end:1px solid var(--admin-border); border-block-end:1px solid var(--admin-border); border-radius:0; background:var(--admin-surface,var(--color-surface)); }
+.operations-metrics>a:focus-visible { outline:3px solid var(--admin-primary,#2563eb); outline-offset:2px; }
+
+.operations-metric-CHANGES_REQUESTED>svg,.operations-metric-FORWARD_FAILED>svg { color:var(--admin-warning-ink); }
+.operations-metric-REJECTED>svg { color:var(--admin-danger-ink,var(--admin-warning-ink)); }
+.operations-metric-REVIEW_APPROVED>svg { color:var(--admin-success-ink); }
+
+.settings-halo-control { display:grid; gap:8px; }
+.settings-halo-control input { min-height:44px; }

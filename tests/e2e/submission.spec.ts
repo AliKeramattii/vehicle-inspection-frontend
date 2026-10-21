@@ -83,9 +83,16 @@ test("submitted inspection locks direct editable routes and summary recovers exi
   }
   expect((await submissionRecord(page)).attemptCount).toBe(1);
 });
-test("receipt before submission safely redirects without claiming success", async ({ page }) => {
-  await page.goto("/inspection/insp_demo/submitted"); await expect(page).toHaveURL(/\/insp_demo\/review$/); await expect(page.getByText("برای بررسی نهایی، بازدید خود را از صفحه شروع باز کنید.")).toBeVisible(); await expect(page.getByText("بازدید با موفقیت ارسال شد")).toHaveCount(0);
+test("receipt before submission protects identity and never claims success", async ({ page }) => {
+  await page.goto("/inspection/insp_demo/submitted");
+  await expect(page.getByText("برای مشاهده این بازدید، هویت خود را از مسیر کارگزاری تأیید کنید.")).toBeVisible();
+  await expect(page.getByText("بازدید با موفقیت ارسال شد")).toHaveCount(0);
+  await page.getByRole("link",{name:"تأیید هویت و ادامه"}).click();
+  await page.getByLabel("کد معرفی / کد ارجاع").fill("A4K9P2");await page.getByRole("button",{name:"شروع بازدید"}).click();await page.getByLabel("کد تأیید پنج‌رقمی").fill("12345");await expect(page).toHaveURL(/readiness$/);
+  await page.goto("/inspection/insp_demo/submitted");await expect(page).toHaveURL(/\/insp_demo\/review$/);
+  await expect(page.getByRole("button",{name:"ارسال برای بررسی",exact:true})).toBeDisabled();await expect(page.getByText("بازدید با موفقیت ارسال شد")).toHaveCount(0);
 });
+
 test("ready summary edit links reuse existing odometer/video/photo flows", async ({ page }) => {
   await submissionWorkflow(page); await page.getByRole("link", { name: "ویرایش کیلومتر فعلی" }).click(); await expect(page).toHaveURL(/odometer-on\/review$/); await expect(page.getByLabel("کیلومتر فعلی")).toBeVisible();
   await page.goBack(); await page.getByRole("link", { name: "مشاهده ویدیوی ۳۶۰ درجه" }).click(); await expect(page.locator("video[controls]")).toBeVisible(); await expect(page.locator("video")).not.toHaveAttribute("autoplay", "");

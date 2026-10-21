@@ -119,7 +119,7 @@ test("semantic status, tables, errors and theme system preference remain distinc
   await page.goto("/admin/assignments"); await expect(page.getByRole("table", { name: "ظرفیت کارشناسان", exact: true })).toBeVisible();
   for (const dark of [false, true]) { await page.getByRole("switch", { name: "پوسته تیره" }).setChecked(dark); await readable(page); }
   await page.goto("/admin");
-  const warning = page.locator('[data-status="needs-more-evidence"] svg'), success = page.locator('[data-status="review-complete"] svg');
+  const warning = page.locator('.operations-metric-CHANGES_REQUESTED>svg'), success = page.locator('.operations-metric-REVIEW_APPROVED>svg');
   await expect(warning).toHaveCSS("color", await semanticColor(page, "--admin-warning-ink", ".admin-root"));
   await expect(success).toHaveCSS("color", await semanticColor(page, "--admin-success-ink", ".admin-root"));
   await page.emulateMedia({ colorScheme: "light" }); await page.getByRole("button", { name: "استفاده از پوسته دستگاه" }).click();

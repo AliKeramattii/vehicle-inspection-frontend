@@ -12,5 +12,5 @@ export async function readInspectionSummary(id: string, repository: InspectionRe
   const capture = await readUploadPackage(id, namespace, template);
   const jobs = await indexedDBUploadQueue.list();
   // Future API adapter supplies the inspection reference; mocks use the same existing identity.
-  return deriveInspectionSummary(inspection, id === mockInspectionId ? mockInspectionReference : id, template, capture, jobs);
+  return deriveInspectionSummary(inspection, repository.getTrackingCode ? await repository.getTrackingCode(id) : id === mockInspectionId ? mockInspectionReference : id, template, capture, jobs);
 }

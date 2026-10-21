@@ -1,6 +1,10 @@
+import { verifiedFixtureInspectionId } from "./photography-helpers";
 import { expect, test, type Page } from "@playwright/test";
 
 async function verifyReferral(page: Page) {
+  if(await verifiedFixtureInspectionId(page)){
+   await page.goto("/readiness");await expect(page.getByRole("button",{name:"همه چیز آماده است"})).toBeEnabled();return;
+  }
   await page.goto("/");
   await page.getByRole("textbox", { name: "کد معرفی / کد ارجاع" }).fill("A4K9P2");
   await page.getByRole("button", { name: "شروع بازدید" }).click();

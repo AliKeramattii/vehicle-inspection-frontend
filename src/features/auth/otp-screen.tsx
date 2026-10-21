@@ -1,3 +1,4 @@
+import "@/features/inspection-status/customer-status.css";
 import Link from "next/link";
 import { CustomerHeroArtwork } from "@/components/layout/customer-hero-artwork";
 import { EntryBranding } from "@/components/layout/entry-branding";

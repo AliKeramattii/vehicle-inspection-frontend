@@ -16,6 +16,7 @@ import { NativeDialog } from "@/components/ui/native-dialog";
 import { SiteSettingsFields,settingTabs } from "./site-settings-fields";
 import { SettingsNavigation, settingsDescriptions } from "./settings-navigation";
 import "./site-settings.css";
+import { withVisualDefaults, visualThemeDefaults } from "@/config/theme-colors";
 import { SettingsBrandPreview } from "./settings-brand-preview";
 import "./settings-redesign.css";
 export function SiteSettingsPage() {
@@ -29,7 +30,7 @@ export function SiteSettingsPage() {
 }
 function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repository:SiteSettingsRepository;reload:()=>Promise<SettingsWorkspace>}) {
   const site=useRuntimeSite(),{actor,setDirty,workspace,confirmAction}=useAdmin();
-  const form=useForm<SiteSettings>({resolver:zodResolver(siteSettingsSchema),defaultValues:state.draft});
+  const form=useForm<SiteSettings>({resolver:zodResolver(siteSettingsSchema),defaultValues:{...state.draft,theme:withVisualDefaults(state.draft.theme)}});
   const values=useWatch({control:form.control}) as SiteSettings;
   const[tab,setTab]=useState<typeof settingTabs[number]>("هویت کارگزاری");
   const[busy,setBusy]=useState(false),[message,setMessage]=useState(""),[error,setError]=useState("");
@@ -39,13 +40,13 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
   useEffect(()=>{setDirty(dirty);return()=>setDirty(false);},[dirty,setDirty]);
   async function apply(operation:()=>Promise<SettingsWorkspace>,notice:string) {
     setBusy(true);setError("");setMessage("");
-    try{const next=await operation();setRevision(next.revision);form.reset(next.draft);setMessage(notice);await reload();return true;}
+    try{const next=await operation();setRevision(next.revision);form.reset({...next.draft,theme:withVisualDefaults(next.draft.theme)});setMessage(notice);await reload();return true;}
     catch(e){setError(e instanceof Error&&!(e instanceof DOMException)?e.message:"ذخیره انجام نشد. تغییرات شما محفوظ است.");return false;}
     finally{setBusy(false);}
   }
   async function reloadLatest() {
     setBusy(true);setMessage("");
-    try {const latest=await reload();setRevision(latest.revision);form.reset(latest.draft);setError("");setMessage("نسخه تازه بارگذاری شد.");}
+    try {const latest=await reload();setRevision(latest.revision);form.reset({...latest.draft,theme:withVisualDefaults(latest.draft.theme)});setError("");setMessage("نسخه تازه بارگذاری شد.");}
     catch {setDirty(form.formState.isDirty);setError("خواندن نسخه تازه ممکن نشد. تغییرات شما محفوظ است؛ دوباره تلاش کنید.");}
     finally {setBusy(false);}
   }
@@ -76,6 +77,7 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
             const [id,version]=JSON.parse(event.target.value) as [string,number];form.setValue("application.template",{id,version},{shouldDirty:true});
           }}>{candidates.map(c=><option key={c.id+":"+c.version} value={JSON.stringify([c.id,c.version])}>{c.title} / نسخه {persian(c.version)}</option>)}</select></label>}
         </fieldset>
+        {tab==="رنگ‌بندی"&&<SecondaryButton type="button" disabled={!canEdit||busy} onClick={()=>form.setValue("theme",{...visualThemeDefaults},{shouldDirty:true,shouldValidate:true})}>بازنشانی رنگ‌ها و هاله به پیش‌فرض</SecondaryButton>}
         <SettingsBrandPreview values={values} logo={resolvedLogo.url} hero={resolvedHero.url}/>
         {(errors.length>0)&&<InlineAlert tone="destructive"><p>تنظیمات معتبر نیست. عنوان، رنگ‌ها و نشانی تصاویر را بررسی کنید.</p>{Object.entries(form.formState.errors.theme??{}).map(([key,value])=><p key={key}>{typeof value==="object"&&value&&"message" in value?String(value.message):""}</p>)}</InlineAlert>}
         {error&&<InlineAlert tone="destructive">{error}<button type="button" className="admin-text-action" disabled={busy} onClick={()=>confirmAction(()=>void reloadLatest())}>بارگذاری نسخه تازه</button></InlineAlert>}

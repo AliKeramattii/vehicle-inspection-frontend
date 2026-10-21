@@ -43,5 +43,5 @@ describe("refinement boundaries",()=>{
   expect((await repository.read(actor)).cases[0].summary.jobs[0].revision).toBe("r1");
   expect((await repository.read({...actor,id:"other"})).cases).toHaveLength(0);
  });
- it("keeps approved decisions separate from upload and records history",async()=>{const repository=new ReviewRepository(new MemoryReviewPersistence());await repository.importSubmitted([reviewCase()]);await repository.assign(admin,"case-1","reviewer-demo");await repository.decide(actor,"case-1",photo.id,"r1","approved");const saved=(await repository.read(actor)).cases[0];expect(saved.status).toBe("review-complete");expect(saved.summary.jobs[0].verification).toBe("processing");expect(saved.decisions[0].decision).toBe("approved");});
+ it("keeps approved decisions separate from upload and records history",async()=>{const repository=new ReviewRepository(new MemoryReviewPersistence());await repository.importSubmitted([reviewCase()]);await repository.assign(admin,"case-1","reviewer-demo");await repository.decide(actor,"case-1",photo.id,"r1","approved");const saved=(await repository.read(actor)).cases[0];expect(saved.status).toBe("in-review");expect(saved.finalDecision).toBeUndefined();expect(saved.summary.jobs[0].verification).toBe("processing");expect(saved.decisions[0].decision).toBe("approved");});
 });

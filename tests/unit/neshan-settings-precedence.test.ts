@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { defaultSiteSettings } from "@/config/site-settings.defaults";
 import { MemorySettingsPersistence, SiteSettingsRepository } from "@/config/site-settings.repository";
-import type { SiteBootstrap } from "@/config/site-settings.schema";
+import type { SiteBootstrap, SiteSettings } from "@/config/site-settings.schema";
 import { actors } from "@/features/admin/model";
 const bootstrap: SiteBootstrap = {schemaVersion: 1, tenantId: "demo", apiBaseUrl: "/api", siteSettingsEndpoint: "/api/public/site-settings", settingsSource: "api"};
 const origin = "http://localhost:3114", actor = actors["platform-admin"];
@@ -12,6 +12,10 @@ function fixture() {
   runtime.application.locationMap!.reverseGeocoding = "api";
   return {storage, factory, runtime, stored: new SiteSettingsRepository(storage, "tenant", {...bootstrap, settingsSource: "mock"}, origin, factory),
     live: new SiteSettingsRepository(storage, "tenant", bootstrap, origin, runtime)};
+}
+// Seed historical/deployment-owned map data directly. Brokerage Admin save may no longer edit map configuration.
+async function deploymentDraft(f:ReturnType<typeof fixture>, settings:SiteSettings) {
+ return f.storage.transact("tenant",()=>{throw new Error("Fixture not initialized");},state=>{state.draft=structuredClone(settings);state.revision++;return state;});
 }
 function enablePreview() { vi.stubEnv("NODE_ENV", "development"); vi.stubEnv("NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW", "1"); }
 afterEach(() => vi.unstubAllEnvs());
@@ -34,16 +38,16 @@ describe("development runtime map and existing Admin publication", () => {
     const confirmed = await admin.publish(actor, changed.revision);
     expect(confirmed.published.application.locationMap).toEqual(f.runtime.application.locationMap);
   });
-  it("preserves an explicit published map key and all Admin map choices", async () => {
+  it("preserves an explicit published deployment key and historical map choices", async () => {
     enablePreview(); const f = fixture(), initial = await f.stored.read();
     const changed = {...initial.draft, application: {...initial.draft.application, locationMap: {...initial.draft.application.locationMap!, webMapKey: "web.admin-fixture", mapType: "standard-night" as const}}};
-    const saved = await f.stored.save(actor, initial.revision, changed); await f.stored.publish(actor, saved.revision);
+    const saved = await deploymentDraft(f, changed); await f.stored.publish(actor, saved.revision);
     expect((await f.live.read()).published.application.locationMap).toEqual((await f.stored.read()).published.application.locationMap);
   });
   it("a saved map draft cannot hide a runtime key from the published customer view", async () => {
     enablePreview(); const f = fixture(), initial = await f.stored.read();
     const draftMap = {...initial.draft.application.locationMap!, webMapKey: "web.unpublished-draft", mapType: "standard-night" as const};
-    const saved = await f.stored.save(actor, initial.revision, {...initial.draft, application: {...initial.draft.application, locationMap: draftMap}});
+    const saved = await deploymentDraft(f, {...initial.draft, application: {...initial.draft.application, locationMap: draftMap}});
     const live = await f.live.read();
     expect(live.published.application.locationMap).toEqual(f.runtime.application.locationMap);
     expect(live.draft.application.locationMap).toEqual(draftMap);
@@ -52,7 +56,7 @@ describe("development runtime map and existing Admin publication", () => {
   it("repairs a partial missing-key publication while preserving its viewport and style without rewriting history", async () => {
     enablePreview(); const f = fixture(), initial = await f.stored.read();
     const partial = {...initial.draft.application.locationMap!, reverseGeocoding: "api" as const, mapType: "standard-night" as const, initialViewport: {latitude: 36, longitude: 52, zoom: 14}};
-    const saved = await f.stored.save(actor, initial.revision, {...initial.draft, application: {...initial.draft.application, locationMap: partial}});
+    const saved = await deploymentDraft(f, {...initial.draft, application: {...initial.draft.application, locationMap: partial}});
     const published = await f.stored.publish(actor, saved.revision), live = await f.live.read();
     expect(live.published.application.locationMap).toEqual({...partial, webMapKey: f.runtime.application.locationMap!.webMapKey});
     expect(live.history).toEqual(published.history); expect(live.audit).toEqual(published.audit);
@@ -61,14 +65,14 @@ describe("development runtime map and existing Admin publication", () => {
   it("uses the matching runtime geocoder profile when filling a missing key", async () => {
     enablePreview(); const f = fixture(), initial = await f.stored.read();
     const partial = {...initial.draft.application.locationMap!, reverseGeocoding: "mock" as const};
-    const saved = await f.stored.save(actor, initial.revision, {...initial.draft, application: {...initial.draft.application, locationMap: partial}});
+    const saved = await deploymentDraft(f, {...initial.draft, application: {...initial.draft.application, locationMap: partial}});
     await f.stored.publish(actor, saved.revision);
     expect((await f.live.read()).published.application.locationMap).toMatchObject({webMapKey: f.runtime.application.locationMap!.webMapKey, reverseGeocoding: "api"});
   });
   it("preserves an explicitly disabled map, and never borrows a disabled runtime map's key", async () => {
     enablePreview(); const f = fixture(), initial = await f.stored.read();
     const disabled = {...initial.draft.application.locationMap!, enabled: false};
-    const saved = await f.stored.save(actor, initial.revision, {...initial.draft, application: {...initial.draft.application, locationMap: disabled}});
+    const saved = await deploymentDraft(f, {...initial.draft, application: {...initial.draft.application, locationMap: disabled}});
     await f.stored.publish(actor, saved.revision); expect((await f.live.read()).published.application.locationMap).toEqual(disabled);
     const other = fixture(); await other.stored.read(); other.runtime.application.locationMap!.enabled = false;
     expect((await other.live.read()).published.application.locationMap!.webMapKey).toBeNull();

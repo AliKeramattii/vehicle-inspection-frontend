@@ -91,7 +91,7 @@ test("admin assignment and exact reviewer rejection reuse the scoped customer re
  await page.goto("/reviewer");await expect(page.getByRole("link",{name:"مشاهده پرونده"})).toBeVisible();await screenshot(page,"reviewer-queue");
  await page.getByRole("link",{name:"مشاهده پرونده"}).click();await expect(page.locator(".review-evidence-media")).toBeVisible();
  for(const [width,height] of [[1440,960],[1280,800],[1024,768]]){await page.setViewportSize({width,height});await viewport(page);await screenshot(page,"reviewer-workspace-"+width);}
- await page.getByLabel("دلیل درخواست ثبت مجدد").fill("پلاک خوانا نیست.");await page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true}).click();await expect(page.getByText("نیاز به مدرک تکمیلی",{exact:true})).toBeVisible();
+ await page.getByLabel("دلیل درخواست ثبت مجدد").fill("پلاک خوانا نیست.");await page.getByRole("button",{name:"درخواست ثبت مجدد",exact:true}).click();await expect(page.getByText("نیاز به اصلاح",{exact:true})).toBeVisible();
  const request=await page.evaluate(async()=>{const r=indexedDB.open("inspection-evidence-requests",1),db=await new Promise<IDBDatabase>(ok=>r.onsuccess=()=>ok(r.result));const rows=await new Promise<{id:string;items:{requirementId:string;reviewerReason:string}[]}[]>(ok=>{const tx=db.transaction("requests"),read=tx.objectStore("requests").getAll();tx.oncomplete=()=>ok(read.result);});db.close();return rows[0];});
  expect(request.items).toHaveLength(1);expect(request.items[0].reviewerReason).toBe("پلاک خوانا نیست.");
  await page.getByRole("combobox",{name:"کارشناس نمونه"}).selectOption("reviewer-sara");await expect(page.getByText("این پرونده در صف شما نیست.")).toBeVisible();

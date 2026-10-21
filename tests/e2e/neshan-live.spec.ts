@@ -180,11 +180,11 @@ for (const mode of ["factory", "partial"] as const) test("persisted " + mode + "
   await page.setViewportSize({ width: 1440, height: 960 });
   await page.goto("/admin/site-settings");
   await page.getByRole("tab", { name: "اتصال API", exact: true }).click();
-  // Compare in memory; never put credential-bearing expected/actual values in reporter output.
-  const keyField = page.getByLabel("کلید عمومی وب نقشه نشان", { exact: true });
-  await keyField.evaluate(input => { (input as HTMLInputElement).type = "password"; }); // redact failure-context snapshots in this test only
-  expect(await keyField.inputValue() === runtime.application.locationMap.webMapKey).toBe(true);
+  // Brokerage settings expose configuration presence, never an editable credential.
+  await expect(page.getByLabel("کلید عمومی وب نقشه نشان", {exact:true})).toHaveCount(0);
+  await expect(page.getByText("کلید عمومی وب: پیکربندی شده", {exact:true})).toBeVisible();
   await expect(page.locator('select[name="application.locationMap.reverseGeocoding"]')).toHaveValue("api");
+  await expect(page.locator('select[name="application.locationMap.reverseGeocoding"]')).toBeDisabled();
   await page.getByRole("tab", { name: "هویت کارگزاری", exact: true }).click();
   await expect(page.getByLabel("عنوان اپلیکیشن", { exact: true })).toHaveValue("پیش‌نویس کارگزاری محفوظ");
   expect(await page.evaluate(async snapshot => {

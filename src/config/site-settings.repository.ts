@@ -37,7 +37,7 @@ export class SiteSettingsRepository {
     const result = structuredClone(state);
     const liveDevelopment = process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW === "1" &&
       this.bootstrap.settingsSource === "api" && this.initial.tenantId === this.bootstrap.tenantId;
-    const approvedSeedTheme = Object.entries(defaultThemeColors).every(([key, value]) => this.initial.theme[key as keyof SiteSettings["theme"]].toLowerCase() === value);
+    const approvedSeedTheme = Object.entries(defaultThemeColors).every(([key, value]) => this.initial.theme[key as keyof typeof defaultThemeColors].toLowerCase() === value);
     // Only an untouched seeded workspace adopts the new factory default in its view.
     // Published/edited tenant choices and immutable history remain byte-for-byte intact.
     if ((this.bootstrap.settingsSource === "mock" || (liveDevelopment && approvedSeedTheme)) && this.bootstrap.tenantId === "demo" && state.revision === 1 && state.audit.length === 0 && state.history.length === 1 && state.published.version === 1 &&
@@ -66,6 +66,11 @@ export class SiteSettingsRepository {
     this.authorize(actor);const valid=this.validate(settings);
     return this.storage.transact(this.key,this.seed,state=> {
       if(state.revision!==revision) throw new Error("تنظیمات در پنجره دیگری تغییر کرده است. نسخه تازه را بارگذاری کنید.");
+      const controlledMap = (stored:SiteSettings["application"]["locationMap"]) => {
+       const map=stored??defaultLocationMap(), runtime=this.initial.application.locationMap;
+       return process.env.NODE_ENV==="development"&&process.env.NEXT_PUBLIC_LOCAL_SETTINGS_PREVIEW==="1"&&this.bootstrap.settingsSource==="api"&&runtime?.enabled&&runtime.webMapKey&&map.enabled&&map.webMapKey===null ? {...map,webMapKey:runtime.webMapKey,reverseGeocoding:runtime.reverseGeocoding} : map;
+      };
+      if(JSON.stringify(controlledMap(state.draft.application.locationMap))!==JSON.stringify(valid.application.locationMap??defaultLocationMap()))throw new Error("تنظیمات نشان به‌صورت مرکزی مدیریت می‌شوند و در تنظیمات برند قابل تغییر نیستند.");
       state.draft={...valid,version:state.published.version,publishedAt:state.published.publishedAt};state.revision++;
       state.audit.unshift({actor:actor.name,action:"ذخیره پیش‌نویس",at:this.now()});return state;
     });
