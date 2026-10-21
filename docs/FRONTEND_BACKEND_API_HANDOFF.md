@@ -8,7 +8,7 @@ These are **proposed contract categories**, not confirmed API URLs or implemente
 
 | Category | Input / result | Ownership |
 | --- | --- | --- |
-| Trusted customer source/session | Tenant/subject/source-owned mobile, expiry/verification policy | Brokerage authentication + ASP.NET |
+| Trusted customer source/session | Tenant/subject/sourceRequestId/source-owned mobile, expiry/verification policy | Brokerage authentication + ASP.NET |
 | Staff session/permissions | `StaffSession` backend-session projection | Brokerage authentication + ASP.NET |
 | Current authorized inspection | Existing ID/tracking/lifecycle/version; safe current attempt | Tenant/subject scoped server query |
 | Customer status | `InspectionStatusEnvelope` plus exact correction tasks; no internal notes | Server-authoritative after submission |
@@ -39,3 +39,5 @@ Brokerage destination and credentials are deployment/tenant controlled. Browser 
 ## Current verification limits
 
 The browser implementation tests mock source context/OTP, tenant-keyed IndexedDB workspaces, exact requests, status projections, public reasons/private notes, final decision separation and halo publication. It does not prove server authentication, SMS delivery, multi-user transactional safety or brokerage receipt. Neshan remains the existing real authorized map/service boundary; no map redesign or key migration belongs to this phase.
+
+Current pre-API consolidation: see [FRONTEND_API_REQUIREMENTS.md](FRONTEND_API_REQUIREMENTS.md), [INSPECTION_STATE_MACHINE.md](INSPECTION_STATE_MACHINE.md) and [PRE_API_FINAL_READINESS_REPORT.md](PRE_API_FINAL_READINESS_REPORT.md). These supplement the existing mock boundaries; they do not implement production services.

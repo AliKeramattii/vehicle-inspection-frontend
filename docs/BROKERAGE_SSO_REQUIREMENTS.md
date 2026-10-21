@@ -16,8 +16,10 @@ An alternative is a short-lived single-use opaque ticket from the brokerage, exc
 
 Authenticated context: authority=backend-session, tenantId, subjectId, role (mapped to existing platform-admin/reviewer/template-editor/viewer), explicit permissions, expiresAt. No bearer token is required in this frontend domain model. `staffDestination` resolves authorized Reviewer/Admin destinations; server must still enforce every operation and media request. A Reviewer has decision permission only for assigned inspections. Site Admin settings do not imply Reviewer decision rights.
 
-Customer context: authority=brokerage-session, tenantId, subjectId, source-owned mobile and explicit OTP/phone-verification policy. Brokerage/inspection association must come from server session, not a URL override. Preserve the number as read-only in the app.
+Customer context: authority=brokerage-session, tenantId, subjectId, sourceRequestId, source-owned mobile and explicit OTP/phone-verification policy. Brokerage/inspection association must come from server session, not a URL override. Preserve the number as read-only in the app.
 
 ## Session/API failure policy to agree
 
 401/expired: stop privileged mutations and return through approved source authentication without deleting durable local captures. 403: no role/assignment grant; show safe access recovery. Tenant mismatch: fail closed. 409: reload versioned decision/session data. Define cookie Secure/HttpOnly/SameSite, CSRF protection and CORS/origin policies for the actual deployment. SSO must work without a required production Next.js/Node server. Neshan central service credentials remain a separate server-owned concern.
+
+Current pre-API consolidation: see [FRONTEND_API_REQUIREMENTS.md](FRONTEND_API_REQUIREMENTS.md), [INSPECTION_STATE_MACHINE.md](INSPECTION_STATE_MACHINE.md) and [PRE_API_FINAL_READINESS_REPORT.md](PRE_API_FINAL_READINESS_REPORT.md). These supplement the existing mock boundaries; they do not implement production services.

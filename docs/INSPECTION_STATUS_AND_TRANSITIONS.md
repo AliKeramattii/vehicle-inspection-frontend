@@ -27,10 +27,12 @@ The frontend exposes no forwarding button that pretends a server delivered evide
 
 ## Return and persistence
 
-`inspection-lifecycle` IndexedDB v1 stores metadata and current inspection index keyed by tenant/subject. Staff workspaces use tenant-specific records, preserving the legacy demo `current` key. Customer access requires the current verified mock session and matching inspection ID; a tracking string or private route alone does not authorize access. Auth restoration is a scoped, expiring mock-session convenience, not a substitute for future server sessions. No new backend entity is mirrored into Zustand; only the existing transient auth workflow remains there.
+`inspection-lifecycle` IndexedDB v1 stores metadata and current inspection index keyed by tenant/subject/sourceRequestId (legacy default keys preserved). Staff workspaces use tenant-specific records, preserving the legacy demo `current` key. Customer access requires the current verified mock session and matching inspection ID; a tracking string or private route alone does not authorize access. Auth restoration is a scoped, expiring mock-session convenience, not a substitute for future server sessions. No new backend entity is mirrored into Zustand; only the existing transient auth workflow remains there.
 
 Safe resume paths cannot change origins or inspections. Review/status queries include runtime deployment context. Focus/navigation re-reads status without aggressive polling. Media and accepted replacements retain existing durable stores. A rejected attempt's previous blobs are never copied into the new attempt.
 
 ## Known mock limits
 
 Separate production deployments require server-enforced authorization, tenant databases/scoping, concurrency/version control, notification delivery, new-attempt transactions, secure media retrieval and forwarding outbox recovery. Browser mock workspaces are not a multi-user security system. Previous evidence can be compared where its durable local namespace still exists; missing old media is disclosed rather than fabricated.
+
+Current pre-API consolidation: see [FRONTEND_API_REQUIREMENTS.md](FRONTEND_API_REQUIREMENTS.md), [INSPECTION_STATE_MACHINE.md](INSPECTION_STATE_MACHINE.md) and [PRE_API_FINAL_READINESS_REPORT.md](PRE_API_FINAL_READINESS_REPORT.md). These supplement the existing mock boundaries; they do not implement production services.

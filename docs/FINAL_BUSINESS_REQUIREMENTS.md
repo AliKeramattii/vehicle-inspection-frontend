@@ -6,9 +6,9 @@ This canonical Next.js frontend has explicit local mock repositories, durable In
 
 ## Customer identity and tracking
 
-`CustomerSourceAdapter` supplies tenant, subject and mobile. The mock supplies the established sample number; URL phone/role/tenant parameters are never identity. OTP remains in use. The customer sees a masked, read-only phone; resend uses the same identity. A matching prior successful mock OTP session can be restored in that tab for 30 minutes; IndexedDB data alone never grants entry. Closing the tab or expiration requires the existing mock OTP again, followed by restoration of the same inspection. This is test convenience, not production authentication.
+`CustomerSourceAdapter` supplies tenant, subject, sourceRequestId and mobile. The mock supplies the established sample number; URL phone/role/tenant parameters are never identity. OTP remains in use. The customer sees a masked, read-only phone; resend uses the same identity. A matching prior successful mock OTP session can be restored in that tab for 30 minutes; IndexedDB data alone never grants entry. Closing the tab or expiration requires the existing mock OTP again, followed by restoration of the same inspection. This is test convenience, not production authentication.
 
-`LifecycleRepository` keeps a tenant/subject index to the current inspection. It preserves `insp_demo` / `BDI-8F31K2` and issues explicitly `MOCK-` codes for local new attempts. Production tracking must be unique, backend-issued and searchable only by authorized staff. Receipt copy does not grant public access to records or media.
+`LifecycleRepository` keeps a tenant/subject/sourceRequestId index (legacy default keys preserved) to the current inspection. It preserves `insp_demo` / `BDI-8F31K2` and issues explicitly `MOCK-` codes for local new attempts. Production tracking must be unique, backend-issued and searchable only by authorized staff. Receipt copy does not grant public access to records or media.
 
 ## Capture and corrections
 
@@ -33,3 +33,5 @@ Neshan configuration is centrally owned across brokerages. Site Admin sees confi
 ## Forwarding and notifications
 
 Approval, delivery pending, delivery failure and acknowledged delivery are distinct. Only backend-confirmed acknowledgement ID and time may justify `FORWARDED`. The frontend never transfers private media to arbitrary brokerage URLs. Backend owns destination allowlists, credentials, idempotency, retries and delivery audit. Optional notification events carry customer-safe information; status remains available through authorized entry without depending on SMS. No notification gateway runs in this frontend.
+
+Current pre-API consolidation: see [FRONTEND_API_REQUIREMENTS.md](FRONTEND_API_REQUIREMENTS.md), [INSPECTION_STATE_MACHINE.md](INSPECTION_STATE_MACHINE.md) and [PRE_API_FINAL_READINESS_REPORT.md](PRE_API_FINAL_READINESS_REPORT.md). These supplement the existing mock boundaries; they do not implement production services.
