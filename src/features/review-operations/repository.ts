@@ -10,7 +10,7 @@ import {indexedDBUploadQueue} from "@/features/upload/queue-repository";
 import {latestSubmittedRevisions} from "./review-revisions";
 import type {UploadJob} from "@/features/upload/upload-model";
 import {photoNamespace} from "@/lib/media/photo-store";
-import {inspectionPhotographyTemplate} from "@/features/photography/inspection-template";
+import {knownPhotographyTemplates} from "@/features/photography/inspection-template";
 import {assertAdmin,assertOwnCase,assignCase,autoAssign,currentEvidence,decisionKey,type OperationsActor,type ReviewCase,type ReviewWorkspace} from "./model";
 import {IndexedDbReviewPersistence,type ReviewPersistence} from "./persistence";
 export class ReviewRepository{
@@ -110,7 +110,7 @@ export async function synchronizeSubmittedCases(tenantId="demo",repository=revie
  const records=await new Promise<SubmissionRecord[]>((resolve,reject)=>{const tx=db.transaction(submissionDatabase.records),read=tx.objectStore(submissionDatabase.records).getAll();tx.oncomplete=()=>{db.close();resolve(read.result);};tx.onerror=tx.onabort=()=>{db.close();reject(new Error("خواندن بازدیدهای ارسال‌شده ممکن نشد."));};});
  const ownership=new Set<string>();for(const record of records){if(tenantId==="demo"&&record.inspectionId==="insp_demo"||await lifecycleRepository.staffProjection(tenantId,record.inspectionId))ownership.add(record.inspectionId);}
  const customerPhones=new Map<string,string>();for(const id of ownership){const projection=await lifecycleRepository.staffProjection(tenantId,id);if(projection)customerPhones.set(id,projection.mobile);}
- const valid=records.filter(r=>ownership.has(r.inspectionId)&&r.receipt&&r.summary&&(r.summary.template||r.summary.namespace===photoNamespace(r.inspectionId,inspectionPhotographyTemplate.templateId,inspectionPhotographyTemplate.templateVersion))).map(r=>({id:r.inspectionId,reference:r.receipt!.reference,submittedAt:r.receipt!.submittedAt,summary:r.summary!,template:structuredClone(r.summary!.template??inspectionPhotographyTemplate),tenantId,customerPhone:customerPhones.get(r.inspectionId),status:"awaiting-assignment" as const,decisions:[]}));
+ const valid=records.filter(r=>ownership.has(r.inspectionId)&&r.receipt&&r.summary&&(r.summary.template||knownPhotographyTemplates.some(t=>r.summary!.namespace===photoNamespace(r.inspectionId,t.templateId,t.templateVersion)))).map(r=>({id:r.inspectionId,reference:r.receipt!.reference,submittedAt:r.receipt!.submittedAt,summary:r.summary!,template:structuredClone(r.summary!.template??knownPhotographyTemplates.find(t=>r.summary!.namespace===photoNamespace(r.inspectionId,t.templateId,t.templateVersion))!),tenantId,customerPhone:customerPhones.get(r.inspectionId),status:"awaiting-assignment" as const,decisions:[]}));
  await repository.importSubmitted(valid);
  const workspace=await repository.read({id:"local-sync",role:"platform-admin"});
  const jobs=await indexedDBUploadQueue.list();

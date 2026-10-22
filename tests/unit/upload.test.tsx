@@ -1,3 +1,4 @@
+// Legacy v1 regression fixture; photo-policy-v2.test.ts covers the current eleven-photo package.
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { acceptedMedia, requiredMediaCount, uploadDatabase, uploadLabel, uploadProgress, type MediaReference, type UploadJob } from "@/features/upload/upload-model";
@@ -6,7 +7,7 @@ import { UploadCoordinator } from "@/features/upload/upload-coordinator";
 import { createMockUploadTransport } from "@/features/upload/mock-upload-transport";
 import { automaticRetry, retryDelay, UploadFailure } from "@/features/upload/retry-policy";
 import { UploadProgress } from "@/features/upload/upload-progress";
-import { inspectionPhotographyTemplate as template } from "@/features/photography/inspection-template";
+import { legacyPhotographyTemplate as template } from "@/features/photography/inspection-template";
 import type { UploadTransport } from "@/features/upload/upload-transport";
 
 const media = (id = "front", kind: "photo" | "video-360" = "photo"): MediaReference => ({ inspectionId: "inspection", namespace: "namespace", evidenceKind: kind, requirementId: kind === "photo" ? id : undefined, title: id, localBlobKey: id, revision: "one", mimeType: kind === "photo" ? "image/jpeg" : "video/webm", byteSize: 100, capturedAt: "now", required: true });

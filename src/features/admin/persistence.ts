@@ -5,7 +5,7 @@ export interface AdminPersistence {
   transact<T>(change: (workspace: AdminWorkspace) => T): Promise<T>;
 }
 export class MemoryAdminPersistence implements AdminPersistence {
-  private workspace = initialAdminWorkspace();
+  constructor(private workspace = initialAdminWorkspace()) {}
   private tail: Promise<unknown> = Promise.resolve();
   async read() { await this.tail; return structuredClone(this.workspace); }
   transact<T>(change: (workspace: AdminWorkspace) => T): Promise<T> {

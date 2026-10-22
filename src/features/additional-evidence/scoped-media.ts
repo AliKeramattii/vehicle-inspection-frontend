@@ -1,3 +1,5 @@
+import { assertPhotoChoice } from "@/features/photography/photo-choice";
+import { selectPhotoAlternative, readPhoto, photoKey } from "@/lib/media/photo-store";
 import { createPhotoOptimization } from "@/lib/media/photo-optimization";
 import { indexedDBPhotoStore, type PhotoDraft } from "@/lib/media/photo-store";
 import { indexedDBCaptureDataStore } from "@/lib/media/capture-data-store";
@@ -23,8 +25,14 @@ export function scopedMedia(request: EvidenceRequest, item: EvidenceRequestItem)
   };
   return {
     optimization,
-    savePhoto: (draft: PhotoDraft) => mutate((namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); return indexedDBPhotoStore.saveDraft(namespace, item.requirementId, draft); }),
-    confirmPhoto: () => mutate((namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); return indexedDBPhotoStore.confirm(namespace, item.requirementId); }),
+    selectAlternative:(alternativeId:string|undefined)=>mutate(namespace=>{
+      if(item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست.");
+      const photo=request.template.sections.flatMap(s=>s.photoRequirements).find(p=>p.id===item.requirementId)!;
+      if(alternativeId !== undefined) assertPhotoChoice(photo,alternativeId);
+      return selectPhotoAlternative(namespace,item.requirementId,alternativeId);
+    }),
+    savePhoto: (draft: PhotoDraft) => mutate((namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); const photo = request.template.sections.flatMap(s=>s.photoRequirements).find(p=>p.id===item.requirementId)!; assertPhotoChoice(photo, draft.alternativeId); return indexedDBPhotoStore.saveDraft(namespace, item.requirementId, draft); }),
+    confirmPhoto: () => mutate(async (namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); const photo = request.template.sections.flatMap(s=>s.photoRequirements).find(p=>p.id===item.requirementId)!; const candidate = await readPhoto(photoKey(namespace,item.requirementId)); assertPhotoChoice(photo, candidate?.draft?.alternativeId); return indexedDBPhotoStore.confirm(namespace, item.requirementId, candidate?.draft?.revisionId); }),
     discardPhotoDraft: () => mutate((namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); return indexedDBPhotoStore.discardDraft(namespace, item.requirementId); }),
     saveVideo: (draft: VideoDraft) => mutate((namespace) => { if (item.kind !== "video-360") throw new Error("ضبط ویدیو برای این درخواست مجاز نیست."); return indexedDBCaptureDataStore.saveVideoDraft(namespace, draft); }),
     confirmVideo: () => mutate((namespace) => { if (item.kind !== "video-360") throw new Error("ضبط ویدیو برای این درخواست مجاز نیست."); return indexedDBCaptureDataStore.confirmVideo(namespace); }),

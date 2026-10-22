@@ -1,6 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
-import { inspectionPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
+import { legacyPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
 import { captureDatabase } from "../../src/lib/media/capture-data-store";
 import { photoNamespace } from "../../src/lib/media/photo-store";
 import { seedPhotos, enterPhotography, fixtureInspectionId } from "./photography-helpers";
@@ -27,9 +27,10 @@ export async function mockRecorder(page: Page, unsupported = false) {
     } } });
   }, { bytes: [...readFileSync("tests/e2e/fixtures/walkaround.webm")], unsupported });
 }
-export async function packageWorkflow(page: Page, options: { photos?: number; kilometers?: number; video?: "accepted" | "draft" | "replacement" | "retake" } = {}) {
-  await page.goto("/"); await seedPhotos(page, options.photos ?? 12);
-  const namespace = photoNamespace(await fixtureInspectionId(page), template.templateId, template.templateVersion);
+import type {PhotographyTemplate} from "../../src/schemas/photography";
+export async function packageWorkflow(page: Page, options: { photos?: number; kilometers?: number; video?: "accepted" | "draft" | "replacement" | "retake" } = {}, policy:PhotographyTemplate=template) {
+  await page.goto("/"); await seedPhotos(page, options.photos ?? policy.sections.flatMap(s=>s.photoRequirements).length,undefined,undefined,policy);
+  const namespace = photoNamespace(await fixtureInspectionId(page), policy.templateId, policy.templateVersion);
   await page.evaluate(async ({ config, namespace, options, bytes }) => {
     const database = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open(config.name, config.version);

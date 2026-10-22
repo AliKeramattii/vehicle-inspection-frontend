@@ -1,3 +1,4 @@
+import {inspectionPhotographyTemplate} from "@/features/photography/inspection-template";
 import type { PhotographyTemplate } from "@/schemas/photography";
 import { adminSnapshotSchema, allowed, templateTitleSchema, roles, type AdminActor, type AdminTemplate, type AdminWorkspace, type Permission, type TemplateVersion, type Branding, type AdminRole } from "./model";
 import type { AdminPersistence } from "./persistence";
@@ -65,8 +66,7 @@ export class MockAdminRepository implements AdminRepository {
     if (!parsed.success) throw new AdminError("invalid", "عنوان قالب را وارد کنید.");
     return this.storage.transact(w => {
       w.sequence++; const id = "inspection-template-" + w.sequence;
-      const base = w.templates[0].versions.find(v => v.id === w.templates[0].currentPublishedId)!;
-      const snapshot = structuredClone(base.snapshot); snapshot.templateId = id; snapshot.templateVersion = 1;
+      const snapshot = structuredClone(inspectionPhotographyTemplate); snapshot.templateId = id; snapshot.templateVersion = 1;
       const template: AdminTemplate = { id, title: parsed.data, partner: w.branding.displayName, versions: [{ id: id + ":v1", version: 1, revision: 1, state: "draft", snapshot, updatedAt: this.now(), updatedBy: actor.name }] };
       w.templates.push(template); this.audit(w, actor, "ایجاد قالب و پیش‌نویس", id); return template;
     });
@@ -75,6 +75,7 @@ export class MockAdminRepository implements AdminRepository {
     authorize(actor, "editDraft"); const parsed = validate(snapshot);
     return this.storage.transact(w => {
       const version = versionIn(templateIn(w, templateId), versionId); editable(version, revision);
+      if (parsed.photoPolicyVersion !== version.snapshot.photoPolicyVersion) throw new AdminError("invalid", "سیاست نیازمندی‌های این نسخه قابل تغییر نیست؛ قالب جدید بسازید.");
       if (parsed.templateId !== templateId || parsed.templateVersion !== version.version) throw new AdminError("invalid", "شناسه و نسخه قالب قابل تغییر نیست.");
       version.snapshot = parsed; version.revision++; version.updatedAt = this.now(); version.updatedBy = actor.name;
       this.audit(w, actor, "ذخیره پیش‌نویس", version.id); return version;

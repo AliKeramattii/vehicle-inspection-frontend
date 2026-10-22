@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir} from "node:fs/promises";
 import ts from "typescript";
 import {photography,fixtureInspectionId} from "./photography-helpers";
 import {photoNamespace} from "../../src/lib/media/photo-store";
-import {inspectionPhotographyTemplate as template} from "../../src/features/photography/inspection-template";
+import {legacyPhotographyTemplate as template} from "../../src/features/photography/inspection-template";
 type Store=typeof import("../../src/lib/media/photo-store");
 type TestWindow=Window&{testPhotos:Store};
 async function loadStore(page:Page){const code=ts.transpileModule(await readFile("src/lib/media/photo-store.ts","utf8"),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;await page.evaluate(async code=>{const url=URL.createObjectURL(new Blob([code],{type:"text/javascript"}));try{(window as unknown as TestWindow).testPhotos=await import(/* webpackIgnore:true */url);}finally{URL.revokeObjectURL(url);}},code);}

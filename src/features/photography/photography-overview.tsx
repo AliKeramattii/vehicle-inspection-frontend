@@ -1,4 +1,5 @@
 "use client";
+import { evidencePhoto } from "./photo-choice";
 import { vehicleViewAssets } from "@/config/vehicle-assets";
 
 import { useState } from "react";
@@ -24,7 +25,7 @@ export function PhotographyOverview({ template, records, inspectionId, data, bod
   const next = nextIncompleteRequirement(template, records), progress = photographyProgress(template, records);
   const [selectedId, select] = useState(next?.photo.id ?? template.sections[0].photoRequirements[0].id);
   const selected = findRequirement(template, selectedId) ?? next ?? { section: template.sections[0], photo: template.sections[0].photoRequirements[0] };
-  const { photo, section } = selected, category = sectionCategory(section.id);
+  const { section } = selected, photo = evidencePhoto(selected.photo, records.find(r=>r.requirementId===selected.photo.id)), category = sectionCategory(section.id);
   const record = records.find((record) => record.requirementId === photo.id), complete = photoSatisfied(requirementStatus(photo, records));
   const chooseSection = (id: InspectionSectionId) => {
     const target = template.sections.find((section) => section.id === id);

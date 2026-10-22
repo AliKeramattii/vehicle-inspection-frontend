@@ -21,26 +21,26 @@ describe("supplied guidance, not extra evidence", () => {
  it("wires exact readiness and technical bytes without rewriting originals", () => {
   for (const [file,src] of [["readiness-clean-vehicle.webp",vehicleReadinessAssets.clean],["readiness-open-space.webp",vehicleReadinessAssets.space],["spec-plate-2.webp",vehicleIdentificationAssets.seat],["Pearl-white sedan windshield VIN inspection.webp",vehicleIdentificationAssets.windshield]]) expect(hash("public"+src)).toBe(hash("references/assets/new-vehicle/guides/"+file));
  });
- it("keeps twelve requirements and one identity for all four variants, including pinned samples", () => {
-  expect(template.sections.flatMap(s => s.photoRequirements)).toHaveLength(12);
+ it("keeps eleven requirements and one identity for all four variants, including pinned samples", () => {
+  expect(template.sections.flatMap(s => s.photoRequirements)).toHaveLength(11);
   expect(vehicleIdentificationGuides).toHaveLength(4);
   for (const choice of vehicleIdentificationGuides) expect(identificationPhoto(photo,choice)).toMatchObject({ id:photo.id, required:true, sampleImage:choice.src, instructions:choice.instructions });
   expect(hasIdentificationChoices({...photo,sampleImage:"/assets/inspection/photo-guides/spec-plate.webp"})).toBe(true);
-  expect(hasIdentificationChoices({...photo,sampleImage:"/images/tenant-vin.webp"})).toBe(false);
+  expect(hasIdentificationChoices({...photo,choice:undefined,sampleImage:"/images/tenant-vin.webp"})).toBe(false);
  });
- it("offers four real buttons before guidance, with keyboard activation and change action", () => {
+ it("offers four real buttons before guidance, with keyboard activation and change action", async () => {
   render(<PhotoGuidance photo={photo} section={section} records={[]} inspectionId="demo" />);
   expect(screen.queryByRole("link",{name:"باز کردن دوربین"})).toBeNull();
   expect(screen.getAllByRole("button",{name:/پیشنهاد/})).toHaveLength(4);
-  fireEvent.click(screen.getByRole("button",{name:vehicleIdentificationGuides[3].title}));
+  await act(async()=>{fireEvent.click(screen.getByRole("button",{name:vehicleIdentificationGuides[3].title}));});
   expect(screen.getByRole("img",{name:/نمونه صحیح/})).toHaveAttribute("src",expect.stringContaining("windshield-vin.webp"));
   expect(screen.getByRole("link",{name:"باز کردن دوربین"})).toHaveAttribute("href","/inspection/demo/capture/photo/spec-plate/camera");
-  fireEvent.click(screen.getByRole("button",{name:"تغییر محل کد"}));
+  await act(async()=>{fireEvent.click(screen.getByRole("button",{name:"تغییر محل کد"}));});
   expect(screen.getAllByRole("button",{name:/پیشنهاد/})).toHaveLength(4);
  });
- it("survives component navigation but isolates inspection, requirement and reviewer-request scopes", () => {
+ it("survives component navigation but isolates inspection, requirement and reviewer-request scopes", async () => {
   const a=renderHook(()=>useIdentificationGuide(photo,"one","request-a"));
-  act(()=>a.result.current.select("seat"));expect(a.result.current.choice?.id).toBe("seat");a.unmount();
+  await act(async()=>{await a.result.current.select("seat");});expect(a.result.current.choice?.id).toBe("seat");a.unmount();
   const b=renderHook(()=>useIdentificationGuide(photo,"one","request-a"));expect(b.result.current.choice?.id).toBe("seat");
   const c=renderHook(()=>useIdentificationGuide(photo,"one","request-b"));expect(c.result.current.choice).toBeUndefined();
   const d=renderHook(()=>useIdentificationGuide(photo,"two","request-a"));expect(d.result.current.choice).toBeUndefined();
@@ -55,9 +55,9 @@ describe("supplied guidance, not extra evidence", () => {
   expect(document.querySelector('input[type="file"]')).toBeNull();view.unmount();expect(service.stop).toHaveBeenCalled();
  });
  it("uses the selected comparison sample while actual accepted evidence stays a Blob", async () => {
-  const choice=renderHook(()=>useIdentificationGuide(photo,"demo"));act(()=>choice.result.current.select("seat"));choice.unmount();
+  const choice=renderHook(()=>useIdentificationGuide(photo,"demo"));await act(async()=>{await choice.result.current.select("seat");});choice.unmount();
   const blob=new Blob(["customer evidence"],{type:"image/jpeg"});vi.spyOn(URL,"createObjectURL").mockReturnValue("blob:evidence");
-  render(<PhotoReview photo={photo} section={section} inspectionId="demo" record={{key:"one",namespace:"test",requirementId:photo.id,status:"captured",blob}} onConfirm={vi.fn()} onRetake={vi.fn()} />);
+  render(<PhotoReview photo={photo} section={section} inspectionId="demo" record={{key:"one",namespace:"test",requirementId:photo.id,alternativeId:"seat",status:"captured",blob}} onConfirm={vi.fn()} onRetake={vi.fn()} />);
   await waitFor(()=>expect(screen.getByRole("img",{name:/عکس شما:/})).toHaveAttribute("src","blob:evidence"));
   expect(screen.getByRole("img",{name:/نمونه صحیح:/})).toHaveAttribute("src",expect.stringContaining("spec-plate-2.webp"));
   expect(screen.queryByRole("checkbox")).toBeNull();
@@ -75,4 +75,17 @@ describe("supplied guidance, not extra evidence", () => {
   render(<PhotoAlignmentGuide photo={photos[0]}/>);expect(document.querySelector('.photo-alignment-guide')).toHaveAttribute("aria-hidden","true");
   expect(document.querySelector('.photo-alignment-guide img')).toHaveAttribute("alt","");
  });
+});
+
+
+it("serializes rapid durable choices and never lets an old response replace the last choice",async()=>{
+ let release!:()=>void;const first=new Promise<void>(resolve=>{release=resolve;});
+ const save=vi.fn().mockImplementationOnce(()=>first).mockResolvedValue(undefined);
+ const hook=renderHook(()=>useIdentificationGuide(photo,"race","capture",{onSelect:save}));
+ let a!:Promise<void>,b!:Promise<void>;
+ act(()=>{a=hook.result.current.select("pillar");b=hook.result.current.select("seat");});
+ await act(async()=>{await Promise.resolve();});expect(save).toHaveBeenCalledTimes(1);
+ await act(async()=>{release();await Promise.all([a,b]);});
+ expect(save.mock.calls.map(c=>c[0])).toEqual(["pillar","seat"]);
+ expect(sessionStorage.getItem(JSON.stringify(["identification-guide-v1","race","capture",photo.id]))).toBe("seat");
 });

@@ -14,8 +14,8 @@ export const vehicleIdentificationGuides = [
 export type IdentificationGuide = typeof vehicleIdentificationGuides[number];
 export function hasIdentificationChoices(photo: PhotoRequirement) {
   // Exact built-in samples cover pinned templates without rewriting their saved configuration.
-  return [vehicleGuideAssets["spec-plate"].src, vehicleGuideAssets["chassis-number"].src].some(src => src === resolveVehicleGuide(photo.sampleImage));
+  return Boolean(photo.choice) || [vehicleGuideAssets["spec-plate"].src, vehicleGuideAssets["chassis-number"].src].some(src => src === resolveVehicleGuide(photo.sampleImage));
 }
 export function identificationPhoto(photo: PhotoRequirement, choice?: IdentificationGuide): PhotoRequirement {
-  return choice ? { ...photo, sampleImage: choice.src, instructions: [...choice.instructions], guidanceTopics: ["text", "focus", "glare"], distance: "۳۰ سانتی‌متر", height: "هم‌سطح کد" } : photo;
+  return choice ? { ...photo, title: photo.choice ? `${photo.title} · ${choice.shortTitle}` : photo.title, sampleImage: choice.src, instructions: [...choice.instructions], guidanceTopics: ["text", "focus", "glare"], distance: "۳۰ سانتی‌متر", height: "هم‌سطح کد" } : photo;
 }

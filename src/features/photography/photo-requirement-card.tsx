@@ -1,3 +1,4 @@
+import { evidencePhoto } from "./photo-choice";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
@@ -8,8 +9,8 @@ import { photoSatisfied, photoStatusLabels, requirementStatus, photographyVisual
 import { PhotoImage } from "./photo-image";
 import { EvidenceSymbol } from "./evidence-symbol";
 
-export function PhotoRequirementCard({ photo, index, records, inspectionId }: { photo: PhotoRequirement; index: number; records: readonly LocalPhoto[]; inspectionId: string }) {
-  const record = records.find((item) => item.requirementId === photo.id), status = requirementStatus(photo, records), complete = photoSatisfied(status), retake = status === "retake-requested";
+export function PhotoRequirementCard({ photo: originalPhoto, index, records, inspectionId }: { photo: PhotoRequirement; index: number; records: readonly LocalPhoto[]; inspectionId: string }) {
+  const record = records.find((item) => item.requirementId === originalPhoto.id), photo = evidencePhoto(originalPhoto,record), status = requirementStatus(photo, records), complete = photoSatisfied(status), retake = status === "retake-requested";
   const state = photographyVisualState(photo, records);
   return <article className="photo-requirement-card" data-state={state}>
     <header><span aria-hidden="true"><EvidenceSymbol state={state} number={fa(index + 1)} /></span><h3>{photo.title}</h3><small>{record?.draft ? "در انتظار تأیید" : photoStatusLabels[status]}</small></header>

@@ -20,13 +20,13 @@ const all = template.sections.flatMap((section) => section.photoRequirements);
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: vi.fn() }) }));
 Element.prototype.scrollIntoView = vi.fn();
 const blob = new Blob(["photo"], { type: "image/jpeg" });
-const record = (id: string): LocalPhoto => ({ key: id, namespace: "test", requirementId: id, status: "captured", blob, capturedAt: "2026-10-06T00:00:00Z" });
+const record = (id: string): LocalPhoto => ({ key: id, namespace: "test", requirementId: id, status: "captured", alternativeId: id === "spec-plate" ? "pillar" : undefined, blob, capturedAt: "2026-10-06T00:00:00Z" });
 afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 
 describe("authoritative photography configuration", () => {
-  it("defines exactly seven sections and twelve unique required photos with matching exact filenames", () => {
-    expect(template.sections.map((section) => section.photoRequirements.length)).toEqual([2, 2, 1, 1, 2, 3, 1]);
-    expect(all).toHaveLength(12); expect(new Set(all.map((photo) => photo.id)).size).toBe(12);
+  it("defines exactly seven sections and eleven unique logical required photos with matching exact filenames", () => {
+    expect(template.sections.map((section) => section.photoRequirements.length)).toEqual([2, 2, 1, 1, 2, 2, 1]);
+    expect(all).toHaveLength(11); expect(new Set(all.map((photo) => photo.id)).size).toBe(11);
     for (const photo of all) {
       expect(photo.required).toBe(true); expect(photo.sampleImage).toBe(`/assets/inspection-vehicle/photo-guides/${photo.id}.webp`);
       const source = readFileSync(`references/assets/new-vehicle/source/${photo.id}.webp`);
@@ -43,18 +43,18 @@ describe("authoritative photography configuration", () => {
   });
   it("adapts one template to the repository without shared mutable state or changing bootstrap samples", async () => {
     const repository = createMockInspectionRepository(), plan = await repository.getCapturePlan("insp_demo");
-    expect(plan.totalRequired).toBe(12); expect(plan.shots.map((photo) => photo.code)).toEqual(all.map((photo) => photo.id));
+    expect(plan.totalRequired).toBe(11); expect(plan.shots.map((photo) => photo.code)).toEqual(all.map((photo) => photo.id));
     plan.sections![0].photoRequirements[0].title = "changed";
     expect((await repository.getCapturePlan("insp_demo")).sections![0].photoRequirements[0].title).toBe(all[0].title);
-    expect(capturePlanFixture.shots).toHaveLength(2); expect(templateCapturePlan().totalRequired).toBe(12);
+    expect(capturePlanFixture.shots).toHaveLength(2); expect(templateCapturePlan().totalRequired).toBe(11);
   });
   it("derives zero, partial, complete, retake and optional-photo progress", () => {
-    expect(photographyProgress(template, [])).toMatchObject({ completed: 0, total: 12, remaining: 12, complete: false });
-    expect(photographyProgress(template, all.slice(0, 4).map((photo) => record(photo.id)))).toMatchObject({ completed: 4, remaining: 8 });
+    expect(photographyProgress(template, [])).toMatchObject({ completed: 0, total: 11, remaining: 11, complete: false });
+    expect(photographyProgress(template, all.slice(0, 4).map((photo) => record(photo.id)))).toMatchObject({ completed: 4, remaining: 7 });
     const records = all.map((photo) => record(photo.id));
     expect(photographyProgress(template, records).complete).toBe(true);
     records[0].status = "retake-requested";
-    expect(photographyProgress(template, records)).toMatchObject({ completed: 11, complete: false });
+    expect(photographyProgress(template, records)).toMatchObject({ completed: 10, complete: false });
     expect(sectionProgress(template.sections[0], records)).toMatchObject({ completed: 1, total: 2, retake: true });
     expect(photographyProgress({ ...template, sections: [{ ...template.sections[0], photoRequirements: [{ ...all[0], required: false }] }] }, records).total).toBe(0);
   });
@@ -83,7 +83,7 @@ describe("image-guided presentation", () => {
   });
   it("continues to the missing odometer data when all configured photos are satisfied", () => {
     render(<PhotographyOverview template={template} records={all.map((photo) => record(photo.id))} inspectionId="insp_demo" />);
-    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "12");
+    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "11");
     expect(screen.getByRole("link", { name: "ثبت کیلومتر فعلی" })).toHaveAttribute("href", "/inspection/insp_demo/capture/photo/odometer-on/review");
   });
   it("shows large exact samples, captured-card view/replacement and reviewer reasons", () => {
@@ -150,7 +150,7 @@ describe("vehicle image navigation and continuation", () => {
   });
   it("uses requirement-specific guidance and technical distances", () => {
     const odometer = findRequirement(template, "odometer-on")!.photo;
-    const vin = findRequirement(template, "chassis-number")!.photo;
+    const vin = findRequirement(template, "spec-plate")!.photo;
     const engine = findRequirement(template, "engine-bay")!.photo;
     expect(odometer.guidanceTopics).toContain("ignition"); expect(odometer.distance).toBe("نزدیک");
     expect(vin.guidanceTopics).toContain("text"); expect(vin.distance).toBe("۳۰ سانتی‌متر");

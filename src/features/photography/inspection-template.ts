@@ -41,14 +41,23 @@ const sections: InspectionSection[] = [
   { id: "roof", title: "سقف", order: 7, photoRequirements: [photo("car-roof", "نمای سقف", "تمام سطح سقف خودرو را در تصویر نشان دهید.",
     ["از موقعیتی ایمن، گوشی را بالاتر بگیرید.", "بیشترین سطح سقف و گوشه‌های اصلی در کادر باشند.", "برای عکاسی روی خودرو نایستید."], { distance: "۱ متر", height: "بالاتر از سقف", guidanceTopics: ["roof", "frame", "steady"], checks: ["واضح", "نور مناسب", "سقف کامل در کادر"] })] },
 ];
-export const inspectionPhotographyTemplate = photographyTemplateSchema.parse({ templateId: "body-image-guided", templateVersion: 1, sections,
+export const legacyPhotographyTemplate = photographyTemplateSchema.parse({ templateId: "body-image-guided", templateVersion: 1, sections,
   captureRequirements: { odometerRequirementId: "odometer-on", video360Required: true } });
 
+// Retain both original IDs and namespace for historical twelve-photo inspections.
+export const inspectionPhotographyTemplate = photographyTemplateSchema.parse({
+  ...legacyPhotographyTemplate, templateVersion: 2, photoPolicyVersion: 2,
+  sections: sections.map(section => ({...section, photoRequirements: section.photoRequirements
+    .filter(photo => photo.id !== "chassis-number")
+    .map(photo => photo.id === "spec-plate" ? {...photo, choice: {groupId: "vehicle-identification", alternatives: ["pillar", "engine", "seat", "windshield"]}} : photo)})),
+});
+export const knownPhotographyTemplates = [legacyPhotographyTemplate, inspectionPhotographyTemplate];
+
 // Compatibility adapter for existing foundation/future viewer consumers; no duplicate metadata.
-export function templateCapturePlan(): CapturePlan {
-  const shots = inspectionPhotographyTemplate.sections.flatMap((section) => section.photoRequirements.map((photo) => ({
+export function templateCapturePlan(template = inspectionPhotographyTemplate): CapturePlan {
+  const shots = template.sections.flatMap((section) => section.photoRequirements.map((photo) => ({
     code: photo.id, title: photo.title, category: (section.id === "cabin" ? "cabin" : section.id === "engine-details" ? "engineChassis" : "body") as CaptureCategory,
     required: photo.required, guideAvailable: true, highlightNodes: photo.semanticNodes ?? [],
   })));
-  return { ...inspectionPhotographyTemplate, totalRequired: shots.filter((shot) => shot.required).length, shots };
+  return { ...template, totalRequired: shots.filter((shot) => shot.required).length, shots };
 }

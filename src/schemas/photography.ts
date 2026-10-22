@@ -3,11 +3,16 @@ import { z } from "zod";
 
 export const sectionIdSchema = z.enum(["right", "left", "front", "rear", "cabin", "engine-details", "roof"]);
 export const photoStatusSchema = z.enum(["pending", "captured", "uploading", "uploaded", "verified", "retake-requested"]);
+export const identificationAlternativeIdSchema = z.enum(["pillar", "engine", "seat", "windshield"]);
+export const photoChoiceSchema = z.object({
+  groupId: z.literal("vehicle-identification"),
+  alternatives: z.array(identificationAlternativeIdSchema).length(4).refine(ids => new Set(ids).size === 4, "Four distinct locations are required."),
+});
 export const photoRequirementSchema = z.object({
   id: z.string().min(1), title: z.string().min(1), description: z.string().min(1),
   sampleImage: z.string().refine(src => src.startsWith("/assets/inspection/photo-guides/") || Object.values(vehicleGuideAssets).some(asset => asset.src === src), "Use an approved vehicle guide."), instructions: z.array(z.string().min(1)).min(1),
   distance: z.string().optional(), height: z.string().optional(), orientation: z.enum(["portrait", "landscape"]).optional(),
-  required: z.boolean(), status: photoStatusSchema, reviewerReason: z.string().optional(),
+  choice: photoChoiceSchema.optional(), required: z.boolean(), status: photoStatusSchema, reviewerReason: z.string().optional(),
   checks: z.array(z.string().min(1)).min(1), semanticNodes: z.array(z.string()).optional(),
   guidanceTopics: z.array(z.enum(["frame", "distance", "angle", "ignition", "glare", "interior", "hood", "text", "focus", "roof", "steady"])).optional(),
 });
@@ -17,7 +22,7 @@ export const inspectionSectionSchema = z.object({
 });
 export const supplementalCaptureSchema = z.object({ odometerRequirementId: z.string().min(1).optional(), video360Required: z.boolean() });
 export const photographyTemplateSchema = z.object({
-  templateId: z.string().min(1), templateVersion: z.number().int().positive(), sections: z.array(inspectionSectionSchema).min(1),
+  photoPolicyVersion: z.literal(2).optional(), templateId: z.string().min(1), templateVersion: z.number().int().positive(), sections: z.array(inspectionSectionSchema).min(1),
   captureRequirements: supplementalCaptureSchema.optional(),
 }).superRefine((template, ctx) => {
   const ids = template.sections.flatMap((section) => section.photoRequirements.map((photo) => photo.id));

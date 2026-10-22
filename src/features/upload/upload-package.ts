@@ -11,7 +11,7 @@ export async function readUploadPackage(inspectionId: string, namespace: string,
     const photo = await readPhoto(photoKey(namespace, requirement.id));
     if (!photo) continue;
     media.push(...acceptedMedia(inspectionId, namespace, template, [photo], { namespace }));
-    statuses.push({ key: photo.key, namespace, requirementId: photo.requirementId, status: photo.status });
+    statuses.push({ key: photo.key, namespace, requirementId: photo.requirementId, alternativeId: photo.alternativeId, status: photo.status });
   }
   const data = await indexedDBCaptureDataStore.get(namespace);
   media.push(...acceptedMedia(inspectionId, namespace, template, [], data));

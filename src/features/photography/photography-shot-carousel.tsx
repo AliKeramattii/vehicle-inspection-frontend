@@ -1,5 +1,6 @@
 "use client";
 
+import { evidencePhoto } from "./photo-choice";
 import { useEffect, useRef } from "react";
 import type { LocalPhoto } from "@/lib/media/photo-store";
 import type { PhotoRequirement } from "@/schemas/photography";
@@ -15,5 +16,5 @@ export function PhotographyShotCarousel({ photos, records, selectedId, onSelect 
     const offset = item.left < bounds.left ? item.left - bounds.left : item.right > bounds.right ? item.right - bounds.right : 0;
     if (offset) rail.scrollBy({ left: offset, behavior: "instant" });
   }, [selectedId]);
-  return <div ref={container} className="photography-shot-carousel" role="group" aria-label="عکس‌های مورد نیاز">{photos.map((photo) => <PhotographyShotCard key={photo.id} photo={photo} records={records} selected={photo.id === selectedId} onSelect={() => onSelect(photo.id)} />)}</div>;
+  return <div ref={container} className="photography-shot-carousel" role="group" aria-label="عکس‌های مورد نیاز">{photos.map((photo) => <PhotographyShotCard key={photo.id} photo={evidencePhoto(photo, records.find(r=>r.requirementId===photo.id))} records={records} selected={photo.id === selectedId} onSelect={() => onSelect(photo.id)} />)}</div>;
 }

@@ -1,7 +1,8 @@
 import { mockInitialInspectionId } from "../../src/features/identity/source-context";
 import { chooseDemoLocation } from "./location-helpers";
 import { expect, type Page } from "@playwright/test";
-import { inspectionPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
+import { type PhotographyTemplate } from "../../src/schemas/photography";
+import { legacyPhotographyTemplate as template } from "../../src/features/photography/inspection-template";
 import { photoDatabase, photoKey, photoNamespace } from "../../src/lib/media/photo-store";
 
 export const requirements = template.sections.flatMap((section) => section.photoRequirements);
@@ -15,18 +16,24 @@ export async function fixtureInspectionId(page:Page):Promise<string> {
  const tenant=await page.evaluate(async()=>{const bootstrap=await(await fetch("/site-bootstrap.json")).json();return String(bootstrap.tenantId);});
  return mockInitialInspectionId(tenant);
 }
-export async function seedPhotos(page: Page, count: number, retakeId?: string, draftId?: string) {
-  const namespace = photoNamespace(await fixtureInspectionId(page), template.templateId, template.templateVersion);
-  const photos = requirements.slice(0, count).map((photo) => ({ key: photoKey(namespace, photo.id), namespace, requirementId: photo.id, image: photo.sampleImage,
-    status: photo.id === retakeId ? "retake-requested" : "captured" }));
-  if (draftId && !photos.some((photo) => photo.requirementId === draftId)) photos.push({ key: photoKey(namespace, draftId), namespace, requirementId: draftId, image: `/assets/inspection-vehicle/photo-guides/${draftId}.webp`, status: "pending" });
+export async function seedPhotos(page: Page, count: number, retakeId?: string, draftId?: string, policy: PhotographyTemplate = template) {
+  const inspectionId=await fixtureInspectionId(page);
+  // Explicit version pin: legacy regression fixtures stay v1, current policy tests request v2.
+  await page.evaluate(async ({inspectionId,policy})=>{
+    const db=await new Promise<IDBDatabase>((resolve,reject)=>{const q=indexedDB.open("inspection-confirmed-facts",1);q.onupgradeneeded=()=>q.result.createObjectStore("facts",{keyPath:"inspectionId"});q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error);});
+    await new Promise<void>((resolve,reject)=>{const tx=db.transaction("facts","readwrite"),store=tx.objectStore("facts"),q=store.get(inspectionId);q.onsuccess=()=>store.put({...q.result,inspectionId,photographyTemplate:policy});tx.oncomplete=()=>resolve();tx.onabort=tx.onerror=()=>reject(tx.error);});db.close();
+  },{inspectionId,policy});
+  const namespace = photoNamespace(inspectionId, policy.templateId, policy.templateVersion);
+  const photos = policy.sections.flatMap(s=>s.photoRequirements).slice(0, count).map((photo) => ({ key: photoKey(namespace, photo.id), namespace, requirementId: photo.id, image: photo.sampleImage,
+    alternativeId: photo.choice ? "pillar" : undefined, status: photo.id === retakeId ? "retake-requested" : "captured" }));
+  if (draftId && !photos.some((photo) => photo.requirementId === draftId)) photos.push({ key: photoKey(namespace, draftId), namespace, requirementId: draftId, image: `/assets/inspection-vehicle/photo-guides/${draftId}.webp`, alternativeId: undefined, status: "pending" });
   await page.evaluate(async ({ photos, databaseConfig, draftId }) => {
     // Test-only deterministic evidence. Runtime never treats sample images as customer captures.
     const records = await Promise.all(photos.map(async ({ image, ...record }) => {
       const blob = await (await fetch(image)).blob();
       return { ...record, blob: record.status === "pending" ? undefined : blob, capturedAt: "2026-10-06T00:00:00Z",
         reviewerReason: record.status === "retake-requested" ? "پلاک خوانا نیست." : undefined,
-        draft: record.requirementId === draftId ? { blob, capturedAt: "2026-10-06T00:00:00Z" } : undefined };
+        draft: record.requirementId === draftId ? { blob, alternativeId:record.alternativeId, capturedAt: "2026-10-06T00:00:00Z" } : undefined };
     }));
     const database = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open(databaseConfig.name, databaseConfig.version);

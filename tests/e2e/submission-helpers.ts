@@ -13,8 +13,9 @@ export async function configureSubmission(page: Page, settings: SubmissionMockSe
     await new Promise<void>((resolve, reject) => { const tx = db.transaction(config.settings, "readwrite"); tx.objectStore(config.settings).put(settings, "settings"); tx.oncomplete = () => resolve(); tx.onerror = () => reject(tx.error); }); db.close();
   }, { config: submissionDatabase, settings: { delayMs: 80, submittedAt: "2026-10-08T07:00:00.000Z", ...settings } });
 }
-export async function submissionWorkflow(page: Page, settings: SubmissionMockSettings = {}) {
-  await uploadWorkflow(page, "complete"); await configureSubmission(page, settings);
+import type {PhotographyTemplate} from "../../src/schemas/photography";
+export async function submissionWorkflow(page: Page, settings: SubmissionMockSettings = {},policy?:PhotographyTemplate) {
+  await uploadWorkflow(page, "complete",false,policy); await configureSubmission(page, settings);
   await page.getByRole("button", { name: "ادامه به بررسی نهایی" }).click(); await expect(page).toHaveURL(new RegExp("/"+await fixtureInspectionId(page)+"/review$"));
   await expect(page.getByRole("heading", { name: "آماده ارسال", exact: true })).toBeVisible();
 }

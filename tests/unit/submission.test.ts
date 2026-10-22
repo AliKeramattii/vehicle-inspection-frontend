@@ -1,8 +1,9 @@
+// Legacy v1 regression fixture; photo-policy-v2.test.ts covers the current eleven-photo package.
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { deriveInspectionSummary, isEditLocked, submissionDatabase, type CaptureSummary, type SubmissionRecord } from "@/features/submission/submission-model";
 import { indexedDBSubmissionRepository as repository } from "@/features/submission/submission-repository";
 import { createSubmissionService, createMockSubmissionTransport } from "@/features/submission/submission-service";
-import { inspectionPhotographyTemplate as template } from "@/features/photography/inspection-template";
+import { legacyPhotographyTemplate as template } from "@/features/photography/inspection-template";
 import { capturePackageProgress } from "@/features/capture-package/capture-package-model";
 import { acceptedMedia, uploadJobId, type UploadJob } from "@/features/upload/upload-model";
 import type { LocalPhoto } from "@/lib/media/photo-store";

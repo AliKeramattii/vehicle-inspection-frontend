@@ -1,4 +1,5 @@
 "use client";
+import { evidencePhoto } from "@/features/photography/photo-choice";
 import Link from "next/link";
 import {ThumbnailCache} from "@/lib/media/thumbnail-cache";
 import {useEffect,useRef,useState} from "react";
@@ -39,7 +40,8 @@ export function ReviewerWorkspace({caseId}:{caseId:string}){
  if(query.isPending)return <div className="review-workspace-skeleton" role="status" aria-label="در حال خواندن پرونده"><div/><div/><p>در حال خواندن پرونده…</p></div>;
  if(!record)return <InlineAlert tone="warning">این پرونده در صف شما نیست.<Link href="/reviewer">بازگشت به صف بررسی</Link></InlineAlert>;
  const decision=evidenceDecision(record,job), counts=reviewCounts(record);
- const sample=record.template.sections.flatMap(s=>s.photoRequirements).find(p=>p.id===job?.requirementId)?.sampleImage;
+ const sampleRequirement=record.template.sections.flatMap(s=>s.photoRequirements).find(p=>p.id===job?.requirementId);
+ const sample=sampleRequirement?evidencePhoto(sampleRequirement,job).sampleImage:undefined;
  const facts=<><Link className="reviewer-action" href="/reviewer">بازگشت به صف بررسی</Link><section><h2>اطلاعات پرونده</h2><bdi>{record.reference}</bdi><p>ارسال: {new Date(record.submittedAt).toLocaleString("fa-IR")}</p></section><section><h2>مشخصات خودرو</h2><p>{vehicle?.make} {vehicle?.model}</p><p>{vehicle?.year.toLocaleString("fa-IR")} · {vehicle?.colorName}</p>{vehicle&&<IranianPlate plate={vehicle.plate}/>}<p><bdi>{vehicle?.vinMasked}</bdi></p><p>کیلومتر: {record.summary.odometer?.kilometers.toLocaleString("fa-IR")} کیلومتر</p></section><section><h2>موقعیت ثبت‌شده</h2><p>{location?.formattedAddress}</p>{location&&<bdi>{location.latitude.toFixed(5)}, {location.longitude.toFixed(5)}</bdi>}</section><section><h2>تاریخچه تصمیم‌ها</h2><ul>{record.decisions.map(d=><li key={d.id}><strong>{d.decision==="approved"?"تأیید":"درخواست ثبت مجدد"}</strong><p>{jobs.find(j=>j.revision===d.revision)?.title??d.requirementId}</p>{d.reason&&<p>{d.reason}</p>}</li>)}</ul></section></>;
  return <div className="review-workspace"><header className="review-workspace-header"><div><Link className="review-workspace-back" href="/reviewer"><ArrowRight size={15}/>بازگشت به صف بررسی</Link><h1>بررسی مدارک</h1><p><bdi>{record.reference}</bdi><span className="review-case-status" data-status={record.status}>{lifecycleLabels[caseLifecycle(record)]}</span></p></div><div className="review-workspace-counts"><span><Check size={16}/>{counts.approved.toLocaleString("fa-IR")} تأیید</span><span><RotateCcw size={16}/>{counts.attention.toLocaleString("fa-IR")} ثبت مجدد</span><span>{counts.remaining.toLocaleString("fa-IR")} بررسی‌نشده</span></div><SecondaryButton className="review-case-details-toggle" onClick={()=>setDetails(true)}><Info size={18}/>اطلاعات پرونده</SecondaryButton></header>
 

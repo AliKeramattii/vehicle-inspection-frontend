@@ -1,3 +1,4 @@
+// Legacy v1 regression fixture; photo-policy-v2.test.ts covers the current eleven-photo package.
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -8,7 +9,7 @@ import { customerReferenceAssets } from "@/config/customer-reference-assets";
 import { brandingAssets } from "@/config/branding-assets";
 import { defaultSiteSettings } from "@/config/site-settings.defaults";
 import { validateContext, type SiteBootstrap } from "@/config/site-settings.schema";
-import { inspectionPhotographyTemplate as template } from "@/features/photography/inspection-template";
+import { legacyPhotographyTemplate as template } from "@/features/photography/inspection-template";
 import { adminSnapshotSchema } from "@/features/admin/model";
 import { artworkForRequirement } from "@/features/photography/vehicle-photo-config";
 import { PhotoImage } from "@/features/photography/photo-image";

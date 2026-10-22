@@ -1,4 +1,5 @@
 "use client";
+import { inspectionPhotographyTemplate } from "@/features/photography/inspection-template";
 import { useEffect,useMemo,useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useForm,useWatch } from "react-hook-form";
@@ -92,6 +93,6 @@ function SettingsEditor({state,repository,reload}:{state:SettingsWorkspace;repos
     </form></div>
     <details className="settings-history"><summary>تاریخچه انتشار و تغییرات محلی</summary><div>{state.audit.length ? <ol>{state.audit.slice().reverse().slice(0,10).map((event,index)=><li key={index}><strong>{event.action}</strong><span>{event.actor}</span><time>{new Date(event.at).toLocaleString("fa-IR")}</time></li>)}</ol> : <p>هنوز تغییری در این مرورگر ثبت نشده است.</p>}<p>{persian(state.history.length)} نسخه تنظیمات در تاریخچه محلی</p></div></details>
     {publishing&&<NativeDialog title="انتشار تنظیمات محلی" onDismiss={()=>setPublishing(false)}><p>تنظیمات فقط برای همین مرورگر و نصب نمونه منتشر می‌شود. این تغییر انتشار واقعی در سرور نیست.</p>{error&&<InlineAlert tone="destructive">{error}</InlineAlert>}<div className="admin-dialog-actions"><SecondaryButton onClick={()=>setPublishing(false)}>بازگشت</SecondaryButton><PrimaryButton loading={busy} onClick={async()=>{const success=await apply(()=>repository.publish(actor,revision),"تنظیمات نمونه منتشر شد.");if(success){setPublishing(false);await site.refresh();}}}>تأیید انتشار</PrimaryButton></div></NativeDialog>}
-    {preview&&<NativeDialog title="پیش‌نمایش تنظیمات سایت" onDismiss={()=>setPreview(false)}><div className="site-settings-dialog-preview"><SettingsBrandPreview values={values} logo={resolvedLogo.url} hero={resolvedHero.url}/><p>۱۲ تصویر + کیلومتر + ویدیوی ۳۶۰ درجه؛ مستقل از تنظیمات برند</p></div><SecondaryButton onClick={()=>setPreview(false)}>بستن پیش‌نمایش</SecondaryButton></NativeDialog>}
+    {preview&&<NativeDialog title="پیش‌نمایش تنظیمات سایت" onDismiss={()=>setPreview(false)}><div className="site-settings-dialog-preview"><SettingsBrandPreview values={values} logo={resolvedLogo.url} hero={resolvedHero.url}/><p>{persian(inspectionPhotographyTemplate.sections.reduce((n,s)=>n+s.photoRequirements.filter(p=>p.required).length,0))} تصویر + کیلومتر + ویدیوی ۳۶۰ درجه؛ مستقل از تنظیمات برند</p></div><SecondaryButton onClick={()=>setPreview(false)}>بستن پیش‌نمایش</SecondaryButton></NativeDialog>}
   </div>;
 }

@@ -1,3 +1,4 @@
+// Legacy v1 regression fixture; photo-policy-v2.test.ts covers the current eleven-photo package.
 import {describe,it,expect,vi,afterEach} from "vitest";
 import {readFileSync} from "node:fs";
 import {Blob as NodeBlob} from "node:buffer";
@@ -7,7 +8,7 @@ import {renderOptimizedImage} from "@/lib/media/image-optimizer-core";
 import {photoDraftBlob,type PhotoDraft} from "@/lib/media/photo-store";
 import {ThumbnailCache} from "@/lib/media/thumbnail-cache";
 import {videoCaptureConstraints,defaultVideoProfile,videoExperimentProfiles} from "@/lib/media/video-profiles";
-import {inspectionPhotographyTemplate} from "@/features/photography/inspection-template";
+import {legacyPhotographyTemplate as inspectionPhotographyTemplate} from "@/features/photography/inspection-template";
 const binary=(path:string)=>Uint8Array.from(readFileSync(path)).buffer;
 const photo=()=>new NodeBlob([binary("public/assets/inspection-vehicle/photo-guides/front-45-right.webp")],{type:"image/webp"}) as unknown as Blob;
 afterEach(()=>vi.unstubAllGlobals());

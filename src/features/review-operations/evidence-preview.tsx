@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {useEffect,useRef,useState} from "react";
 import {Camera,Video,ImageOff} from "lucide-react";
-import {readPhoto} from "@/lib/media/photo-store";
+import {photoRevisionKey,readPhoto} from "@/lib/media/photo-store";
 import {indexedDBCaptureDataStore} from "@/lib/media/capture-data-store";
 import {photoRevision,type UploadJob} from "@/features/upload/upload-model";
 import {InlineAlert} from "@/components/ui/status";
@@ -10,7 +10,7 @@ import {readImageHeader} from "@/lib/media/image-header";
 import type {ThumbnailCache} from "@/lib/media/thumbnail-cache";
 import {SecondaryButton} from "@/components/ui/button";
 async function evidenceBlob(job:Pick<UploadJob,"namespace"|"evidenceKind"|"localBlobKey"|"revision">) {
- if(job.evidenceKind==="photo"){const record=await readPhoto(job.localBlobKey);if(record&&photoRevision(record)===job.revision&&record.blob)return record.blob;}
+ if(job.evidenceKind==="photo"){const record=await readPhoto(job.localBlobKey);if(record&&photoRevision(record)===job.revision&&record.blob)return record.blob;const historical=await readPhoto(photoRevisionKey(job.localBlobKey,job.revision));if(historical?.blob&&photoRevision(historical)===job.revision)return historical.blob;}
  else {const data=await indexedDBCaptureDataStore.get(job.namespace);if(data.video360?.accepted?.metadata.localBlobKey===job.revision)return data.video360.accepted.blob;}
  throw new Error("Evidence unavailable");
 }

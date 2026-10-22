@@ -37,7 +37,7 @@ function AuthorizedVehicleNavigator(props:Props){
   <div hidden={active&&ready}><VehiclePhotoNavigator {...props} controls={false}/></div>
   {visited&&!failed&&<div className="optional-vehicle-canvas photography-image" data-view={view} hidden={!active}><Boundary failed={onFailure}><Scene view={view} reset={reset} paint={props.bodyColor??"#E8EDF2"} onFailure={onFailure} onReady={onReady}/></Boundary></div>}
   {active&&!ready&&<p className="optional-model-loading" role="status">در حال آماده‌سازی مدل خودرو…</p>}
-  {active&&ready&&<div className="fixed-inspection-markers" aria-label="دوازده نیازمندی تصویری">{requirements.map((photo,index)=>{
+  {active&&ready&&<div className="fixed-inspection-markers" aria-label={`${fa(requirements.length)} نیازمندی تصویری`}>{requirements.map((photo,index)=>{
    const evidence=markerEvidence(photo,props.records,jobs.data??[],namespace),state=evidence.state,pos=fixedMarkerPosition(index),action=photoRequirementEntry(photo,props.records).action;
    return <button key={photo.id} type="button" className="vehicle-photo-marker fixed-inspection-marker" style={{left:pos.x+"%",top:pos.y+"%"}} data-requirement={photo.id} data-state={state} aria-pressed={props.photo.id===photo.id} aria-label={action+" "+photo.title+"، "+(evidence.captureComplete?"عکس ثبت شده":"عکس ثبت نشده")+"، "+evidence.upload} onClick={()=>{props.onSelect(photo.id);setChosen({id:photo.id,view:requirementView(photo.id)});setDetail(photo.id);}}><span aria-hidden="true">{state==="failed"?<Icon name="close" size={18}/>:<EvidenceSymbol state={state} number={fa(index+1)} size={18}/>}</span></button>;
   })}</div>}

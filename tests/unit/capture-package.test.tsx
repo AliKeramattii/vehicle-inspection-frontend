@@ -1,7 +1,8 @@
+// Legacy v1 regression fixture; photo-policy-v2.test.ts covers the current eleven-photo package.
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { act, render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { inspectionPhotographyTemplate as template } from "@/features/photography/inspection-template";
+import { legacyPhotographyTemplate as template } from "@/features/photography/inspection-template";
 import { capturePackageProgress, parseOdometer, formatOdometer, nextCaptureTask, type CapturePackageData, type VideoDraft } from "@/features/capture-package/capture-package-model";
 import { OdometerField } from "@/features/capture-package/odometer-field";
 import { useVideoRecording } from "@/features/capture-package/use-video-recording";

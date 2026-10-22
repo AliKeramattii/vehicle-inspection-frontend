@@ -4,7 +4,7 @@ import { photoDraftBlob } from "@/lib/media/photo-store";
 import { photoImagePolicy } from "@/lib/media/image-policy";
 import type {PhotoOptimizationHandlers} from "./photo-optimization-control";
 const PhotoOptimizationControl=dynamic(()=>import("./photo-optimization-control").then(module=>module.PhotoOptimizationControl));
-import { useIdentificationGuide } from "./use-identification-guide";
+import { evidencePhoto } from "./photo-choice";
 
 import { useRef, useState } from "react";
 import Link from "next/link";
@@ -22,14 +22,14 @@ import { requirementRetakeReason } from "./photography-model";
 import { OdometerField } from "@/features/capture-package/odometer-field";
 import type { OdometerReading } from "@/features/capture-package/capture-package-model";
 
-export function PhotoReview({ photo: originalPhoto, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote, guideScope, optimization }: {
+export function PhotoReview({ photo: originalPhoto, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote, optimization }: {
   optimization?: PhotoOptimizationHandlers;
   photo: PhotoRequirement; section: InspectionSection; record?: LocalPhoto; inspectionId: string;
   onConfirm: () => void; onRetake: () => void; pending?: boolean; error?: string;
   odometer?: { reading?: OdometerReading; onSave: (kilometers: number) => void };
   guideScope?: string; navigation?: { backHref: string; backLabel: string; guideHref: string; returnLabel?: string }; preservationNote?: string;
 }) {
-  const { photo } = useIdentificationGuide(originalPhoto, inspectionId, guideScope);
+  const photo = evidencePhoto(originalPhoto, record);
   const [expanded, setExpanded] = useState<"sample" | "user">();
   const trigger = useRef<HTMLButtonElement | null>(null);
   const blob = record?.draft ? photoDraftBlob(record.draft) : record?.blob, draft = Boolean(record?.draft);

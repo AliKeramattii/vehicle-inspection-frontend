@@ -6,6 +6,7 @@ import { adaptInspection } from "@/lib/api/adapters/inspection";
 import { RepositoryError, type InspectionRepository } from "@/lib/api/repositories";
 import { capturePlanSchema, inspectionLocationSchema } from "@/schemas/domain";
 import { inspectionFixture, mockInspectionReference } from "./fixtures";
+import { inspectionPhotoTemplate } from "@/features/photography/template-policy";
 import { templateCapturePlan } from "@/features/photography/inspection-template";
 import { consentInputSchema, type ConsentReceipt } from "@/features/consent/consent-model";
 import { vehicleConfirmationSchema, type VehicleConfirmationReceipt } from "@/features/vehicle/vehicle-model";
@@ -19,13 +20,14 @@ export function createMockInspectionRepository(tenantId = "demo"): InspectionRep
     if (id !== mockInitialInspectionId(tenantId) && (typeof indexedDB === "undefined" || !await lifecycleRepository.read(await createMockCustomerSource(tenantId).resolve(), id))) throw new RepositoryError("NOT_FOUND", "بازدید پیدا نشد.");
     if (!inspections.has(id)) inspections.set(id, adaptInspection({...structuredClone(inspectionFixture), inspectionId: id}));
     const inspection = inspections.get(id)!;
+    await inspectionPhotoTemplate(id);
     const facts = await readFacts(id); if (facts?.location) inspection.location = facts.location; if (facts?.vehicle) inspection.vehicle = facts.vehicle;
     return inspection;
   }
   return {
     async getTrackingCode(id) { await requireInspection(id); const record = typeof indexedDB !== "undefined" ? await lifecycleRepository.read(await createMockCustomerSource(tenantId).resolve(), id) : undefined; return record?.trackingCode ?? (tenantId === "demo" ? mockInspectionReference : `MOCK-${tenantId.toUpperCase()}`); },
     async getInspection(id) { const inspection = await requireInspection(id); const facts=await readFacts(id); if(facts?.location)inspection.location=facts.location;if(facts?.vehicle)inspection.vehicle=facts.vehicle; return structuredClone(inspection); },
-    async getCapturePlan(id) { await requireInspection(id); return capturePlanSchema.parse(structuredClone(templateCapturePlan())); },
+    async getCapturePlan(id) { await requireInspection(id); return capturePlanSchema.parse(structuredClone(templateCapturePlan(await inspectionPhotoTemplate(id)))); },
     async recordConsent(id, input) {
       await requireInspection(id);
       const accepted = consentInputSchema.parse(input);

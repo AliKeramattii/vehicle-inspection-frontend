@@ -1,7 +1,7 @@
 import { resolveVehicleGuide } from "@/config/vehicle-assets";
 import { z } from "zod";
 import { photographyTemplateSchema, photoRequirementSchema, inspectionSectionSchema, supplementalCaptureSchema, type PhotographyTemplate, type InspectionSectionId } from "@/schemas/photography";
-import { inspectionPhotographyTemplate as defaultPhotographyTemplate } from "@/features/photography/inspection-template";
+import { legacyPhotographyTemplate, inspectionPhotographyTemplate as defaultPhotographyTemplate } from "@/features/photography/inspection-template";
 
 export const roles = ["platform-admin", "template-editor", "viewer", "reviewer"] as const;
 export type AdminRole = typeof roles[number];
@@ -35,13 +35,16 @@ export type AdminWorkspace = {
   branding: Branding; webhooks: Webhook[]; users: AdminUser[];
 };
 export const sectionLabels: Record<InspectionSectionId, string> = Object.fromEntries(defaultPhotographyTemplate.sections.map(s => [s.id, s.title])) as Record<InspectionSectionId, string>;
-export const canonicalAssets = defaultPhotographyTemplate.sections.flatMap(s => s.photoRequirements.map(r => r.sampleImage));
-const canonicalIds = new Set(defaultPhotographyTemplate.sections.flatMap(s => s.photoRequirements.map(r => r.id)));
+export const canonicalAssets = [...new Set(legacyPhotographyTemplate.sections.flatMap(s => s.photoRequirements.map(r => r.sampleImage)))];
+
 export const adminSnapshotSchema = photographyTemplateSchema.safeExtend({ sections: z.array(inspectionSectionSchema.safeExtend({ photoRequirements: z.array(photoRequirementSchema.strict()).min(1) }).strict()).min(1), captureRequirements: supplementalCaptureSchema.strict().optional() }).strict().superRefine((snapshot, context) => {
   const requirements = snapshot.sections.flatMap(s => s.photoRequirements);
+  const policy = snapshot.photoPolicyVersion === 2 ? defaultPhotographyTemplate : legacyPhotographyTemplate;
+  const canonicalIds = new Set(policy.sections.flatMap(s=>s.photoRequirements.map(r=>r.id)));
   const fail = (message: string) => context.addIssue({ code: "custom", message });
   if (snapshot.sections.length !== defaultPhotographyTemplate.sections.length) fail("هر هفت بخش قالب باید حفظ شود.");
-  if (requirements.length !== canonicalIds.size || requirements.some(r => !canonicalIds.has(r.id))) fail("شناسه‌های دوازده تصویر باید حفظ شوند.");
+  if (requirements.length !== canonicalIds.size || requirements.some(r => !canonicalIds.has(r.id))) fail("شناسه‌های تصاویر نسخه سیاست باید حفظ شوند.");
+  if (snapshot.photoPolicyVersion === 2 && (requirements.some(r=>!r.required) || requirements.some(r=>JSON.stringify(r.choice)!==JSON.stringify(policy.sections.flatMap(s=>s.photoRequirements).find(p=>p.id===r.id)?.choice)))) fail("ده عکس ثابت و دقیقاً یک انتخاب از چهار محل کد باید حفظ شود.");
   if (snapshot.sections.some((s, i) => s.order !== i + 1)) fail("ترتیب بخش‌ها باید پیوسته باشد.");
   if (requirements.some(r => !canonicalAssets.includes(resolveVehicleGuide(r.sampleImage)))) fail("تصویر راهنما باید از دارایی‌های تأییدشده باشد.");
   if (requirements.some(r => r.status !== "pending" || r.reviewerReason !== undefined)) fail("وضعیت شواهد در تعریف قالب قابل ویرایش نیست.");

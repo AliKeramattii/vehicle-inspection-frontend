@@ -65,12 +65,14 @@ function PhotographySession({ inspectionId, template, view, bodyColor }: { inspe
   const found = findRequirement(template, view.requirementId);
   if (!found) return <MissingPhoto inspectionId={inspectionId} />;
   const { photo, section } = found;
-  if (view.kind === "guide") return focus(<PhotoGuidance {...shared} photo={photo} section={section} />);
-  if (view.kind === "camera") return focus(<PhotoCamera photo={photo} inspectionId={inspectionId} onCapture={async (blob) => {
-    await photos.draft.mutateAsync({ id: photo.id, draft: { blob, capturedAt: new Date().toISOString() } });
+  const record = photos.records.find(record => record.requirementId === photo.id);
+  const guideSelection = {id:record?.selectedAlternativeId === null ? undefined : record?.selectedAlternativeId ?? record?.draft?.alternativeId ?? record?.alternativeId,
+    onSelect:async (alternativeId:string|undefined)=>{await photos.choice.mutateAsync({id:photo.id,alternativeId});}};
+  if (view.kind === "guide") return focus(<PhotoGuidance {...shared} guideSelection={guideSelection} photo={photo} section={section} />);
+  if (view.kind === "camera") return focus(<PhotoCamera guideSelection={guideSelection} photo={photo} inspectionId={inspectionId} onCapture={async (blob, alternativeId) => {
+    await photos.draft.mutateAsync({ id: photo.id, draft: { blob, alternativeId, capturedAt: new Date().toISOString() } });
     router.push(inspectionRoutes.photo(inspectionId, photo.id, "review"));
   }} />);
-  const record = photos.records.find((record) => record.requirementId === photo.id);
   return focus(<PhotoReview key={`${photo.id}:${capture.data?.odometer?.updatedAt ?? ""}`} photo={photo} section={section} inspectionId={inspectionId} record={record} pending={photos.confirm.isPending || photos.discard.isPending || capture.odometer.isPending} error={photos.confirm.error?.message ?? photos.discard.error?.message ?? capture.odometer.error?.message}
     optimization={photos.optimization ? {prepare:(policy,signal)=>photos.optimization!.prepare(photo.id,policy,signal),choose:(revision,choice)=>photos.optimization!.choose(photo.id,revision,choice)} : undefined}
     odometer={template.captureRequirements?.odometerRequirementId === photo.id ? { reading: capture.data?.odometer, onSave: (kilometers) => {

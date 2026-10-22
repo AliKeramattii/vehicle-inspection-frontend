@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useIdentificationGuide } from "./use-identification-guide";
+import { useIdentificationGuide, type GuideSelection } from "./use-identification-guide";
 import { IdentificationGuideChoice } from "./identification-guide-choice";
 import { PhotoAlignmentGuide, photoAlignmentView } from "./photo-alignment-guide";
 import { useState } from "react";
@@ -14,11 +14,11 @@ import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import type { PhotoRequirement } from "@/schemas/photography";
 import { useCamera } from "./use-camera";
 
-type PhotoCameraProps = { photo: PhotoRequirement; inspectionId: string; onCapture: (blob: Blob) => Promise<void>; service?: CameraService; guideHref?: string; reviewerReason?: string; guideScope?: string };
+type PhotoCameraProps = { guideSelection?: GuideSelection; photo: PhotoRequirement; inspectionId: string; onCapture: (blob: Blob, alternativeId?: string) => Promise<void>; service?: CameraService; guideHref?: string; reviewerReason?: string; guideScope?: string };
 export function PhotoCamera(props: PhotoCameraProps) {
-  const selection = useIdentificationGuide(props.photo, props.inspectionId, props.guideScope);
-  if (selection.required && !selection.choice) return <div className="photo-route"><div className="photo-scroll photography-content"><Link className="photo-back" href={props.guideHref ?? inspectionRoutes.photo(props.inspectionId, props.photo.id, "guide")}>بازگشت به راهنمای عکاسی</Link><h2>{props.photo.title}</h2><IdentificationGuideChoice onSelect={selection.select} /></div></div>;
-  return <LivePhotoCamera {...props} photo={selection.photo} />;
+  const selection = useIdentificationGuide(props.photo, props.inspectionId, props.guideScope, props.guideSelection);
+  if (selection.required && !selection.choice) return <div className="photo-route"><div className="photo-scroll photography-content"><Link className="photo-back" href={props.guideHref ?? inspectionRoutes.photo(props.inspectionId, props.photo.id, "guide")}>بازگشت به راهنمای عکاسی</Link><h2>{props.photo.title}</h2>{selection.error && <InlineAlert tone="destructive">{selection.error}</InlineAlert>}<IdentificationGuideChoice onSelect={selection.select} /></div></div>;
+  return <LivePhotoCamera {...props} photo={selection.photo} onCapture={blob => props.onCapture(blob, selection.choice?.id)} />;
 }
 function LivePhotoCamera({ photo, inspectionId, onCapture, service, guideHref, reviewerReason }: PhotoCameraProps) {
   const { video, state, retry, take } = useCamera(service);

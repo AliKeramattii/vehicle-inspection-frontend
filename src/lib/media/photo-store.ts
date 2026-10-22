@@ -1,18 +1,19 @@
 import type { ImagePolicy, ImageOptimizationMetadata, ImageOptimizationResult } from "./image-policy";
 import type { PhotoRequirementStatus } from "@/schemas/photography";
 
-export type PhotoDraft = { blob: Blob; capturedAt: string; revisionId?: string; optimization?: ImageOptimizationMetadata; optimizedBlob?: Blob; selectedVariant?: "source" | "optimized" };
+export type PhotoDraft = { alternativeId?: string; blob: Blob; capturedAt: string; revisionId?: string; optimization?: ImageOptimizationMetadata; optimizedBlob?: Blob; selectedVariant?: "source" | "optimized" };
 export type LocalPhoto = { key: string; namespace: string; requirementId: string; status: PhotoRequirementStatus;
-  blob?: Blob; sourceBlob?: Blob; imageOptimization?: ImageOptimizationMetadata; capturedAt?: string; revisionId?: string; draft?: PhotoDraft; reviewerReason?: string };
+  alternativeId?: string; selectedAlternativeId?: string | null; blob?: Blob; sourceBlob?: Blob; imageOptimization?: ImageOptimizationMetadata; capturedAt?: string; revisionId?: string; draft?: PhotoDraft; reviewerReason?: string };
 export interface PhotoStore {
   list(namespace: string): Promise<LocalPhoto[]>;
   saveDraft(namespace: string, requirementId: string, draft: PhotoDraft): Promise<void>;
-  confirm(namespace: string, requirementId: string): Promise<void>;
+  confirm(namespace: string, requirementId: string, expectedRevision?: string): Promise<void>;
   discardDraft(namespace: string, requirementId: string): Promise<void>;
 }
 export const photoDatabase = { name: "inspection-photos", version: 1, store: "photos" } as const;
 export const photoNamespace = (id: string, templateId: string, version: number) => JSON.stringify([id, templateId, version]);
 export const photoKey = (namespace: string, requirementId: string) => JSON.stringify([namespace, requirementId]);
+export const photoRevisionKey = (key: string, revision: string) => JSON.stringify(["photo-history", key, revision]);
 export function validatePhotoBlob(blob: Blob) {
   if (!blob.type.startsWith("image/") || !blob.size || blob.size > 20 * 1024 * 1024) throw new Error("یک عکس معتبر با حجم کمتر از ۲۰ مگابایت انتخاب کنید.");
 }
@@ -34,7 +35,17 @@ async function change(namespace: string, requirementId: string, update: (photo: 
     const read = store.get(key);
     let error: unknown;
     read.onsuccess = () => {
-      try { store.put(update((read.result as LocalPhoto | undefined) ?? { key, namespace, requirementId, status: "pending" })); }
+      try {
+        const previous = read.result as LocalPhoto | undefined;
+        const next = update(previous ?? {key, namespace, requirementId, status:"pending"});
+        // Archive an accepted choice only on successful replacement, in the SAME transaction.
+        // A distinct prefix keeps these Blobs out of normal namespace lists and progress.
+        if (previous?.blob && (previous.alternativeId || next.alternativeId) && previous.revisionId !== next.revisionId) {
+          const revision = previous.revisionId ?? `${previous.capturedAt}:${previous.blob.size}:${previous.blob.type}`;
+          store.put({...previous, key:photoRevisionKey(key,revision), namespace:JSON.stringify(["photo-history",namespace]), draft:undefined});
+        }
+        store.put(next);
+      }
       catch (cause) { error = cause; transaction.abort(); }
     };
     transaction.oncomplete = () => { database.close(); resolve(); };
@@ -61,12 +72,13 @@ export const indexedDBPhotoStore: PhotoStore = {
     validatePhotoBlob(draft.blob);
     await change(namespace, requirementId, (photo) => ({ ...photo, draft: { ...draft, revisionId: secureRevision() } }));
   },
-  async confirm(namespace, requirementId) {
+  async confirm(namespace, requirementId, expectedRevision) {
     await change(namespace, requirementId, (photo) => {
       if (!photo.draft) throw new Error("ابتدا یک عکس بگیرید.");
+      if (expectedRevision !== undefined && photo.draft.revisionId !== expectedRevision) throw new Error("نسخه عکس تغییر کرده است؛ دوباره بررسی کنید.");
       const draft = photo.draft, blob = photoDraftBlob(draft);
       return { ...photo, blob, sourceBlob: blob !== draft.blob ? draft.blob : undefined, imageOptimization: draft.optimization ? {...draft.optimization,selectedVariant:blob !== draft.blob ? "optimized" : "source",...(draft.optimization.status === "processing" ? {status:"kept-original",reason:"source-confirmed"} as const : {})} : undefined,
-        capturedAt: draft.capturedAt, revisionId: draft.revisionId ?? secureRevision(), status: "captured", draft: undefined, reviewerReason: undefined };
+        alternativeId: draft.alternativeId, selectedAlternativeId: draft.alternativeId, capturedAt: draft.capturedAt, revisionId: draft.revisionId ?? secureRevision(), status: "captured", draft: undefined, reviewerReason: undefined };
     });
   },
   async discardDraft(namespace, requirementId) { await change(namespace, requirementId, (photo) => ({ ...photo, draft: undefined })); },
@@ -117,4 +129,8 @@ export async function choosePhotoVariant(namespace:string,requirementId:string,r
   if (variant === "optimized" && (photo.draft.optimization?.status !== "ready" || !photo.draft.optimizedBlob)) throw new Error("نسخه کم‌حجم هنوز آماده نیست؛ اصل عکس محفوظ است.");
   return {...photo,draft:{...photo.draft,selectedVariant:variant}};
  });
+}
+
+export async function selectPhotoAlternative(namespace: string, requirementId: string, alternativeId: string | undefined) {
+ await change(namespace, requirementId, photo => ({...photo, selectedAlternativeId: alternativeId ?? null}));
 }

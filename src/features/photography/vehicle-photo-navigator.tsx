@@ -1,3 +1,4 @@
+import { evidencePhoto } from "./photo-choice";
 import { vehicleViewAssets } from "@/config/vehicle-assets";
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
@@ -23,7 +24,7 @@ export function VehiclePhotoNavigator({ template, photo, sectionId, records, onA
         const state = photographyVisualState(target, records), selected = target.id === photo.id;
         const { action } = photoRequirementEntry(target, records);
         return <button key={target.id} type="button" className="vehicle-photo-marker" data-requirement={target.id} data-state={state} aria-pressed={selected}
-          aria-label={`${action} ${target.title}، ${photographyStateLabels[state]}`} onClick={() => onActivate(target.id)} style={{ left: `${marker.x}%`, top: `${marker.y}%` }}>
+          aria-label={`${action} ${evidencePhoto(target,records.find(r=>r.requirementId===target.id)).title}، ${photographyStateLabels[state]}`} onClick={() => onActivate(target.id)} style={{ left: `${marker.x}%`, top: `${marker.y}%` }}>
           <span aria-hidden="true"><EvidenceSymbol state={state} number={fa(requirements.indexOf(target) + 1)} size={18} /></span>
         </button>;
       })}</div>

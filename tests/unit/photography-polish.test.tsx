@@ -1,6 +1,7 @@
+// Legacy v1 regression fixture; photo-policy-v2.test.ts covers the current eleven-photo package.
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { inspectionPhotographyTemplate as template } from "@/features/photography/inspection-template";
+import { legacyPhotographyTemplate as template } from "@/features/photography/inspection-template";
 import { photographyProgress, photographyVisualState, sectionProgress } from "@/features/photography/photography-model";
 import { PhotographyOverview } from "@/features/photography/photography-overview";
 import { SectionRow } from "@/features/photography/section-row";

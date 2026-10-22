@@ -25,6 +25,7 @@ export const captureSlotSchema = z.object({
   status: z.enum(["pending", "completed", "retake"]).optional(),
 });
 export const capturePlanSchema = z.object({
+  photoPolicyVersion: z.literal(2).optional(),
   templateId: z.string().min(1), templateVersion: z.number().int().positive(),
   totalRequired: z.number().int().nonnegative(), shots: z.array(captureSlotSchema),
   sections: z.array(inspectionSectionSchema).optional(),

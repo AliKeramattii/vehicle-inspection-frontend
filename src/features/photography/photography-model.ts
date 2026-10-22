@@ -1,3 +1,4 @@
+import { validPhotoChoice } from "./photo-choice";
 import type { LocalPhoto } from "@/lib/media/photo-store";
 import type { InspectionSection, PhotographyTemplate, PhotoRequirement, PhotoRequirementStatus } from "@/schemas/photography";
 
@@ -5,7 +6,9 @@ export const photoStatusLabels: Record<PhotoRequirementStatus, string> = {
   pending: "ثبت نشده", captured: "ثبت شد", uploading: "در حال ارسال", uploaded: "ارسال شد", verified: "تأیید شد", "retake-requested": "نیاز به عکاسی مجدد",
 };
 export function requirementStatus(photo: PhotoRequirement, records: readonly LocalPhoto[]): PhotoRequirementStatus {
-  return records.find((record) => record.requirementId === photo.id)?.status ?? photo.status;
+  const record = records.find(record => record.requirementId === photo.id);
+  const status = record?.status ?? photo.status;
+  return photoSatisfied(status) && !validPhotoChoice(photo, record?.alternativeId) ? "pending" : status;
 }
 export const photoSatisfied = (status: PhotoRequirementStatus) => ["captured", "uploading", "uploaded", "verified"].includes(status);
 export type PhotographyVisualState = "pending" | "complete" | "attention";

@@ -1,3 +1,4 @@
+import { validPhotoChoice, evidencePhoto } from "@/features/photography/photo-choice";
 import type { LocalPhoto } from "@/lib/media/photo-store";
 import { photoKey } from "@/lib/media/photo-store";
 import type { PhotographyTemplate } from "@/schemas/photography";
@@ -7,7 +8,7 @@ export type UploadStatus = "local" | "queued" | "uploading" | "uploaded" | "fail
 export type VerificationStatus = "not-started" | "processing" | "verified" | "retake-requested";
 export type MediaReference = {
   inspectionId: string; namespace: string; evidenceKind: "photo" | "video-360";
-  requirementId?: string; title: string; localBlobKey: string; revision: string;
+  requirementId?: string; alternativeId?: string; title: string; localBlobKey: string; revision: string;
   mimeType: string; byteSize: number; capturedAt: string; required: boolean;
   requestId?: string; requestVersion?: number; requestItemId?: string; replacesEvidenceId?: string;
 };
@@ -24,8 +25,9 @@ export function acceptedMedia(inspectionId: string, namespace: string, template:
   const items: MediaReference[] = [];
   for (const section of template.sections) for (const requirement of section.photoRequirements) {
     const photo = photos.find((record) => record.requirementId === requirement.id);
+    if (!validPhotoChoice(requirement, photo?.alternativeId)) continue;
     if (!photo?.blob?.size || !photo.capturedAt || photo.status === "pending" || photo.status === "retake-requested") continue;
-    items.push({ inspectionId, namespace, evidenceKind: "photo", requirementId: requirement.id, title: requirement.title, localBlobKey: photoKey(namespace, requirement.id), revision: photoRevision(photo), mimeType: photo.blob.type, byteSize: photo.blob.size, capturedAt: photo.capturedAt, required: requirement.required });
+    items.push({ inspectionId, namespace, evidenceKind: "photo", requirementId: requirement.id, alternativeId: photo.alternativeId, title: evidencePhoto(requirement, photo, false).title, localBlobKey: photoKey(namespace, requirement.id), revision: photoRevision(photo), mimeType: photo.blob.type, byteSize: photo.blob.size, capturedAt: photo.capturedAt, required: requirement.required });
   }
   const video = data.video360?.accepted;
   if (template.captureRequirements?.video360Required && video?.blob.size && data.video360?.state !== "retakeRequired") items.push({ inspectionId, namespace, evidenceKind: "video-360", title: "ویدیوی ۳۶۰ درجه", localBlobKey: video.metadata.localBlobKey, revision: video.metadata.localBlobKey, mimeType: video.metadata.mimeType, byteSize: video.metadata.sizeBytes, capturedAt: video.metadata.capturedAt, required: true });

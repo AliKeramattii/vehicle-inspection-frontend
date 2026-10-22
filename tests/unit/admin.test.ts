@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { inspectionPhotographyTemplate } from "@/features/photography/inspection-template";
+import { inspectionPhotographyTemplate as currentTemplate, legacyPhotographyTemplate as inspectionPhotographyTemplate } from "@/features/photography/inspection-template";
 import { actors, adminSnapshotSchema, canonicalAssets, moveRequirement, pinPublishedTemplate, allowed, permissions, type AdminRole } from "@/features/admin/model";
 import { MemoryAdminPersistence } from "@/features/admin/persistence";
 import { MockAdminRepository } from "@/features/admin/repository";
-import { seedTime } from "@/features/admin/fixtures";
+import { initialAdminWorkspace, seedTime } from "@/features/admin/fixtures";
 const admin = actors["platform-admin"];
 const templateId = inspectionPhotographyTemplate.templateId;
-function setup() { const storage = new MemoryAdminPersistence(); const repo = new MockAdminRepository(storage,() => seedTime); return { storage, repo }; }
+function setup() { const storage = new MemoryAdminPersistence(initialAdminWorkspace(inspectionPhotographyTemplate)); const repo = new MockAdminRepository(storage,() => seedTime); return { storage, repo }; }
 async function draft(repo: MockAdminRepository) { return repo.createDraft(admin,templateId,templateId + ":v1"); }
 describe("Admin template compatibility", () => {
   it("reuses 7 sections and 12 canonical photo IDs with independent odometer/video", () => {
@@ -94,7 +94,7 @@ describe("Admin durable service boundary", () => {
   it("creates a new template with stable requirement identities", async () => {
     const {repo} = setup(); const created = await repo.createTemplate(admin,"قالب آزمایشی");
     expect(created.versions[0].snapshot.templateId).toBe(created.id);
-    expect(created.versions[0].snapshot.sections.flatMap(s => s.photoRequirements.map(r => r.id))).toEqual(inspectionPhotographyTemplate.sections.flatMap(s => s.photoRequirements.map(r => r.id)));
+    expect(created.versions[0].snapshot.sections.flatMap(s => s.photoRequirements.map(r => r.id))).toEqual(currentTemplate.sections.flatMap(s => s.photoRequirements.map(r => r.id)));
     await expect(repo.createTemplate(admin," ")).rejects.toMatchObject({code:"invalid"});
   });
   it.each(["viewer","template-editor"] as AdminRole[])("denies publishing, branding, users and webhooks for %s", async role => {
