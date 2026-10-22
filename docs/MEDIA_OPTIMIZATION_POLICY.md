@@ -2,7 +2,7 @@
 
 ## Status and ownership
 
-Experimental, explicit opt-in, draft photos only. No insurer quality policy is implied. The twelve requirement IDs, numeric odometer, separate video, original capture quality and existing upload state machine remain unchanged. No library, production server or duplicate queue is introduced.
+Experimental, explicit opt-in, draft photos only. No insurer quality policy is implied. Current business policy is eleven logical photographs (ten fixed + one of four VIN/spec alternatives), with historical v1 retaining twelve. Numeric odometer, separate video, original capture quality and existing upload state machine remain unchanged. No library, production server or duplicate queue is introduced.
 
 Existing photo database/store/version 1 and keys remain compatible. Optional fields extend PhotoDraft/LocalPhoto; no rewrite or deletion of old records occurs. `photo-store.ts` queries the encoded namespace key range, retaining a namespace check. Historical records remain readable. Source-first workflow:
 
@@ -49,6 +49,6 @@ Current approved production capture is live-only. Unsupported recording has exis
 
 ## Required acceptance beyond this lab
 
-Compare real low-light, motion, tiny embossed VIN, Persian/Latin plates, glare/cluster and spec labels on iOS Safari/Android Chrome; visually compare original/candidate at 100% and zoom. Approve minimum detail, maximum file/pixel sizes and accepted MIME with backend/insurance stakeholders. PSNR and byte reduction are regression indicators only. Keep originals and explicit source selection until acceptance. No asset or eleven-photo migration is authorized by this policy.
+Compare real low-light, motion, tiny embossed VIN, Persian/Latin plates, glare/cluster and spec labels on iOS Safari/Android Chrome; visually compare original/candidate at 100% and zoom. Approve minimum detail, maximum file/pixel sizes and accepted MIME with backend/insurance stakeholders. PSNR and byte reduction are regression indicators only. Keep originals and explicit source selection until acceptance. No asset replacement is authorized by this media policy. The separately approved v2 logical-photo change is documented in PHOTO_REQUIREMENT_POLICY_V2.md.
 
 Primary technical references: [createImageBitmap orientation/resize](https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap), [actual recorder bitrate](https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder/videoBitsPerSecond), [track constraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints).

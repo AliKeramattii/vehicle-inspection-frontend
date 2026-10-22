@@ -39,3 +39,8 @@ Reviewer retrieval requires authenticated resource/revision checks (including hi
 
 ## Concurrency, audit and forwarding
 Use server-issued expectedVersion/ETag and idempotency for submit, decisions, replacement/resubmit, restart, settings publication and delivery. Store actor/time, previous/current revision, public reason separately from internal note and delivery attempts. Reject stale transitions, do not last-write-win legal decisions. Backend-owned outbox handles private brokerage transfer with destination allowlist, credentials, retries, timeout and acknowledged receipt. Approval is not delivery; failed forwarding does not trigger customer recapture.
+
+
+## V2 chosen-photo identity and retention
+
+The eleven-photo policy persists one alternativeId under the logical requirementId, never four independent active media records. Durable preference, captured draft and accepted revision are distinct. Choice replacements archive the prior accepted bytes/metadata transactionally under a separate private IDB prefix; they are excluded from active progress and upload enumeration. No evidence deletion, public URL, new authorization store or cleanup policy is introduced. Existing post-submit and exact-request guards remain. Proposed backend authorization must validate pinned policy, tenant/inspection ownership, chosen alternative and immutable revision for upload, private retrieval, processing and forwarding. See PHOTO_REQUIREMENT_POLICY_V2.md and BACKEND_MEDIA_PROCESSING_REQUIREMENTS.md.

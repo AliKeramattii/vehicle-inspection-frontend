@@ -1,6 +1,6 @@
 # Phase 04 — reference-led 2D photography
 
-Checkpoint 1 of the user-approved reference-driven redesign uses Fleetr for vehicle-first hierarchy, Automotive Inspection for grouped progress, and EGO for spatial/task separation. The legacy reference 07 remains historical comparison material, rather than the new pixel target. Production still uses the canonical 2D sedan, seven sections and twelve configured requirements. The optional licensed Three/R3F preview remains isolated.
+Checkpoint 1 of the user-approved reference-driven redesign uses Fleetr for vehicle-first hierarchy, Automotive Inspection for grouped progress, and EGO for spatial/task separation. The legacy reference 07 remains historical comparison material, rather than the new pixel target. Production still uses the canonical 2D sedan, seven sections and eleven logical requirements (ten fixed plus one four-location VIN/spec choice; historical v1 remains twelve). The optional licensed Three/R3F preview remains isolated.
 
 ## Configuration and state ownership
 
@@ -77,7 +77,7 @@ A replacement draft adds attention while preserving the accepted original and it
 with replacement drafts keep their count and expose attention, rather than a misleading completion-only
 state. Progress segments also show attention independently from the circular accepted count.
 A reviewer retake removes progress credit until replacement. Completed journey steps use the independent Emerald success role
-on capture surfaces. The circular count and segments derive from real local evidence (fresh 0/12);
+on capture surfaces. The circular count and segments derive from real local evidence (fresh v2 0/11; historical v1 0/12);
 `تصویر ذخیره‌شده روی دستگاه` is truthful local status, not fake uploaded/synchronized progress.
 No manual standing-position certification, arbitrary 2D toggle or remote upload implementation.
 
@@ -108,7 +108,7 @@ Atomic confirmation accepts a draft, then opens the next incomplete required pho
 After the final photo, the completed section has a prominent CTA to the next incomplete section's
 first requirement. The overview stays manually accessible. Twelve satisfied requirements expose
 the next required local task: missing odometer data, then walk-around video, then local review.
-The photo count remains twelve. A quiet review link below the cards keeps partial packages manually
+The current photo count is eleven (ten fixed plus one four-choice logical group); historical v1 retains twelve. A quiet review link below the cards keeps partial packages manually
 accessible without changing the image/control composition.
 
 ## Camera, durability and mock boundary
@@ -170,7 +170,7 @@ No canonical automotive asset was replaced by this modernisation. Suggested prio
 
 
 ## Approved UI refinement
-Production remains 2D and template-driven. Optional explicit loopback development may load one mobile Sportage model with twelve fixed screen-space requirement markers, sharing selection and downstream guarded routes. It never ships the restricted GLB or duplicates capture state. Successful checks are green; optional 3D upload checks require the current accepted revision's binary acknowledgement.
+Production remains 2D and template-driven. Optional explicit loopback development may load one mobile Sportage model with template-derived screen-space requirement markers, sharing selection and downstream guarded routes. It never ships the restricted GLB or duplicates capture state. Successful checks are green; optional 3D upload checks require the current accepted revision's binary acknowledgement.
 Capture and retakes are live-only: no arbitrary gallery or File Manager import. Unsupported devices show recovery. Existing durable evidence, accepted replacement safety and automatic continuation remain. See UI_REFINEMENT.md.
 
 ## Unified optional-viewer interaction
@@ -178,7 +178,7 @@ Production remains2D. Optional3D pins derive accepted local capture separately f
 
 ## Supplied sedan reference consolidation
 
-Active reference artwork now comes from `src/config/vehicle-assets.ts`: twelve exact guides, eight explicit physical/category view roles and eight transparent recording ghosts. Known old built-in guide URLs resolve at presentation time for pinned template history; actual captured Blobs and tenant custom images do not pass through a replacement migration. Marker/image layers share the source aspect ratio. See `NEW_VEHICLE_ASSET_AUDIT.md` and `NEW_VEHICLE_ASSET_MIGRATION.md`; the earlier asset-continuity candidate list is historical and has been superseded for active 2D defaults. The optional Sportage 3D subsystem is unchanged.
+Active reference artwork now comes from `src/config/vehicle-assets.ts`: the twelve original exact guide files plus two existing VIN/spec location samples (eleven logical requirements in v2), eight explicit physical/category view roles and eight transparent recording ghosts. Known old built-in guide URLs resolve at presentation time for pinned template history; actual captured Blobs and tenant custom images do not pass through a replacement migration. Marker/image layers share the source aspect ratio. See `NEW_VEHICLE_ASSET_AUDIT.md` and `NEW_VEHICLE_ASSET_MIGRATION.md`; the earlier asset-continuity candidate list is historical and has been superseded for active 2D defaults. The optional Sportage 3D subsystem is unchanged.
 
 ## Sedan location choices and photo-only alignment
 

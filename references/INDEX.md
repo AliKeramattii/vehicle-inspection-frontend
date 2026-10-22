@@ -42,7 +42,7 @@ Do not display these PNG files as production UI backgrounds. Reconstruct them us
 ## Phase 04 — canonical image-guided photography
 
 Production flow: 2D overview → section → required photo → sample/guidance → camera → comparison
-→ confirmation. Seven sections contain twelve photos in the current configurable template.
+→ confirmation. Seven sections contain eleven logical photos in the current v2 template: ten fixed plus one of four VIN/spec locations. Historical v1 retains twelve photos; see docs/PHOTO_REQUIREMENT_POLICY_V2.md.
 Reference 07 defines the primary composition, using static 2D photography instead of WebGL.
 Its historical fourteen-photo counts do not override the template. Markers on the vehicle, compact
 side controls, circular/segmented progress, categories and two rows of shot images are required.
@@ -73,7 +73,7 @@ mirror physical vehicle directions. Configuration, rather than old PNG counts, d
 
 ## Approved white sedan asset migration
 
-The latest supplied `references/assets/new-vehicle/` photographs supersede the older SUV imagery for active 2D defaults and guidance, while PNGs still define layout. The old guide source folder and screenshot baselines remain historical evidence. Twelve guide IDs/seven sections are unchanged. See `docs/NEW_VEHICLE_ASSET_AUDIT.md` for all 40 supplied assets, eight navigation roles and genuine-alpha Recorder V2 ghosts. Optional Sportage 3D remains intentionally unchanged.
+The latest supplied `references/assets/new-vehicle/` photographs supersede the older SUV imagery for active 2D defaults and guidance, while PNGs still define layout. The old guide source folder and screenshot baselines remain historical evidence. All supplied guide files/seven sections are preserved. Current v2 uses eleven logical IDs; the historical twelfth ID remains available to pinned v1 inspections. See `docs/NEW_VEHICLE_ASSET_AUDIT.md` for all 40 supplied assets, eight navigation roles and genuine-alpha Recorder V2 ghosts. Optional Sportage 3D remains intentionally unchanged.
 
 ## Approved Emerald, Amber and Slate palette (2026-10-16)
 

@@ -51,3 +51,8 @@ Baseline lint/typecheck/unit/build: exit0, 480 units. Reproductions: six failed 
 8. Toggle offline during upload, refresh/reopen with local media, restore connection, individual/retry-all; check no duplicate acknowledgements and no lost accepted originals. Do not uninstall/clear storage as a retry mechanism.
 9. Submit once, double tap/reload, inspect receipt/tracking, exact correction and explicit new attempt. Real forwarding success only from actual backend acknowledgement.
 10. Review permissions/tenant isolation on the deployed server separately; local mock/emulation cannot establish this. PWA install/update/cold offline only after that feature is implemented and approved.
+
+
+## Eleven-photo policy acceptance supplement
+
+New policy: ten fixed + exactly one of four existing VIN/spec suggestions = eleven photographs; numeric odometer and required video stay separate. Each choice independently passes captured-identity, upload and readiness tests. New browser coverage checks all four live photo paths, refresh, 100dvh widths, upload/submission/Reviewer, exact requested correction, retained original and Admin eleven-slot presentation. Explicit v1 fixtures retain historical twelve-photo/receipt/decision coverage. Future API checks must validate group/alternative/revision identity and one active accepted upload. Actual command counts, screenshots, known visual debt and exits are recorded in PERFORMANCE_OPTIMIZATION_REPORT.md; no backend acceptance is claimed.

@@ -1,6 +1,6 @@
 # Performance baseline
 
-Measured against starting HEAD `3b62f68bd88dc631d902023562360fe6944bfe9d` plus the pre-existing local user changes. These are lab observations, not production telemetry. The current template remains seven sections and twelve photos, with separate numeric odometer and walk-around video.
+Measured against starting HEAD `3b62f68bd88dc631d902023562360fe6944bfe9d` plus the pre-existing local user changes. These are lab observations, not production telemetry. This historical measurement used seven sections and twelve photos (legacy v1), with separate numeric odometer and walk-around video.
 
 ## Reproduction and conditions
 
@@ -42,3 +42,8 @@ The interaction observer is a lab event-latency sample, not field INP; zero can 
 Queue uploads are deterministic in-process mocks. CDP network throttling measures route requests, not mock binary upload throughput. Real ASP.NET transfer throughput, field INP, iOS/Android device memory, physical camera startup and insurance readability require separate deployment/device acceptance. See MEDIA_OPTIMIZATION_POLICY.md and PERFORMANCE_OPTIMIZATION_REPORT.md.
 
 Raw diagnostics are intentionally local/ignored under `.agent/reference-review/performance/`: before-benchmark.json, before-mobile-{1,2,3}.json, before-indexeddb.json, static-image-inventory.json and command logs. Reproduction specs are committed under tests/performance; saved results summarized here remain reviewable without those files.
+
+
+## V2 follow-up inventory (not a new before benchmark)
+
+Completed optimization HEAD 59abbce is reused. Existing approved guide byte inventory: ten fixed guides total 789,800 bytes; legacy twelve-guide set 1,087,324 bytes. Eleven-guide variants: pillar 927,792, engine 949,332, seat 1,245,642, windshield 991,358 bytes. These are static guide files only, not camera evidence, network upload payload, quality measurements or startup savings. No guide was regenerated. Previous camera/compression/video benchmarks above remain the completed phase's measured results.

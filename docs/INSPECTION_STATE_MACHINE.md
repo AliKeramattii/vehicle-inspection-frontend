@@ -55,3 +55,8 @@ Submit uses existing derived capture-package/readiness helpers: required accepte
 Request scope pins inspection/template/version/requirement and exact original evidence. The latest acknowledged request round for each target determines the current revision, independent of IndexedDB/job order. Only receipt-listed job IDs in that request namespace qualify. Superseded/unacknowledged/foreign jobs do not qualify. Archived revisions cannot replay over current data; metadata history does not duplicate Blobs.
 
 The backend must use expectedVersion/ETag CAS, stable command IDs and server actor/time on every decision, correction, new-attempt and delivery transition. Reject stale versions with conflict and reload current state. Multiple browser databases are not a cross-service transaction; production outbox/transaction guarantees are still required. Failure/retry never deletes accepted media. Audit records and finalized snapshots remain immutable under the future retention policy.
+
+
+## Current photo policy v2
+
+New capture readiness derives eleven logical photographs: ten mandatory fixed slots and one valid VIN/spec alternative. Selecting a guide or creating a draft is not completion. Accepted A retains its completion credit while B is pending; confirmation atomically promotes B and invalidates obsolete upload revisions. Retake attention, upload completion and Reviewer approval remain separate. The existing exact-item correction namespace opens only that requested logical group, not its three unused alternatives or unrelated fields. Frozen twelve-photo v1 submissions remain locked/readable. See PHOTO_REQUIREMENT_POLICY_V2.md for IDs, pins and proposed API metadata.

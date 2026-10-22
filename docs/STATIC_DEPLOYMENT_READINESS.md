@@ -62,3 +62,8 @@ src/app/api/development/vehicle-model/[variant]/route.ts
 ```
 
 See DEPLOYMENT_AND_RUNTIME_CONFIG for commercial assets, CORS and configuration ownership. Framework references: installed `node_modules/next/dist/docs/01-app/02-guides/static-exports.md` and [official static-export guide](https://nextjs.org/docs/app/guides/static-exports). Current normal server build must not be marketed as a static deployment.
+
+
+## V2 photo policy impact
+
+The eleven-photo follow-up adds typed client policy, optional metadata and IndexedDB pin/history behavior, with no new server route, dependency, production Node service or 3D download. All existing static-routing/deep-link blockers and the approved architecture-decision gate remain unchanged. Actual npm run build succeeds in the existing Next deployment mode; this is not a claim that arbitrary-ID static export has been migrated. See PHOTO_REQUIREMENT_POLICY_V2.md and STATIC_DEPLOYMENT_DECISION.md.

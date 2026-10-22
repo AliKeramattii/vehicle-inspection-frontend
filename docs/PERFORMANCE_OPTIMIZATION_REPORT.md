@@ -1,6 +1,10 @@
 # Performance optimization report
 
-## Scope and delivery
+## Follow-up: approved eleven-photo policy
+
+Starting from completed optimization HEAD 59abbce, a separate approved follow-up implements the eleven-photo policy: ten fixed plus one of four existing VIN/spec suggestions. It reuses the completed processing, video, cache and queue systems. The following before/after tables remain the original legacy-v1 twelve-photo experiment; their sample totals are not changed to eleven. No generalized speed or evidence-quality claim is added. New policy derivation, durable identity and compatibility are documented in PHOTO_REQUIREMENT_POLICY_V2.md; validation results are recorded at the end of this document.
+
+## Original optimization scope and delivery
 
 Continued the interrupted task in the canonical integrated worktree, branch feat/unified-ui-admin-3d. Starting HEAD: `3b62f68bd88dc631d902023562360fe6944bfe9d`. This report belongs to the focused optimization commit; use git log for its delivery identity. No new worktree, branch switch, backend, dependency, asset replacement or eleven-photo migration.
 
@@ -120,3 +124,60 @@ Private service-key scan of browser static assets and staged-key scan were clear
 - Historical visual/test debt and the unrelated readiness mismatch remain untouched; Reviewer CLS requires a separately approved layout task.
 
 Delivery only stages intended performance code, tests, documentation and plan; no reset/stash, protected file staging or main merge. Final commit/push and remote HEAD are reported in the completion response.
+
+
+## Eleven-photo follow-up: measured comparison and delivery
+
+Implementation: `11f5d880ead1130cb0390caef236841d50a191ea` (`feat: implement versioned eleven-photo inspection policy`). It reuses completed optimization commit 59abbce; no new compressor, codec package, queue, backend or model was introduced.
+
+Repeated the existing production benchmark harness with PERF_PHASE=photo-policy-v2, three repeats, same documented CPU/network/cache/viewports. This comparison uses explicit legacy-v1 capture/submission fixtures on both builds for comparability; new-v2 functionality is separately covered by nine browser scenarios. Before = completed optimization build 59abbce; after = this policy build. Raw diagnostic JSON remains ignored under .agent/reference-review/performance/photo-policy-v2-*. The rows are lab observations at different times, not a randomized experiment or field percentile.
+
+| Route | Ready ms, before → after | LCP ms | Encoded JS bytes | Decoded JS bytes |
+|---|---:|---:|---:|---:|
+| landing | 3,206 → 3,026 | 3,328 → 3,196 | 281,955 → 283,216 | 986,490 → 992,897 |
+| capture | 3,761 → 3,124 | 3,792 → 3,592 | 305,616 → 306,564 | 1,055,926 → 1,061,788 |
+| guide | 3,250 → 3,083 | 3,628 → 3,476 | 305,616 → 306,564 | 1,055,926 → 1,061,788 |
+| camera-fixture | 4,864 → 4,663 | 684 → 696 | 308,323 → 309,301 | 1,062,304 → 1,068,296 |
+| reviewer-case | 3,616 → 3,601 | 3,240 → 3,144 | 296,354 → 297,431 | 1,040,975 → 1,046,390 |
+| admin-settings | 3,208 → 3,102 | 3,200 → 3,088 | 287,961 → 289,058 | 1,005,755 → 1,011,342 |
+
+| Route | CDP task ms, before → after | JS heap snapshot MiB |
+|---|---:|---:|
+| landing | 835 → 711 | 8.47 → 8.59 |
+| capture | 993 → 638 | 21.75 → 24.39 |
+| guide | 730 → 514 | 11.35 → 20.97 |
+| camera-fixture | 986 → 710 | 20.88 → 12.64 |
+| reviewer-case | 1032 → 740 | 14.30 → 15.60 |
+| admin-settings | 802 → 630 | 15.02 → 16.85 |
+
+Marker navigation median 328 → 327ms; shutter-to-durable-review 906 → 417ms in this follow-up. Capture JS adds 948 encoded / 5,862 decoded bytes for policy/pinning/selection/history logic. Total emitted chunks 3,245,957 → 3,268,815 raw bytes and 976,647 → 981,776 summed gzip bytes. These totals include optional code, not just startup. Although ready/task timings improved in this run, guide/overview heap snapshots increased and existing Reviewer CLS remains ~0.596. No universal speed/memory improvement is established or promised. Previous repeatable IDB/worker/payload improvements remain the completed phase's measurements; no work was repeated simply to re-claim them.
+
+Current capture fixture still emits 193,380-byte image/jpeg, preserving native capture settings. Current static guide inventory is recorded in PERFORMANCE_BASELINE.md; one fewer required photograph does not guarantee a proportional payload reduction (the under-seat guide is larger). Upload-byte reduction/processing-quality/video-profile results above remain explicitly the previous controlled experiments. No new real-camera insurer-quality, physical video, server throughput or upload-duration claim is made. Deterministic shared-queue/retry/offline checks remain correctness tests, not internet benchmarks.
+
+### Actual validation
+
+- npm run lint: exit 0.
+- npm run typecheck: exit 0.
+- npm run test: exit 0, 553 tests / 51 files. Includes all four choices independently, missing choice, ten fixed slots, history/pins, stale callbacks, atomic replacement, rapid selection and retained White-Label publication.
+- npm run build: exit 0, Next 16.3.8. Existing dynamic-route/static-export blockers remain unchanged; no routing migration or new production Node dependency.
+- npm run test:e2e -- --config playwright.photo-policy.config.ts: exit 0, 9 passed, including new screenshots and actual canvas/mock-recorder capture, chosen evidence in upload/submission/Reviewer, exact scoped correction and original preservation.
+- Focused customer regression config (temporary diagnostic copy of the existing config, production port 3222): exit 0, 86 passed / 3 project skips. Existing REVIEW_UPLOAD/REVIEW_SUBMISSION/REVIEW_ADDITIONAL flags omit historical pixel assertions only; all domain/navigation/error/retry assertions still execute. Files: photography-markers, photography-navigation, viewport, media-optimization, upload, submission, additional-evidence and final-product.
+- Staff/White-Label final-product scenarios: exit 0, 3 passed / 8 customer-only skips. Covers assignment, per-evidence/whole-case decisions, rejection and Site Settings draft/publish/central map ownership.
+- Real authorized live Neshan: exit 0, 3 passed (provider tiles, Persian reverse HTTP 200, persisted settings/customer/Admin), unchanged local config.
+- Restricted loopback optional GLB regression: exit 0, 1 passed, explicit historical-v1 twelve-marker fixture. No geometry, GLB, licensing or production gating changes; only its accessible count label now derives from the active template.
+- Existing production benchmark harness: exit 0, 2 passed.
+
+Focused commands are not a claim that the entire historical screenshot suite is green. Initial unit failures exposed old implicit twelve-photo fixtures; these now explicitly select v1, while current defaults have dedicated v2 tests. Diagnostic browser failures came from premature navigation, a stale category selector and an overbroad image selector; those tests were corrected. The initial diagnostic config also lacked the canonical snapshot path/mobile options; its newly generated misplaced artifacts were removed, without modifying any existing baseline. A real introduced compatibility issue (fresh Admin v2 seed made the White-Label v1 reference unavailable) was fixed by retaining the immutable v1 publication and regression-tested.
+
+### Visual review and preservation
+
+Inspected canonical 07/08/10/19/20 for preserved composition and actual 320x568, 360x800, 390x844, 430x932, 768x1024 customer and 1440x960 staff screenshots. Current layout, internal scrolling and controls below vehicle imagery remain. No CSS redesign, canonical image, ghost, model or legal-copy change. Two manually reviewed NEW baselines only:
+
+- tests/photo-policy/screenshots/photo-policy.spec.ts/eleven-photo-overview-390.png
+- tests/photo-policy/screenshots/photo-policy.spec.ts/four-location-choices-390.png
+
+All twenty pre-existing modified files remain byte-identical to the task-start preservation manifest and excluded from commits, including readiness imagery/styles/schema/config changes. User untracked logo/reference/nested checkout paths remain untouched. The unrelated readiness screenshot discrepancy and historical pixel debt are not fixed or rebaselined. Earlier visual baselines remain unchanged. Known warnings: Playwright FORCE_COLOR/NO_COLOR and existing Three.Clock deprecation; no new dependency/quality claim.
+
+### Remaining boundaries
+
+Backend/auth/SSO/private filesystem/MSSQL/forwarding contracts are proposals, not implemented services. Real low-end/iOS camera quality and insurer acceptance still need field approval. Local archived choice revisions require storage; no automatic cleanup is introduced. Existing pinned v1 drafts intentionally continue showing twelve, and new inspections receive eleven. Real tenant template assignment remains an API responsibility; mock pins/defaults do not claim a backend publication-assignment implementation.

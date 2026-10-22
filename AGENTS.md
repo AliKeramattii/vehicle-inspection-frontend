@@ -161,7 +161,7 @@ Never rely only on service-worker background sync.
 
 Production Phase 04 is premium **2D image-guided inspection**: overview → InspectionSection →
 PhotoRequirement → canonical sample/guidance → camera → comparison → confirmation. Current
-template: seven sections/twelve required photos; derive progress/totals from configuration.
+template: seven sections/eleven required photos (ten fixed plus one four-location VIN/spec choice; legacy v1 remains twelve); derive progress/totals from configuration.
 This supersedes historical customer 3D/14-photo requirements and reference screenshot counts.
 
 Definition of Done prioritizes section navigation, meaningful reference photography, camera,
@@ -177,7 +177,7 @@ today 2D section navigation uses that boundary. Do not duplicate camera/review/s
 
 Reference 07 remains the primary composition: compact journey/progress, dominant studio vehicle,
 markers directly on the image, physical-direction controls, categories and image shot cards.
-Use canonical 2D photography and the current seven-section/twelve-photo template, never customer
+Use canonical 2D photography and the current seven-section/eleven-photo template (historical v1 remains twelve), never customer
 WebGL/3D. Marker coordinates share the image crop; card/marker/view/CTA derive from one selection.
 Gray = no photo, Emerald = locally accepted, Amber = incomplete/retake; selection uses an independent Sky ring. Keep upload and reviewer approval distinct with text/icons.
 Review prioritizes actual captured evidence and a compact sample, retake and simple confirmation.

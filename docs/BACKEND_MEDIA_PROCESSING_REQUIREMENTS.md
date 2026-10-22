@@ -42,3 +42,12 @@ Brokerage-specific destination adapter selects the approved immutable variant, w
 - Real customer authentication, staff SSO/assignment authorization and per-brokerage isolation.
 
 No endpoint in this document is represented as implemented. See API_CONTRACT.md, API_CONTRACT_REVIEW_CHECKLIST.md and API_IMPLEMENTATION_PRIORITY.md before backend development.
+
+
+## Current photo policy v2 — planned contract clarification
+
+New inspections require **10 fixed photographs + one selected from four existing VIN/spec alternatives = 11 photographs**, plus separate numeric odometer and one walk-around video. Historical twelve-photo snapshots remain pinned. See PHOTO_REQUIREMENT_POLICY_V2.md for exact IDs/labels/assets and compatibility.
+
+PROPOSED: use the existing generic evidence registration/completion resources with templateId, templateVersion, photoPolicyVersion, stable logical requirementId (`spec-plate` for the v2 group), selected alternativeId (`pillar`, `engine`, `seat`, `windshield`), evidence revision, kind, expected bytes/MIME and stable idempotency metadata. A chosen alternative is not an additional requirement or file. Server must validate pinned policy, require ten fixed photos and one valid chosen photo, prevent two active group revisions, and reject stale uploads/processing/forwarding responses. Odometer is numeric data, video is separate generic media. No endpoint is implemented here.
+
+Keep private filesystem media and MSSQL metadata separate, with original/accepted/thumbnail variants, authorized retrieval and immutable revision history. Reviewer and final brokerage delivery use the approved revision and its actual selected alternative, with audit, retries, idempotency and destination acknowledgement. Tenant inspection API/auth/SSO configuration remains independent of shared global Neshan settings. No new public media URLs or browser credentials are introduced.

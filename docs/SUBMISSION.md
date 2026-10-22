@@ -3,7 +3,7 @@
 ## Flow and package
 
 Upload Center → `/inspection/[inspectionId]/review` → submit → `/submitted`.
-The configurable current package remains **12 required photographs, one manual odometer reading,
+The configurable current package remains **11 required photographs (ten fixed plus one of four VIN/spec alternatives), one manual odometer reading,
 one walk-around video**. Video is not a photo and odometer is not a file. Media totals derive from
 the template; the current template has thirteen media files. Production photography stays 2D.
 

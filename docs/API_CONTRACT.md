@@ -713,3 +713,12 @@ No new endpoint or transport is introduced. Existing revision-aware registration
 Proposed optional metadata: source/accepted bytes, MIME, orientation-normalized dimensions, chosen variant, policy version and draft/evidence revision; video requested profile versus actual negotiated width/height/fps/bitrate/container. Client claims require server verification; server computes a content hash and returns processing state separately from upload/verification. Do not send device IDs or Blob URLs. Keep stable idempotency/CAS, existing request linkage and authorized variant/range retrieval. No odometer media Blob or photo-count change.
 
 See MEDIA_OPTIMIZATION_POLICY.md and BACKEND_MEDIA_PROCESSING_REQUIREMENTS.md for private filesystem/MSSQL metadata, worker/thumbnail/transcoding, validation/cache and unresolved approval gates. No production API or quality standard is claimed here.
+
+
+## Current photo policy v2 — planned contract clarification
+
+New inspections require **10 fixed photographs + one selected from four existing VIN/spec alternatives = 11 photographs**, plus separate numeric odometer and one walk-around video. Historical twelve-photo snapshots remain pinned. See PHOTO_REQUIREMENT_POLICY_V2.md for exact IDs/labels/assets and compatibility.
+
+PROPOSED: use the existing generic evidence registration/completion resources with templateId, templateVersion, photoPolicyVersion, stable logical requirementId (`spec-plate` for the v2 group), selected alternativeId (`pillar`, `engine`, `seat`, `windshield`), evidence revision, kind, expected bytes/MIME and stable idempotency metadata. A chosen alternative is not an additional requirement or file. Server must validate pinned policy, require ten fixed photos and one valid chosen photo, prevent two active group revisions, and reject stale uploads/processing/forwarding responses. Odometer is numeric data, video is separate generic media. No endpoint is implemented here.
+
+Keep private filesystem media and MSSQL metadata separate, with original/accepted/thumbnail variants, authorized retrieval and immutable revision history. Reviewer and final brokerage delivery use the approved revision and its actual selected alternative, with audit, retries, idempotency and destination acknowledgement. Tenant inspection API/auth/SSO configuration remains independent of shared global Neshan settings. No new public media URLs or browser credentials are introduced.

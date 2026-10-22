@@ -8,7 +8,7 @@ A Persian RTL mobile-first self-inspection application, independently deployed f
 ## Customer journey
 Source brokerage identity → referral/OTP → readiness → consent → confirmed location → vehicle/plate → 2D photography → local package review → shared Upload Center → final summary → submit → tracking receipt/status. Existing route URLs and default 2D interaction remain. Optional licensed 3D is loopback development only, not a production requirement.
 
-Current package is **12 required photos + 1 integer odometer reading + 1 walk-around video**. Video is not a photo; odometer is not a file. Derived media denominator is required photos plus required video. Template IDs/version are pinned; changes to the template do not retroactively alter existing inspections.
+Current package is **11 required photos (10 fixed + exactly one of four VIN/spec alternatives) + 1 integer odometer reading + 1 walk-around video**. Video is not a photo; odometer is not a file. Derived media denominator is required photos plus required video. Template IDs/version are pinned; changes to the template do not retroactively alter existing inspections.
 
 | Section | Canonical required photo IDs |
 |---|---|
