@@ -1,3 +1,4 @@
+import type {VideoCaptureMetadata} from "@/lib/media/video-profiles";
 import { z } from "zod";
 import { normalizeDigits } from "@/lib/utils/persian";
 import type { EvidenceState } from "@/types/domain";
@@ -18,7 +19,7 @@ export function parseOdometer(text: string): number {
   return value;
 }
 export const formatOdometer = (kilometers: number) => new Intl.NumberFormat("fa-IR", { maximumFractionDigits: 0 }).format(kilometers);
-export type LocalMediaMetadata = { kind: z.infer<typeof evidenceKindSchema>; mimeType: string; sizeBytes: number; localBlobKey: string; capturedAt: string; requirementId?: string };
+export type LocalMediaMetadata = { kind: z.infer<typeof evidenceKindSchema>; mimeType: string; sizeBytes: number; localBlobKey: string; capturedAt: string; requirementId?: string; capture?: VideoCaptureMetadata };
 export type VideoDraft = { blob: Blob; durationSeconds: number; metadata: LocalMediaMetadata };
 export type LocalVideo360 = { accepted?: VideoDraft; draft?: VideoDraft; state: EvidenceState; reviewerReason?: string };
 export type CapturePackageData = { namespace: string; odometer?: OdometerReading; video360?: LocalVideo360 };

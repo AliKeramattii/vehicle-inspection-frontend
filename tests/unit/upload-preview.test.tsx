@@ -28,3 +28,12 @@ it("does not steal a user-focused input in the deferred photography route entry 
   screen.getByLabelText("کیلومتر فعلی").focus(); await act(async () => frame(0)); expect(screen.getByLabelText("کیلومتر فعلی")).toHaveFocus(); expect(scroll).toHaveBeenCalledWith({ block: "nearest" });
   if (previous) HTMLElement.prototype.scrollIntoView = previous; else Reflect.deleteProperty(HTMLElement.prototype, "scrollIntoView");
 });
+
+it("focuses a heading after a lazy view replaces its loading skeleton",async()=>{
+ let frame:FrameRequestCallback=()=>{};vi.stubGlobal("requestAnimationFrame",(callback:FrameRequestCallback)=>{frame=callback;return 1;});vi.stubGlobal("cancelAnimationFrame",vi.fn());
+ const view=render(<div className="photography-screen"><PhotographyRouteFocus routeKey="guide"><div className="photography-skeleton" /></PhotographyRouteFocus></div>);
+ await act(async()=>frame(0));
+ view.rerender(<div className="photography-screen"><PhotographyRouteFocus routeKey="guide"><div className="photo-route"><h2>راهنمای عکس</h2></div></PhotographyRouteFocus></div>);
+ await act(async()=>{});expect(screen.getByRole("heading",{name:"راهنمای عکس"})).toHaveFocus();
+ view.unmount();
+});

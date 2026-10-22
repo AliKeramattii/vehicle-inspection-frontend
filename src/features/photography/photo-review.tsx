@@ -1,4 +1,9 @@
 "use client";
+import dynamic from "next/dynamic";
+import { photoDraftBlob } from "@/lib/media/photo-store";
+import { photoImagePolicy } from "@/lib/media/image-policy";
+import type {PhotoOptimizationHandlers} from "./photo-optimization-control";
+const PhotoOptimizationControl=dynamic(()=>import("./photo-optimization-control").then(module=>module.PhotoOptimizationControl));
 import { useIdentificationGuide } from "./use-identification-guide";
 
 import { useRef, useState } from "react";
@@ -17,7 +22,8 @@ import { requirementRetakeReason } from "./photography-model";
 import { OdometerField } from "@/features/capture-package/odometer-field";
 import type { OdometerReading } from "@/features/capture-package/capture-package-model";
 
-export function PhotoReview({ photo: originalPhoto, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote, guideScope }: {
+export function PhotoReview({ photo: originalPhoto, section, record, inspectionId, onConfirm, onRetake, pending, error, odometer, navigation, preservationNote, guideScope, optimization }: {
+  optimization?: PhotoOptimizationHandlers;
   photo: PhotoRequirement; section: InspectionSection; record?: LocalPhoto; inspectionId: string;
   onConfirm: () => void; onRetake: () => void; pending?: boolean; error?: string;
   odometer?: { reading?: OdometerReading; onSave: (kilometers: number) => void };
@@ -26,7 +32,8 @@ export function PhotoReview({ photo: originalPhoto, section, record, inspectionI
   const { photo } = useIdentificationGuide(originalPhoto, inspectionId, guideScope);
   const [expanded, setExpanded] = useState<"sample" | "user">();
   const trigger = useRef<HTMLButtonElement | null>(null);
-  const blob = record?.draft?.blob ?? record?.blob, draft = Boolean(record?.draft);
+  const blob = record?.draft ? photoDraftBlob(record.draft) : record?.blob, draft = Boolean(record?.draft);
+  const imagePolicy = photoImagePolicy(photo);
   const reason = requirementRetakeReason(photo, record ? [record] : []);
   const dismiss = () => { setExpanded(undefined); requestAnimationFrame(() => trigger.current?.focus()); };
   return <div className="photo-route photo-review"><div className="photo-scroll photography-content photo-review-content"><Link className="photo-back" href={navigation?.backHref ?? inspectionRoutes.section(inspectionId, section.id)}>{navigation?.backLabel ?? `بازگشت به ${section.title}`}</Link>
@@ -37,6 +44,7 @@ export function PhotoReview({ photo: originalPhoto, section, record, inspectionI
         <button aria-label="بزرگ‌نمایی عکس شما" onClick={(event) => { trigger.current = event.currentTarget; setExpanded("user"); }}><PhotoImage blob={blob} alt={`عکس شما: ${photo.title}`} eager frame="captured-evidence" retry={false} /></button>
       </figure>
       <button className="photo-review-reference" aria-label="بزرگ‌نمایی نمونه" onClick={(event) => { trigger.current = event.currentTarget; setExpanded("sample"); }}><PhotoImage src={photo.sampleImage} alt={`نمونه صحیح: ${photo.title}`} eager frame="comparison" retry={false} /><span><strong>نمونه</strong><small>قاب‌بندی عکس را با نمونه مقایسه کنید.</small></span><Icon name="enlarge" size={20} /></button>
+      {record?.draft && optimization && (record.draft.blob.size > imagePolicy.suitableBytes || record.draft.optimization) && <PhotoOptimizationControl key={record.draft.revisionId ?? record.draft.capturedAt} draft={record.draft} policy={imagePolicy} actions={optimization} />}
       {odometer && <OdometerField value={odometer.reading} onSave={odometer.onSave} pending={pending} />}
       <p className="photo-review-note">{draft ? "برای نگه‌داشتن این عکس، تأیید و ادامه را بزنید." : "عکس ثبت‌شده روی این دستگاه ذخیره شده است."}</p>
       {draft && record?.blob && <p className="photo-local-note">عکس قبلی تا تأیید و ذخیره موفق این جایگزین محفوظ می‌ماند.</p>}

@@ -1,4 +1,5 @@
 "use client";
+import dynamic from "next/dynamic";
 
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -9,21 +10,22 @@ import { useInspectionAccess } from "@/features/inspection/use-inspection-access
 import { inspectionRoutes } from "@/features/inspection/inspection-routes";
 import { photographyTemplateSchema, type PhotographyTemplate } from "@/schemas/photography";
 import { PhotographyOverview } from "./photography-overview";
-import { SectionDetail } from "./section-detail";
 import { PhotoGuidance } from "./photo-guidance";
-import { PhotoCamera } from "./photo-camera";
+import { SectionDetail } from "./section-detail";
 import { PhotoReview } from "./photo-review";
-import { PhotographyCompletion } from "./photography-completion";
 import { usePhotoRecords } from "./use-photo-records";
 import { findRequirement, nextRequirement } from "./photography-model";
 import { PhotographyRouteFocus } from "./photography-route-focus";
 import { PhotographyLoading } from "./photography-loading";
 import { useCaptureData } from "@/features/capture-package/use-capture-data";
 import { nextCaptureTask } from "@/features/capture-package/capture-package-model";
-import { VideoCapture } from "@/features/capture-package/video-capture";
-import { VideoReview } from "@/features/capture-package/video-review";
 import { photoNamespace, photoKey } from "@/lib/media/photo-store";
 import { videoBlobKey } from "@/lib/media/capture-data-store";
+
+const PhotoCamera = dynamic(() => import("@/features/photography/photo-camera").then(module => module.PhotoCamera), { loading: () => <PhotographyLoading message="در حال آماده‌سازی مدرک…" /> });
+const VideoCapture = dynamic(() => import("@/features/capture-package/video-capture").then(module => module.VideoCapture), { loading: () => <PhotographyLoading message="در حال آماده‌سازی مدرک…" /> });
+const VideoReview = dynamic(() => import("@/features/capture-package/video-review").then(module => module.VideoReview), { loading: () => <PhotographyLoading message="در حال آماده‌سازی مدرک…" /> });
+const PhotographyCompletion = dynamic(() => import("./photography-completion").then(module => module.PhotographyCompletion), { loading: () => <PhotographyLoading message="در حال آماده‌سازی مدرک…" /> });
 
 export type PhotographyView = { kind: "overview" } | { kind: "completion" } | { kind: "video-record" } | { kind: "video-review" } | { kind: "section"; sectionId: string } | { kind: "guide" | "camera" | "review"; requirementId: string };
 export function PhotographyWorkflow({ inspectionId, view }: { inspectionId: string; view: PhotographyView }) {
@@ -49,8 +51,8 @@ function PhotographySession({ inspectionId, template, view, bodyColor }: { inspe
   const focus = (children: React.ReactNode) => <PhotographyRouteFocus routeKey={JSON.stringify(view)}>{children}</PhotographyRouteFocus>;
   if (view.kind === "overview") return focus(<PhotographyOverview {...shared} template={template} bodyColor={bodyColor} />);
   if (view.kind === "completion") return focus(<PhotographyCompletion {...shared} template={template} />);
-  if (view.kind === "video-record") return focus(<VideoCapture inspectionId={inspectionId} reason={capture.data?.video360?.reviewerReason} onRecorded={async ({ blob, durationSeconds }, signal) => {
-    await capture.draft.mutateAsync({ blob, durationSeconds, metadata: { kind: "video-360", mimeType: blob.type, sizeBytes: blob.size, localBlobKey: videoBlobKey(namespace), capturedAt: new Date().toISOString() } });
+  if (view.kind === "video-record") return focus(<VideoCapture inspectionId={inspectionId} reason={capture.data?.video360?.reviewerReason} onRecorded={async ({ blob, durationSeconds, capture: captureSettings }, signal) => {
+    await capture.draft.mutateAsync({ blob, durationSeconds, metadata: { kind: "video-360", mimeType: blob.type, sizeBytes: blob.size, localBlobKey: videoBlobKey(namespace), capture: captureSettings, capturedAt: new Date().toISOString() } });
     if (!signal.aborted) router.push(inspectionRoutes.video(inspectionId, "review"));
   }} />);
   if (view.kind === "video-review") return focus(<VideoReview inspectionId={inspectionId} video={capture.data?.video360} pending={capture.confirm.isPending || capture.discard.isPending} error={capture.confirm.error?.message ?? capture.discard.error?.message}
@@ -70,6 +72,7 @@ function PhotographySession({ inspectionId, template, view, bodyColor }: { inspe
   }} />);
   const record = photos.records.find((record) => record.requirementId === photo.id);
   return focus(<PhotoReview key={`${photo.id}:${capture.data?.odometer?.updatedAt ?? ""}`} photo={photo} section={section} inspectionId={inspectionId} record={record} pending={photos.confirm.isPending || photos.discard.isPending || capture.odometer.isPending} error={photos.confirm.error?.message ?? photos.discard.error?.message ?? capture.odometer.error?.message}
+    optimization={photos.optimization ? {prepare:(policy,signal)=>photos.optimization!.prepare(photo.id,policy,signal),choose:(revision,choice)=>photos.optimization!.choose(photo.id,revision,choice)} : undefined}
     odometer={template.captureRequirements?.odometerRequirementId === photo.id ? { reading: capture.data?.odometer, onSave: (kilometers) => {
       void (async () => {
         // Photo credit and numeric data remain separate. A data-save failure cannot erase the accepted photo.

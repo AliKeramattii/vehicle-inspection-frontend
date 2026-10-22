@@ -1,3 +1,4 @@
+import { createPhotoOptimization } from "@/lib/media/photo-optimization";
 import { indexedDBPhotoStore, type PhotoDraft } from "@/lib/media/photo-store";
 import { indexedDBCaptureDataStore } from "@/lib/media/capture-data-store";
 import type { VideoDraft } from "@/features/capture-package/capture-package-model";
@@ -14,7 +15,14 @@ export function scopedMedia(request: EvidenceRequest, item: EvidenceRequestItem)
     const source = await readRequestPackage(current); await indexedDBUploadQueue.reconcile(source.namespace, source.media);
     return result;
   });
+  const optimizer = createPhotoOptimization(mutate);
+  const assertPhoto = (id:string) => {if(item.kind !== "photo" || item.requirementId !== id)throw new Error("کاهش حجم فقط برای عکس همین درخواست مجاز است.");};
+  const optimization = {
+    prepare:(id:string,...args:Parameters<typeof optimizer.prepare> extends [string,...infer Rest] ? Rest : never)=>{assertPhoto(id);return optimizer.prepare(id,...args);},
+    choose:(id:string,...args:Parameters<typeof optimizer.choose> extends [string,...infer Rest] ? Rest : never)=>{assertPhoto(id);return optimizer.choose(id,...args);},
+  };
   return {
+    optimization,
     savePhoto: (draft: PhotoDraft) => mutate((namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); return indexedDBPhotoStore.saveDraft(namespace, item.requirementId, draft); }),
     confirmPhoto: () => mutate((namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); return indexedDBPhotoStore.confirm(namespace, item.requirementId); }),
     discardPhotoDraft: () => mutate((namespace) => { if (item.kind !== "photo") throw new Error("این درخواست مربوط به عکس نیست."); return indexedDBPhotoStore.discardDraft(namespace, item.requirementId); }),

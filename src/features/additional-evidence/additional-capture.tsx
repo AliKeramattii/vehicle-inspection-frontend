@@ -1,12 +1,10 @@
 "use client";
+import dynamic from "next/dynamic";
+import { PhotoReview } from "@/features/photography/photo-review";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { PhotoGuidance } from "@/features/photography/photo-guidance";
-import { PhotoCamera } from "@/features/photography/photo-camera";
-import { PhotoReview } from "@/features/photography/photo-review";
-import { VideoCapture } from "@/features/capture-package/video-capture";
-import { VideoReview } from "@/features/capture-package/video-review";
 import { photoKey, readPhoto } from "@/lib/media/photo-store";
 import { indexedDBCaptureDataStore, videoBlobKey } from "@/lib/media/capture-data-store";
 import { useUploadRuntime } from "@/features/upload/upload-runtime";
@@ -15,6 +13,12 @@ import { SecondaryButton } from "@/components/ui/button";
 import { scopedMedia } from "./scoped-media";
 import { additionalRoutes, itemHref, requestNamespace, type AdditionalView, type EvidenceRequest } from "./request-model";
 import { readRequestPackage } from "./request-source";
+
+const PhotoCamera = dynamic(() => import("@/features/photography/photo-camera").then(module => module.PhotoCamera), { loading: () => <CaptureLoading /> });
+const VideoCapture = dynamic(() => import("@/features/capture-package/video-capture").then(module => module.VideoCapture), { loading: () => <CaptureLoading /> });
+const VideoReview = dynamic(() => import("@/features/capture-package/video-review").then(module => module.VideoReview), { loading: () => <CaptureLoading /> });
+function CaptureLoading(){return <div className="submission-loading" role="status" aria-label="در حال آماده‌سازی مدرک"><div/><div/></div>;}
+
 
 /** Request controller reuses ordinary guidance/camera/review; there is no second capture implementation. */
 export function AdditionalCapture({ request, view }: { request: EvidenceRequest; view: Exclude<AdditionalView, { kind: "list" }> }) {
@@ -30,7 +34,7 @@ export function AdditionalCapture({ request, view }: { request: EvidenceRequest;
   if (item.kind === "video-360") {
     if (view.stage === "record") return <VideoCapture inspectionId={request.inspectionId} backHref={backHref} backLabel={backLabel} reason={item.reviewerReason} onRecorded={async (video, signal) => {
       if (signal.aborted) throw new DOMException("Cancelled", "AbortError");
-      await media.saveVideo({ blob: video.blob, durationSeconds: video.durationSeconds, metadata: { kind: "video-360", mimeType: video.blob.type, sizeBytes: video.blob.size, localBlobKey: videoBlobKey(namespace), capturedAt: new Date().toISOString() } });
+      await media.saveVideo({ blob: video.blob, durationSeconds: video.durationSeconds, metadata: { kind: "video-360", mimeType: video.blob.type, sizeBytes: video.blob.size, localBlobKey: videoBlobKey(namespace), capture: video.capture, capturedAt: new Date().toISOString() } });
       if (!signal.aborted) router.push(itemHref(request, item, "review"));
     }} />;
     const value = data.data?.kind === "video-360" ? data.data : undefined;
@@ -43,5 +47,5 @@ export function AdditionalCapture({ request, view }: { request: EvidenceRequest;
   if (view.stage === "guide") return <PhotoGuidance guideScope={request.id + ":" + item.id} photo={photo} section={scopedSection} records={[]} inspectionId={request.inspectionId} navigation={{ backHref, backLabel, cameraHref: additionalRoutes.photo(request.inspectionId, request.id, photo.id, "camera") }} />;
   if (view.stage === "camera") return <PhotoCamera guideScope={request.id + ":" + item.id} photo={photo} inspectionId={request.inspectionId} guideHref={guideHref} reviewerReason={item.reviewerReason} onCapture={async (blob) => { await media.savePhoto({ blob, capturedAt: new Date().toISOString() }); router.push(itemHref(request, item, "review")); }} />;
   const value = data.data?.kind === "photo" ? data.data : undefined;
-  return <PhotoReview guideScope={request.id + ":" + item.id} photo={photo} section={scopedSection} record={value?.candidate?.draft || value?.candidate?.blob ? value.candidate : value?.original} inspectionId={request.inspectionId} navigation={{ backHref, backLabel, guideHref, returnLabel: "بازگشت به درخواست" }} preservationNote="مدرک ارسال‌شده اولیه محفوظ است. این عکس فقط در پاسخ به درخواست کارشناس ثبت می‌شود." pending={pending} error={error} onConfirm={() => void act(async () => { await media.confirmPhoto(); await next(); })} onRetake={() => void act(async () => { await media.discardPhotoDraft(); router.push(guideHref); })} />;
+  return <PhotoReview optimization={{prepare:(policy,signal)=>act(async()=>{await media.optimization.prepare(photo.id,policy,signal);await data.refetch();}),choose:(revision,choice)=>act(async()=>{await media.optimization.choose(photo.id,revision,choice);await data.refetch();})}} guideScope={request.id + ":" + item.id} photo={photo} section={scopedSection} record={value?.candidate?.draft || value?.candidate?.blob ? value.candidate : value?.original} inspectionId={request.inspectionId} navigation={{ backHref, backLabel, guideHref, returnLabel: "بازگشت به درخواست" }} preservationNote="مدرک ارسال‌شده اولیه محفوظ است. این عکس فقط در پاسخ به درخواست کارشناس ثبت می‌شود." pending={pending} error={error} onConfirm={() => void act(async () => { await media.confirmPhoto(); await next(); })} onRetake={() => void act(async () => { await media.discardPhotoDraft(); router.push(guideHref); })} />;
 }
